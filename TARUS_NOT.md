@@ -4,6 +4,9 @@ Tarus ekosistemine özel el yazısı ve çizim notu uygulaması. [saber-notes/sa
 
 ## Yapılandırma
 - **Uygulama Adı:** Not
+- **Sürüm:** `lib/data/version.dart` (tarus şeması, 1.0.0'dan başlar; Saber 1.36.1 temel alındı).
+  Artırmak için: `dart run scripts/bump_version.dart --custom X.Y.Z --quiet` — betiğin
+  değiştirdiği `README*.md` ve `flatpak/` Saber'in dosyalarıdır, geri alın.
 - **Paket Kimliği (Application ID):** `tr.tarus.not`
 - **Varsayılan Eşitleme Sunucusu:** `https://not.tarus.tr`
 - **Protokol:** WebDAV
@@ -66,3 +69,19 @@ flutter test test/pusula_belirteci_test.dart
 NOT_SUNUCU_URL=http://127.0.0.1:3999 flutter test test/not_sunucu_esitleme_test.dart
 ```
 Linux'ta testler için `libgtk-3-dev` gerekir (super_native_extensions).
+
+## Lisans (GPL-3.0)
+tarus Not, [Saber](https://github.com/saber-notes/saber) (© 2022- Adil Hanney ve
+katkıda bulunanlar) üzerine geliştirilmiştir ve Saber gibi **GNU GPL-3.0** ile
+lisanslıdır (`LICENSE.md`). APK dağıtılırken kaynak kodu da sunulmalıdır (GPL-3.0 §6):
+
+- Uygulamada: Ayarlar → en alttaki sürüm → Hakkında: Saber referansı, lisans notu,
+  kaynak kodu ve Saber bağlantıları (`lib/components/settings/app_info.dart`).
+- İndirme sayfasında (yazilim.tarus.tr) şu not bulunmalı:
+
+  > tarus Not, açık kaynak Saber (© Adil Hanney ve katkıda bulunanlar) üzerine
+  > geliştirilmiştir ve GNU GPL-3.0 ile lisanslıdır. Kaynak kodu:
+  > https://github.com/tarusatolye/not-mobil — Saber: https://github.com/saber-notes/saber
+
+- Kaynak bağlantısı APK'yı alan herkesin erişebileceği bir yerde olmalı: depo
+  özelse ya açılmalı ya da kaynak arşivi indirme sayfasına konmalı.
