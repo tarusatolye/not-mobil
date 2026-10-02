@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:saber/data/is_this_a_test.dart';
@@ -13,12 +12,11 @@ export 'package:sentry_flutter/sentry_flutter.dart' show SentryWidget;
 /// Whether the Sentry SDK is available for use.
 /// Also see [isSentryEnabled].
 ///
-/// This flag will be:
-/// - false if the foss patches were applied before this build
-/// - false on Linux (except in tests)
-/// - true otherwise
-@pragma('vm:platform-const-if', !kDebugMode)
-bool get isSentryAvailable => !Platform.isLinux || isThisATest;
+/// tarus: yalnız testlerde true. Aşağıdaki DSN Saber geliştiricisinin Sentry
+/// projesi; açık kalsaydı ilk açılışta çökme raporlarını oraya göndermek için
+/// onay istenirdi (Not notlarının yolları/adları kayıtlara düşebilir).
+/// tarus hataları Hata bildir → sistem.tarus.tr'ye gider.
+bool get isSentryAvailable => isThisATest;
 
 /// Whether Sentry was initialized when the app started.
 ///

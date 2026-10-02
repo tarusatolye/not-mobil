@@ -15,6 +15,12 @@ import 'package:saber/data/version.dart' as version;
 abstract class UpdateManager {
   static final log = Logger('UpdateManager');
 
+  /// tarus: güncelleme denetimi kapalı. Aşağıdaki adresler Saber'in (upstream)
+  /// sürümüne bakıyor; açık kalırsa Not kullanıcısına Saber'in güncellemesi
+  /// önerilir ve Windows'ta Saber kurulumu indirilirdi. tarus Not'un güncellemesi
+  /// yazilim.tarus.tr'den gelir; o uç yazılınca adresler değiştirilip açılır.
+  static const etkin = false;
+
   static final Uri versionUrl = Uri.parse(
     'https://raw.githubusercontent.com/saber-notes/saber/main/lib/data/version.dart',
   );
@@ -31,6 +37,7 @@ abstract class UpdateManager {
     BuildContext context, {
     bool userTriggered = false,
   }) async {
+    if (!etkin) return;
     if (!userTriggered) {
       if (status.value == .upToDate) {
         // check for updates if not already done

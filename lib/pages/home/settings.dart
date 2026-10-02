@@ -571,9 +571,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       }
                     },
                   ),
-                if (requiresManualUpdates ||
-                    stows.shouldCheckForUpdates.value !=
-                        stows.shouldCheckForUpdates.defaultValue) ...[
+                if (UpdateManager.etkin &&
+                    (requiresManualUpdates ||
+                        stows.shouldCheckForUpdates.value !=
+                            stows.shouldCheckForUpdates.defaultValue)) ...[
                   SettingsSwitch(
                     title: t.settings.prefLabels.shouldCheckForUpdates,
                     icon: Icons.system_update,
