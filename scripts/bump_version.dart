@@ -169,24 +169,9 @@ Future<void> updateAllFiles() async {
     RegExp(r"source-tag: 'v.+"): "source-tag: 'v${newVersion.buildName}'",
   });
 
-  // update download link in READMEs
-  final readmes = Directory('.').listSync().whereType<File>().where(
-    (file) =>
-        RegExp(r'README.*\.md')
-            .hasMatch(file.path.split(RegExp(r'[\\/]')).last),
-  );
-  for (final readme in readmes) {
-    await readme.replace({
-      // e.g. [download_windows]: https://github.com/saber-notes/saber/releases/download/v0.11.0/SaberInstaller_v0.11.0.exe
-      RegExp(
-        r'\[download_windows\]: .+',
-      ): '[download_windows]: https://github.com/saber-notes/saber/releases/download/v${newVersion.buildName}/SaberInstaller_v${newVersion.buildName}.exe',
-      // e.g. [download_appimage]: https://github.com/saber-notes/saber/releases/download/v0.11.0/Saber-0.11.0-x86_64.AppImage
-      RegExp(
-        r'\[download_appimage\]: .+',
-      ): '[download_appimage]: https://github.com/saber-notes/saber/releases/download/v${newVersion.buildName}/Saber-${newVersion.buildName}-x86_64.AppImage',
-    });
-  }
+  // tarus Not: README indirme bağlantıları güncellenmez. README'ler upstream
+  // Saber'in (saber-notes/saber sürümlerine bağlanır); tarus Not sürüm
+  // numarası (1.0.0…) orada yok, bağlantı kırılıyordu. Dağıtım yazilim.tarus.tr.
 
   // create metadata changelog
   final changelogFile = File(

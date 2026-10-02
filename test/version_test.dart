@@ -108,7 +108,7 @@ void main() {
       isNot(contains(dummyChangelog)),
       reason: 'Dummy text found in changelog downloaded from GitHub',
     );
-  });
+  }, skip: "tarus Not: sürüm notları saber-notes/saber GitHub'ında yok; güncelleme denetimi kapalı (UpdateManager.etkin = false).");
 
   test('Test that changelog has been translated', () {
     for (final localeCode in localeNames.keys) {
@@ -121,7 +121,7 @@ void main() {
         reason: 'Changelog for $localeCode does not exist',
       );
     }
-  });
+  }, skip: "tarus Not: mağaza sürüm notu yalnız en-US; Saber'in tüm dil çevirisi beklentisi tarus yayınına uymuyor.");
 
   group('SaberVersion class', () {
     test('getters', () {
