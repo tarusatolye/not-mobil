@@ -26,7 +26,8 @@ class FlavorConfig {
     appStore: const String.fromEnvironment('APP_STORE'),
     shouldCheckForUpdatesByDefault: const bool.fromEnvironment(
       'UPDATE_CHECK',
-      defaultValue: true,
+      // tarus: kapalı — denetim Saber'in sürümüne bakıyor (UpdateManager.etkin).
+      defaultValue: false,
     ),
   );
 }

@@ -9,11 +9,43 @@ Tarus ekosistemine özel el yazısı ve çizim notu uygulaması. [saber-notes/sa
 - **Protokol:** WebDAV
 
 ## Derleme (Build)
-Uygulamayı derlemek için Flutter SDK gereklidir:
+Flutter SDK (`submodules/flutter`, 3.47.4) ve Rust (`rustup`; sürüm ve Android
+hedefleri `rust-toolchain.toml`'dan) gerekir — `super_native_extensions` yerel
+parçası Rust ile derlenir. Windows'ta: `winget install Rustlang.Rustup`.
+
 ```bash
 flutter build apk --release
 ```
-Derlenen APK dosyasını doğrudan Android tablet veya telefonunuza kurabilirsiniz.
+
+### İmza anahtarı (ilk yayından önce, bir kez)
+Release APK yalnız tarus'a özel anahtarla imzalanır; `android/key.properties`
+yoksa derleme durur. Saber'in depodaki yedek anahtarı kaldırıldı (açık anahtarla
+imzalanan uygulamaya herkes sahte güncelleme yapabilirdi).
+
+**Anahtar sonradan değiştirilemez:** kaybolursa kurulu uygulamalar güncellenemez,
+kullanıcılar kaldırıp yeniden kurmak zorunda kalır. Dosyayı ve parolayı parola
+yöneticisine yedekleyin; depoya koymayın (`.gitignore`: `key.properties`, `*.keystore`).
+
+```bash
+keytool -genkeypair -v -keystore android/tarus-not.keystore -alias tarus-not \
+  -keyalg RSA -keysize 4096 -validity 36500 -dname "CN=tarus Not, O=tarus, C=TR"
+```
+
+`android/key.properties`:
+```properties
+storePassword=<parola>
+keyPassword=<parola>
+keyAlias=tarus-not
+storeFile=../tarus-not.keystore
+```
+
+Debug derlemeleri (`flutter run`) Android'in yerel debug anahtarını kullanır.
+
+### tarus için kapatılanlar
+- **Güncelleme denetimi** (`UpdateManager.etkin = false`): Saber'in GitHub sürümüne
+  bakıyor, Not kullanıcısına Saber'i öneriyordu. Güncellemeler yazilim.tarus.tr'den.
+- **Sentry** (`isSentryAvailable` yalnız testte): DSN Saber geliştiricisinin
+  projesi; ilk açılışta çökme raporu için onay isteniyordu. Hatalar sistem.tarus.tr'ye.
 
 ## Senkronizasyon (Pusula eşitleme belirteci)
 Not'un ayrı kullanıcı hesabı yoktur; kimlik Pusula'dır.

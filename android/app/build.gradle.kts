@@ -8,13 +8,23 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+// tarus: release yalnız tarus'a özel anahtarla (git dışı android/key.properties)
+// imzalanır. Saber'in depoda açık duran yedek anahtarı (fallback-key.jks) kaldırıldı:
+// onunla imzalanan APK için herkes `tr.tarus.not` güncellemesi üretebilirdi.
+// Debug derlemeler Android'in yerel debug anahtarını kullanır. Bkz. TARUS_NOT.md.
 val keystoreProperties = Properties()
 val keystorePropertiesFile = rootProject.file("key.properties")
-val fallbackKeystorePropertiesFile = rootProject.file("fallback-key.properties")
-if (keystorePropertiesFile.exists()) {
+val releaseImzasiVar = keystorePropertiesFile.exists()
+if (releaseImzasiVar) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
-} else if (fallbackKeystorePropertiesFile.exists()) {
-    keystoreProperties.load(FileInputStream(fallbackKeystorePropertiesFile))
+}
+
+gradle.taskGraph.whenReady {
+    if (!releaseImzasiVar && allTasks.any { it.name.contains("Release") }) {
+        throw GradleException(
+            "android/key.properties yok: release APK tarus imza anahtarı olmadan derlenmez (TARUS_NOT.md → İmza anahtarı)."
+        )
+    }
 }
 
 android {
@@ -38,19 +48,18 @@ android {
     }
 
     signingConfigs {
-        create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
-            storeFile = keystoreProperties["storeFile"]?.let { file(it) }
-            storePassword = keystoreProperties["storePassword"] as String
+        if (releaseImzasiVar) {
+            create("release") {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = keystoreProperties["storeFile"]?.let { file(it) }
+                storePassword = keystoreProperties["storePassword"] as String
+            }
         }
     }
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
-        }
-        debug {
-            signingConfig = signingConfigs.getByName("release")
+            if (releaseImzasiVar) signingConfig = signingConfigs.getByName("release")
         }
     }
 
