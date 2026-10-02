@@ -12,9 +12,9 @@ import 'package:saber/components/settings/app_info.dart';
 import 'package:saber/components/theming/adaptive_circular_progress_indicator.dart';
 import 'package:saber/data/nextcloud/login_flow.dart';
 import 'package:saber/data/nextcloud/nextcloud_client_extension.dart';
+import 'package:saber/data/nextcloud/pusula_belirteci.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/i18n/strings.g.dart';
-import 'package:saber/pages/user/login.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const _width = 400.0;
@@ -22,7 +22,6 @@ const _width = 400.0;
 /// Lighter than the actual Saber color for better contrast
 const _saberColor = Color(0xFFffd642);
 const _onSaberColor = Colors.black;
-const _saberColorDarkened = Color(0xFFc29800);
 const _ncColor = Color(0xFF0082c9);
 
 class NcLoginStep extends HookWidget {
@@ -96,12 +95,7 @@ class NcLoginStep extends HookWidget {
                     mainAxisSize: .min,
                     spacing: 48,
                     children: [
-                      _LoginWithSaber(
-                        login: () => loginFlow.value = _createLoginFlow(
-                          context,
-                          NextcloudClientExtension.defaultNextcloudUri,
-                        ),
-                      ),
+                      _LoginWithPusula(onBaglandi: recheckCurrentStep),
                       _LoginWithNextcloud(
                         login: (url) => loginFlow.value = _createLoginFlow(
                           context,
@@ -128,12 +122,7 @@ class NcLoginStep extends HookWidget {
           const SizedBox(height: 16),
           _Header(shouldUseTwoColumns: shouldUseTwoColumns),
           const SizedBox(height: 32),
-          _LoginWithSaber(
-            login: () => loginFlow.value = _createLoginFlow(
-              context,
-              NextcloudClientExtension.defaultNextcloudUri,
-            ),
-          ),
+          _LoginWithPusula(onBaglandi: recheckCurrentStep),
           const SizedBox(height: 32),
           _LoginWithNextcloud(
             login: (url) =>
@@ -204,14 +193,48 @@ class const _HeaderImage({required final bool shouldUseTwoColumns})
   }
 }
 
-class const _LoginWithSaber({required final VoidCallback login})
+/// tarus Not (not.tarus.tr): Pusula Ayarlar'dan alınan eşitleme belirteciyle bağlanır.
+class const _LoginWithPusula({required final VoidCallback onBaglandi})
     extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    final belirtecController = useTextEditingController();
+    final bekliyor = useState(false);
+    final hata = useState<String?>(null);
+    final gecerli = useListenableSelector(
+      belirtecController,
+      () => PusulaBelirteci.gecerliMi(belirtecController.text),
+    );
     final buttonStyle = useMemoized(
       () => _buttonStyleFromBrand(_saberColor, _onSaberColor),
       const [],
     );
+
+    Future<void> baglan() async {
+      bekliyor.value = true;
+      hata.value = null;
+      final sunucu = NextcloudClientExtension.defaultNextcloudUri;
+      try {
+        final kullaniciAdi = await PusulaBelirteci.dogrula(
+          sunucu: sunucu,
+          belirtec: belirtecController.text,
+        );
+        PusulaBelirteci.kaydet(
+          sunucu: sunucu,
+          kullaniciAdi: kullaniciAdi,
+          belirtec: belirtecController.text,
+        );
+        onBaglandi();
+      } on DynamiteStatusCodeException catch (e) {
+        hata.value = e.statusCode == 401
+            ? 'Belirteç geçersiz ya da iptal edilmiş. Pusula → Ayarlar → Not eşitleme ekranından yeni bir belirteç oluşturun.'
+            : 'Sunucu yanıt vermedi (${e.statusCode}). Birazdan yeniden deneyin.';
+      } catch (e) {
+        hata.value = 'Bağlanılamadı: $e';
+      } finally {
+        bekliyor.value = false;
+      }
+    }
 
     final theme = Theme.of(context);
     return Column(
@@ -223,35 +246,37 @@ class const _LoginWithSaber({required final VoidCallback login})
             SvgPicture.asset('assets/icon/icon.svg', width: 32, height: 32),
             const SizedBox(width: 16),
             Expanded(
-              child: Text(
-                t.login.ncLoginStep.saberNcServer,
-                style: theme.textTheme.headlineSmall,
-              ),
+              child: Text('tarus Not', style: theme.textTheme.headlineSmall),
             ),
           ],
         ),
-        const SizedBox(height: 16),
-        ElevatedButton(
-          onPressed: login,
-          style: buttonStyle,
-          child: Text(t.login.ncLoginStep.loginWithSaber),
+        const SizedBox(height: 8),
+        const Text(
+          'Pusula → Ayarlar → Not eşitleme ekranında bu cihaz için bir '
+          'eşitleme belirteci oluşturun ve buraya yapıştırın.',
+        ),
+        const SizedBox(height: 8),
+        TextField(
+          autocorrect: false,
+          enableSuggestions: false,
+          controller: belirtecController,
+          decoration: InputDecoration(
+            labelText: 'Eşitleme belirteci',
+            hintText: '${PusulaBelirteci.onek}…',
+            errorText: hata.value,
+            errorMaxLines: 4,
+          ),
         ),
         const SizedBox(height: 4),
-        Text.rich(
-          t.login.signup(
-            linkToSignup: (text) => TextSpan(
-              text: text,
-              style: TextStyle(
-                color: theme.colorScheme.brightness == .dark
-                    ? _saberColor
-                    : _saberColorDarkened,
-              ),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  launchUrl(NcLoginPage.signupUrl);
-                },
-            ),
-          ),
+        ElevatedButton(
+          onPressed: gecerli && !bekliyor.value ? baglan : null,
+          style: buttonStyle,
+          child: bekliyor.value
+              ? const SizedBox.square(
+                  dimension: 16,
+                  child: AdaptiveCircularProgressIndicator(),
+                )
+              : const Text('Pusula ile bağlan'),
         ),
       ],
     );
