@@ -1,0 +1,2 @@
+• First tarus Not release (based on Saber 1.36.1): sign in with a Pusula sync token, default server not.tarus.tr
+• Saber update check and Sentry crash reporting removed; release builds require the tarus signing key
