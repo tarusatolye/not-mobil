@@ -5,8 +5,9 @@ Tarus ekosistemine özel el yazısı ve çizim notu uygulaması. [saber-notes/sa
 ## Yapılandırma
 - **Uygulama Adı:** Not
 - **Sürüm:** `lib/data/version.dart` (tarus şeması, 1.0.0'dan başlar; Saber 1.36.1 temel alındı).
-  Artırmak için: `dart run scripts/bump_version.dart --custom X.Y.Z --quiet` — betiğin
-  değiştirdiği `README*.md` ve `flatpak/` Saber'in dosyalarıdır, geri alın.
+  Artırmak için: `dart run scripts/bump_version.dart --custom X.Y.Z --quiet`; sonra
+  `metadata/en-US/changelogs/<buildNumber>.txt` ve `flatpak/…metainfo.xml`'deki
+  yer tutucu notu doldurun (`test/version_test.dart` betiğin eşitlediği dosyaları denetler).
 - **Paket Kimliği (Application ID):** `tr.tarus.not`
 - **Varsayılan Eşitleme Sunucusu:** `https://not.tarus.tr`
 - **Protokol:** WebDAV
