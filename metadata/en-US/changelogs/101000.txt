@@ -1,0 +1,2 @@
+• tarus themes: the 8 canonical tarus themes (Settings → Theme), System follows device light/dark
+• Report a bug (Settings → Hata bildir): sent with the Pusula sync token via not.tarus.tr to Pusula and sistem.tarus.tr

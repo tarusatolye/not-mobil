@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,8 +8,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:go_router/go_router.dart';
 import 'package:saber/components/theming/saber_theme.dart';
-import 'package:saber/components/theming/yaru_builder.dart';
 import 'package:saber/data/prefs.dart';
+import 'package:saber/data/tarus_tema.dart';
 import 'package:saber/i18n/extensions/redirecting_localization_delegate.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:window_manager/window_manager.dart';
@@ -20,7 +19,7 @@ class DynamicMaterialApp extends StatefulHookWidget {
     super.key,
     required this.title,
     required this.router,
-    this.defaultSwatch = Colors.yellow,
+    this.defaultSwatch = Colors.yellow, // tarus: kullanılmıyor (TarusTema)
   });
 
   final String title;
@@ -84,74 +83,23 @@ class DynamicMaterialAppState extends State<DynamicMaterialApp>
 
   @override
   Widget build(BuildContext context) {
-    final themeMode = useValueListenable(stows.appTheme);
     final platform = useValueListenable(stows.platform);
-    var chosenAccentColor = useValueListenable(stows.accentColor);
-    if ((chosenAccentColor?.a ?? 0) < double.minPositive)
-      chosenAccentColor = null; // discard transparent accent color
     useListenable(stows.hyperlegibleFont);
+    final tarusTemaId = useValueListenable(stows.tarusTema);
 
-    // Use Yaru theme, with or without [chosenAccentColor]
-    if (platform == .linux) {
-      return YaruBuilder(
-        primary: chosenAccentColor, // if null, falls back to system color
-        platform: platform,
-        builder: (context, theme) {
-          return ExplicitlyThemedApp(
-            title: widget.title,
-            router: widget.router,
-            themeMode: themeMode,
-            theme: theme,
-            darkTheme: theme,
-            highContrastTheme: theme,
-            highContrastDarkTheme: theme,
-          );
-        },
-      );
-    }
-
-    // Use [chosenAccentColor] with material/cupertino theme
-    if (chosenAccentColor != null) {
-      return ExplicitlyThemedApp(
-        title: widget.title,
-        router: widget.router,
-        themeMode: themeMode,
-        theme: SaberTheme.createThemeFromSeed(
-          chosenAccentColor,
-          .light,
-          platform,
-        ),
-        darkTheme: SaberTheme.createThemeFromSeed(
-          chosenAccentColor,
-          .dark,
-          platform,
-        ),
-      );
-    }
-
-    // Try and use device's accent color, or fall back to defaultSwatch
-    return DynamicColorBuilder(
-      builder: (ColorScheme? lightColorScheme, ColorScheme? darkColorScheme) {
-        return ExplicitlyThemedApp(
-          title: widget.title,
-          router: widget.router,
-          themeMode: themeMode,
-          theme: (platform == .android && lightColorScheme != null)
-              ? SaberTheme.createTheme(lightColorScheme, platform)
-              : SaberTheme.createThemeFromSeed(
-                  lightColorScheme?.primary ?? widget.defaultSwatch,
-                  .light,
-                  platform,
-                ),
-          darkTheme: (platform == .android && darkColorScheme != null)
-              ? SaberTheme.createTheme(darkColorScheme, platform)
-              : SaberTheme.createThemeFromSeed(
-                  darkColorScheme?.primary ?? widget.defaultSwatch,
-                  .dark,
-                  platform,
-                ),
-        );
-      },
+    // tarus: 8 kanonik tema (lib/data/tarus_tema.dart); Saber'in sistem vurgu
+    // rengi, Yaru ve elle vurgu seçimi kullanılmaz.
+    final secili = TarusTema.bul(tarusTemaId);
+    final acikTema = secili ?? TarusTema.sistemAcik;
+    final koyuTema = secili ?? TarusTema.sistemKoyu;
+    return ExplicitlyThemedApp(
+      title: widget.title,
+      router: widget.router,
+      themeMode: secili == null
+          ? ThemeMode.system
+          : (secili.acik ? ThemeMode.light : ThemeMode.dark),
+      theme: SaberTheme.createTheme(acikTema.renkSemasi, platform),
+      darkTheme: SaberTheme.createTheme(koyuTema.renkSemasi, platform),
     );
   }
 

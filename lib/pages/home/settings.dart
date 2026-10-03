@@ -10,13 +10,13 @@ import 'package:saber/components/navbar/responsive_navbar.dart';
 import 'package:saber/components/settings/app_info.dart';
 import 'package:saber/components/settings/nextcloud_profile.dart';
 import 'package:saber/components/settings/settings_button.dart';
-import 'package:saber/components/settings/settings_color.dart';
 import 'package:saber/components/settings/settings_directory_selector.dart';
 import 'package:saber/components/settings/settings_dropdown.dart';
 import 'package:saber/components/settings/settings_selection.dart';
 import 'package:saber/components/settings/settings_sentry.dart';
 import 'package:saber/components/settings/settings_subtitle.dart';
 import 'package:saber/components/settings/settings_switch.dart';
+import 'package:saber/components/settings/tarus_tema_secici.dart';
 import 'package:saber/components/settings/update_manager.dart';
 import 'package:saber/components/theming/adaptive_alert_dialog.dart';
 import 'package:saber/components/theming/adaptive_toggle_buttons.dart';
@@ -31,6 +31,7 @@ import 'package:saber/data/routes.dart';
 import 'package:saber/data/sentry/sentry_init.dart';
 import 'package:saber/data/tools/shape_pen.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/pages/user/hata_bildir_sayfasi.dart';
 import 'package:stow/stow.dart';
 
 class const SettingsPage({super.key}) extends StatefulWidget {
@@ -70,12 +71,6 @@ class const SettingsPage({super.key}) extends StatefulWidget {
 }
 
 abstract class _SettingsStows {
-  static final appTheme = TransformedStow(
-    stows.appTheme,
-    (ThemeMode value) => value.index,
-    (int value) => ThemeMode.values[value],
-  );
-
   static final platform = TransformedStow(
     stows.platform,
     (TargetPlatform value) => value.index,
@@ -191,6 +186,15 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 const NextcloudProfile(),
                 const Padding(padding: .all(8), child: AppInfo()),
+                SettingsButton(
+                  title: 'Hata bildir',
+                  icon: Icons.bug_report_outlined,
+                  onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const HataBildirSayfasi(modul: 'Ayarlar'),
+                    ),
+                  ),
+                ),
                 SettingsSubtitle(subtitle: t.settings.prefCategories.general),
                 SettingsDropdown(
                   title: t.settings.prefLabels.locale,
@@ -212,41 +216,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     }),
                   ],
                 ),
-                SettingsSelection(
-                  title: t.settings.prefLabels.appTheme,
-                  iconBuilder: (i) {
-                    if (i == ThemeMode.system.index)
-                      return Icons.brightness_auto;
-                    if (i == ThemeMode.light.index) return Icons.light_mode;
-                    if (i == ThemeMode.dark.index) return Icons.dark_mode;
-                    return null;
-                  },
-                  pref: _SettingsStows.appTheme,
-                  optionsWidth: 60,
-                  options: [
-                    ToggleButtonsOption(
-                      ThemeMode.system.index,
-                      Icon(
-                        Icons.brightness_auto,
-                        semanticLabel: t.settings.themeModes.system,
-                      ),
-                    ),
-                    ToggleButtonsOption(
-                      ThemeMode.light.index,
-                      Icon(
-                        Icons.light_mode,
-                        semanticLabel: t.settings.themeModes.light,
-                      ),
-                    ),
-                    ToggleButtonsOption(
-                      ThemeMode.dark.index,
-                      Icon(
-                        Icons.dark_mode,
-                        semanticLabel: t.settings.themeModes.dark,
-                      ),
-                    ),
-                  ],
-                ),
+                const TarusTemaSecici(),
                 SettingsSelection(
                   title: t.settings.prefLabels.platform,
                   iconBuilder: (i) => switch (stows.platform.value) {
@@ -321,11 +291,6 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     ),
                   ],
-                ),
-                SettingsColor(
-                  title: t.settings.prefLabels.customAccentColor,
-                  icon: Icons.colorize,
-                  pref: stows.accentColor,
                 ),
                 SettingsSwitch(
                   title: t.settings.prefLabels.hyperlegibleFont,

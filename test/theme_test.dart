@@ -12,26 +12,21 @@ void main() {
       FlavorConfig.setup();
     });
 
+    // tarus: Saber'in elle vurgu rengi kaldırıldı; renkler TarusTema'dan
+    // (test/tarus_tema_test.dart). Burada platform ve yazı tipi sınanır.
     for (final platform in TargetPlatform.values)
       for (final hyperlegible in const [false, true])
-        for (final hasAccent in const [false, true])
-          _testTheme(
-            platform: platform,
-            hyperlegible: hyperlegible,
-            hasAccent: hasAccent,
-          );
+        _testTheme(platform: platform, hyperlegible: hyperlegible);
   });
 }
 
 void _testTheme({
   required TargetPlatform platform,
   required bool hyperlegible,
-  required bool hasAccent,
 }) {
   final repr =
       '${platform.name}_'
-      '${hyperlegible ? 'hyperlegible' : 'inter'}_'
-      '${hasAccent ? 'with-accent' : 'no-accent'}';
+      '${hyperlegible ? 'hyperlegible' : 'inter'}';
   testWidgets(repr, (tester) async {
     final router = GoRouter(
       routes: [GoRoute(path: '/', builder: (_, _) => const Text('hi'))],
@@ -39,11 +34,9 @@ void _testTheme({
 
     stows.platform.value = platform;
     stows.hyperlegibleFont.value = hyperlegible;
-    stows.accentColor.value = hasAccent ? const Color(0xFF00FF00) : null;
     addTearDown(() {
       stows.platform.value = stows.platform.defaultValue;
       stows.hyperlegibleFont.value = stows.hyperlegibleFont.defaultValue;
-      stows.accentColor.value = stows.accentColor.defaultValue;
     });
 
     await tester.pumpWidget(
@@ -57,15 +50,6 @@ void _testTheme({
     );
     for (final theme in [app.theme, ?app.darkTheme]) {
       expect(theme.platform, platform);
-
-      if (hasAccent) {
-        final actualAccent = HSVColor.fromColor(theme.colorScheme.primary);
-        expect(
-          actualAccent.hue,
-          inInclusiveRange(90, 150),
-          reason: 'Accent should be green',
-        );
-      }
 
       final expectedFontFamily = hyperlegible
           ? 'AtkinsonHyperlegibleNext'
