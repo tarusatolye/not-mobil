@@ -119,6 +119,13 @@ class Stows {
     codec: const ColorCodec(),
     volatile: !_isOnMainIsolate,
   );
+  /// tarus teması (`TarusTema.hepsi` kimliği). Boş: sistem moduna göre
+  /// Modern Işık / Karanlık. Saber'in tema/vurgu ayarlarının yerini alır.
+  final tarusTema = PlainStow(
+    'tarusTema',
+    '',
+    volatile: !_isOnMainIsolate,
+  );
   final hyperlegibleFont = PlainStow(
     'hyperlegibleFont',
     false,

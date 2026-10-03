@@ -86,3 +86,19 @@ lisanslıdır (`LICENSE.md`). APK dağıtılırken kaynak kodu da sunulmalıdır
 
 - Kaynak bağlantısı APK'yı alan herkesin erişebileceği bir yerde olmalı: depo
   özelse ya açılmalı ya da kaynak arşivi indirme sayfasına konmalı.
+
+## Tema
+Ayarlar → Tema: tarus 8 kanonik tema (`lib/data/tarus_tema.dart`). Kimlik, ad ve
+sıra `ozluk/tarus-kabuk/components/TemaSecici.tsx`, renkler `tarus-kabuk/css/tarus.css`
+ile birebir; değişiklik önce kabukta yapılır, sonra buraya taşınır
+(`test/tarus_tema_test.dart` ozluk yanındaysa sırayı karşılaştırır). "Sistem":
+cihaz açıkken Modern Işık, karanlıkken Karanlık. Saber'in tema modu, vurgu rengi
+ve Yaru teması kullanılmaz. Tema yalnız uygulama kabuğunu boyar; not sayfası
+Saber'in karanlık mod kuralıyla çizilir.
+
+## Hata bildir
+Ayarlar → Hata bildir: başlık, açıklama, isteğe bağlı ekran görüntüsü (en çok 2 MB).
+Mobilde Pusula oturumu yoktur; kayıt eşitleme belirteciyle Not sunucusuna
+(`POST /mobil/hata-bildir`) gider, Not sunucusu Pusula'ya (`/not/hata-bildir/`)
+iletir, kayıt sistem.tarus.tr Hata Panosu'nda `not.tarus.tr` altında görünür.
+Sunucu tarafı: not 2.0.4 ve Pusula 1.8.5.
