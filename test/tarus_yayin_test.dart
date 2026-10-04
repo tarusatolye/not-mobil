@@ -32,6 +32,9 @@ void main() {
     expect(AppInfo.tarusLisansNotu, contains('GPL-3.0'));
     expect(AppInfo.kaynakKoduUrl.toString(), contains('tarusatolye/not-mobil'));
     expect(AppInfo.saberKaynakUrl.toString(), contains('saber-notes/saber'));
-    expect(File('LICENSE.md').readAsStringSync(), contains('GNU GENERAL PUBLIC LICENSE'));
+    expect(
+      File('LICENSE.md').readAsStringSync(),
+      contains('GNU GENERAL PUBLIC LICENSE'),
+    );
   });
 }

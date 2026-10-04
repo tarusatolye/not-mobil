@@ -89,17 +89,15 @@ class DynamicMaterialAppState extends State<DynamicMaterialApp>
 
     // tarus: 8 kanonik tema (lib/data/tarus_tema.dart); Saber'in sistem vurgu
     // rengi, Yaru ve elle vurgu seçimi kullanılmaz.
-    final secili = TarusTema.bul(tarusTemaId);
-    final acikTema = secili ?? TarusTema.sistemAcik;
-    final koyuTema = secili ?? TarusTema.sistemKoyu;
+    // Kayıt yoksa ya da bilinmiyorsa Modern (kullanıcı kararı 2026-10-04).
+    final secili = TarusTema.coz(tarusTemaId);
+    final tema = SaberTheme.createTheme(secili.renkSemasi, platform);
     return ExplicitlyThemedApp(
       title: widget.title,
       router: widget.router,
-      themeMode: secili == null
-          ? ThemeMode.system
-          : (secili.acik ? ThemeMode.light : ThemeMode.dark),
-      theme: SaberTheme.createTheme(acikTema.renkSemasi, platform),
-      darkTheme: SaberTheme.createTheme(koyuTema.renkSemasi, platform),
+      themeMode: secili.acik ? ThemeMode.light : ThemeMode.dark,
+      theme: tema,
+      darkTheme: tema,
     );
   }
 

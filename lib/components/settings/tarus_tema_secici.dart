@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/tarus_tema.dart';
 
-/// Ayarlar → Tema: tarus 8 kanonik tema + sistem (Modern Işık / Karanlık).
-/// Web'deki ortak `TemaSecici` ile aynı ad ve sıra.
+/// Ayarlar → Tema: tarus 8 kanonik tema. Web'deki ortak `TemaSecici` ve
+/// `tarus-kabuk/mobil` `TEMALAR` ile aynı kimlik, ad ve sıra; kayıt yokken
+/// Modern seçili (kullanıcı kararı 2026-10-04).
 class TarusTemaSecici extends StatelessWidget {
   const new({super.key});
 
@@ -11,7 +12,8 @@ class TarusTemaSecici extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: stows.tarusTema,
-      builder: (context, secili, _) {
+      builder: (context, kayit, _) {
+        final secili = TarusTema.coz(kayit).id;
         return Padding(
           padding: const .symmetric(horizontal: 16, vertical: 8),
           child: Column(
@@ -23,20 +25,11 @@ class TarusTemaSecici extends StatelessWidget {
                 spacing: 8,
                 runSpacing: 8,
                 children: [
-                  _TemaKarti(
-                    ad: 'Sistem',
-                    aciklama: 'Cihaz moduna göre Modern Işık / Karanlık',
-                    ust: TarusTema.sistemAcik,
-                    alt: TarusTema.sistemKoyu,
-                    secili: secili.isEmpty || TarusTema.bul(secili) == null,
-                    onSec: () => stows.tarusTema.value = '',
-                  ),
                   for (final t in TarusTema.hepsi)
                     _TemaKarti(
                       ad: t.ad,
                       aciklama: t.aciklama,
-                      ust: t,
-                      alt: t,
+                      tema: t,
                       secili: secili == t.id,
                       onSec: () => stows.tarusTema.value = t.id,
                     ),
@@ -54,16 +47,13 @@ class _TemaKarti extends StatelessWidget {
   const new({
     required this.ad,
     required this.aciklama,
-    required this.ust,
-    required this.alt,
+    required this.tema,
     required this.secili,
     required this.onSec,
   });
 
   final String ad, aciklama;
-
-  /// Önizlemenin sol (ust) ve sağ (alt) yarısı; sistem kartında iki tema.
-  final TarusTema ust, alt;
+  final TarusTema tema;
   final bool secili;
   final VoidCallback onSec;
 
@@ -92,12 +82,8 @@ class _TemaKarti extends StatelessWidget {
                 borderRadius: .circular(6),
                 child: SizedBox(
                   height: 40,
-                  child: Row(
-                    children: [
-                      Expanded(child: _Onizleme(ust)),
-                      if (!identical(ust, alt)) Expanded(child: _Onizleme(alt)),
-                    ],
-                  ),
+                  width: double.infinity,
+                  child: _Onizleme(tema),
                 ),
               ),
               const SizedBox(height: 6),

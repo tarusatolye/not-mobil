@@ -14,9 +14,7 @@ import 'package:saber/data/prefs.dart';
 import 'package:saber/data/version.dart';
 
 extension NextcloudClientExtension on NextcloudClient {
-  static final Uri defaultNextcloudUri = Uri.parse(
-    'https://not.tarus.tr',
-  );
+  static final Uri defaultNextcloudUri = Uri.parse('https://not.tarus.tr');
 
   static final userAgent =
       'Saber/$buildName '

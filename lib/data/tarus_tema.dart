@@ -65,11 +65,15 @@ class TarusTema {
     return null;
   }
 
-  /// Sistem açık moddayken (tercih boş) kullanılan tema.
-  static TarusTema get sistemAcik => bul('modern')!;
+  /// Varsayılan tema kimliği: kayıt yokken Modern (kullanıcı kararı
+  /// 2026-10-04; web ve `tarus-kabuk/mobil` `VARSAYILAN_TEMA` ile aynı).
+  static const varsayilanId = 'modern';
 
-  /// Sistem karanlık moddayken (tercih boş) kullanılan tema.
-  static TarusTema get sistemKoyu => bul('karanlik')!;
+  /// Kayıt yokken ya da kimlik bilinmiyorsa kullanılan tema (Modern Işık).
+  static TarusTema get varsayilan => bul(varsayilanId)!;
+
+  /// Kayıtlı kimliği temaya çevirir; boş ya da bilinmeyen kimlik Modern olur.
+  static TarusTema coz(String id) => bul(id) ?? varsayilan;
 
   static const hepsi = <TarusTema>[
     TarusTema(

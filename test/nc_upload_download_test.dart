@@ -23,6 +23,9 @@ void main() async {
     FlavorConfig.setup();
     await FileManager.init();
 
+    // tarus: varsayılan sunucu not.tarus.tr; bu test hesapları Saber'in
+    // Nextcloud test sunucusunda (Saber'in eşitleme/şifreleme kodunu sınar).
+    stows.url.value = 'https://nc.saber.adil.hanney.org';
     stows.username.value = 'test.issue.118';
     stows.ncPassword.value = 'riNLA-2fXWY-Kay3x-jEMX5-bZr6m';
     stows.encPassword.value = 'test.issue.118';

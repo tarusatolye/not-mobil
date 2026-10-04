@@ -66,13 +66,27 @@ void main() {
       );
     }
 
-    testWidgets('varsayılan: sistem moduna göre Modern Işık / Karanlık', (
-      tester,
-    ) async {
+    testWidgets('varsayılan: kayıt yokken Modern Işık', (tester) async {
+      expect(stows.tarusTema.defaultValue, 'modern');
       final app = await uygulama(tester);
-      expect(app.themeMode, ThemeMode.system);
-      expect(app.theme.colorScheme.surface, TarusTema.sistemAcik.bg);
-      expect(app.darkTheme!.colorScheme.surface, TarusTema.sistemKoyu.bg);
+      final modern = TarusTema.bul('modern')!;
+      expect(app.themeMode, ThemeMode.light);
+      expect(app.theme.colorScheme.surface, modern.bg);
+      expect(app.theme.colorScheme.primary, modern.accent);
+    });
+
+    testWidgets('boş ya da bilinmeyen kayıt Modern açılır', (tester) async {
+      addTearDown(() => stows.tarusTema.value = stows.tarusTema.defaultValue);
+      for (final kayit in ['', 'yok']) {
+        stows.tarusTema.value = kayit;
+        final app = await uygulama(tester);
+        expect(app.themeMode, ThemeMode.light, reason: kayit);
+        expect(
+          app.theme.colorScheme.surface,
+          TarusTema.varsayilan.bg,
+          reason: kayit,
+        );
+      }
     });
 
     testWidgets('seçili tema modu ve renkleri belirler', (tester) async {

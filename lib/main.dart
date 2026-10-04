@@ -14,6 +14,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_to_regexp/path_to_regexp.dart';
 import 'package:pdfrx/pdfrx.dart';
 import 'package:printing/printing.dart';
+import 'package:saber/components/baglam_menusu.dart';
 import 'package:saber/components/canvas/pencil_shader.dart';
 import 'package:saber/components/theming/dynamic_material_app.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
@@ -256,12 +257,15 @@ class const App({super.key}) extends StatefulWidget {
       ),
       GoRoute(
         path: RoutePaths.login,
-        builder: (context, state) => const NcLoginPage(),
+        // tarus: basılı tutunca Hata bildir (düzenleyici çizim yüzeyi, sarılmaz).
+        builder: (context, state) =>
+            const BaglamMenusu(modul: 'Giriş', child: NcLoginPage()),
       ),
       GoRoute(path: '/profile', redirect: (context, state) => RoutePaths.login),
       GoRoute(
         path: RoutePaths.logs,
-        builder: (context, state) => const LogsPage(),
+        builder: (context, state) =>
+            const BaglamMenusu(modul: 'Kayıtlar', child: LogsPage()),
       ),
     ],
   );

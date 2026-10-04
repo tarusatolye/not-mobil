@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:saber/components/baglam_menusu.dart';
 import 'package:saber/components/home/sentry_consent_dialog.dart';
 import 'package:saber/components/navbar/responsive_navbar.dart';
 import 'package:saber/components/settings/update_manager.dart';
@@ -64,6 +65,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  /// tarus: basılı tutunca Hata bildir menüsündeki ekran adı.
+  String get _modul => switch (widget.subpage) {
+    HomePage.browseSubpage => 'Gözat',
+    HomePage.whiteboardSubpage => 'Beyaz tahta',
+    HomePage.settingsSubpage => 'Ayarlar',
+    _ => 'Son notlar',
+  };
+
   @override
   Widget build(BuildContext context) {
     // hide navbar in fullscreen whiteboard
@@ -72,9 +81,14 @@ class _HomePageState extends State<HomePage> {
       return body;
     }
 
-    return ResponsiveNavbar(
-      selectedIndex: HomePage.subpages.indexOf(widget.subpage),
-      body: body,
+    // tarus: basılı tutunca Hata bildir; beyaz tahta çizim yüzeyi, sarılmaz.
+    return BaglamMenusu(
+      modul: _modul,
+      etkin: widget.subpage != HomePage.whiteboardSubpage,
+      child: ResponsiveNavbar(
+        selectedIndex: HomePage.subpages.indexOf(widget.subpage),
+        body: body,
+      ),
     );
   }
 

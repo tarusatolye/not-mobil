@@ -1,0 +1,2 @@
+• Default theme is Modern when nothing is saved (same 8 themes as the tarus web apps, no System option)
+• Press and hold on an empty spot (home, browse, settings, login) to open Hata bildir, as in the other tarus mobile apps
