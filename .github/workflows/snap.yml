@@ -2,14 +2,10 @@ name: Build unofficial snap
 
 on:
   workflow_dispatch:
+  # Actions dakikası (2026-10-04): yalnız etiket ve elle; dosya değişince her dalda çalışmaz.
   push:
     tags:
       - "**"
-    branches:
-      - "**"
-    paths:
-      - .github/workflows/snap.yml
-      - snap/snapcraft.yaml
 
 jobs:
   build-snap:

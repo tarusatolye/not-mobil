@@ -7,8 +7,16 @@ on:
     branches:
       - main
 
+# Actions dakikası (2026-10-04): aynı PR'a yeni commit gelince eski çalışma
+# iptal edilir; PR birleştirme commit'i PR'da sınandığı için main'de işler
+# atlanır (doğrudan main push'u yine sınanır).
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   run-tests:
+    if: ${{ github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'Merge pull request') }}
     name: Run Flutter tests
     runs-on: ubuntu-latest
     timeout-minutes: 10

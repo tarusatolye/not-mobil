@@ -3,14 +3,10 @@ name: Build for Windows
 on:
   # Enable manual run
   workflow_dispatch:
+  # Actions dakikası (2026-10-04): yalnız etiket ve elle; dosya değişince her dalda çalışmaz.
   push:
     tags:
       - "**"
-    branches:
-      - "**"
-    paths:
-      - .github/workflows/windows.yml
-      - installers/desktop_inno_script.iss
 
 jobs:
   build-windows:
