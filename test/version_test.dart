@@ -93,35 +93,43 @@ void main() {
     expect(fromNumber.buildName, fromName.buildName);
   });
 
-  test('Test that changelog can be downloaded from GitHub', () async {
-    final changelog = await UpdateManager.getChangelog(
-      newestVersion: buildNumber,
-    );
-    expect(
-      changelog,
-      isNotNull,
-      reason: 'Changelog can\'t be found on GitHub. Please ignore this test if you haven\'t pushed the latest version yet.',
-    );
-    expect(changelog, isNotEmpty);
-    expect(
-      changelog,
-      isNot(contains(dummyChangelog)),
-      reason: 'Dummy text found in changelog downloaded from GitHub',
-    );
-  }, skip: "tarus Not: sürüm notları saber-notes/saber GitHub'ında yok; güncelleme denetimi kapalı (UpdateManager.etkin = false).");
-
-  test('Test that changelog has been translated', () {
-    for (final localeCode in localeNames.keys) {
-      if (localeCode == 'en') continue;
-
-      final file = File('metadata/$localeCode/changelogs/$buildNumber.txt');
-      expect(
-        file.existsSync(),
-        true,
-        reason: 'Changelog for $localeCode does not exist',
+  test(
+    'Test that changelog can be downloaded from GitHub',
+    () async {
+      final changelog = await UpdateManager.getChangelog(
+        newestVersion: buildNumber,
       );
-    }
-  }, skip: "tarus Not: mağaza sürüm notu yalnız en-US; Saber'in tüm dil çevirisi beklentisi tarus yayınına uymuyor.");
+      expect(
+        changelog,
+        isNotNull,
+        reason: 'Changelog can\'t be found on GitHub. Please ignore this test if you haven\'t pushed the latest version yet.',
+      );
+      expect(changelog, isNotEmpty);
+      expect(
+        changelog,
+        isNot(contains(dummyChangelog)),
+        reason: 'Dummy text found in changelog downloaded from GitHub',
+      );
+    },
+    skip: "tarus Not: sürüm notları saber-notes/saber GitHub'ında yok; güncelleme denetimi kapalı (UpdateManager.etkin = false).",
+  );
+
+  test(
+    'Test that changelog has been translated',
+    () {
+      for (final localeCode in localeNames.keys) {
+        if (localeCode == 'en') continue;
+
+        final file = File('metadata/$localeCode/changelogs/$buildNumber.txt');
+        expect(
+          file.existsSync(),
+          true,
+          reason: 'Changelog for $localeCode does not exist',
+        );
+      }
+    },
+    skip: "tarus Not: mağaza sürüm notu yalnız en-US; Saber'in tüm dil çevirisi beklentisi tarus yayınına uymuyor.",
+  );
 
   group('SaberVersion class', () {
     test('getters', () {

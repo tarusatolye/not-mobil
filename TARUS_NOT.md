@@ -71,6 +71,21 @@ NOT_SUNUCU_URL=http://127.0.0.1:3999 flutter test test/not_sunucu_esitleme_test.
 ```
 Linux'ta testler için `libgtk-3-dev` gerekir (super_native_extensions).
 
+`nc_upload_download_test` ve `nc_deletion_test` Saber'in Nextcloud test sunucusuna
+(`nc.saber.adil.hanney.org`, Saber'in test hesapları) karşı çalışır; varsayılan
+sunucu not.tarus.tr olduğu için adres testte açıkça verilir.
+
+Golden ekran görüntüleri (`test/goldens/`, `metadata/en-US/images/*Screenshots/`)
+arayüz bilerek değişince güncellenir: `flutter test --update-goldens <test dosyası>`
+(önce `dart run golden_screenshot:download_apple_fonts`; CI ile aynı sonuç için
+Linux'ta, `submodules/flutter` sürümüyle).
+
+## Sürüm notları
+- **1.1.1** (2026-10-04): kayıt yokken varsayılan tema Modern, "Sistem" seçeneği
+  kaldırıldı; boş yerde basılı tutunca Hata bildir menüsü; CI: golden'lar tarus
+  arayüzüne göre güncellendi, Nextcloud testleri Saber test sunucusuna yönlendi.
+- **1.1.0** (2026-10-03): tarus 8 tema, Ayarlar → Hata bildir.
+
 ## Lisans (GPL-3.0)
 tarus Not, [Saber](https://github.com/saber-notes/saber) (© 2022- Adil Hanney ve
 katkıda bulunanlar) üzerine geliştirilmiştir ve Saber gibi **GNU GPL-3.0** ile
@@ -91,13 +106,21 @@ lisanslıdır (`LICENSE.md`). APK dağıtılırken kaynak kodu da sunulmalıdır
 Ayarlar → Tema: tarus 8 kanonik tema (`lib/data/tarus_tema.dart`). Kimlik, ad ve
 sıra `ozluk/tarus-kabuk/components/TemaSecici.tsx`, renkler `tarus-kabuk/css/tarus.css`
 ile birebir; değişiklik önce kabukta yapılır, sonra buraya taşınır
-(`test/tarus_tema_test.dart` ozluk yanındaysa sırayı karşılaştırır). "Sistem":
-cihaz açıkken Modern Işık, karanlıkken Karanlık. Saber'in tema modu, vurgu rengi
+(`test/tarus_tema_test.dart` ozluk yanındaysa sırayı karşılaştırır). Kayıt
+yokken (ya da kimlik bilinmiyorsa) **Modern** (kullanıcı kararı 2026-10-04; web
+ve `tarus-kabuk/mobil` `VARSAYILAN_TEMA` ile aynı); web'de olmadığı için "Sistem"
+seçeneği yok (1.1.1'de kaldırıldı). Saber'in tema modu, vurgu rengi
 ve Yaru teması kullanılmaz. Tema yalnız uygulama kabuğunu boyar; not sayfası
 Saber'in karanlık mod kuralıyla çizilir.
 
 ## Hata bildir
-Ayarlar → Hata bildir: başlık, açıklama, isteğe bağlı ekran görüntüsü (en çok 2 MB).
+Ayarlar → Hata bildir ya da ekranın boş bir yerinde ~0,7 sn basılı tutunca açılan
+menü (pusula-mobil / posta-mobil `BaglamMenusu` ile aynı davranış;
+`lib/components/baglam_menusu.dart`): Son notlar, Gözat, Ayarlar, Giriş ve
+Kayıtlar ekranlarında. Kendi basılı tutma işlevi olan öğe (not kartı seçimi,
+ayarı sıfırlama, metin seçimi) önce kazanır; yazı alanı odaktayken açılmaz.
+Düzenleyici ve beyaz tahta çizim yüzeyi olduğu için sarılmaz (kalemi kıpırdatmadan
+tutmak orada çizimdir). Bildirim ekranı: başlık, açıklama, isteğe bağlı ekran görüntüsü (en çok 2 MB).
 Mobilde Pusula oturumu yoktur; kayıt eşitleme belirteciyle Not sunucusuna
 (`POST /mobil/hata-bildir`) gider, Not sunucusu Pusula'ya (`/not/hata-bildir/`)
 iletir, kayıt sistem.tarus.tr Hata Panosu'nda `not.tarus.tr` altında görünür.

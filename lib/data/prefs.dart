@@ -12,6 +12,7 @@ import 'package:saber/data/codecs/base64_codec.dart';
 import 'package:saber/data/flavor_config.dart';
 import 'package:saber/data/quota.dart';
 import 'package:saber/data/sentry/sentry_consent.dart';
+import 'package:saber/data/tarus_tema.dart';
 import 'package:saber/data/tools/highlighter.dart';
 import 'package:saber/data/tools/pen.dart';
 import 'package:sbn/canvas_background_pattern.dart';
@@ -119,11 +120,13 @@ class Stows {
     codec: const ColorCodec(),
     volatile: !_isOnMainIsolate,
   );
-  /// tarus teması (`TarusTema.hepsi` kimliği). Boş: sistem moduna göre
-  /// Modern Işık / Karanlık. Saber'in tema/vurgu ayarlarının yerini alır.
+
+  /// tarus teması (`TarusTema.hepsi` kimliği). Varsayılan Modern (kullanıcı
+  /// kararı 2026-10-04); boş ya da bilinmeyen kayıt da Modern olarak açılır.
+  /// Saber'in tema/vurgu ayarlarının yerini alır.
   final tarusTema = PlainStow(
     'tarusTema',
-    '',
+    TarusTema.varsayilanId,
     volatile: !_isOnMainIsolate,
   );
   final hyperlegibleFont = PlainStow(
