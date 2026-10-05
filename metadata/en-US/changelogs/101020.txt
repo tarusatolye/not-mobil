@@ -1,0 +1,2 @@
+• Visible Saber names in the app (settings, login, sync help, about) now say tarus Not; the GPL-3.0 and Saber attribution in About stays
+• The Saber sponsor and storage button was removed from About

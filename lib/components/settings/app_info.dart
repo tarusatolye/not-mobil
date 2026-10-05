@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,9 +9,6 @@ import 'package:saber/i18n/strings.g.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class const AppInfo({super.key}) extends StatelessWidget {
-  static final Uri sponsorUrl = Uri.parse(
-    'https://github.com/sponsors/adil192',
-  );
   static final Uri privacyPolicyUrl = Uri.parse(
     'https://saber.adil.hanney.org/privacy-policy/',
   );
@@ -88,15 +83,8 @@ class const AppInfo({super.key}) extends StatelessWidget {
           child: Text('Saber (temel alınan proje)'),
         ),
       ),
-      if (!Platform.isIOS && !Platform.isMacOS)
-        // Apple rejected the app for having donations not through the App Store
-        TextButton(
-          onPressed: () => launchUrl(sponsorUrl),
-          child: SizedBox(
-            width: double.infinity,
-            child: Text(t.appInfo.sponsorButton),
-          ),
-        ),
+      // tarus: Saber geliştiricisine bağış/depolama düğmesi kaldırıldı
+      // (tarus Not kullanıcısını Saber'in ücretli sunucusuna yönlendiriyordu).
       TextButton(
         onPressed: () => launchUrl(licenseUrl),
         child: SizedBox(

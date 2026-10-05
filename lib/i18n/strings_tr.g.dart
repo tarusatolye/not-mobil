@@ -16,7 +16,7 @@ class TranslationsTr extends Translations with BaseTranslations<AppLocale, Trans
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	TranslationsTr({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
-		  $meta = meta ?? TranslationMetadata(
+		  _meta = meta ?? TranslationMetadata(
 		    locale: AppLocale.tr,
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
@@ -25,7 +25,8 @@ class TranslationsTr extends Translations with BaseTranslations<AppLocale, Trans
 		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver);
 
 	/// Metadata for the translations of <tr>.
-	@override final TranslationMetadata<AppLocale, Translations> $meta;
+	final TranslationMetadata<AppLocale, Translations> _meta;
+	@override TranslationMetadata<AppLocale, Translations> get $meta => _meta;
 
 	late final TranslationsTr _root = this; // ignore: unused_field
 
@@ -68,7 +69,7 @@ class _Translations$home$tr extends Translations$home$en {
 	@override late final _Translations$home$titles$tr titles = _Translations$home$titles$tr._(_root);
 	@override late final _Translations$home$tooltips$tr tooltips = _Translations$home$tooltips$tr._(_root);
 	@override late final _Translations$home$create$tr create = _Translations$home$create$tr._(_root);
-	@override String get welcome => 'Saber\'a hoş geldiniz';
+	@override String get welcome => 'Not\'a hoş geldiniz';
 	@override String get invalidFormat => 'Seçtiğiniz dosya desteklenmiyor. Lütfen bir .sbn, .sbn2, .sba veya .pdf dosyası seçin.';
 	@override String get noFiles => 'Dosya yok';
 	@override String get createNewNote => 'Yeni bir not oluşturmak için + butonuna tıklayınız';
@@ -117,7 +118,7 @@ class _Translations$settings$tr extends Translations$settings$en {
 	];
 	@override late final _Translations$settings$reset$tr reset = _Translations$settings$reset$tr._(_root);
 	@override String get resyncEverything => 'Her şeyi yeniden senkronize et';
-	@override String get openDataDir => 'Saber klasörünü aç';
+	@override String get openDataDir => 'tarus Not klasörünü aç';
 	@override late final _Translations$settings$customDataDir$tr customDataDir = _Translations$settings$customDataDir$tr._(_root);
 	@override String get autosaveDisabled => 'Asla';
 	@override String get shapeRecognitionDisabled => 'Asla';
@@ -408,7 +409,7 @@ class _Translations$sentry$consent$tr extends Translations$sentry$consent$en {
 	// Translations
 	@override late final _Translations$sentry$consent$description$tr description = _Translations$sentry$consent$description$tr._(_root);
 	@override late final _Translations$sentry$consent$answers$tr answers = _Translations$sentry$consent$answers$tr._(_root);
-	@override String get title => 'Saber geliştirmeye yardımcı olur mu?';
+	@override String get title => 'tarus Not\'u geliştirmeye yardım etmek ister misiniz?';
 }
 
 // Path: settings.prefCategories
@@ -438,7 +439,7 @@ class _Translations$settings$prefLabels$tr extends Translations$settings$prefLab
 	@override String get layoutSize => 'Yerleşim tipi';
 	@override String get customAccentColor => 'Farklı ana renk';
 	@override String get hyperlegibleFont => 'Hyperlegible font';
-	@override String get shouldCheckForUpdates => 'Otomatik olarak Saber güncellemelerini kontrol et';
+	@override String get shouldCheckForUpdates => 'tarus Not güncellemelerini otomatik denetle';
 	@override String get shouldAlwaysAlertForUpdates => 'Hızlı güncellemeler';
 	@override String get allowInsecureConnections => 'Güvensiz bağlantılara izin ver';
 	@override String get editorToolbarAlignment => 'Editör araç çubuğunun yerleşimi';
@@ -455,7 +456,7 @@ class _Translations$settings$prefLabels$tr extends Translations$settings$prefLab
 	@override String get printPageIndicators => 'Sayfa belirteçlerini yazdır';
 	@override String get shapeRecognitionDelay => 'Şekil tanıma gecikmesi';
 	@override String get autoStraightenLines => 'Çizgileri otomatik düzleştir';
-	@override String get customDataDir => 'Özel Saber klasörü';
+	@override String get customDataDir => 'Özel tarus Not klasörü';
 	@override String get autoDisableFingerDrawingWhenStylusDetected => 'Parmak çizimini otomatik olarak devre dışı bırak';
 	@override String get sentry => 'Hata raporlama';
 	@override String get autosave => 'Otomatik koruma';
@@ -469,7 +470,7 @@ class _Translations$settings$prefDescriptions$tr extends Translations$settings$p
 
 	// Translations
 	@override String get hyperlegibleFont => 'Atkinson Hyperlegible, görme sorunu yaşayanların okumasını kolaylaştıran bir fonttur';
-	@override String get allowInsecureConnections => '(Önerilmez) Saber\'ın kendinden imzalı/güvensiz sertifika kullanan sunuculara bağlanmasına izin verir';
+	@override String get allowInsecureConnections => '(Önerilmez) tarus Not\'un kendinden imzalı/güvensiz sertifika kullanan sunuculara bağlanmasına izin verir';
 	@override String get preferGreyscale => 'E-mürekkep ekranlar için';
 	@override String get autoClearWhiteboardOnExit => 'Diğer cihazlarınıza senkronize edilmeye devam edecek';
 	@override String get disableEraserAfterUse => 'Silgiyi kullandıktan sonra otomatik olarak kaleme geçer';
@@ -580,10 +581,10 @@ class _Translations$login$ncLoginStep$tr extends Translations$login$ncLoginStep$
 
 	// Translations
 	@override String get whereToStoreData => 'Verilerinizi nerede saklamak istediğinizi seçin:';
-	@override String get saberNcServer => 'Saber\'ın resmi Nextcloud sunucus';
+	@override String get saberNcServer => 'tarus Not sunucusu';
 	@override String get otherNcServer => 'Diğer Nextcloud sunucusu';
 	@override String get serverUrl => 'Sunucu URL\'i';
-	@override String get loginWithSaber => 'Saber ile giriş yap';
+	@override String get loginWithSaber => 'tarus Not ile giriş yap';
 	@override String get loginWithNextcloud => 'Nextcloud ile giriş yap';
 	@override late final _Translations$login$ncLoginStep$loginFlow$tr loginFlow = _Translations$login$ncLoginStep$loginFlow$tr._(_root);
 }
@@ -596,7 +597,7 @@ class _Translations$login$encLoginStep$tr extends Translations$login$encLoginSte
 
 	// Translations
 	@override String get enterEncPassword => 'Verilerinizi korumak için lütfen şifreleme parolanızı girin:';
-	@override String get newToSaber => 'Saber\'da ilk seferiniz mi? Yeni bir şifreleme parolası girin.';
+	@override String get newToSaber => 'tarus Not\'ta ilk kez mi? Yeni bir şifreleme parolası girin.';
 	@override String get encPassword => 'Şifreleme parolası';
 	@override String get encFaqTitle => 'Sıkça sorulan sorular';
 	@override String get wrongEncPassword => 'Verilen parola ile şifre çözülemedi. Lütfen parolayı tekrar girin.';
@@ -638,7 +639,7 @@ class _Translations$profile$faq$1$tr extends Translations$profile$faq$1$en {
 
 	// Translations
 	@override String get q => 'Nextcloud parolamı nasıl değiştirebilirim?';
-	@override String get a => 'Sunucu websitesine gidin ve hesabınıza giriş yapın. Arayüzde Ayarlar > Güvenlik > Parola değiştir yolunu takip edin. Parolanızı değiştirdikten sonra Saber\'dan çıkış yapıp tekrardan giriş yapmanız gerekecek.';
+	@override String get a => 'Sunucu websitesine gidin ve hesabınıza giriş yapın. Arayüzde Ayarlar > Güvenlik > Parola değiştir yolunu takip edin. Parolanızı değiştirdikten sonra tarus Not\'tan çıkış yapıp tekrardan giriş yapmanız gerekecek.';
 }
 
 // Path: profile.faq.2
@@ -649,7 +650,7 @@ class _Translations$profile$faq$2$tr extends Translations$profile$faq$2$en {
 
 	// Translations
 	@override String get q => 'Şifreleme parolamı nasıl değiştirebilirim?';
-	@override String get a => '"1. Saber\'dan çıkış yap. Veri kaybı yaşamamak için çıkış yapmadan önce senkronizasyonun tamamlandığından emin olun (ana sayfada senkronizasyon ilerlemesini görebilirsiniz)."\n2. Sunucu websitesine gidin ve \'Saber\' klasörünü silin. Bu sunucudaki tüm notları silecek.\n"3. Saber\'a giriş yap. Tekrar giriş yaparken yeni şifreleme parolanızı belirleyebilirsiniz.\n4. Diğer cihazlarınızda da Saber\'dan çıkış yapıp tekrar giriş yapmayı unutmayın.';
+	@override String get a => '1. tarus Not\'tan çıkış yapın. Veri kaybı yaşamamak için çıkış yapmadan önce senkronizasyonun tamamlandığından emin olun (ana sayfada senkronizasyon ilerlemesini görebilirsiniz).\n2. Sunucu websitesine gidin ve \'Saber\' klasörünü silin. Bu sunucudaki tüm notları silecek.\n3. tarus Not\'a yeniden giriş yapın. Tekrar giriş yaparken yeni şifreleme parolanızı belirleyebilirsiniz.\n4. Diğer cihazlarınızda da tarus Not\'tan çıkış yapıp tekrar giriş yapmayı unutmayın.';
 }
 
 // Path: profile.faq.3
@@ -660,7 +661,7 @@ class _Translations$profile$faq$3$tr extends Translations$profile$faq$3$en {
 
 	// Translations
 	@override String get q => 'Hesabımı nasıl silebilirim?';
-	@override String get a => 'Üstte yer alan "${_root.profile.quickLinks.deleteAccount}" butonuna tıklayın, gerekirse giriş yapın.\nEğer resmi Saber sunucusunu kullanıyorsanız hesabınız 1 haftalık bekleme süresinden sonra silinecek. adilhanney@disroot.org adresinden benimle iletişime geçerek silinme talebini iptal edebilirsiniz.\nEğer üçüncü parti bir sunucu kullanıyorsanız hesabınızı silme seçeneği sunulmuyor olabilir: daha fazla bilgi için ilgili sunucunun gizlilik politikasını inceleyin.';
+	@override String get a => 'Üstte yer alan "${_root.profile.quickLinks.deleteAccount}" butonuna tıklayın, gerekirse giriş yapın.\ntarus Not\'un ayrı bir hesabı yoktur; kimliğiniz Pusula hesabınızdır. Bu cihazın eşitleme erişimini Pusula > Ayarlar > Not eşitleme bölümünden belirteci iptal ederek kaldırabilirsiniz.\nEğer üçüncü parti bir sunucu kullanıyorsanız hesabınızı silme seçeneği sunulmuyor olabilir: daha fazla bilgi için ilgili sunucunun gizlilik politikasını inceleyin.';
 }
 
 // Path: editor.toolbar
@@ -813,7 +814,7 @@ class _Translations$editor$versionTooNew$tr extends Translations$editor$versionT
 	final TranslationsTr _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Bu not Saber\'ın yeni bir versiyonunda düzenlenmiş';
+	@override String get title => 'Bu not tarus Not\'un daha yeni bir sürümünde düzenlenmiş';
 	@override String get subtitle => 'Bu notu düzenlemek veri kaybına sebep olabilir. Bunu görmezden gelerek düzenlemek ister misiniz?';
 	@override String get allowEditing => 'Düzenlemeye izin ver';
 }
@@ -904,7 +905,7 @@ class _Translations$login$ncLoginStep$loginFlow$tr extends Translations$login$nc
 	final TranslationsTr _root; // ignore: unused_field
 
 	// Translations
-	@override String get pleaseAuthorize => 'Lütfen Saber\'ın Nextcloud hesabınıza erişmesine izin verin';
+	@override String get pleaseAuthorize => 'Lütfen tarus Not\'un Nextcloud hesabınıza erişmesine izin verin';
 	@override String get followPrompts => 'Lütfen Nextcloud arayüzündeki aşamaları takip edin';
 	@override String get browserDidntOpen => 'Giriş sayfası açılmadıysa buraya tıklayın';
 }
@@ -928,7 +929,7 @@ class _Translations$login$encLoginStep$encFaq$1$tr extends Translations$login$en
 
 	// Translations
 	@override String get q => 'Henüz bir şifreleme parolası belirlemedim. Nereden alacağım?';
-	@override String get a => 'Yeni bir şifreleme parolası belirleyip yukarıya yazın.\nSaber şifreleme anahtarını bu parolayı kullanarak üretecek.';
+	@override String get a => 'Yeni bir şifreleme parolası belirleyip yukarıya yazın.\ntarus Not şifreleme anahtarını bu paroladan üretir.';
 }
 
 // Path: login.encLoginStep.encFaq.2
