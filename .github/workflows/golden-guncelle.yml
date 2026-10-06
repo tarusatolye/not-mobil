@@ -1,0 +1,54 @@
+name: Golden güncelle
+
+# Elle tetiklenir (2026-10-06): görünen metin ya da tema bilerek değişince golden
+# ekran görüntüleri testlerin çalıştığı ortamda (ubuntu, aynı Flutter ve yazı
+# tipleri) yeniden üretilir ve bu dala commit edilir. Yerelde (Windows) üretilen
+# golden'lar yazı tipi farkı yüzünden CI'da tutmaz.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: golden-guncelle-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  guncelle:
+    name: Golden'ları yeniden üret
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - uses: "./.github/shared_workflows/install_apt_dependencies"
+
+      - name: Setup Flutter
+        uses: adil192/setup-flutter-submodule@v3
+        with:
+          flutter-path: submodules/flutter
+
+      - name: Disable Flutter CLI animations
+        run: flutter config --no-cli-animations
+
+      - run: flutter pub get
+
+      - name: Download Apple fonts
+        run: dart run golden_screenshot:download_apple_fonts
+
+      - name: Golden'ları güncelle
+        run: flutter test --update-goldens --no-pub
+
+      - name: Değişen golden'ları commit et
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- '*.png'
+          if git diff --cached --quiet; then
+            echo "Golden değişikliği yok."
+            exit 0
+          fi
+          git commit -m "Golden ekran görüntüleri güncellendi (golden-guncelle iş akışı)"
+          git push
