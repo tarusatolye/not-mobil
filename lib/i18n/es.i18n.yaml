@@ -201,14 +201,14 @@ login:
       followPrompts(OUTDATED): Siga las indicaciones en su navegador.
       browserDidntOpen(OUTDATED): El navegador no se abrió
     whereToStoreData(OUTDATED): "Elige dónde quieres almacenar tus datos:"
-    saberNcServer(OUTDATED): Servidor Nextcloud de tarus Not
+    saberNcServer(OUTDATED): Servidor de tarus Not
     otherNcServer(OUTDATED): Otro servidor Nextcloud
     serverUrl(OUTDATED): URL del servidor
     loginWithSaber(OUTDATED): Iniciar sesión con tarus Not
     loginWithNextcloud(OUTDATED): Iniciar sesión con Nextcloud
   encLoginStep:
     enterEncPassword(OUTDATED): "Para proteger sus datos, ingrese su contraseña de cifrado:"
-    newToSaber(OUTDATED): Nuevo en tarus Not
+    newToSaber(OUTDATED): ¿Nuevo en tarus Not?
     encPassword(OUTDATED): Contraseña de cifrado
     encFaqTitle(OUTDATED): Preguntas frecuentes
     wrongEncPassword(OUTDATED): El descifrado falló con la contraseña proporcionada. Intente ingresarlo nuevamente.

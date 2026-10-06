@@ -2,9 +2,9 @@
 Version=1.0
 Type=Application
 
-Name=Saber
-Comment=The notes app built for handwriting.
-Comment[cs]=Aplikace pro psaní poznámek uzpůsobená pro ruční psaní.
+Name=tarus Not
+Comment=Handwritten notes and sketches, end-to-end encrypted
+Comment[tr]=El yazısı not ve eskiz, uçtan uca şifreli
 Categories=Office;WordProcessor;
 
 Icon=com.adilhanney.saber

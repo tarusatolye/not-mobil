@@ -407,7 +407,7 @@ class _Translations$sentry$consent$fa extends Translations$sentry$consent$en {
 	// Translations
 	@override late final _Translations$sentry$consent$description$fa description = _Translations$sentry$consent$description$fa._(_root);
 	@override late final _Translations$sentry$consent$answers$fa answers = _Translations$sentry$consent$answers$fa._(_root);
-	@override String get title => 'به بهبود صابر کمک می کنید؟';
+	@override String get title => 'به بهبود tarus Not کمک می کنید؟';
 }
 
 // Path: settings.prefCategories
@@ -583,7 +583,7 @@ class _Translations$login$ncLoginStep$fa extends Translations$login$ncLoginStep$
 	@override String get saberNcServer => 'سرور Nextcloud tarus Not';
 	@override String get otherNcServer => 'سرور Nextcloud دیگر';
 	@override String get serverUrl => 'آدرس سرور';
-	@override String get loginWithSaber => 'با صابر وارد شوید';
+	@override String get loginWithSaber => 'با tarus Not وارد شوید';
 	@override String get loginWithNextcloud => 'با Nextcloud وارد شوید';
 }
 
@@ -595,7 +595,7 @@ class _Translations$login$encLoginStep$fa extends Translations$login$encLoginSte
 
 	// Translations
 	@override String get enterEncPassword => 'برای محافظت از داده های خود، لطفا رمز رمزگذاری خود را وارد کنید:';
-	@override String get newToSaber => 'تازه وارد صابر';
+	@override String get newToSaber => 'تازه وارد tarus Not';
 	@override String get encPassword => 'رمز رمزگذاری';
 	@override String get encFaqTitle => 'سوالات متداول';
 	@override String get wrongEncPassword => 'رمزگشایی با رمز عبور ارائه شده انجام نشد. لطفاً دوباره آن را وارد کنید.';
@@ -648,7 +648,7 @@ class _Translations$profile$faq$2$fa extends Translations$profile$faq$2$en {
 
 	// Translations
 	@override String get q => 'چگونه رمز رمزگذاری خود را تغییر دهم؟';
-	@override String get a => '1. از tarus Not خارج شوید. قبل از خروج از سیستم مطمئن شوید که همگام‌سازی کامل شده است تا هیچ داده‌ای را از دست ندهید (پیشرفت همگام‌سازی را در صفحه اصلی ببینید).\n2. به وب سایت سرور خود بروید و پوشه \'Saber\' خود را حذف کنید. با این کار تمام یادداشت های شما از سرور حذف می شود.\n3. دوباره وارد سابر شوید. هنگام ورود به سیستم می‌توانید رمز رمزگذاری جدیدی انتخاب کنید.\n4. فراموش نکنید که از سیستم خارج شوید و در دستگاه های دیگر خود نیز دوباره وارد tarus Not شوید.';
+	@override String get a => '1. از tarus Not خارج شوید. قبل از خروج از سیستم مطمئن شوید که همگام‌سازی کامل شده است تا هیچ داده‌ای را از دست ندهید (پیشرفت همگام‌سازی را در صفحه اصلی ببینید).\n2. به وب سایت سرور خود بروید و پوشه \'Saber\' خود را حذف کنید. با این کار تمام یادداشت های شما از سرور حذف می شود.\n3. دوباره وارد tarus Not شوید. هنگام ورود به سیستم می‌توانید رمز رمزگذاری جدیدی انتخاب کنید.\n4. فراموش نکنید که از سیستم خارج شوید و در دستگاه های دیگر خود نیز دوباره وارد tarus Not شوید.';
 }
 
 // Path: profile.faq.3

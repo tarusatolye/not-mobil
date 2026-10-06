@@ -191,7 +191,7 @@ class _Translations$appInfo$hu extends Translations$appInfo$en {
 	final TranslationsHu _root; // ignore: unused_field
 
 	// Translations
-	@override String licenseNotice({required Object buildYear}) => 'tarus Not Copyright © 2022-${buildYear} Adil Hanney\nEz a program nem tartalmaz semmilyen garanciát. Ez egy szabad szoftver, és bizonyos feltételek mellett szabadon terjeszthető.';
+	@override String licenseNotice({required Object buildYear}) => 'Saber Copyright © 2022-${buildYear} Adil Hanney\nEz a program nem tartalmaz semmilyen garanciát. Ez egy szabad szoftver, és bizonyos feltételek mellett szabadon terjeszthető.';
 	@override String get debug => 'DEBUG';
 	@override String get sponsorButton => 'Ide kattintva támogathat engem vagy vásárolhat több tárhelyet';
 	@override String get licenseButton => 'További licencinformációk megtekintéséhez kattintson ide';
@@ -439,7 +439,7 @@ class _Translations$settings$prefLabels$hu extends Translations$settings$prefLab
 	@override String get layoutSize => 'Elrendezési mód';
 	@override String get customAccentColor => 'Egyéni hangsúlyszín';
 	@override String get hyperlegibleFont => 'Atkinson Hyperlegible betűtípus';
-	@override String get shouldCheckForUpdates => 'Automatikusan ellenőrzi a tarus Not frissítéseket';
+	@override String get shouldCheckForUpdates => 'Automatikusan ellenőrzi a tarus Not frissítéseit';
 	@override String get shouldAlwaysAlertForUpdates => 'Gyorsabb értesítések a frissítésekről';
 	@override String get allowInsecureConnections => 'Nem biztonságos kapcsolatok engedélyezése';
 	@override String get editorToolbarAlignment => 'A szerkesztő eszköztár igazítása';
@@ -584,7 +584,7 @@ class _Translations$login$ncLoginStep$hu extends Translations$login$ncLoginStep$
 	@override String get saberNcServer => 'A tarus Not Nextcloud szervere';
 	@override String get otherNcServer => 'Másik Nextcloud szerver';
 	@override String get serverUrl => 'Szerver URL';
-	@override String get loginWithSaber => 'Bejelentkezés tarus Not-rel';
+	@override String get loginWithSaber => 'Bejelentkezés a tarus Nottal';
 	@override String get loginWithNextcloud => 'Bejelentkezés Nextcloud-dal';
 	@override late final _Translations$login$ncLoginStep$loginFlow$hu loginFlow = _Translations$login$ncLoginStep$loginFlow$hu._(_root);
 }
@@ -597,7 +597,7 @@ class _Translations$login$encLoginStep$hu extends Translations$login$encLoginSte
 
 	// Translations
 	@override String get enterEncPassword => 'Az adatai védelme érdekében kérjük, adja meg a titkosítási jelszavát:';
-	@override String get newToSaber => 'Először használja a tarus Not-t? Adjon meg egy új titkosítási jelszót.';
+	@override String get newToSaber => 'Először használja a tarus Notot? Adjon meg egy új titkosítási jelszót.';
 	@override String get encPassword => 'Titkosítási jelszó';
 	@override String get encFaqTitle => 'Gyakran ismételt kérdések';
 	@override String get wrongEncPassword => 'A megadott jelszóval a visszafejtés nem sikerült. Kérjük, próbálja meg újra megadni.';
@@ -639,7 +639,7 @@ class _Translations$profile$faq$1$hu extends Translations$profile$faq$1$en {
 
 	// Translations
 	@override String get q => 'Hogyan változtatom meg a Nextcloud jelszavamat?';
-	@override String get a => 'Nyissa meg a szerver weboldalát, és jelentkezzen be. Ezután menjen a Beállítások > Biztonság > Jelszó módosítása menüpontra. A jelszó módosítása után ki kell jelentkeznie a tarus Notből, majd újra be kell jelentkeznie.';
+	@override String get a => 'Nyissa meg a szerver weboldalát, és jelentkezzen be. Ezután menjen a Beállítások > Biztonság > Jelszó módosítása menüpontra. A jelszó módosítása után ki kell jelentkeznie a tarus Notból, majd újra be kell jelentkeznie.';
 }
 
 // Path: profile.faq.2
@@ -650,7 +650,7 @@ class _Translations$profile$faq$2$hu extends Translations$profile$faq$2$en {
 
 	// Translations
 	@override String get q => 'Hogyan változtatom meg a titkosítási jelszavamat?';
-	@override String get a => '0. Győződjön meg arról, hogy a szinkronizálás befejeződött (a szinkronizálás állapotát a kezdőképernyőn láthatja).\n1. Jelentkezzen ki a tarus Notből.\n2. Nyissa meg a szerver weboldalát, és törölje a „Saber” mappát. Ez minden jegyzetét törli a szerverről.\n3. Jelentkezzen be újra a tarus Notbe. Bejelentkezéskor új titkosítási jelszót választhat.\n4. Ne felejtkezzen el kijelentkezni, majd újra bejelentkezni a tarus Notbe a többi eszközén is.';
+	@override String get a => '0. Győződjön meg arról, hogy a szinkronizálás befejeződött (a szinkronizálás állapotát a kezdőképernyőn láthatja).\n1. Jelentkezzen ki a tarus Notból.\n2. Nyissa meg a szerver weboldalát, és törölje a „Saber” mappát. Ez minden jegyzetét törli a szerverről.\n3. Jelentkezzen be újra a tarus Notba. Bejelentkezéskor új titkosítási jelszót választhat.\n4. Ne felejtkezzen el kijelentkezni, majd újra bejelentkezni a tarus Notba a többi eszközén is.';
 }
 
 // Path: profile.faq.3

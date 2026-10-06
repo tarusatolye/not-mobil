@@ -20,7 +20,7 @@ home:
   create:
     newNote: บันทึกใหม่
     importNote: นำเข้าบันทึก
-  welcome: ยินดีต้อนรับสู่เซเบอร์
+  welcome: ยินดีต้อนรับสู่ tarus Not
   invalidFormat: ไฟล์ที่คุณเลือกไม่รองรับ โปรดเลือกไฟล์ประเภท sbn, sbn2, sba หรือ pdf แทน
   noFiles: ไม่พบไฟล์
   noPreviewAvailable: ไม่มีภาพตัวอย่าง
@@ -255,7 +255,7 @@ profile:
   quotaUsageUncapped(OUTDATED): คุณกำลังใช้ $used
 appInfo:
   licenseNotice: |-
-    สงวนลิขสิทธิ์ tarus Not © 2022-$buildYear Adil Hanney
+    สงวนลิขสิทธิ์ Saber © 2022-$buildYear Adil Hanney
     โปรแกรมนี้ไม่มีการรับประกันใดๆ ทั้งสิ้น นี่คือซอฟต์แวร์ฟรี และคุณสามารถแจกจ่ายต่อได้ภายใต้เงื่อนไขบางประการ
   debug: แก้ไขข้อผิดพลาด
   sponsorButton: คลิกที่นี่เพื่อสนับสนุนฉัน หรือซื้อพื้นที่จัดเก็บเพิ่มเติม

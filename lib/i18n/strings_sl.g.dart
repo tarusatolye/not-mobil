@@ -191,7 +191,7 @@ class _Translations$appInfo$sl extends Translations$appInfo$en {
 	final TranslationsSl _root; // ignore: unused_field
 
 	// Translations
-	@override String licenseNotice({required Object buildYear}) => 'tarus Not  Avtorske pravice © 2022-${buildYear}  Adil Hanney\nTa program je brez kakršnegakoli jamstva. To je prosta programska oprema in vabljeni ste, da jo razširjate pod določenimi pogoji.';
+	@override String licenseNotice({required Object buildYear}) => 'Saber  Avtorske pravice © 2022-${buildYear}  Adil Hanney\nTa program je brez kakršnegakoli jamstva. To je prosta programska oprema in vabljeni ste, da jo razširjate pod določenimi pogoji.';
 	@override String get debug => 'RAZROŠČEVANJE';
 	@override String get sponsorButton => 'Dotakni se tukaj, da me sponzoriraš ali kupiš več prostora za shranjevanje';
 	@override String get licenseButton => 'Dotakni se tukaj za več informacij o licenci';

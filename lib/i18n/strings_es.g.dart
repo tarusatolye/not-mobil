@@ -579,7 +579,7 @@ class _Translations$login$ncLoginStep$es extends Translations$login$ncLoginStep$
 	// Translations
 	@override late final _Translations$login$ncLoginStep$loginFlow$es loginFlow = _Translations$login$ncLoginStep$loginFlow$es._(_root);
 	@override String get whereToStoreData => 'Elige dónde quieres almacenar tus datos:';
-	@override String get saberNcServer => 'Servidor Nextcloud de tarus Not';
+	@override String get saberNcServer => 'Servidor de tarus Not';
 	@override String get otherNcServer => 'Otro servidor Nextcloud';
 	@override String get serverUrl => 'URL del servidor';
 	@override String get loginWithSaber => 'Iniciar sesión con tarus Not';
@@ -594,7 +594,7 @@ class _Translations$login$encLoginStep$es extends Translations$login$encLoginSte
 
 	// Translations
 	@override String get enterEncPassword => 'Para proteger sus datos, ingrese su contraseña de cifrado:';
-	@override String get newToSaber => 'Nuevo en tarus Not';
+	@override String get newToSaber => '¿Nuevo en tarus Not?';
 	@override String get encPassword => 'Contraseña de cifrado';
 	@override String get encFaqTitle => 'Preguntas frecuentes';
 	@override String get wrongEncPassword => 'El descifrado falló con la contraseña proporcionada. Intente ingresarlo nuevamente.';

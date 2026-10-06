@@ -69,7 +69,7 @@ class _Translations$home$th extends Translations$home$en {
 	@override late final _Translations$home$titles$th titles = _Translations$home$titles$th._(_root);
 	@override late final _Translations$home$tooltips$th tooltips = _Translations$home$tooltips$th._(_root);
 	@override late final _Translations$home$create$th create = _Translations$home$create$th._(_root);
-	@override String get welcome => 'ยินดีต้อนรับสู่เซเบอร์';
+	@override String get welcome => 'ยินดีต้อนรับสู่ tarus Not';
 	@override String get invalidFormat => 'ไฟล์ที่คุณเลือกไม่รองรับ โปรดเลือกไฟล์ประเภท sbn, sbn2, sba หรือ pdf แทน';
 	@override String get noFiles => 'ไม่พบไฟล์';
 	@override String get noPreviewAvailable => 'ไม่มีภาพตัวอย่าง';
@@ -190,7 +190,7 @@ class _Translations$appInfo$th extends Translations$appInfo$en {
 	final TranslationsTh _root; // ignore: unused_field
 
 	// Translations
-	@override String licenseNotice({required Object buildYear}) => 'สงวนลิขสิทธิ์ tarus Not © 2022-${buildYear} Adil Hanney\nโปรแกรมนี้ไม่มีการรับประกันใดๆ ทั้งสิ้น นี่คือซอฟต์แวร์ฟรี และคุณสามารถแจกจ่ายต่อได้ภายใต้เงื่อนไขบางประการ';
+	@override String licenseNotice({required Object buildYear}) => 'สงวนลิขสิทธิ์ Saber © 2022-${buildYear} Adil Hanney\nโปรแกรมนี้ไม่มีการรับประกันใดๆ ทั้งสิ้น นี่คือซอฟต์แวร์ฟรี และคุณสามารถแจกจ่ายต่อได้ภายใต้เงื่อนไขบางประการ';
 	@override String get debug => 'แก้ไขข้อผิดพลาด';
 	@override String get sponsorButton => 'คลิกที่นี่เพื่อสนับสนุนฉัน หรือซื้อพื้นที่จัดเก็บเพิ่มเติม';
 	@override String get licenseButton => 'คลิกที่นี่เพื่อดูข้อมูลใบอนุญาตเพิ่มเติม';

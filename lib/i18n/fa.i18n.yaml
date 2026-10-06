@@ -91,7 +91,7 @@ sentry:
       yes(OUTDATED): بله
       no(OUTDATED): هیچ
       later(OUTDATED): بعداً از من بپرس
-    title(OUTDATED): به بهبود صابر کمک می کنید؟
+    title(OUTDATED): به بهبود tarus Not کمک می کنید؟
 settings:
   prefCategories:
     general: عمومی
@@ -205,11 +205,11 @@ login:
     saberNcServer(OUTDATED): سرور Nextcloud tarus Not
     otherNcServer(OUTDATED): سرور Nextcloud دیگر
     serverUrl(OUTDATED): آدرس سرور
-    loginWithSaber(OUTDATED): با صابر وارد شوید
+    loginWithSaber(OUTDATED): با tarus Not وارد شوید
     loginWithNextcloud(OUTDATED): با Nextcloud وارد شوید
   encLoginStep:
     enterEncPassword(OUTDATED): "برای محافظت از داده های خود، لطفا رمز رمزگذاری خود را وارد کنید:"
-    newToSaber(OUTDATED): تازه وارد صابر
+    newToSaber(OUTDATED): تازه وارد tarus Not
     encPassword(OUTDATED): رمز رمزگذاری
     encFaqTitle(OUTDATED): سوالات متداول
     wrongEncPassword(OUTDATED): رمزگشایی با رمز عبور ارائه شده انجام نشد. لطفاً دوباره آن را وارد کنید.
@@ -237,7 +237,7 @@ profile:
     a: |-
       1. از tarus Not خارج شوید. قبل از خروج از سیستم مطمئن شوید که همگام‌سازی کامل شده است تا هیچ داده‌ای را از دست ندهید (پیشرفت همگام‌سازی را در صفحه اصلی ببینید).
       2. به وب سایت سرور خود بروید و پوشه 'Saber' خود را حذف کنید. با این کار تمام یادداشت های شما از سرور حذف می شود.
-      3. دوباره وارد سابر شوید. هنگام ورود به سیستم می‌توانید رمز رمزگذاری جدیدی انتخاب کنید.
+      3. دوباره وارد tarus Not شوید. هنگام ورود به سیستم می‌توانید رمز رمزگذاری جدیدی انتخاب کنید.
       4. فراموش نکنید که از سیستم خارج شوید و در دستگاه های دیگر خود نیز دوباره وارد tarus Not شوید.
   - q: چگونه می توانم حساب کاربری خود را حذف کنم؟
     a: |-

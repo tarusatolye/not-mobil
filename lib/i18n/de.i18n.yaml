@@ -125,11 +125,11 @@ settings:
     autosave: Automatisches Backup
     shapeRecognitionDelay: Verzögerung der Formerkennung
     autoStraightenLines: Linien automatisch begradigen
-    customDataDir: Eigener tarus Not-Ordner
+    customDataDir: Eigener tarus-Not-Ordner
     sentry: Fehlerberichterstattung
   prefDescriptions:
     hyperlegibleFont: Verbessert die Lesbarkeit für Menschen mit geringer Sehkraft
-    allowInsecureConnections: tarus Not erlauben, unsichere Zertifikaten zu verwenden (Nicht empfohlen)
+    allowInsecureConnections: tarus Not erlauben, unsichere Zertifikate zu verwenden (nicht empfohlen)
     preferGreyscale: Optimierung für E-Ink-Displays
     autoClearWhiteboardOnExit: Löscht das Whiteboard beim Beenden der App
     disableEraserAfterUse: Nach dem Nutzen des Radierers automatisch zum Stift zurückwechseln
@@ -170,7 +170,7 @@ settings:
     title: Diese Einstellung zurücksetzen?
     button: Zurücksetzen
   resyncEverything: Alles neu Synchronisieren
-  openDataDir: tarus Not-Ordner öffnen
+  openDataDir: tarus-Not-Ordner öffnen
   customDataDir:
     cancel: Abbrechen
     select: Auswählen
@@ -199,7 +199,7 @@ login:
     loggedIn: Mit Nextcloud angemeldet
   ncLoginStep:
     whereToStoreData: "Wähle, wo du deine Daten speichern willst:"
-    saberNcServer: tarus Nots Nextcloud-Server
+    saberNcServer: tarus-Not-Server
     otherNcServer: Anderer Nextcloud-Server
     serverUrl: Server URL
     loginWithSaber: Mit tarus Not anmelden
@@ -245,7 +245,7 @@ profile:
     a: |-
       0. Bitte stelle zuerst sicher, dass alle Daten korrekt synchronisiert wurden, damit du keine Daten verlierst (du kannst den Fortschritt auf dem Startbildschirm prüfen).
       1. Melde dich in tarus Not ab.
-      2. Öffne die Server-Startseite und lösche den „Saber“-Order. Dadurch werden alle Notizen vom Server gelöscht.
+      2. Öffne die Server-Startseite und lösche den „Saber“-Ordner. Dadurch werden alle Notizen vom Server gelöscht.
       3. Melde dich wieder in tarus Not an. Du wirst nach einem neuen Verschlüsselungspasswort gefragt.
       4. Vergiss nicht dich auf anderen Geräten in tarus Not ab- und wieder anzumelden.
   - q: Wie lösche ich meinen Account?

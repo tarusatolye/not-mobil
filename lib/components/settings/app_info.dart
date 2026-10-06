@@ -4,14 +4,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:saber/data/flavor_config.dart';
 import 'package:saber/data/is_this_a_test.dart';
 import 'package:saber/data/prefs.dart';
+import 'package:saber/data/tarus_baglantilar.dart';
 import 'package:saber/data/version.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class const AppInfo({super.key}) extends StatelessWidget {
-  static final Uri privacyPolicyUrl = Uri.parse(
-    'https://saber.adil.hanney.org/privacy-policy/',
-  );
+  /// tarus gizlilik politikası (Saber'in sayfası değil; TarusBaglantilar).
+  static Uri get privacyPolicyUrl => TarusBaglantilar.gizlilik;
   static final Uri licenseUrl = Uri.parse(
     'https://github.com/saber-notes/saber/blob/main/LICENSE.md',
   );
@@ -25,9 +25,7 @@ class const AppInfo({super.key}) extends StatelessWidget {
   );
 
   /// tarus Not'un kaynak kodu (GPL-3.0 §6: ikili dağıtımla birlikte kaynak).
-  static final Uri kaynakKoduUrl = Uri.parse(
-    'https://github.com/tarusatolye/not-mobil',
-  );
+  static Uri get kaynakKoduUrl => TarusBaglantilar.kaynakKodu;
 
   /// GPL-3.0 kaynak bildirimi (Hakkında penceresinde; TARUS_NOT.md → Lisans).
   static String get tarusLisansNotu =>

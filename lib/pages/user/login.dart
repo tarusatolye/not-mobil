@@ -6,6 +6,7 @@ import 'package:saber/components/nextcloud/nc_login_step.dart';
 import 'package:saber/components/theming/adaptive_circular_progress_indicator.dart';
 import 'package:saber/components/theming/adaptive_linear_progress_indicator.dart';
 import 'package:saber/data/prefs.dart';
+import 'package:saber/data/tarus_baglantilar.dart';
 import 'package:saber/i18n/strings.g.dart';
 
 class NcLoginPage extends StatefulWidget {
@@ -21,9 +22,9 @@ class NcLoginPage extends StatefulWidget {
   /// If provided, forces the current step to this value (for testing)
   final LoginStep? forceCurrentStep;
 
-  static final Uri signupUrl = Uri.parse(
-    'https://nc.saber.adil.hanney.org/index.php/apps/registration/',
-  );
+  /// Hesap oluşturma: Not'un ayrı hesabı yok, kimlik Pusula'dır (Saber'in
+  /// Nextcloud kayıt sayfası değil). Şu an arayüzde kullanılmıyor.
+  static Uri get signupUrl => TarusBaglantilar.pusulaHesapOlustur;
 
   @override
   State<NcLoginPage> createState() => _NcLoginPageState();

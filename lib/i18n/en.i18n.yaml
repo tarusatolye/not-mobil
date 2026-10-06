@@ -252,7 +252,7 @@ profile:
   - q: How can I delete my account?
     a: |-
       Tap on the "@:profile.quickLinks.deleteAccount" button above, and login if needed.
-      tarus Not has no separate account: your identity is your Pusula account. To remove this device's sync access, revoke its token in Pusula > Settings > Not sync.
+      tarus Not has no separate account: your identity is your Pusula account. To remove this device's sync access, revoke its token in Pusula > Settings > Not sync. To have your notes and account data deleted from the server, use the deletion request page shown there.
       If you are using a third party server, there might not be an option to delete your account: you'll need to consult the server's privacy policy for more information.
 appInfo:
   licenseNotice: |-

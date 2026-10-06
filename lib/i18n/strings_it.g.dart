@@ -69,7 +69,7 @@ class _Translations$home$it extends Translations$home$en {
 	@override late final _Translations$home$titles$it titles = _Translations$home$titles$it._(_root);
 	@override late final _Translations$home$tooltips$it tooltips = _Translations$home$tooltips$it._(_root);
 	@override late final _Translations$home$create$it create = _Translations$home$create$it._(_root);
-	@override String get welcome => 'Benvenuto su tarus Not';
+	@override String get welcome => 'Benvenuto in tarus Not';
 	@override String get invalidFormat => 'Il file selezionato non è supportato. Seleziona un file sbn, sbn2, sba o pdf.';
 	@override String get noFiles => 'Nessun file trovato';
 	@override String get noPreviewAvailable => 'Nessuna anteprima disponibile';
@@ -191,7 +191,7 @@ class _Translations$appInfo$it extends Translations$appInfo$en {
 	final TranslationsIt _root; // ignore: unused_field
 
 	// Translations
-	@override String licenseNotice({required Object buildYear}) => 'tarus Not Copyright © 2022-${buildYear} Adil Hanney\nQuesto programma non ha alcuna garanzia. Questo è un software libero e sei libero di ridistribuirlo a determinate condizioni.';
+	@override String licenseNotice({required Object buildYear}) => 'Saber Copyright © 2022-${buildYear} Adil Hanney\nQuesto programma non ha alcuna garanzia. Questo è un software libero e sei libero di ridistribuirlo a determinate condizioni.';
 	@override String get debug => 'DEBUG';
 	@override String get sponsorButton => 'Tocca qui per sponsorizzarmi o acquistare altro spazio di archiviazione';
 	@override String get licenseButton => 'Tocca qui per visualizzare ulteriori informazioni sulla licenza';
@@ -581,7 +581,7 @@ class _Translations$login$ncLoginStep$it extends Translations$login$ncLoginStep$
 
 	// Translations
 	@override String get whereToStoreData => 'Scegli dove vuoi archiviare i tuoi dati:';
-	@override String get saberNcServer => 'Il server Nextcloud di tarus Not';
+	@override String get saberNcServer => 'Il server di tarus Not';
 	@override String get otherNcServer => 'Altro server Nextcloud';
 	@override String get serverUrl => 'URL Server';
 	@override String get loginWithSaber => 'Accedi con tarus Not';
@@ -597,7 +597,7 @@ class _Translations$login$encLoginStep$it extends Translations$login$encLoginSte
 
 	// Translations
 	@override String get enterEncPassword => 'Per proteggere i tuoi dati, inserisci la tua password di cifratura:';
-	@override String get newToSaber => 'Nuovo su tarus Not? Basta inserire una nuova password di cifratura.';
+	@override String get newToSaber => 'Nuovo in tarus Not? Basta inserire una nuova password di cifratura.';
 	@override String get encPassword => 'Password di cifratura';
 	@override String get encFaqTitle => 'Domande frequenti';
 	@override String get wrongEncPassword => 'La decrittazione non è riuscita con la password fornita. Per favore prova a inserirla nuovamente.';

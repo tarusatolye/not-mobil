@@ -1,17 +1,11 @@
-Saber is the notes app built for handwriting.
+tarus Not is the handwriting and sketch notes app of the tarus ecosystem.
 
-It's designed to be as simple and intuitive as possible, while still delivering unique features that you'll actually use. Additionally, Saber is available across all your devices, large and small, and syncs between them seamlessly.
+Write and draw with a stylus or your finger: pens, highlighter, shapes, images and PDFs on pages or a whiteboard. In dark mode your notes can be inverted, so you write with light ink on a dark background; images and PDFs are inverted too.
 
-Notably, it can invert your notes when you're in dark mode. This allows you to write with white ink on a black background, which is much easier on the eyes in low-light environments like when the teacher turns off the lights in class.
-Images and PDFs are also inverted, so you can still use a digital printout or a textbook without the fuss.
+Your notes are end-to-end encrypted on your device with an encryption password only you know, before they leave the device. The tarus Not server (not.tarus.tr) stores only encrypted files and cannot read them. If you forget the encryption password, your synced notes cannot be recovered.
 
-Saber uses a dual-password system to protect your notes from anyone but you, even if they have complete control over the server. You can safely store your notes on the official Saber server, another server, or even host your own!
+tarus Not has no separate account: you connect with a sync token from your Pusula account (Pusula > Settings > Not sync). You can revoke the token at any time, and the device stops syncing within 30 seconds. Notes sync between your devices; when the same note changes in two places, the older version is kept as a conflict copy instead of being lost.
 
-The app is completely open-source so that anyone can view the source code and see exactly what it's doing and how it handles your data. Many other note-taking apps are closed-source and proprietary, meaning that their inner workings are a mystery to the public.
+Organise notes in nested folders, find recent notes on the home screen, and report a problem from inside the app (Settings > Hata bildir, or press and hold an empty area).
 
-As someone who studies maths, highlighting multi-line equations was always a hassle with other apps, where the highlighter would change color when it overlapped with itself. Another problem I had was that in some apps, the highlighter would render on top of the text, fading it out and making it hard to read.
-Saber's highlighter has no such issues. It utilizes canvas compositing to render the highlighter in a way that is consistent with/better than traditional paper, where it handles overlaps and maintains color consistency.
-
-Saber has everything you need to keep your notes organized. Create folders inside folders inside folders to your heart's content with no limit on the number of nested folders. And even though a note may be buried deep within a nested folder, you can still access it easily with your most recent notes always available on the home screen.
-
-Discover a whole new way to capture and organize your thoughts with Saber. Whether you're a student, professional, or creative mind, Saber is your trusted companion for digital handwriting. Download now and let your ideas flow freely!
+tarus Not is based on the open source Saber app (© 2022- Adil Hanney and contributors) and, like Saber, is licensed under the GNU General Public License version 3 (GPL-3.0). Source code: https://github.com/tarusatolye/not-mobil

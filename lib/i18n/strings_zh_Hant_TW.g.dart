@@ -191,7 +191,7 @@ class Translations$appInfo$zh_Hant_TW extends Translations$appInfo$en {
 	final TranslationsZhHantTw _root; // ignore: unused_field
 
 	// Translations
-	@override String licenseNotice({required Object buildYear}) => 'tarus Not  版權所有 © 2022-${buildYear}  Adil Hanney\n本程式不提供任何形式的保證。這是一款自由軟體，您可在特定條件下自由轉散發。';
+	@override String licenseNotice({required Object buildYear}) => 'Saber  版權所有 © 2022-${buildYear}  Adil Hanney\n本程式不提供任何形式的保證。這是一款自由軟體，您可在特定條件下自由轉散發。';
 	@override String get debug => 'DEBUG';
 	@override String get sponsorButton => '點擊此處贊助我或購買更多儲存空間';
 	@override String get licenseButton => '點擊此處檢視更多授權條款資訊';

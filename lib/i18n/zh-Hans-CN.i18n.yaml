@@ -255,7 +255,7 @@ profile:
   quotaUsageUncapped(OUTDATED): 你正在使用 $used
 appInfo:
   licenseNotice: |-
-    tarus Not  版权所有 © 2022-$buildYear  Adil Hanney
+    Saber  版权所有 © 2022-$buildYear  Adil Hanney
     本程序不附带任何担保。这是自由软件，您可以在特定条件下重新分发它。
   debug: DEBUG
   sponsorButton: 点击此处赞助我或购买更多存储空间

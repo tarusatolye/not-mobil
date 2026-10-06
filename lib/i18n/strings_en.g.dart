@@ -1043,8 +1043,8 @@ class Translations$profile$faq$3$en {
 	/// en: 'How can I delete my account?'
 	String get q => 'How can I delete my account?';
 
-	/// en: 'Tap on the "Delete account" button above, and login if needed. tarus Not has no separate account: your identity is your Pusula account. To remove this device's sync access, revoke its token in Pusula > Settings > Not sync. If you are using a third party server, there might not be an option to delete your account: you'll need to consult the server's privacy policy for more information.'
-	String get a => 'Tap on the "${_root.profile.quickLinks.deleteAccount}" button above, and login if needed.\ntarus Not has no separate account: your identity is your Pusula account. To remove this device\'s sync access, revoke its token in Pusula > Settings > Not sync.\nIf you are using a third party server, there might not be an option to delete your account: you\'ll need to consult the server\'s privacy policy for more information.';
+	/// en: 'Tap on the "Delete account" button above, and login if needed. tarus Not has no separate account: your identity is your Pusula account. To remove this device's sync access, revoke its token in Pusula > Settings > Not sync. To have your notes and account data deleted from the server, use the deletion request page shown there. If you are using a third party server, there might not be an option to delete your account: you'll need to consult the server's privacy policy for more information.'
+	String get a => 'Tap on the "${_root.profile.quickLinks.deleteAccount}" button above, and login if needed.\ntarus Not has no separate account: your identity is your Pusula account. To remove this device\'s sync access, revoke its token in Pusula > Settings > Not sync. To have your notes and account data deleted from the server, use the deletion request page shown there.\nIf you are using a third party server, there might not be an option to delete your account: you\'ll need to consult the server\'s privacy policy for more information.';
 }
 
 // Path: editor.toolbar

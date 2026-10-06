@@ -1,4 +1,7 @@
+# tarus Not (Saber tabanlı). Snap adı/kimliği değişmedi; tarus masaüstü
+# paketi dağıtmıyor, dosya kaynak bütünlüğü için tutuluyor.
 name: saber
+title: tarus Not
 base: core24
 adopt-info: saber
 grade: stable
@@ -12,8 +15,8 @@ platforms:
 
 parts:
   saber:
-    source: https://github.com/saber-notes/saber.git
-    source-tag: 'v1.1.2'
+    source: https://github.com/tarusatolye/not-mobil.git
+    source-tag: '1.1.3'
     source-depth: 1
     plugin: flutter
     build-packages:

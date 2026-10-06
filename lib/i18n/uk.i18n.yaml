@@ -255,7 +255,7 @@ profile:
   quotaUsageUncapped(OUTDATED): Ви використовуєте $used
 appInfo:
   licenseNotice(OUTDATED): |-
-    tarus Not Авторські права © 2022-$buildYear Adil Hanney
+    Saber Авторські права © 2022-$buildYear Adil Hanney
     Ця програма не має жодної гарантії. Це безкоштовне програмне забезпечення, і ви маєте право поширювати його за певних умов.
   debug(OUTDATED): ВІДЛАДКА
   sponsorButton(OUTDATED): Натисніть сюди, щоб мене спонсорувати або купити більше сховища

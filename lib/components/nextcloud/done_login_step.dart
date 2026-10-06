@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:logging/logging.dart';
 import 'package:saber/components/misc/faq.dart';
+import 'package:saber/components/nextcloud/hesap_silme_dialog.dart';
 import 'package:saber/data/extensions/string_extensions.dart';
 import 'package:saber/data/nextcloud/nextcloud_client_extension.dart';
 import 'package:saber/data/prefs.dart';
@@ -107,11 +108,9 @@ class DoneLoginStep extends StatelessWidget {
             Flexible(
               fit: FlexFit.tight,
               child: ElevatedButton(
-                onPressed: () {
-                  final url = '$serverUri/index.php/settings/user/drop_account';
-                  log.info('Opening URL: $url');
-                  launchUrl(Uri.parse(url));
-                },
+                // tarus: Nextcloud'un hesap silme sayfası yerine tarus'taki
+                // silme yolları (Pusula belirteci, cihaz, sunucu verisi).
+                onPressed: () => HesapSilmeDialog.goster(context),
                 child: Text(t.profile.quickLinks.deleteAccount),
               ),
             ),

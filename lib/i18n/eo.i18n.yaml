@@ -124,12 +124,12 @@ settings:
     autosave: Aŭtomata konservado
     shapeRecognitionDelay: Prokrasto de formorekono
     autoStraightenLines: Aŭtomate rektigu liniojn
-    customDataDir: Kutima tarus Not-dosierujo
+    customDataDir: Propra dosierujo de tarus Not
     sentry: Erarraportado
     autoDisableFingerDrawingWhenStylusDetected(OUTDATED): Aŭtomate malŝalti fingrodesegnadon
   prefDescriptions:
     hyperlegibleFont: Pliigas legeblecon por uzantoj kun malalta vidkapablo
-    allowInsecureConnections: (Nerekomendita) Permesu al tarus Noto konektiĝi al serviloj kun mem-subskribitaj/nefidindaj atestiloj
+    allowInsecureConnections: (Nerekomendita) Permesu al tarus Not konektiĝi al serviloj kun mem-subskribitaj/nefidindaj atestiloj
     preferGreyscale: Por ekranoj de bitlegiloj
     autoClearWhiteboardOnExit: Malplenigas la tabulon post kiam vi foriras la aplikaĵon
     disableEraserAfterUse: Aŭtomate ŝanĝas reen al la plumo post uzi la forviŝilon
@@ -170,7 +170,7 @@ settings:
     title: Restarigu agordon?
     button: Restarigo
   resyncEverything: Resinkronigu ĉion
-  openDataDir: Malfermu tarus Not-dosierujon
+  openDataDir: Malfermu la dosierujon de tarus Not
   customDataDir:
     cancel: Nuligu
     select: Elektu
@@ -199,10 +199,10 @@ login:
     loggedIn: Ensalutita per NextCloud-konto
   ncLoginStep:
     whereToStoreData: "Elektu kie vi volas konservi viajn datumojn:"
-    saberNcServer: tarus Nota Nextcloud-servilo
+    saberNcServer: Servilo de tarus Not
     otherNcServer: Aliaj Nextcloud-serviloj
     serverUrl: Retadreso de servilo
-    loginWithSaber: Ensalutu per tarus Not-konto
+    loginWithSaber: Ensalutu per tarus Not
     loginWithNextcloud: Ensalutu per Nextcloud-konto
     loginFlow:
       pleaseAuthorize: Bonvolu rajtigi tarus Not por aliri vian NextCloud-konton
@@ -245,7 +245,7 @@ profile:
     a: |-
       0. Certigu, ke la sinkronigado estas kompleta (vidu la sinkronigan progreson sur la ĉefekrano).
       1. Elsalutu el tarus Not.
-      2. Iru al la retejo de via servilo kaj forigu vian tarus Not-dosierujon. Ĉi tio forigos ĉiujn viajn notojn de la servilo.
+      2. Iru al la retejo de via servilo kaj forigu vian dosierujon 'Saber'. Ĉi tio forigos ĉiujn viajn notojn de la servilo.
       3. Reensalutu al tarus Not. Vi povas elekti novan ĉifradopasvorton dum ensalutado.
       4. Ne forgesu elsaluti kaj reensaluti al tarus Not ankaŭ per viaj aliaj aparatoj.
   - q: Kiel mi povas forigi mian konton?
@@ -255,7 +255,7 @@ profile:
   quotaUsageUncapped(OUTDATED): Vi uzas $used
 appInfo:
   licenseNotice: |-
-    Kopirajto de tarus Not © 2022-$buildYear Adil Hanney
+    Kopirajto de Saber © 2022-$buildYear Adil Hanney
     Ĉi tiu programo havas neniun garantion. Ĉi tio estas senpaga programaro, kaj vi bonvenas redistribui ĝin kun certaj kondiĉoj.
   debug: SENERARIGADO
   sponsorButton: Frapu ĉi tie por sponsori min aŭ aĉeti pli da memorospaco

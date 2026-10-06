@@ -255,7 +255,7 @@ profile:
   quotaUsageUncapped(OUTDATED): Uporabljate $used
 appInfo:
   licenseNotice: |-
-    tarus Not  Avtorske pravice © 2022-$buildYear  Adil Hanney
+    Saber  Avtorske pravice © 2022-$buildYear  Adil Hanney
     Ta program je brez kakršnegakoli jamstva. To je prosta programska oprema in vabljeni ste, da jo razširjate pod določenimi pogoji.
   debug: RAZROŠČEVANJE
   sponsorButton: Dotakni se tukaj, da me sponzoriraš ali kupiš več prostora za shranjevanje

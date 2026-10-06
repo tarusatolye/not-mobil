@@ -81,7 +81,7 @@ home:
     simpleGrid: Grille simple
 sentry:
   consent:
-    title: Aide à améliorer tarus Not ?
+    title: Aider à améliorer tarus Not ?
     description:
       question: Voulez-vous signaler automatiquement des erreurs inattendues ? Cela aide à identifier et à corriger les problèmes plus rapidement.
       scope: Les rapports peuvent contenir des informations sur l'erreur et votre appareil. J'ai fait tout mon possible pour filtrer les données personnelles, mais certaines peuvent rester.
@@ -129,7 +129,7 @@ settings:
     sentry: Rapport d’erreurs
   prefDescriptions:
     hyperlegibleFont: La fonte Atkinson Hyperlegible améliore la lisibilité pour les personnes malvoyantes
-    allowInsecureConnections: (Déconseillé) Autoriser tarus Not à se connecter à des serveurs dont les certificats sont auto-signés/non-sécurisé
+    allowInsecureConnections: (Déconseillé) Autoriser tarus Not à se connecter à des serveurs dont les certificats sont auto-signés ou non fiables
     preferGreyscale: Pour les couleurs de stylos proposées
     autoClearWhiteboardOnExit: Il restera synchronisé avec vos autres appareils
     disableEraserAfterUse: Revenir automatiquement au stylo après usage de la gomme
@@ -199,13 +199,13 @@ login:
     loggedIn: Connecté avec Nextcloud
   ncLoginStep:
     whereToStoreData: "Choisissez où vous souhaitez stocker vos données :"
-    saberNcServer: Le serveur Nextcloud de tarus Not
+    saberNcServer: Le serveur tarus Not
     otherNcServer: Autre serveur Nextcloud
     serverUrl: Adresse du serveur
     loginWithSaber: Se connecter avec tarus Not
     loginWithNextcloud: Se connecter avec Nextcloud
     loginFlow:
-      pleaseAuthorize: Veuillez autoriser tarus Not pour accéder à votre compte Nextcloud
+      pleaseAuthorize: Veuillez autoriser tarus Not à accéder à votre compte Nextcloud
       followPrompts: Veuillez suivre les indications dans l'interface Nextcloud
       browserDidntOpen: La page de connexion n'est pas ouverte ? Cliquez ici
   encLoginStep:
@@ -247,7 +247,7 @@ profile:
       1. Déconnectez-vous de tarus Not.
       2. Sur le site web du serveur supprimez votre dossier 'Saber'. Cela supprimera toutes vos notes sur le serveur.
       3. Connectez-vous à nouveau dans tarus Not. Vous pourrez choisir un nouveau mot de passe de chiffrement à la connexion.
-      4. N'oubliez pas de vous déconnecter et vous re-connecter dans tarus Not sur votre poste également.
+      4. N'oubliez pas de vous déconnecter et vous re-connecter dans tarus Not sur vos autres appareils également.
   - q: Comment puis-je supprimer mon compte ?
     a: |-
       Cliquez sur le button "@:profile.quickLinks.deleteAccount" ci-dessus, et connectez-vous si nécessaire.

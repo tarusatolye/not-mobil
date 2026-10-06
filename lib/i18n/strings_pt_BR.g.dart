@@ -649,7 +649,7 @@ class _Translations$profile$faq$2$pt_BR extends Translations$profile$faq$2$en {
 
 	// Translations
 	@override String get q => 'Como eu mudo a minha senha de criptografia?';
-	@override String get a => '1. Saia da sua conta do tarus Not. Tenha certeza de que a sincronização foi finalizada antes de sair, de modo que você não perca nenhum dado (veja o progresso da sincronização na tela inicial).\n2. Vá para o website do seu servidor e apague a sua pasta do tarus Not. Isso apagará todas as suas notas do servidor.\n3. Faça login na sua conta do tarus Not. Você pode escolher uma nova senha de criptografia quando fizer login.\n4. Não se esqueça de sair e fazer login novamente no tarus Not em seus outros dispositivos também.';
+	@override String get a => '1. Saia da sua conta do tarus Not. Tenha certeza de que a sincronização foi finalizada antes de sair, de modo que você não perca nenhum dado (veja o progresso da sincronização na tela inicial).\n2. Vá para o website do seu servidor e apague a sua pasta \'Saber\'. Isso apagará todas as suas notas do servidor.\n3. Faça login na sua conta do tarus Not. Você pode escolher uma nova senha de criptografia quando fizer login.\n4. Não se esqueça de sair e fazer login novamente no tarus Not em seus outros dispositivos também.';
 }
 
 // Path: profile.faq.3

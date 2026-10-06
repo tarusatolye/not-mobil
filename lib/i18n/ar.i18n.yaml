@@ -20,7 +20,7 @@ home:
   create:
     newNote: ملاحظة جديدة
     importNote: استيراد ملاحظة
-  welcome: أهلًا بك في سيبر
+  welcome: أهلًا بك في tarus Not
   invalidFormat: الملف الذي اخترته غير مدعوم. يرجى اختيار ملف بصيغة .SBN أو .SBN2 أو .SBA أو .PDF
   noFiles: لم يتم العثور على أي ملفات
   noPreviewAvailable: لا تتوفر معاينة
@@ -81,7 +81,7 @@ home:
     simpleGrid: شبكة بسيطة
 sentry:
   consent:
-    title: المساعدة في تحسين سيبر؟
+    title: هل تريد المساعدة في تحسين tarus Not؟
     description:
       question: هل ترغب في الإبلاغ تلقائيًّا عن الأخطاء غير المتوقعة؟ هذا يساعدني في تحديد المشكلات وإصلاحها بشكل أسرع.
       scope: قد تحتوي التقارير على معلومات حول الخطأ وجهازك. لقد بذلتُ قصارى جهدي لحجب البيانات الشخصية، ولكن قد تبقى بعضها.
@@ -106,7 +106,7 @@ settings:
     layoutSize: نوع التخطيط
     customAccentColor: اللون المميِّز المخصص
     hyperlegibleFont: خط أتكينسون فائق المقروئية
-    shouldCheckForUpdates: التحقق من تحديثات سيبر
+    shouldCheckForUpdates: التحقق من تحديثات tarus Not
     shouldAlwaysAlertForUpdates: تحديثات أسرع
     allowInsecureConnections: السماح بالاتصالات غير الآمنة
     editorToolbarAlignment: موضع شريط الأدوات
@@ -125,11 +125,11 @@ settings:
     autosave: الحفظ التلقائي
     shapeRecognitionDelay: تأخير التعرف على الشكل
     autoStraightenLines: استقامة الخطوط تلقائيًّا
-    customDataDir: مجلد سيبر مخصص
+    customDataDir: مجلد tarus Not مخصص
     sentry(OUTDATED): الإبلاغ خطأ
   prefDescriptions:
     hyperlegibleFont: يزيد Atkinson Hyperlegible من وضوح الرؤية للقراء الذين يعانون من ضعف في الرؤية
-    allowInsecureConnections: (غير موصى به) بالاتصال بالخوادم بشهادات غير موثوقة/موقعة ذاتيًا tarus Not السماح لـ
+    allowInsecureConnections: (غير موصى به) السماح لـ tarus Not بالاتصال بالخوادم ذات الشهادات الموقّعة ذاتيًا أو غير الموثوقة
     preferGreyscale: لشاشات الحبر الإلكتروني
     autoClearWhiteboardOnExit: ستظل متزامنة مع أجهزتك الأخرى
     disableEraserAfterUse: التبديل تلقائيًا إلى القلم بعد استخدام الممحاة
@@ -170,7 +170,7 @@ settings:
     title: إعادة تعيين هذا الإعداد؟
     button: إعادة تعيين
   resyncEverything: إعادة مزامنة كل شيء
-  openDataDir: tarus Not فتح مجلد
+  openDataDir: فتح مجلد tarus Not
   customDataDir:
     cancel: إلغاء
     select: تحديد
@@ -199,18 +199,18 @@ login:
     loggedIn: تم تسجيل الدخول باستخدام Nextcloud
   ncLoginStep:
     whereToStoreData: "اختر المكان الذي تريد تخزين بياناتك فيه:"
-    saberNcServer: Nextcloud الى tarus Not خادم
+    saberNcServer: خادم tarus Not
     otherNcServer: اخر Nextcloud خادم
     serverUrl: عنوان الخادم
-    loginWithSaber: tarus Not تسجيل الدخول باستخدام
+    loginWithSaber: تسجيل الدخول باستخدام tarus Not
     loginWithNextcloud: Nextcloud تسجيل الدخول باستخدام
     loginFlow:
-      pleaseAuthorize: الخاص بك Nextcloud للوصول إلى حساب tarus Not الرجاء تفويض
+      pleaseAuthorize: الرجاء تفويض tarus Not للوصول إلى حساب Nextcloud الخاص بك
       followPrompts: Nextcloud الرجاء اتباع الإرشادات في واجهة
       browserDidntOpen: لم تفتح صفحة تسجيل الدخول؟ اضغط هنا
   encLoginStep:
     enterEncPassword: "لحماية بياناتك، يرجى إدخال كلمة مرور التشفير:"
-    newToSaber: ؟ فقط أدخل كلمة مرور تشفير جديدةtarus Not جديد على
+    newToSaber: جديد على tarus Not؟ فقط أدخل كلمة مرور تشفير جديدة.
     encPassword: كلمة مرور التشفير
     encFaqTitle: الأسئلة الشائعة
     wrongEncPassword: فشل فك التشفير باستخدام كلمة المرور المقدمة. يرجى المحاولة مرة أخرى.
@@ -224,7 +224,7 @@ login:
     - q: لم أقم بتعيين كلمة مرور تشفير حتى الآن. من أين أحصل عليها؟
       a: |-
         اختر كلمة مرور تشفير جديدة وأدخلها أعلاه.
-        بإنشاء مفاتيح التشفير الخاصة بك تلقائيًا من هذه الكلمة tarus Not سيقوم .
+        سيقوم tarus Not بإنشاء مفاتيح التشفير الخاصة بك تلقائيًا من كلمة المرور هذه.
     - q: الخاص بي؟ Nextcloud هل يمكنني استخدام نفس كلمة المرور لحساب
       a: الخاص بك Nextcloud نعم، ولكن ضع في اعتبارك أنه سيكون من الأسهل على مدير الخادم أو أي شخص آخر الوصول إلى ملاحظاتك إذا تمكن من الوصول إلى حساب.
 profile:
@@ -243,7 +243,7 @@ profile:
     a: انتقل إلى موقع الخادم الخاص بك وقم بتسجيل الدخول. ثم انتقل إلى الإعدادات > الأمان > تغيير كلمة المرور. ستحتاج إلى تسجيل الخروج وتسجيل الدخول مرة أخرى إلى tarus Not بعد تغيير كلمة المرور الخاصة بك.
   - q: كيف يمكنني تغيير كلمة مرور التشفير الخاصة بي؟
     a: |-
-      1. تسجيل الخروج من tarus Not. تأكد من اكتمال المزامنة قبل تسجيل الخروج حتى لا تفقد أي بيانات (انظر تقدم المزامنة على الشاشة الرئيسية).
+      1. سجّل الخروج من tarus Not. تأكد من اكتمال المزامنة قبل تسجيل الخروج حتى لا تفقد أي بيانات (انظر تقدم المزامنة على الشاشة الرئيسية).
       2. اذهب إلى موقع الخادم الخاص بك واحذف مجلد "Saber" الخاص بك. سيؤدي هذا إلى حذف كافة ملاحظاتك من الخادم.
       3. قم بتسجيل الدخول مرة أخرى إلى tarus Not. يمكنك اختيار كلمة مرور تشفير جديدة عند تسجيل الدخول.
       4. لا تنس تسجيل الخروج وتسجيل الدخول مرة أخرى إلى tarus Not على أجهزتك الأخرى أيضًا.
@@ -254,7 +254,7 @@ profile:
   quotaUsageUncapped(OUTDATED): أنت تستخدم $used
 appInfo:
   licenseNotice: |-
-    tarus Not حقوق نشر © 2022-$buildYear  Adil Hanney
+    Saber حقوق نشر © 2022-$buildYear  Adil Hanney
     هذا البرنامج لا يأتي مع أي ضمان على الإطلاق. هذا برنامج مجاني، ونرحب بإعادة توزيعه في ظل ظروف معينة.
   debug: تصحيح أخطاء
   sponsorButton: انقر هنا لتدعمني أو شراء المزيد من مساحة التخزين

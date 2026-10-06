@@ -8,6 +8,13 @@ Tarus ekosistemine özel el yazısı ve çizim notu uygulaması. [saber-notes/sa
   Artırmak için: `dart run scripts/bump_version.dart --custom X.Y.Z --quiet`; sonra
   `metadata/en-US/changelogs/<buildNumber>.txt` ve `flatpak/…metainfo.xml`'deki
   yer tutucu notu doldurun (`test/version_test.dart` betiğin eşitlediği dosyaları denetler).
+  Betik `dart run` ile değil `dart scripts/bump_version.dart …` ile çalıştırılır
+  (`dart run` yerel derleme kancalarını, dolayısıyla Rust'ı çalıştırır).
+- **Play versionCode:** `buildNumber + 2_000_000` (`android/app/build.gradle.kts`,
+  `playSurumKaydirma`). Paket `tr.tarus.not` Saber şemasıyla 1.36.1'e (136010; bölünmüş
+  APK'da 1360103) kadar kod taşıdı, tarus şeması 1.0.0'da 100000'e indi; kaydırma Play'e
+  giden her kodu eskilerin hepsinden büyük ve monoton tutar (1.1.3 → AAB 2101030).
+  Uygulama içi sürüm (Hakkında) `buildNumber`'ı gösterir. Kaydırma bir daha küçültülmez.
 - **Paket Kimliği (Application ID):** `tr.tarus.not`
 - **Varsayılan Eşitleme Sunucusu:** `https://not.tarus.tr`
 - **Protokol:** WebDAV
@@ -18,8 +25,26 @@ hedefleri `rust-toolchain.toml`'dan) gerekir — `super_native_extensions` yerel
 parçası Rust ile derlenir. Windows'ta: `winget install Rustlang.Rustup`.
 
 ```bash
-flutter build apk --release
+flutter build apk --release          # yerel deneme
+./scripts/build_appbundle.sh         # Google Play (aşağıda)
 ```
+
+### Google Play
+- `scripts/build_appbundle.sh`: temiz ağaçta FOSS yaması (Onyx SDK, boox HTTP deposu ve
+  Sentry çıkar; bitince ağaç HEAD'e döner), `flutter build appbundle --release`, çıktı
+  `output/tarus-not-<sürüm>.aab` + GPL kaynak arşivi `output/not-mobil-<sürüm>-kaynak.tar.gz`.
+- **Hedef API:** Play, 31 Ağustos 2026'dan beri yeni uygulama ve güncellemelerde API 36
+  (Android 16) istiyor; `targetSdk = maxOf(36, flutter.targetSdkVersion)`.
+- **İmza:** Play App Signing açılır; `android/key.properties`'teki anahtar **yükleme
+  anahtarı** olur (uygulama imza anahtarını Google tutar; yükleme anahtarı kaybolursa
+  Play Console'dan sıfırlanır).
+- Mağaza metinleri `store/play/tr-TR/` (başlık ≤30, kısa ≤80, uzun ≤4000, yenilikler ≤500
+  karakter), İngilizce `metadata/en-US/`. Veri güvenliği formu: `store/play/veri-guvenligi.md`.
+- Gizlilik, hesap silme, kaynak kodu ve Pusula adresleri `lib/data/tarus_baglantilar.dart`
+  (`--dart-define=TARUS_GIZLILIK_URL=…` ile derlemede değişir). Varsayılan gizlilik ve
+  silme sayfası `https://yazilim.tarus.tr/gizlilik/` (kurumsal sitede gizlilik sayfası yok).
+- CI (`android.yml`) yüklemesi `tr.tarus.not` dahili teste taslak; yalnız depo değişkeni
+  `PLAY_YUKLEME=true` ve `PLAY_STORE_JSON` gizi varken çalışır.
 
 ### İmza anahtarı (ilk yayından önce, bir kez)
 Release APK yalnız tarus'a özel anahtarla imzalanır; `android/key.properties`
@@ -81,6 +106,9 @@ arayüz bilerek değişince güncellenir: `flutter test --update-goldens <test d
 Linux'ta, `submodules/flutter` sürümüyle).
 
 ## Sürüm notları
+- **1.1.3** (2026-10-06): gizlilik ve hesap silme tarus'a (silme penceresi), User-Agent
+  `tarusNot/`, mağaza metinleri, çeviri düzeltmeleri (10 dilde Saber telif satırı geri),
+  Play hazırlığı (API 36, versionCode kaydırma, AAB betiği).
 - **1.1.1** (2026-10-04): kayıt yokken varsayılan tema Modern, "Sistem" seçeneği
   kaldırıldı; boş yerde basılı tutunca Hata bildir menüsü; CI: golden'lar tarus
   arayüzüne göre güncellendi, Nextcloud testleri Saber test sunucusuna yönlendi.
@@ -93,6 +121,9 @@ lisanslıdır (`LICENSE.md`). APK dağıtılırken kaynak kodu da sunulmalıdır
 
 - Uygulamada: Ayarlar → en alttaki sürüm → Hakkında: Saber referansı, lisans notu,
   kaynak kodu ve Saber bağlantıları (`lib/components/settings/app_info.dart`).
+- Play mağaza açıklamasının sonunda aynı not var (`store/play/tr-TR/uzun-aciklama.txt`).
+- **Telif satırı:** `appInfo.licenseNotice` her dilde «Saber … Adil Hanney» kalır (ürün
+  adı değil telif sahibi); `test/tarus_yayin_test.dart` denetler.
 - İndirme sayfasında (yazilim.tarus.tr) şu not bulunmalı:
 
   > tarus Not, açık kaynak Saber (© Adil Hanney ve katkıda bulunanlar) üzerine

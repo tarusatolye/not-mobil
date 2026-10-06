@@ -106,7 +106,7 @@ settings:
     layoutSize: Elrendezési mód
     customAccentColor: Egyéni hangsúlyszín
     hyperlegibleFont: Atkinson Hyperlegible betűtípus
-    shouldCheckForUpdates: Automatikusan ellenőrzi a tarus Not frissítéseket
+    shouldCheckForUpdates: Automatikusan ellenőrzi a tarus Not frissítéseit
     shouldAlwaysAlertForUpdates: Gyorsabb értesítések a frissítésekről
     allowInsecureConnections: Nem biztonságos kapcsolatok engedélyezése
     editorToolbarAlignment: A szerkesztő eszköztár igazítása
@@ -202,7 +202,7 @@ login:
     saberNcServer: A tarus Not Nextcloud szervere
     otherNcServer: Másik Nextcloud szerver
     serverUrl: Szerver URL
-    loginWithSaber: Bejelentkezés tarus Not-rel
+    loginWithSaber: Bejelentkezés a tarus Nottal
     loginWithNextcloud: Bejelentkezés Nextcloud-dal
     loginFlow:
       pleaseAuthorize: Kérjük, engedélyezze a tarus Not számára a Nextcloud-fiókjához való hozzáférést
@@ -210,7 +210,7 @@ login:
       browserDidntOpen: Nem nyílt meg a bejelentkezési oldal? Kattintson ide
   encLoginStep:
     enterEncPassword: "Az adatai védelme érdekében kérjük, adja meg a titkosítási jelszavát:"
-    newToSaber: Először használja a tarus Not-t? Adjon meg egy új titkosítási jelszót.
+    newToSaber: Először használja a tarus Notot? Adjon meg egy új titkosítási jelszót.
     encPassword: Titkosítási jelszó
     encFaqTitle: Gyakran ismételt kérdések
     wrongEncPassword: A megadott jelszóval a visszafejtés nem sikerült. Kérjük, próbálja meg újra megadni.
@@ -240,14 +240,14 @@ profile:
   - q: Elveszítem a jegyzeteimet, ha kijelentkezem?
     a: Nem. A jegyzetei mind az eszközén, mind a szerveren megmaradnak. A szerverrel csak akkor lesznek szinkronizálva, ha újra bejelentkezik. Mielőtt kijelentkezik, győződjön meg arról, hogy a szinkronizálás befejeződött, különben adatvesztés történhet (a kezdőképernyőn látható a szinkronizálás állapota).
   - q: Hogyan változtatom meg a Nextcloud jelszavamat?
-    a: Nyissa meg a szerver weboldalát, és jelentkezzen be. Ezután menjen a Beállítások > Biztonság > Jelszó módosítása menüpontra. A jelszó módosítása után ki kell jelentkeznie a tarus Notből, majd újra be kell jelentkeznie.
+    a: Nyissa meg a szerver weboldalát, és jelentkezzen be. Ezután menjen a Beállítások > Biztonság > Jelszó módosítása menüpontra. A jelszó módosítása után ki kell jelentkeznie a tarus Notból, majd újra be kell jelentkeznie.
   - q: Hogyan változtatom meg a titkosítási jelszavamat?
     a: |-
       0. Győződjön meg arról, hogy a szinkronizálás befejeződött (a szinkronizálás állapotát a kezdőképernyőn láthatja).
-      1. Jelentkezzen ki a tarus Notből.
+      1. Jelentkezzen ki a tarus Notból.
       2. Nyissa meg a szerver weboldalát, és törölje a „Saber” mappát. Ez minden jegyzetét törli a szerverről.
-      3. Jelentkezzen be újra a tarus Notbe. Bejelentkezéskor új titkosítási jelszót választhat.
-      4. Ne felejtkezzen el kijelentkezni, majd újra bejelentkezni a tarus Notbe a többi eszközén is.
+      3. Jelentkezzen be újra a tarus Notba. Bejelentkezéskor új titkosítási jelszót választhat.
+      4. Ne felejtkezzen el kijelentkezni, majd újra bejelentkezni a tarus Notba a többi eszközén is.
   - q: Hogyan törölhetem a fiókomat?
     a: |-
       Koppintson a fenti „@:profile.quickLinks.deleteAccount” gombra, és szükség esetén jelentkezzen be.
@@ -255,7 +255,7 @@ profile:
   quotaUsageUncapped(OUTDATED): Használod a $used-t
 appInfo:
   licenseNotice: |-
-    tarus Not Copyright © 2022-$buildYear Adil Hanney
+    Saber Copyright © 2022-$buildYear Adil Hanney
     Ez a program nem tartalmaz semmilyen garanciát. Ez egy szabad szoftver, és bizonyos feltételek mellett szabadon terjeszthető.
   debug: DEBUG
   sponsorButton: Ide kattintva támogathat engem vagy vásárolhat több tárhelyet

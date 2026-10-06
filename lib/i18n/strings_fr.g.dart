@@ -407,7 +407,7 @@ class _Translations$sentry$consent$fr extends Translations$sentry$consent$en {
 	final TranslationsFr _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Aide à améliorer tarus Not ?';
+	@override String get title => 'Aider à améliorer tarus Not ?';
 	@override late final _Translations$sentry$consent$description$fr description = _Translations$sentry$consent$description$fr._(_root);
 	@override late final _Translations$sentry$consent$answers$fr answers = _Translations$sentry$consent$answers$fr._(_root);
 }
@@ -470,7 +470,7 @@ class _Translations$settings$prefDescriptions$fr extends Translations$settings$p
 
 	// Translations
 	@override String get hyperlegibleFont => 'La fonte Atkinson Hyperlegible améliore la lisibilité pour les personnes malvoyantes';
-	@override String get allowInsecureConnections => '(Déconseillé) Autoriser tarus Not à se connecter à des serveurs dont les certificats sont auto-signés/non-sécurisé';
+	@override String get allowInsecureConnections => '(Déconseillé) Autoriser tarus Not à se connecter à des serveurs dont les certificats sont auto-signés ou non fiables';
 	@override String get preferGreyscale => 'Pour les couleurs de stylos proposées';
 	@override String get autoClearWhiteboardOnExit => 'Il restera synchronisé avec vos autres appareils';
 	@override String get disableEraserAfterUse => 'Revenir automatiquement au stylo après usage de la gomme';
@@ -581,7 +581,7 @@ class _Translations$login$ncLoginStep$fr extends Translations$login$ncLoginStep$
 
 	// Translations
 	@override String get whereToStoreData => 'Choisissez où vous souhaitez stocker vos données :';
-	@override String get saberNcServer => 'Le serveur Nextcloud de tarus Not';
+	@override String get saberNcServer => 'Le serveur tarus Not';
 	@override String get otherNcServer => 'Autre serveur Nextcloud';
 	@override String get serverUrl => 'Adresse du serveur';
 	@override String get loginWithSaber => 'Se connecter avec tarus Not';
@@ -650,7 +650,7 @@ class _Translations$profile$faq$2$fr extends Translations$profile$faq$2$en {
 
 	// Translations
 	@override String get q => 'Comment changer mon mot de passe de chiffrement ?';
-	@override String get a => '0. Assurez-vous que la synchronisation soit terminée (regardez la barre de progression sur l\'écran d\'accueil).\n1. Déconnectez-vous de tarus Not.\n2. Sur le site web du serveur supprimez votre dossier \'Saber\'. Cela supprimera toutes vos notes sur le serveur.\n3. Connectez-vous à nouveau dans tarus Not. Vous pourrez choisir un nouveau mot de passe de chiffrement à la connexion.\n4. N\'oubliez pas de vous déconnecter et vous re-connecter dans tarus Not sur votre poste également.';
+	@override String get a => '0. Assurez-vous que la synchronisation soit terminée (regardez la barre de progression sur l\'écran d\'accueil).\n1. Déconnectez-vous de tarus Not.\n2. Sur le site web du serveur supprimez votre dossier \'Saber\'. Cela supprimera toutes vos notes sur le serveur.\n3. Connectez-vous à nouveau dans tarus Not. Vous pourrez choisir un nouveau mot de passe de chiffrement à la connexion.\n4. N\'oubliez pas de vous déconnecter et vous re-connecter dans tarus Not sur vos autres appareils également.';
 }
 
 // Path: profile.faq.3
@@ -906,7 +906,7 @@ class _Translations$login$ncLoginStep$loginFlow$fr extends Translations$login$nc
 	final TranslationsFr _root; // ignore: unused_field
 
 	// Translations
-	@override String get pleaseAuthorize => 'Veuillez autoriser tarus Not pour accéder à votre compte Nextcloud';
+	@override String get pleaseAuthorize => 'Veuillez autoriser tarus Not à accéder à votre compte Nextcloud';
 	@override String get followPrompts => 'Veuillez suivre les indications dans l\'interface Nextcloud';
 	@override String get browserDidntOpen => 'La page de connexion n\'est pas ouverte ? Cliquez ici';
 }

@@ -191,7 +191,7 @@ class _Translations$appInfo$uk extends Translations$appInfo$en {
 	final TranslationsUk _root; // ignore: unused_field
 
 	// Translations
-	@override String licenseNotice({required Object buildYear}) => 'tarus Not Авторські права © 2022-${buildYear} Adil Hanney\nЦя програма не має жодної гарантії. Це безкоштовне програмне забезпечення, і ви маєте право поширювати його за певних умов.';
+	@override String licenseNotice({required Object buildYear}) => 'Saber Авторські права © 2022-${buildYear} Adil Hanney\nЦя програма не має жодної гарантії. Це безкоштовне програмне забезпечення, і ви маєте право поширювати його за певних умов.';
 	@override String get debug => 'ВІДЛАДКА';
 	@override String get sponsorButton => 'Натисніть сюди, щоб мене спонсорувати або купити більше сховища';
 	@override String get licenseButton => 'Натисніть сюди, щоб переглянути більше інформації про ліцензію';

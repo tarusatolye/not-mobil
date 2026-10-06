@@ -165,8 +165,8 @@ Future<void> updateAllFiles() async {
 
   // update snap
   await File('snap/snapcraft.yaml').replace({
-    // e.g. source-tag: 'v0.5.5'
-    RegExp(r"source-tag: 'v.+"): "source-tag: 'v${newVersion.buildName}'",
+    // e.g. source-tag: '1.1.3' (tarus etiketleri yalnız rakam, `v` yok)
+    RegExp(r"source-tag: '.+"): "source-tag: '${newVersion.buildName}'",
   });
 
   // tarus Not: README indirme bağlantıları güncellenmez. README'ler upstream
@@ -245,7 +245,7 @@ Future<void> updateAllFiles() async {
   print('  - ./scripts/translate_changelogs.dart');
   print('Next steps:');
   print(
-    '  - Add the new release to the App Store: https://appstoreconnect.apple.com/apps/1671523739/appstore',
+    '  - tarus Not: store/play/tr-TR/yenilikler.txt, then ./scripts/build_appbundle.sh and upload to Play Console',
   );
 
   // open changelog files in editor
@@ -279,10 +279,10 @@ void _generateMetainfoDescription(List<String> metainfoLines) {
       .where((dir) => !dir.path.endsWith('en-US'))
       .where(
         (dir) => dir.listSync().any(
-          (file) => file.path.endsWith('/full_description.txt'),
+          (file) => _slash(file.path).endsWith('/full_description.txt'),
         ),
       )
-      .map((dir) => dir.path.split('/').last)
+      .map((dir) => _slash(dir.path).split('/').last)
       .sorted();
   for (final localeCode in [null, ...localesWithFullDescription]) {
     final txtFile = File(
@@ -309,8 +309,7 @@ void _generateMetainfoScreenshots(List<String> metainfoLines) {
     ),
     (
       name: '3_login',
-      caption:
-          'The login page which asks which Nextcloud server you want to use',
+      caption: 'The login page for connecting with a Pusula sync token',
     ),
     (
       name: '4_settings',
@@ -325,7 +324,7 @@ void _generateMetainfoScreenshots(List<String> metainfoLines) {
             File('${dir.path}/images/flathubScreenshots/1_home.png')
                 .existsSync(),
       )
-      .map((dir) => dir.path.split('/').last)
+      .map((dir) => _slash(dir.path).split('/').last)
       .sorted();
 
   var start =
@@ -354,17 +353,24 @@ void _generateMetainfoScreenshots(List<String> metainfoLines) {
     metainfoLines.insert(start++, '$indent    <caption>$caption</caption>');
     metainfoLines.insert(
       start++,
-      '$indent    <image>https://raw.githubusercontent.com/saber-notes/saber/refs/tags/v${newVersion.buildName}/metadata/en-US/images/flathubScreenshots/$name.png</image>',
+      '$indent    <image>$_screenshotBase/${newVersion.buildName}/metadata/en-US/images/flathubScreenshots/$name.png</image>',
     );
     for (final locale in localesWithScreenshots) {
       metainfoLines.insert(
         start++,
-        '$indent    <image xml:lang="$locale">https://raw.githubusercontent.com/saber-notes/saber/refs/tags/v${newVersion.buildName}/metadata/$locale/images/flathubScreenshots/$name.png</image>',
+        '$indent    <image xml:lang="$locale">$_screenshotBase/${newVersion.buildName}/metadata/$locale/images/flathubScreenshots/$name.png</image>',
       );
     }
     metainfoLines.insert(start++, '$indent</screenshot>');
   }
 }
+
+/// tarus Not deposu; sürüm etiketleri yalnız rakam (ör. `1.1.3`, `v` yok).
+const _screenshotBase =
+    'https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags';
+
+/// Windows'ta `Directory.path` ters bölü taşır; yerel kodu ayıklamak için.
+String _slash(String path) => path.replaceAll(r'\', '/');
 
 extension on File {
   Future<bool> contains(Pattern pattern) async {

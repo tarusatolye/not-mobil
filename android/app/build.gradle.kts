@@ -27,6 +27,14 @@ gradle.taskGraph.whenReady {
     }
 }
 
+// tarus: Play versionCode = tarus buildNumber (lib/data/version.dart, 1.1.3 → 101030)
+// + 2_000_000. Paket tr.tarus.not Saber sürüm şemasıyla 1.36.1 (136010; ABI'ye
+// bölünmüş APK'da ×10+ABI → 1360103'e kadar) kodlarını taşıdı; tarus şeması
+// 1.0.0'da 100000'e indi. Kaydırma, Play'e giden her kodun (AAB 2101030…,
+// bölünmüş APK 21010302…) eskilerin hepsinden büyük ve monoton artan kalmasını
+// sağlar. Değiştirmeyin: Play'e yüklenen kod bir daha küçültülemez.
+val playSurumKaydirma = 2_000_000
+
 android {
     namespace = "tr.tarus.not"
     compileSdk = 37
@@ -42,8 +50,10 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
+        // Play şartı (31 Ağustos 2026'dan): yeni uygulama ve güncellemeler
+        // Android 16 / API 36 hedeflemeli (developer.android.com/google/play/requirements/target-sdk).
+        targetSdk = maxOf(36, flutter.targetSdkVersion)
+        versionCode = flutter.versionCode + playSurumKaydirma
         versionName = flutter.versionName
     }
 

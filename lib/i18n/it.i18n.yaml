@@ -20,7 +20,7 @@ home:
   create:
     newNote: Nuova nota
     importNote: Importa nota
-  welcome: Benvenuto su tarus Not
+  welcome: Benvenuto in tarus Not
   invalidFormat: Il file selezionato non è supportato. Seleziona un file sbn, sbn2, sba o pdf.
   noFiles: Nessun file trovato
   noPreviewAvailable: Nessuna anteprima disponibile
@@ -199,7 +199,7 @@ login:
     loggedIn: Effettuato l'accesso con Nextcloud
   ncLoginStep:
     whereToStoreData: "Scegli dove vuoi archiviare i tuoi dati:"
-    saberNcServer: Il server Nextcloud di tarus Not
+    saberNcServer: Il server di tarus Not
     otherNcServer: Altro server Nextcloud
     serverUrl: URL Server
     loginWithSaber: Accedi con tarus Not
@@ -210,7 +210,7 @@ login:
       browserDidntOpen: La pagina di accesso non si è aperta? Clicca qui
   encLoginStep:
     enterEncPassword: "Per proteggere i tuoi dati, inserisci la tua password di cifratura:"
-    newToSaber: Nuovo su tarus Not? Basta inserire una nuova password di cifratura.
+    newToSaber: Nuovo in tarus Not? Basta inserire una nuova password di cifratura.
     encPassword: Password di cifratura
     encFaqTitle: Domande frequenti
     wrongEncPassword: La decrittazione non è riuscita con la password fornita. Per favore prova a inserirla nuovamente.
@@ -255,7 +255,7 @@ profile:
   quotaUsageUncapped(OUTDATED): Stai usando $used
 appInfo:
   licenseNotice: |-
-    tarus Not Copyright © 2022-$buildYear Adil Hanney
+    Saber Copyright © 2022-$buildYear Adil Hanney
     Questo programma non ha alcuna garanzia. Questo è un software libero e sei libero di ridistribuirlo a determinate condizioni.
   debug: DEBUG
   sponsorButton: Tocca qui per sponsorizzarmi o acquistare altro spazio di archiviazione

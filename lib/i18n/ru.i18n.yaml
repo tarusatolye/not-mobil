@@ -20,7 +20,7 @@ home:
   create:
     newNote: Новая заметка
     importNote: Импорт заметки
-  welcome: Приветствуем в tarus Not
+  welcome: Добро пожаловать в tarus Not
   invalidFormat: Выбранный вами файл не поддерживается. Выберите файл .sbn, .sbn2, .sba или .pdf.
   noFiles: Файлов ещё нет
   noPreviewAvailable: Предварительный просмотр недоступен
@@ -199,7 +199,7 @@ login:
     loggedIn: Авторизован в Nextcloud
   ncLoginStep:
     whereToStoreData: "Выберите, где вы хотите хранить свои данные:"
-    saberNcServer: tarus Not Nextcloud сервер
+    saberNcServer: Сервер tarus Not
     otherNcServer: Другой Nextcloud сервер
     serverUrl: URL-адрес сервера
     loginWithSaber: Войти с помощью tarus Not

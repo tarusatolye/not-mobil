@@ -240,7 +240,7 @@ profile:
   - q: Como eu mudo a minha senha de criptografia?
     a: |-
       1. Saia da sua conta do tarus Not. Tenha certeza de que a sincronização foi finalizada antes de sair, de modo que você não perca nenhum dado (veja o progresso da sincronização na tela inicial).
-      2. Vá para o website do seu servidor e apague a sua pasta do tarus Not. Isso apagará todas as suas notas do servidor.
+      2. Vá para o website do seu servidor e apague a sua pasta 'Saber'. Isso apagará todas as suas notas do servidor.
       3. Faça login na sua conta do tarus Not. Você pode escolher uma nova senha de criptografia quando fizer login.
       4. Não se esqueça de sair e fazer login novamente no tarus Not em seus outros dispositivos também.
   - q: Como eu posso apagar a minha conta?

@@ -1,0 +1,15 @@
+tarus Not, tarus ekosisteminin el yazısı ve eskiz not uygulamasıdır.
+
+Kalemle ya da parmağınızla yazın ve çizin: kalemler, vurgulayıcı, şekiller, görseller ve PDF'ler; sayfalı not ya da beyaz tahta. Karanlık modda notlarınız ters çevrilebilir, koyu zemine açık mürekkeple yazarsınız; görseller ve PDF'ler de birlikte çevrilir.
+
+Notlarınız cihazdan çıkmadan önce, yalnız sizin bildiğiniz şifreleme parolasıyla cihazınızda uçtan uca şifrelenir. tarus Not sunucusu (not.tarus.tr) yalnız şifreli dosyaları saklar ve okuyamaz. Şifreleme parolasını unutursanız eşitlenen notlar kurtarılamaz.
+
+tarus Not'un ayrı bir hesabı yoktur: Pusula hesabınızdan aldığınız eşitleme belirteciyle bağlanırsınız (Pusula › Ayarlar › Not eşitleme). Belirteci istediğiniz an iptal edebilirsiniz; cihaz en geç 30 saniye içinde eşitlemeyi bırakır. Notlar cihazlarınız arasında eşitlenir; aynı not iki yerde değişirse eski sürüm kaybolmaz, çakışma kopyası olarak saklanır.
+
+İç içe klasörlerle düzenleyin, son notlarınızı ana ekranda bulun, sorunları uygulamanın içinden bildirin (Ayarlar › Hata bildir ya da boş bir yere basılı tutun).
+
+Reklam, analitik ya da üçüncü taraf izleme yoktur.
+
+Gizlilik politikası: https://yazilim.tarus.tr/gizlilik/
+
+Açık kaynak: tarus Not, açık kaynak Saber uygulaması (© 2022- Adil Hanney ve katkıda bulunanlar) üzerine geliştirilmiştir ve Saber gibi GNU Genel Kamu Lisansı sürüm 3 (GPL-3.0) ile lisanslıdır. Kaynak kodu: https://github.com/tarusatolye/not-mobil

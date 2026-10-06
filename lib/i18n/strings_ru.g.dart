@@ -69,7 +69,7 @@ class _Translations$home$ru extends Translations$home$en {
 	@override late final _Translations$home$titles$ru titles = _Translations$home$titles$ru._(_root);
 	@override late final _Translations$home$tooltips$ru tooltips = _Translations$home$tooltips$ru._(_root);
 	@override late final _Translations$home$create$ru create = _Translations$home$create$ru._(_root);
-	@override String get welcome => 'Приветствуем в tarus Not';
+	@override String get welcome => 'Добро пожаловать в tarus Not';
 	@override String get invalidFormat => 'Выбранный вами файл не поддерживается. Выберите файл .sbn, .sbn2, .sba или .pdf.';
 	@override String get noFiles => 'Файлов ещё нет';
 	@override String get noPreviewAvailable => 'Предварительный просмотр недоступен';
@@ -581,7 +581,7 @@ class _Translations$login$ncLoginStep$ru extends Translations$login$ncLoginStep$
 
 	// Translations
 	@override String get whereToStoreData => 'Выберите, где вы хотите хранить свои данные:';
-	@override String get saberNcServer => 'tarus Not Nextcloud сервер';
+	@override String get saberNcServer => 'Сервер tarus Not';
 	@override String get otherNcServer => 'Другой Nextcloud сервер';
 	@override String get serverUrl => 'URL-адрес сервера';
 	@override String get loginWithSaber => 'Войти с помощью tarus Not';

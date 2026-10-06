@@ -255,7 +255,7 @@ profile:
   quotaUsageUncapped(OUTDATED): אתה משתמש ב-$used
 appInfo:
   licenseNotice: |-
-    tarus Not  כל הזכויות שמורות © 2022-$buildYear  עַאדִל האני
+    Saber  כל הזכויות שמורות © 2022-$buildYear  עַאדִל האני
     תוכנית זו מגיעה ללא כל אחריות. זוהי תוכנה חופשית ואפשר להפיץ אותה מחדש בתנאים מסוימים.
   debug: דִּיבָּג
   sponsorButton: אפשר להקיש כאן כדי לתת לי חסות או לקנות שטח אחסון נוסף

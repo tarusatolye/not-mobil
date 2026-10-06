@@ -69,7 +69,7 @@ class _Translations$home$ar extends Translations$home$en {
 	@override late final _Translations$home$titles$ar titles = _Translations$home$titles$ar._(_root);
 	@override late final _Translations$home$tooltips$ar tooltips = _Translations$home$tooltips$ar._(_root);
 	@override late final _Translations$home$create$ar create = _Translations$home$create$ar._(_root);
-	@override String get welcome => 'أهلًا بك في سيبر';
+	@override String get welcome => 'أهلًا بك في tarus Not';
 	@override String get invalidFormat => 'الملف الذي اخترته غير مدعوم. يرجى اختيار ملف بصيغة .SBN أو .SBN2 أو .SBA أو .PDF';
 	@override String get noFiles => 'لم يتم العثور على أي ملفات';
 	@override String get noPreviewAvailable => 'لا تتوفر معاينة';
@@ -118,7 +118,7 @@ class _Translations$settings$ar extends Translations$settings$en {
 	];
 	@override late final _Translations$settings$reset$ar reset = _Translations$settings$reset$ar._(_root);
 	@override String get resyncEverything => 'إعادة مزامنة كل شيء';
-	@override String get openDataDir => 'tarus Not فتح مجلد';
+	@override String get openDataDir => 'فتح مجلد tarus Not';
 	@override late final _Translations$settings$customDataDir$ar customDataDir = _Translations$settings$customDataDir$ar._(_root);
 	@override String get autosaveDisabled => 'أبداً';
 	@override String get shapeRecognitionDisabled => 'أبداً';
@@ -191,7 +191,7 @@ class _Translations$appInfo$ar extends Translations$appInfo$en {
 	final TranslationsAr _root; // ignore: unused_field
 
 	// Translations
-	@override String licenseNotice({required Object buildYear}) => 'tarus Not حقوق نشر © 2022-${buildYear}  Adil Hanney\nهذا البرنامج لا يأتي مع أي ضمان على الإطلاق. هذا برنامج مجاني، ونرحب بإعادة توزيعه في ظل ظروف معينة.';
+	@override String licenseNotice({required Object buildYear}) => 'Saber حقوق نشر © 2022-${buildYear}  Adil Hanney\nهذا البرنامج لا يأتي مع أي ضمان على الإطلاق. هذا برنامج مجاني، ونرحب بإعادة توزيعه في ظل ظروف معينة.';
 	@override String get debug => 'تصحيح أخطاء';
 	@override String get sponsorButton => 'انقر هنا لتدعمني أو شراء المزيد من مساحة التخزين';
 	@override String get licenseButton => 'انقر هنا لعرض المزيد من معلومات الترخيص';
@@ -407,7 +407,7 @@ class _Translations$sentry$consent$ar extends Translations$sentry$consent$en {
 	final TranslationsAr _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'المساعدة في تحسين سيبر؟';
+	@override String get title => 'هل تريد المساعدة في تحسين tarus Not؟';
 	@override late final _Translations$sentry$consent$description$ar description = _Translations$sentry$consent$description$ar._(_root);
 	@override late final _Translations$sentry$consent$answers$ar answers = _Translations$sentry$consent$answers$ar._(_root);
 }
@@ -439,7 +439,7 @@ class _Translations$settings$prefLabels$ar extends Translations$settings$prefLab
 	@override String get layoutSize => 'نوع التخطيط';
 	@override String get customAccentColor => 'اللون المميِّز المخصص';
 	@override String get hyperlegibleFont => 'خط أتكينسون فائق المقروئية';
-	@override String get shouldCheckForUpdates => 'التحقق من تحديثات سيبر';
+	@override String get shouldCheckForUpdates => 'التحقق من تحديثات tarus Not';
 	@override String get shouldAlwaysAlertForUpdates => 'تحديثات أسرع';
 	@override String get allowInsecureConnections => 'السماح بالاتصالات غير الآمنة';
 	@override String get editorToolbarAlignment => 'موضع شريط الأدوات';
@@ -458,7 +458,7 @@ class _Translations$settings$prefLabels$ar extends Translations$settings$prefLab
 	@override String get autosave => 'الحفظ التلقائي';
 	@override String get shapeRecognitionDelay => 'تأخير التعرف على الشكل';
 	@override String get autoStraightenLines => 'استقامة الخطوط تلقائيًّا';
-	@override String get customDataDir => 'مجلد سيبر مخصص';
+	@override String get customDataDir => 'مجلد tarus Not مخصص';
 	@override String get sentry => 'الإبلاغ خطأ';
 }
 
@@ -470,7 +470,7 @@ class _Translations$settings$prefDescriptions$ar extends Translations$settings$p
 
 	// Translations
 	@override String get hyperlegibleFont => 'يزيد Atkinson Hyperlegible من وضوح الرؤية للقراء الذين يعانون من ضعف في الرؤية';
-	@override String get allowInsecureConnections => '(غير موصى به) بالاتصال بالخوادم بشهادات غير موثوقة/موقعة ذاتيًا tarus Not السماح لـ';
+	@override String get allowInsecureConnections => '(غير موصى به) السماح لـ tarus Not بالاتصال بالخوادم ذات الشهادات الموقّعة ذاتيًا أو غير الموثوقة';
 	@override String get preferGreyscale => 'لشاشات الحبر الإلكتروني';
 	@override String get autoClearWhiteboardOnExit => 'ستظل متزامنة مع أجهزتك الأخرى';
 	@override String get disableEraserAfterUse => 'التبديل تلقائيًا إلى القلم بعد استخدام الممحاة';
@@ -581,10 +581,10 @@ class _Translations$login$ncLoginStep$ar extends Translations$login$ncLoginStep$
 
 	// Translations
 	@override String get whereToStoreData => 'اختر المكان الذي تريد تخزين بياناتك فيه:';
-	@override String get saberNcServer => 'Nextcloud الى tarus Not خادم';
+	@override String get saberNcServer => 'خادم tarus Not';
 	@override String get otherNcServer => 'اخر Nextcloud خادم';
 	@override String get serverUrl => 'عنوان الخادم';
-	@override String get loginWithSaber => 'tarus Not تسجيل الدخول باستخدام';
+	@override String get loginWithSaber => 'تسجيل الدخول باستخدام tarus Not';
 	@override String get loginWithNextcloud => 'Nextcloud تسجيل الدخول باستخدام';
 	@override late final _Translations$login$ncLoginStep$loginFlow$ar loginFlow = _Translations$login$ncLoginStep$loginFlow$ar._(_root);
 }
@@ -597,7 +597,7 @@ class _Translations$login$encLoginStep$ar extends Translations$login$encLoginSte
 
 	// Translations
 	@override String get enterEncPassword => 'لحماية بياناتك، يرجى إدخال كلمة مرور التشفير:';
-	@override String get newToSaber => '؟ فقط أدخل كلمة مرور تشفير جديدةtarus Not جديد على';
+	@override String get newToSaber => 'جديد على tarus Not؟ فقط أدخل كلمة مرور تشفير جديدة.';
 	@override String get encPassword => 'كلمة مرور التشفير';
 	@override String get encFaqTitle => 'الأسئلة الشائعة';
 	@override String get wrongEncPassword => 'فشل فك التشفير باستخدام كلمة المرور المقدمة. يرجى المحاولة مرة أخرى.';
@@ -650,7 +650,7 @@ class _Translations$profile$faq$2$ar extends Translations$profile$faq$2$en {
 
 	// Translations
 	@override String get q => 'كيف يمكنني تغيير كلمة مرور التشفير الخاصة بي؟';
-	@override String get a => '1. تسجيل الخروج من tarus Not. تأكد من اكتمال المزامنة قبل تسجيل الخروج حتى لا تفقد أي بيانات (انظر تقدم المزامنة على الشاشة الرئيسية).\n2. اذهب إلى موقع الخادم الخاص بك واحذف مجلد "Saber" الخاص بك. سيؤدي هذا إلى حذف كافة ملاحظاتك من الخادم.\n3. قم بتسجيل الدخول مرة أخرى إلى tarus Not. يمكنك اختيار كلمة مرور تشفير جديدة عند تسجيل الدخول.\n4. لا تنس تسجيل الخروج وتسجيل الدخول مرة أخرى إلى tarus Not على أجهزتك الأخرى أيضًا.';
+	@override String get a => '1. سجّل الخروج من tarus Not. تأكد من اكتمال المزامنة قبل تسجيل الخروج حتى لا تفقد أي بيانات (انظر تقدم المزامنة على الشاشة الرئيسية).\n2. اذهب إلى موقع الخادم الخاص بك واحذف مجلد "Saber" الخاص بك. سيؤدي هذا إلى حذف كافة ملاحظاتك من الخادم.\n3. قم بتسجيل الدخول مرة أخرى إلى tarus Not. يمكنك اختيار كلمة مرور تشفير جديدة عند تسجيل الدخول.\n4. لا تنس تسجيل الخروج وتسجيل الدخول مرة أخرى إلى tarus Not على أجهزتك الأخرى أيضًا.';
 }
 
 // Path: profile.faq.3
@@ -906,7 +906,7 @@ class _Translations$login$ncLoginStep$loginFlow$ar extends Translations$login$nc
 	final TranslationsAr _root; // ignore: unused_field
 
 	// Translations
-	@override String get pleaseAuthorize => 'الخاص بك Nextcloud للوصول إلى حساب tarus Not الرجاء تفويض';
+	@override String get pleaseAuthorize => 'الرجاء تفويض tarus Not للوصول إلى حساب Nextcloud الخاص بك';
 	@override String get followPrompts => 'Nextcloud الرجاء اتباع الإرشادات في واجهة';
 	@override String get browserDidntOpen => 'لم تفتح صفحة تسجيل الدخول؟ اضغط هنا';
 }
@@ -930,7 +930,7 @@ class _Translations$login$encLoginStep$encFaq$1$ar extends Translations$login$en
 
 	// Translations
 	@override String get q => 'لم أقم بتعيين كلمة مرور تشفير حتى الآن. من أين أحصل عليها؟';
-	@override String get a => 'اختر كلمة مرور تشفير جديدة وأدخلها أعلاه.\nبإنشاء مفاتيح التشفير الخاصة بك تلقائيًا من هذه الكلمة tarus Not سيقوم .';
+	@override String get a => 'اختر كلمة مرور تشفير جديدة وأدخلها أعلاه.\nسيقوم tarus Not بإنشاء مفاتيح التشفير الخاصة بك تلقائيًا من كلمة المرور هذه.';
 }
 
 // Path: login.encLoginStep.encFaq.2

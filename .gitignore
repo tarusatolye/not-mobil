@@ -66,3 +66,6 @@ coverage/
 
 # temp files for fdroid pubspec.lock
 /tmpfdroid/
+
+# tarus: scripts/build_appbundle.sh çıktısı (AAB, kaynak arşivi)
+/output/

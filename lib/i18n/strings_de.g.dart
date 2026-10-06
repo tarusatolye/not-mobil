@@ -118,7 +118,7 @@ class _Translations$settings$de extends Translations$settings$en {
 	];
 	@override late final _Translations$settings$reset$de reset = _Translations$settings$reset$de._(_root);
 	@override String get resyncEverything => 'Alles neu Synchronisieren';
-	@override String get openDataDir => 'tarus Not-Ordner öffnen';
+	@override String get openDataDir => 'tarus-Not-Ordner öffnen';
 	@override late final _Translations$settings$customDataDir$de customDataDir = _Translations$settings$customDataDir$de._(_root);
 	@override String get autosaveDisabled => 'Nie';
 	@override String get shapeRecognitionDisabled => 'Nie';
@@ -458,7 +458,7 @@ class _Translations$settings$prefLabels$de extends Translations$settings$prefLab
 	@override String get autosave => 'Automatisches Backup';
 	@override String get shapeRecognitionDelay => 'Verzögerung der Formerkennung';
 	@override String get autoStraightenLines => 'Linien automatisch begradigen';
-	@override String get customDataDir => 'Eigener tarus Not-Ordner';
+	@override String get customDataDir => 'Eigener tarus-Not-Ordner';
 	@override String get sentry => 'Fehlerberichterstattung';
 }
 
@@ -470,7 +470,7 @@ class _Translations$settings$prefDescriptions$de extends Translations$settings$p
 
 	// Translations
 	@override String get hyperlegibleFont => 'Verbessert die Lesbarkeit für Menschen mit geringer Sehkraft';
-	@override String get allowInsecureConnections => 'tarus Not erlauben, unsichere Zertifikaten zu verwenden (Nicht empfohlen)';
+	@override String get allowInsecureConnections => 'tarus Not erlauben, unsichere Zertifikate zu verwenden (nicht empfohlen)';
 	@override String get preferGreyscale => 'Optimierung für E-Ink-Displays';
 	@override String get autoClearWhiteboardOnExit => 'Löscht das Whiteboard beim Beenden der App';
 	@override String get disableEraserAfterUse => 'Nach dem Nutzen des Radierers automatisch zum Stift zurückwechseln';
@@ -581,7 +581,7 @@ class _Translations$login$ncLoginStep$de extends Translations$login$ncLoginStep$
 
 	// Translations
 	@override String get whereToStoreData => 'Wähle, wo du deine Daten speichern willst:';
-	@override String get saberNcServer => 'tarus Nots Nextcloud-Server';
+	@override String get saberNcServer => 'tarus-Not-Server';
 	@override String get otherNcServer => 'Anderer Nextcloud-Server';
 	@override String get serverUrl => 'Server URL';
 	@override String get loginWithSaber => 'Mit tarus Not anmelden';
@@ -650,7 +650,7 @@ class _Translations$profile$faq$2$de extends Translations$profile$faq$2$en {
 
 	// Translations
 	@override String get q => 'Wie ändere ich mein Verschlüsselungspasswort?';
-	@override String get a => '0. Bitte stelle zuerst sicher, dass alle Daten korrekt synchronisiert wurden, damit du keine Daten verlierst (du kannst den Fortschritt auf dem Startbildschirm prüfen).\n1. Melde dich in tarus Not ab.\n2. Öffne die Server-Startseite und lösche den „Saber“-Order. Dadurch werden alle Notizen vom Server gelöscht.\n3. Melde dich wieder in tarus Not an. Du wirst nach einem neuen Verschlüsselungspasswort gefragt.\n4. Vergiss nicht dich auf anderen Geräten in tarus Not ab- und wieder anzumelden.';
+	@override String get a => '0. Bitte stelle zuerst sicher, dass alle Daten korrekt synchronisiert wurden, damit du keine Daten verlierst (du kannst den Fortschritt auf dem Startbildschirm prüfen).\n1. Melde dich in tarus Not ab.\n2. Öffne die Server-Startseite und lösche den „Saber“-Ordner. Dadurch werden alle Notizen vom Server gelöscht.\n3. Melde dich wieder in tarus Not an. Du wirst nach einem neuen Verschlüsselungspasswort gefragt.\n4. Vergiss nicht dich auf anderen Geräten in tarus Not ab- und wieder anzumelden.';
 }
 
 // Path: profile.faq.3

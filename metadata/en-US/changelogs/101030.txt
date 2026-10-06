@@ -1,0 +1,4 @@
+• Privacy policy and account deletion now point to tarus (in-app deletion steps and a web request page), not to Saber or Nextcloud
+• Sync User-Agent is tarusNot/<version>; store texts describe tarus Not
+• Translation fixes (de, fr, es, it, ru, ar and others); the Saber copyright notice was restored in 10 languages
+• Play preparation: target API 36, versionCode above all earlier codes, app bundle build script
