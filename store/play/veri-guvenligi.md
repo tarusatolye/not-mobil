@@ -10,9 +10,9 @@ Formu göndermeden önce yayımlanan derlemeyle karşılaştırın; kod değişi
 |---|---|---|
 | Uygulama gerekli kullanıcı verisi türlerinden herhangi birini topluyor ya da paylaşıyor mu? | **Evet** | Eşitleme açıksa notlar (şifreli) ve kimlik not.tarus.tr'ye gider; Hata bildir isteğe bağlı. |
 | Aktarılan tüm kullanıcı verileri şifreleniyor mu? | **Evet** | Tüm trafik HTTPS (not.tarus.tr). Not içeriği ayrıca uçtan uca şifreli. |
-| Kullanıcılar verilerinin silinmesini isteyebilir mi? | **Evet** | Uygulamada Profil › Hesabı sil (adımlar + web talebi), web: `https://yazilim.tarus.tr/gizlilik/` (veri silme istekleri, yazilim@tarus.tr). |
+| Kullanıcılar verilerinin silinmesini isteyebilir mi? | **Evet** | Uygulamada Profil › Hesabı sil (adımlar + web talebi), web: `https://tarus.tr/hesap-silme` (talep e-postayla yazilim@tarus.tr'ye, Pusula yöneticisi işler). |
 | Hesap oluşturma | Uygulamada hesap **oluşturulmaz**; kimlik Pusula'dır (web'de oluşturulur). Giriş: Pusula eşitleme belirteci. | `lib/components/nextcloud/nc_login_step.dart` |
-| Hesap silme URL'si (Play zorunlu alanı) | `https://yazilim.tarus.tr/gizlilik/` (`TarusBaglantilar.hesapSilme`) | Ayrı silme sayfası yapılırsa iki yerde birlikte değişir. |
+| Hesap silme URL'si (Play zorunlu alanı) | `https://tarus.tr/hesap-silme` (`TarusBaglantilar.hesapSilme`) | 2026-10-06'da açıldı (tarus#c3bb217). |
 
 ## Toplanan veri türleri
 
@@ -41,8 +41,8 @@ sunucularında), **geçici işlenmiyor** (saklanıyor), reklam/pazarlama/analiti
 
 ## Kullanıcının yapacakları
 
-1. Play Console'da «Gizlilik politikası» = `https://yazilim.tarus.tr/gizlilik/`.
-2. Gizlilik politikasına bir **tarus Not** bölümü eklenmeli (bugün yalnız genel ekosistem metni var):
+1. Play Console'da «Gizlilik politikası» = `https://tarus.tr/gizlilik`.
+2. ✓ Gizlilik politikasında tarus Not bölümü var (§10, 2026-10-06; uçtan uca şifreleme, Pusula belirteci, Hata bildir, silme yolu). Hukuki gözden geçirme yine önerilir:
    uçtan uca şifreleme, Pusula belirteci, Hata bildir verisi, silme yolu ve süresi. Metin hukuki
    gözden geçirmeden geçmeli (`ozluk/not-lisans-raporu.md` §7.2).
 3. Formu bu tabloya göre doldurun; yayımlanan derleme FOSS değilse (Onyx/Sentry SDK'ları içeride)

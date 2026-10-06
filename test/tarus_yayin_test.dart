@@ -70,6 +70,9 @@ void main() {
       expect(adres.host, isNot(contains('saber')));
       expect(adres.host, isNot(contains('hanney')));
     }
+    // yazilim.tarus.tr kapatılıyor (2026-10-06): gizlilik ve silme tarus.tr'de
+    expect(AppInfo.privacyPolicyUrl.toString(), 'https://tarus.tr/gizlilik');
+    expect(TarusBaglantilar.hesapSilme.toString(), 'https://tarus.tr/hesap-silme');
     final profil = File('lib/components/nextcloud/done_login_step.dart')
         .readAsStringSync();
     expect(profil, isNot(contains('drop_account')));

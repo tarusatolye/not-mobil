@@ -42,7 +42,7 @@ flutter build apk --release          # yerel deneme
   karakter), İngilizce `metadata/en-US/`. Veri güvenliği formu: `store/play/veri-guvenligi.md`.
 - Gizlilik, hesap silme, kaynak kodu ve Pusula adresleri `lib/data/tarus_baglantilar.dart`
   (`--dart-define=TARUS_GIZLILIK_URL=…` ile derlemede değişir). Varsayılan gizlilik ve
-  silme sayfası `https://yazilim.tarus.tr/gizlilik/` (kurumsal sitede gizlilik sayfası yok).
+  silme sayfası `https://tarus.tr/gizlilik` ve `https://tarus.tr/hesap-silme` (2026-10-06; yazilim.tarus.tr kapatılıyor).
 - CI (`android.yml`) yüklemesi `tr.tarus.not` dahili teste taslak; yalnız depo değişkeni
   `PLAY_YUKLEME=true` ve `PLAY_STORE_JSON` gizi varken çalışır.
 

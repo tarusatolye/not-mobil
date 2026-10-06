@@ -9,17 +9,16 @@
 ///   --dart-define=TARUS_GIZLILIK_URL=https://tarus.tr/gizlilik/
 /// ```
 ///
-/// Varsayılanlar (2026-10-05): kurumsal sitede gizlilik sayfası yok
-/// (`kurumsal.tarus.tr/gizlilik` SPA ana sayfasına düşüyor); canlı tarus
-/// gizlilik politikası `yazilim.tarus.tr/gizlilik/`. Ayrı bir hesap silme
-/// sayfası da yok: o politikadaki "veri silme istekleri" bölümü kullanılır.
+/// Varsayılanlar (2026-10-06): tarus.tr (kurumsal.tarus.tr) gizlilik
+/// politikası (§10 Android uygulamaları, tarus Not dahil) ve ayrı hesap
+/// silme sayfası. yazilim.tarus.tr kapatılıyor (kullanıcı kararı 2026-10-06).
 abstract final class TarusBaglantilar {
   /// Gizlilik politikası (Hakkında, giriş adımı). Play Console'daki
   /// "Gizlilik politikası" alanına da aynı adres yazılır.
   static final Uri gizlilik = Uri.parse(
     const String.fromEnvironment(
       'TARUS_GIZLILIK_URL',
-      defaultValue: 'https://yazilim.tarus.tr/gizlilik/',
+      defaultValue: 'https://tarus.tr/gizlilik',
     ),
   );
 
@@ -29,7 +28,7 @@ abstract final class TarusBaglantilar {
   static final Uri hesapSilme = Uri.parse(
     const String.fromEnvironment(
       'TARUS_HESAP_SILME_URL',
-      defaultValue: 'https://yazilim.tarus.tr/gizlilik/',
+      defaultValue: 'https://tarus.tr/hesap-silme',
     ),
   );
 
