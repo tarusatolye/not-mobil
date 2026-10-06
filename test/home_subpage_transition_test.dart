@@ -43,7 +43,7 @@ void main() {
         await tester.pump(const Duration(milliseconds: 150));
 
         expect(
-          [find.text('Welcome to Saber'), find.text('Logged out')],
+          [find.text('Welcome to Not'), find.text('Logged out')],
           [findsOneWidget, findsOneWidget],
         );
       });
