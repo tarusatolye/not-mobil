@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.1.3+101030
+version: 1.1.4+101040
 
 environment:
   sdk: ^3.13.0
@@ -274,20 +274,27 @@ flutter:
     - shaders/pencil.frag
 
 
-# ./scripts/generate_icons.sh
+# tarus Not marka ikonları (2026-10-06): assets/icon/icon.png, icon-foreground.png,
+# icon-monochrome.png, icon-background.png ve android/app/src/main/res/mipmap-*
+# tek kaynaktan üretilir, elle çizilmez:
+#   cd ozluk/tarus-kabuk/marka
+#   node uret.mjs --app not --out ../../../not-mobil --hedef flutter
+#   node uret.mjs --app not --out ../../../not-mobil/android/app/src/main/res --hedef android
+# Android başlatıcısı üreticinin mipmap'leriyle hazır; `dart run icons_launcher:create`
+# aynı kaynaktan yeniden yazar. iOS koyu/renklendirilebilir ve macOS ikonları
+# (icon_ios_dark/icon_ios_tintable/icon_macos) hâlâ Saber'in; Not işaretiyle
+# yeniden üretilene kadar iOS'ta yalnız açık ikon kullanılır.
 icons_launcher:
   image_path: "assets/icon/icon.png"
   platforms:
     android:
       enable: true
-      adaptive_background_color: "#ffc800"
-      adaptive_foreground_image: "assets/icon/icon_maskable.png"
-      adaptive_monochrome_image: "assets/icon/icon_monochrome.png"
+      adaptive_background_color: "#AC865A"
+      adaptive_foreground_image: "assets/icon/icon-foreground.png"
+      adaptive_monochrome_image: "assets/icon/icon-monochrome.png"
     ios:
       enable: true
-      image_path: "assets/icon/icon_opaque.png"
-      dark_path: "assets/icon/icon_ios_dark.png"
-      tinted_path: "assets/icon/icon_ios_tintable.png"
+      image_path: "assets/icon/icon.png"
     linux:
       enable: false # handled separately by flatpak, appimage, and snap
     windows:

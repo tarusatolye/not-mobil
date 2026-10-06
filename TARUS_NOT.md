@@ -106,6 +106,9 @@ arayüz bilerek değişince güncellenir: `flutter test --update-goldens <test d
 Linux'ta, `submodules/flutter` sürümüyle).
 
 ## Sürüm notları
+- **1.1.4** (2026-10-06): başlatıcı ikonu tarus Not işareti (`#AC865A` zeminde beyaz
+  defter sayfası, monochrome katmanlı); Saber'in sarı «S» ikonu ve indigo `icon.svg` kalktı.
+  İkonlar `ozluk/tarus-kabuk/marka/uret.mjs` ile üretilir (`--hedef flutter` + `--hedef android`).
 - **1.1.3** (2026-10-06): gizlilik ve hesap silme tarus'a (silme penceresi), User-Agent
   `tarusNot/`, mağaza metinleri, çeviri düzeltmeleri (10 dilde Saber telif satırı geri),
   Play hazırlığı (API 36, versionCode kaydırma, AAB betiği).

@@ -1,3 +1,4 @@
+• Yeni uygulama simgesi: tarus Not işareti (Saber'in sarı «S» simgesi yerine)
 • Gizlilik politikası ve hesap silme tarus'a bağlandı: uygulama içinde silme adımları ve web'den silme talebi
 • Mağaza metinleri ve eşitleme kimliği tarus Not
 • Çeviri düzeltmeleri; Saber telif bildirimi 10 dilde geri getirildi
