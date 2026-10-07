@@ -3,11 +3,10 @@ import 'package:logging/logging.dart';
 import 'package:saber/components/nextcloud/done_login_step.dart';
 import 'package:saber/components/nextcloud/enc_login_step.dart';
 import 'package:saber/components/nextcloud/nc_login_step.dart';
-import 'package:saber/components/theming/adaptive_circular_progress_indicator.dart';
-import 'package:saber/components/theming/adaptive_linear_progress_indicator.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/tarus_baglantilar.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 class NcLoginPage extends StatefulWidget {
   const new({
@@ -112,22 +111,17 @@ class _NcLoginPageState extends State<NcLoginPage> {
         }),
         leading: widget.forceAppBarLeading
             ? IconButton(
-                icon: const Icon(Icons.arrow_back),
+                icon: const Icon(TarusIkon.geri),
                 onPressed: () => Navigator.of(context).pop(),
               )
             : null,
         bottom: PreferredSize(
           preferredSize: const .fromHeight(4),
-          child: AdaptiveLinearProgressIndicator(
-            value: step.progress,
-            minHeight: 4,
-          ),
+          child: LinearProgressIndicator(value: step.progress, minHeight: 4),
         ),
       ),
       body: switch (step) {
-        .waitingForPrefs => const Center(
-          child: AdaptiveCircularProgressIndicator(),
-        ),
+        .waitingForPrefs => const Center(child: CircularProgressIndicator()),
         .nc => NcLoginStep(recheckCurrentStep: recheckCurrentStep),
         .enc => EncLoginStep(recheckCurrentStep: recheckCurrentStep),
         .done => DoneLoginStep(recheckCurrentStep: recheckCurrentStep),

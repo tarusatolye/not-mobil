@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:logging/logging.dart';
-import 'package:saber/components/theming/adaptive_icon.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 import 'package:sbn/font_fallbacks.dart';
 
 final logsHistory = _LogsHistory();
@@ -47,48 +46,24 @@ class const LogsPage({super.key}) extends StatelessWidget {
       body: ListenableBuilder(
         listenable: logsHistory,
         builder: (context, _) {
-          final theme = Theme.of(context);
-          final colorScheme = theme.colorScheme;
           return CustomScrollView(
             slivers: [
               SliverAppBar(
-                collapsedHeight: kToolbarHeight,
-                expandedHeight: 200,
                 pinned: true,
-                scrolledUnderElevation: 1,
-                flexibleSpace: FlexibleSpaceBar(
-                  title: Text(
-                    t.logs.logs,
-                    style: TextStyle(color: colorScheme.onSurface),
-                  ),
-                  centerTitle: false,
-                  titlePadding: const EdgeInsetsDirectional.only(
-                    start: 16,
-                    bottom: 16,
-                  ),
-                ),
+                title: Text(t.logs.logs),
                 actions: [
                   if (logsHistory.isFrozen)
                     IconButton(
-                      icon: const AdaptiveIcon(
-                        icon: Icons.play_arrow,
-                        cupertinoIcon: CupertinoIcons.play_arrow,
-                      ),
+                      icon: const Icon(TarusIkon.oynat),
                       onPressed: logsHistory.unfreeze,
                     )
                   else
                     IconButton(
-                      icon: const AdaptiveIcon(
-                        icon: Icons.pause,
-                        cupertinoIcon: CupertinoIcons.pause,
-                      ),
+                      icon: const Icon(TarusIkon.duraklat),
                       onPressed: logsHistory.freeze,
                     ),
                   IconButton(
-                    icon: const AdaptiveIcon(
-                      icon: Icons.copy,
-                      cupertinoIcon: CupertinoIcons.doc_on_clipboard,
-                    ),
+                    icon: const Icon(TarusIkon.kopyala),
                     onPressed: logsHistory.history.isEmpty
                         ? null
                         : () {
@@ -113,32 +88,11 @@ class const LogsPage({super.key}) extends StatelessWidget {
               ),
               if (logsHistory.history.isEmpty)
                 SliverFillRemaining(
-                  child: Padding(
-                    padding: const .all(16),
-                    child: Column(
-                      mainAxisAlignment: .center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/images/undraw_detailed_analysis_re_tk6j.svg',
-                          width: 300,
-                          height: 300 * 570 / 925.49161,
-                          excludeFromSemantics: true,
-                        ),
-                        const SizedBox(height: 64),
-                        Text(
-                          t.logs.noLogs,
-                          style: TextStyle(
-                            color: colorScheme.onSurface,
-                            fontSize: 24,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          t.logs.useTheApp,
-                          style: TextStyle(color: colorScheme.onSurface),
-                        ),
-                      ],
-                    ),
+                  hasScrollBody: false,
+                  child: TarusBosDurum(
+                    ikon: TarusIkon.kayitlar,
+                    baslik: t.logs.noLogs,
+                    aciklama: t.logs.useTheApp,
                   ),
                 )
               else

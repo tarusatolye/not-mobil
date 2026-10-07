@@ -3,6 +3,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:saber/components/home/preview_card.dart';
 import 'package:saber/data/extensions/change_notifier_extensions.dart';
 import 'package:saber/data/prefs.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
 
 class MasonryFiles extends StatefulWidget {
   const new({
@@ -60,20 +61,23 @@ class _MasonryFilesState extends State<MasonryFiles> {
     isAnythingSelected.value = widget.selectedFiles.value.isNotEmpty;
 
     return SliverPadding(
-      padding: const .symmetric(horizontal: 16, vertical: 8),
+      padding: const .symmetric(
+        horizontal: TarusOlcu.sayfaYatay,
+        vertical: TarusOlcu.aralik,
+      ),
       sliver: switch (stows.homeLayout.value) {
         .masonryGrid => SliverMasonryGrid.count(
           crossAxisCount: widget.crossAxisCount,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
+          mainAxisSpacing: TarusOlcu.blokArasi,
+          crossAxisSpacing: TarusOlcu.blokArasi,
           childCount: widget.files.length,
           itemBuilder: itemBuilder,
         ),
         .simpleGrid => SliverGrid.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: widget.crossAxisCount,
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
+            mainAxisSpacing: TarusOlcu.blokArasi,
+            crossAxisSpacing: TarusOlcu.blokArasi,
             // This aspect ratio was chosen to fit an A4 page and
             // two lines for the title.
             childAspectRatio: 0.60,

@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:saber/components/theming/adaptive_alert_dialog.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/editor/editor.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 class DeleteNoteButton extends StatelessWidget {
   const new({
@@ -29,7 +29,7 @@ class DeleteNoteButton extends StatelessWidget {
           ),
         );
       },
-      icon: const Icon(Icons.delete_forever),
+      icon: const Icon(TarusIkon.sil),
     );
   }
 }
@@ -54,7 +54,7 @@ class _DeleteNoteDialogState extends State<_DeleteNoteDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AdaptiveAlertDialog(
+    return TarusDialog(
       title: widget.filesToDelete.length < 5
           ? Text(
               t.home.deleteNoteDialog.deleteName(
@@ -66,20 +66,21 @@ class _DeleteNoteDialogState extends State<_DeleteNoteDialog> {
                 n: widget.filesToDelete.length,
               ),
             ),
-      content: CheckboxListTile.adaptive(
+      content: CheckboxListTile(
         value: deleteAllowed,
         onChanged: (value) => setState(() => deleteAllowed = value!),
         controlAffinity: .leading,
+        contentPadding: .zero,
         title: Text(
           t.home.deleteNoteDialog.confirmDelete(n: widget.filesToDelete.length),
         ),
       ),
       actions: [
-        CupertinoDialogAction(
+        TarusDialogDugmesi(
           onPressed: () => Navigator.of(context).pop(),
           child: Text(t.common.cancel),
         ),
-        CupertinoDialogAction(
+        TarusDialogDugmesi(
           onPressed: deleteAllowed
               ? () async {
                   await Future.wait([

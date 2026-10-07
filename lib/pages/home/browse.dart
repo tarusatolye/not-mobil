@@ -1,27 +1,24 @@
 import 'dart:async';
 
-import 'package:collapsible/collapsible.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:path/path.dart' as p;
-import 'package:saber/components/home/delete_note_button.dart';
-import 'package:saber/components/home/export_note_button.dart';
 import 'package:saber/components/home/grid_folders.dart';
 import 'package:saber/components/home/home_layout_button.dart';
 import 'package:saber/components/home/masonry_files.dart';
-import 'package:saber/components/home/move_note_button.dart';
-import 'package:saber/components/home/new_note_button.dart';
-import 'package:saber/components/home/no_files.dart';
+import 'package:saber/components/home/new_folder_dialog.dart';
 import 'package:saber/components/home/path_components.dart';
-import 'package:saber/components/home/rename_note_button.dart';
+import 'package:saber/components/home/secim_cubugu.dart';
 import 'package:saber/components/home/sort_button.dart';
 import 'package:saber/components/home/syncing_button.dart';
-import 'package:saber/components/theming/saber_theme.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/routes.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
 
 class BrowsePage extends StatefulHookWidget {
   const new({super.key, String? path}) : initialPath = path;
@@ -117,90 +114,122 @@ class _BrowsePageState extends State<BrowsePage> {
     findChildrenOfPath();
   }
 
+  void yeniKlasor() {
+    showDialog(
+      context: context,
+      builder: (context) => NewFolderDialog(
+        createFolder: createFolder,
+        doesFolderExist: (String folderName) =>
+            children?.directories.contains(folderName) ?? false,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final colorScheme = ColorScheme.of(context);
-    final platform = Theme.of(context).platform;
-    final crossAxisCount = MediaQuery.sizeOf(context).width ~/ 300 + 1;
+    final genislik = MediaQuery.sizeOf(context).width;
+    final crossAxisCount = genislik ~/ 300 + 1;
+    final klasorSutun = (genislik ~/ 220).clamp(2, 6);
     useListenable(stows.homeLayout);
     useOnListenableChange(stows.browseSortMetric, findChildrenOfPath);
+
+    final klasorler = children?.directories ?? const <String>[];
+    final dosyalar = children?.files ?? const <String>[];
 
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            collapsedHeight: kToolbarHeight,
-            expandedHeight: 200 - 8,
-            pinned: true,
-            scrolledUnderElevation: 1,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text(
-                t.home.titles.browse,
-                style: TextStyle(color: colorScheme.onSurface),
+          TarusSayfaUstu(
+            baslik: t.home.titles.browse,
+            eylemler: [
+              IconButton(
+                tooltip: t.home.newFolder.newFolder,
+                onPressed: yeniKlasor,
+                icon: const Icon(TarusIkon.yeniKlasor),
               ),
-              centerTitle: false,
-              titlePadding: const EdgeInsetsDirectional.only(
-                start: 16,
-                bottom: 8, // less than other pages for path components
+              const BrowseSortButton(),
+              const HomeLayoutButton(),
+              const SyncingButton(),
+            ],
+          ),
+          SliverPadding(
+            padding: const .symmetric(horizontal: TarusOlcu.sayfaYatay - 4),
+            sliver: SliverToBoxAdapter(
+              child: PathComponents(
+                path,
+                onPathComponentTap: onPathComponentTap,
+                onBack: () => onDirectoryTap('..'),
               ),
             ),
-            actions: const [
-              BrowseSortButton(),
-              HomeLayoutButton(),
-              SyncingButton(),
-            ],
           ),
-          SliverToBoxAdapter(
-            child: PathComponents(path, onPathComponentTap: onPathComponentTap),
-          ),
-          const SliverPadding(padding: .only(bottom: 16)),
-          GridFolders(
-            isAtRoot: path?.isEmpty ?? true,
-            crossAxisCount: crossAxisCount,
-            onTap: onDirectoryTap,
-            createFolder: createFolder,
-            doesFolderExist: (String folderName) {
-              return children?.directories.contains(folderName) ?? false;
-            },
-            renameFolder: (String oldName, String newName) async {
-              final oldPath = '${path ?? ''}/$oldName';
-              await FileManager.renameDirectory(oldPath, newName);
-              findChildrenOfPath();
-            },
-            isFolderEmpty: (String folderName) async {
-              final folderPath = '${path ?? ''}/$folderName';
-              final children = await FileManager.getChildrenOfDirectory(
-                folderPath,
-              );
-              return children?.isEmpty ?? true;
-            },
-            deleteFolder: (String folderName) async {
-              final folderPath = '${path ?? ''}/$folderName';
-              await FileManager.deleteDirectory(folderPath);
-              findChildrenOfPath();
-            },
-            folders: [
-              for (final directoryPath in children?.directories ?? const [])
-                directoryPath,
-            ],
-          ),
+          if (klasorler.isNotEmpty) ...[
+            SliverPadding(
+              padding: const .symmetric(horizontal: TarusOlcu.sayfaYatay),
+              sliver: SliverToBoxAdapter(
+                child: TarusBolumEtiketi(
+                  t.tarus.klasorler,
+                  padding: const .fromLTRB(4, 8, 4, 8),
+                ),
+              ),
+            ),
+            GridFolders(
+              crossAxisCount: klasorSutun,
+              onTap: onDirectoryTap,
+              doesFolderExist: (String folderName) {
+                return children?.directories.contains(folderName) ?? false;
+              },
+              renameFolder: (String oldName, String newName) async {
+                final oldPath = '${path ?? ''}/$oldName';
+                await FileManager.renameDirectory(oldPath, newName);
+                findChildrenOfPath();
+              },
+              isFolderEmpty: (String folderName) async {
+                final folderPath = '${path ?? ''}/$folderName';
+                final children = await FileManager.getChildrenOfDirectory(
+                  folderPath,
+                );
+                return children?.isEmpty ?? true;
+              },
+              deleteFolder: (String folderName) async {
+                final folderPath = '${path ?? ''}/$folderName';
+                await FileManager.deleteDirectory(folderPath);
+                findChildrenOfPath();
+              },
+              folders: klasorler,
+            ),
+          ],
           if (children == null) ...[
-            // loading
-          ] else if (children!.isEmpty) ...[
-            const SliverSafeArea(sliver: SliverToBoxAdapter(child: NoFiles())),
-          ] else ...[
+            // yükleniyor
+          ] else if (dosyalar.isEmpty) ...[
             SliverSafeArea(
               top: false,
-              minimum: const .only(
-                top: 8,
-                // Allow space for the FloatingActionButton
-                bottom: 70,
+              sliver: SliverToBoxAdapter(
+                child: TarusBosDurum(
+                  ikon: TarusIkon.notlar,
+                  baslik: path == null
+                      ? t.tarus.bos.hicNotYok
+                      : t.tarus.bos.klasordeNotYok,
+                  aciklama: t.tarus.bos.yeniNotIcinArti,
+                ),
               ),
+            ),
+          ] else ...[
+            SliverPadding(
+              padding: const .symmetric(horizontal: TarusOlcu.sayfaYatay),
+              sliver: SliverToBoxAdapter(
+                child: TarusBolumEtiketi(
+                  t.tarus.notlar,
+                  padding: const .fromLTRB(4, 14, 4, 4),
+                ),
+              ),
+            ),
+            SliverSafeArea(
+              top: false,
+              minimum: const .only(bottom: TarusOlcu.aralik),
               sliver: MasonryFiles(
                 crossAxisCount: crossAxisCount,
                 files: [
-                  for (final filePath in children?.files ?? const [])
-                    "${path ?? ""}/$filePath",
+                  for (final filePath in dosyalar) "${path ?? ""}/$filePath",
                 ],
                 selectedFiles: selectedFiles,
               ),
@@ -208,33 +237,9 @@ class _BrowsePageState extends State<BrowsePage> {
           ],
         ],
       ),
-      floatingActionButton: NewNoteButton(
-        cupertino: platform.isCupertino,
-        path: path,
-      ),
-      persistentFooterButtons: selectedFiles.value.isEmpty
+      bottomNavigationBar: selectedFiles.value.isEmpty
           ? null
-          : [
-              Collapsible(
-                axis: CollapsibleAxis.vertical,
-                collapsed: selectedFiles.value.length != 1,
-                child: RenameNoteButton(
-                  existingPath: selectedFiles.value.isEmpty
-                      ? ''
-                      : selectedFiles.value.first,
-                  unselectNotes: () => selectedFiles.value = [],
-                ),
-              ),
-              MoveNoteButton(
-                filesToMove: selectedFiles.value,
-                unselectNotes: () => selectedFiles.value = [],
-              ),
-              DeleteNoteButton(
-                filesToDelete: selectedFiles.value,
-                unselectNotes: () => selectedFiles.value = [],
-              ),
-              ExportNoteButton(selectedFiles: selectedFiles.value),
-            ],
+          : SecimCubugu(selectedFiles: selectedFiles),
     );
   }
 }

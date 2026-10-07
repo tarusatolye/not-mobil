@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/data/routes.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 class const FileTree({super.key}) extends StatelessWidget {
   @override
@@ -44,16 +44,17 @@ class const _FileTreeDir({required final String? path}) extends HookWidget {
             child: Row(
               children: [
                 Icon(
-                  areChildrenVisible.value ? Icons.folder_open : Icons.folder,
+                  areChildrenVisible.value
+                      ? TarusIkon.klasorAcik
+                      : TarusIkon.klasor,
                   color: colorScheme.primary,
-                  size: 25,
+                  size: 18,
                 ),
-                const SizedBox(width: 5),
+                const SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     path!.substring(path!.lastIndexOf('/') + 1),
-                    style: TextTheme.of(context).bodyMedium
-                        ?.copyWith(fontSize: 14),
+                    style: TextTheme.of(context).bodyMedium,
                     overflow: .ellipsis,
                   ),
                 ),
@@ -105,13 +106,12 @@ class const _FileTreeFile({required final String path}) extends HookWidget {
           },
           child: Row(
             children: [
-              const Icon(Icons.insert_drive_file, size: 25),
-              const SizedBox(width: 5),
+              const Icon(TarusIkon.not, size: 18),
+              const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   path.substring(path.lastIndexOf('/') + 1),
-                  style: TextTheme.of(context).bodyMedium
-                      ?.copyWith(fontSize: 14),
+                  style: TextTheme.of(context).bodyMedium,
                   overflow: .ellipsis,
                 ),
               ),

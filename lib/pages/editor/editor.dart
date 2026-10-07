@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:collapsible/collapsible.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -22,10 +21,7 @@ import 'package:saber/components/canvas/canvas_image.dart';
 import 'package:saber/components/canvas/image/editor_image.dart';
 import 'package:saber/components/canvas/save_indicator.dart';
 import 'package:saber/components/editor/read_only_banner.dart';
-import 'package:saber/components/theming/adaptive_alert_dialog.dart';
-import 'package:saber/components/theming/adaptive_icon.dart';
 import 'package:saber/components/theming/dynamic_material_app.dart';
-import 'package:saber/components/theming/saber_theme.dart';
 import 'package:saber/components/toolbar/color_bar.dart';
 import 'package:saber/components/toolbar/editor_bottom_sheet.dart';
 import 'package:saber/components/toolbar/editor_page_manager.dart';
@@ -49,6 +45,8 @@ import 'package:saber/data/tools/select.dart';
 import 'package:saber/data/tools/shape_pen.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/home/whiteboard.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 import 'package:sbn/change.dart';
 import 'package:super_clipboard/super_clipboard.dart';
 
@@ -1359,8 +1357,6 @@ class EditorState extends State<Editor> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = ColorScheme.of(context);
-    final platform = Theme.of(context).platform;
     final isToolbarVertical =
         stows.editorToolbarAlignment.value == AxisDirection.left ||
         stows.editorToolbarAlignment.value == AxisDirection.right;
@@ -1666,10 +1662,7 @@ class EditorState extends State<Editor> {
                 ),
                 actions: [
                   IconButton(
-                    icon: const AdaptiveIcon(
-                      icon: Icons.insert_page_break,
-                      cupertinoIcon: CupertinoIcons.add,
-                    ),
+                    icon: const Icon(TarusIkon.sayfaEkle),
                     tooltip: t.editor.menu.insertPage,
                     onPressed: () => setState(() {
                       final currentPageIndex = this.currentPageIndex;
@@ -1683,16 +1676,14 @@ class EditorState extends State<Editor> {
                     }),
                   ),
                   IconButton(
-                    icon: const AdaptiveIcon(
-                      icon: Icons.grid_view,
-                      cupertinoIcon: CupertinoIcons.rectangle_grid_2x2,
-                    ),
+                    icon: const Icon(TarusIkon.sayfalar),
                     tooltip: t.editor.pages,
                     onPressed: () {
                       showDialog(
                         context: context,
-                        builder: (context) => AdaptiveAlertDialog(
+                        builder: (context) => TarusDialog(
                           title: Text(t.editor.pages),
+                          kaydir: false,
                           content: pageManager(context),
                           actions: const [],
                         ),
@@ -1700,17 +1691,13 @@ class EditorState extends State<Editor> {
                     },
                   ),
                   IconButton(
-                    icon: const AdaptiveIcon(
-                      icon: Icons.more_vert,
-                      cupertinoIcon: CupertinoIcons.ellipsis_vertical,
-                    ),
+                    icon: const Icon(TarusIkon.dahaFazla),
                     onPressed: () {
                       showModalBottomSheet(
                         context: context,
                         builder: (context) => bottomSheet(context),
                         isScrollControlled: true,
                         showDragHandle: true,
-                        backgroundColor: colorScheme.surface,
                         constraints: const BoxConstraints(maxWidth: 500),
                       );
                     },
@@ -1722,11 +1709,10 @@ class EditorState extends State<Editor> {
             (DynamicMaterialApp.isFullscreen &&
                 !stows.editorToolbarShowInFullscreen.value)
             ? FloatingActionButton(
-                shape: platform.isCupertino ? const CircleBorder() : null,
                 onPressed: () {
                   DynamicMaterialApp.setFullscreen(false, updateSystem: true);
                 },
-                child: const Icon(Icons.fullscreen_exit),
+                child: const Icon(TarusIkon.tamEkrandanCik),
               )
             : null,
       ),
@@ -1996,15 +1982,15 @@ class EditorState extends State<Editor> {
     final disableReadOnly =
         await showDialog(
           context: context,
-          builder: (context) => AdaptiveAlertDialog(
+          builder: (context) => TarusDialog(
             title: Text(t.editor.versionTooNew.title),
             content: Text(t.editor.versionTooNew.subtitle),
             actions: [
-              CupertinoDialogAction(
+              TarusDialogDugmesi(
                 child: Text(t.common.cancel),
                 onPressed: () => Navigator.pop(context, false),
               ),
-              CupertinoDialogAction(
+              TarusDialogDugmesi(
                 child: Text(t.editor.versionTooNew.allowEditing),
                 onPressed: () => Navigator.pop(context, true),
               ),

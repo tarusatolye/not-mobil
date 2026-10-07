@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
 
+/// Editör araç çubuğu düğmesi: 40 px, Lucide ikon; seçili araç vurgu
+/// %14 zemin + %45 kenarlıkla (Pusula Mobil `selectionStyle`) gösterilir.
 class ToolbarIconButton extends StatelessWidget {
   const new({
     super.key,
@@ -21,40 +25,15 @@ class ToolbarIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = ColorScheme.of(context);
-    final backgroundColor = WidgetStateProperty.resolveWith((states) {
-      if (states.contains(WidgetState.disabled) ||
-          !states.contains(WidgetState.selected)) {
-        return Colors.transparent;
-      }
-      return colorScheme.primary;
-    });
-    final foregroundColor = WidgetStateProperty.resolveWith((states) {
-      if (states.contains(WidgetState.disabled)) {
-        return colorScheme.onSurface.withValues(alpha: 0.4);
-      }
-      if (states.contains(WidgetState.selected)) {
-        return colorScheme.onPrimary;
-      }
-      return colorScheme.primary;
-    });
-    final buttonStyle = ButtonStyle(
-      backgroundColor: backgroundColor,
-      iconColor: foregroundColor,
-      foregroundColor: foregroundColor,
-      iconSize: const WidgetStatePropertyAll(20),
-      padding: const WidgetStatePropertyAll(EdgeInsets.all(8)),
-      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-    );
-
     return Padding(
       padding: padding,
-      child: IconButton.filled(
-        style: buttonStyle,
-        onPressed: (enabled) ? onPressed : null,
+      child: TarusIkonDugmesi(
+        ikon: null,
         tooltip: tooltip,
-        isSelected: selected,
-        icon: child,
+        secili: selected && enabled,
+        onPressed: enabled ? onPressed : null,
+        ikonBoyutu: TarusOlcu.ikon,
+        child: child,
       ),
     );
   }

@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/data/flavor_config.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/editor/editor.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 import 'utils/test_mock_channel_handlers.dart';
 
@@ -35,16 +36,16 @@ void main() {
     );
     addTearDown(editorState.cancelAutosaveAndMarkSaved);
 
-    IconButton getUndoBtn() => tester.widget<IconButton>(
+    TarusIkonDugmesi getUndoBtn() => tester.widget<TarusIkonDugmesi>(
       find.ancestor(
-        of: find.byIcon(Icons.undo),
-        matching: find.byType(IconButton),
+        of: find.byIcon(TarusIkon.geriAl),
+        matching: find.byType(TarusIkonDugmesi),
       ),
     );
-    IconButton getRedoBtn() => tester.widget<IconButton>(
+    TarusIkonDugmesi getRedoBtn() => tester.widget<TarusIkonDugmesi>(
       find.ancestor(
-        of: find.byIcon(Icons.redo),
-        matching: find.byType(IconButton),
+        of: find.byIcon(TarusIkon.yinele),
+        matching: find.byType(TarusIkonDugmesi),
       ),
     );
 
@@ -64,7 +65,7 @@ void main() {
     );
 
     // undo
-    await tester.tap(find.byIcon(Icons.undo));
+    await tester.tap(find.byIcon(TarusIkon.geriAl));
     await tester.pump();
     expect(editorState.coreInfo.pages.first.strokes, hasLength(0));
     expect(
@@ -74,7 +75,7 @@ void main() {
     );
 
     // redo
-    await tester.tap(find.byIcon(Icons.redo));
+    await tester.tap(find.byIcon(TarusIkon.yinele));
     await tester.pump();
     expect(editorState.coreInfo.pages.first.strokes, hasLength(1));
     expect(
@@ -84,7 +85,7 @@ void main() {
     );
 
     // undo, then draw again
-    await tester.tap(find.byIcon(Icons.undo));
+    await tester.tap(find.byIcon(TarusIkon.geriAl));
     await tester.pump();
     expect(editorState.coreInfo.pages.first.strokes, hasLength(0));
     await drawOnEditor(tester);

@@ -3,6 +3,7 @@ import 'package:saber/components/home/sentry_consent_dialog.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/sentry/sentry_init.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 class const SettingsSentryConsent({super.key}) extends StatelessWidget {
   String _getSubtitle() {
@@ -29,7 +30,7 @@ class const SettingsSentryConsent({super.key}) extends StatelessWidget {
         final subtitle = _getSubtitle();
         return ListTile(
           contentPadding: const .symmetric(vertical: 4, horizontal: 16),
-          leading: const Icon(Icons.bug_report),
+          leading: const Icon(TarusIkon.hataBildir),
           title: Text(
             title,
             style: TextStyle(

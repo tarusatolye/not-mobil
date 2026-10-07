@@ -11,6 +11,7 @@ import 'package:saber/data/editor/editor_core_info.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/tools/select.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 import 'package:sbn/canvas_background_pattern.dart';
 import 'package:sbn/quill_styles.dart';
 
@@ -77,9 +78,10 @@ class _InnerCanvasState extends State<InnerCanvas> {
             controller:
                 widget.coreInfo.pages[widget.pageIndex].quill.controller,
             config: QuillEditorConfig(
+              // tarus: başlık rengi temadan bağımsız, dışa aktarmayla aynı.
               customStyles: SaberQuillStyles.get(
                 invert: invert,
-                secondary: colorScheme.secondary,
+                secondary: TarusKagit.kenar,
                 lineHeight: widget.coreInfo.lineHeight,
               ),
               scrollable: false,
@@ -122,8 +124,9 @@ class _InnerCanvasState extends State<InnerCanvas> {
           }(),
           lineHeight: widget.coreInfo.lineHeight,
           lineThickness: widget.coreInfo.lineThickness,
-          primaryColor: colorScheme.primary,
-          secondaryColor: colorScheme.secondary,
+          // tarus: kağıt çizgileri temadan bağımsız, dışa aktarmayla aynı.
+          primaryColor: TarusKagit.cizgi,
+          secondaryColor: TarusKagit.kenar,
         ),
         foregroundPainter: CanvasPainter(
           repaint: widget.redrawPageListenable,

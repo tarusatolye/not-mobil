@@ -33,13 +33,11 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  cupertino_icons: ^1.0.5
-  material_symbols_icons: ^4.2758.0
+  # tarus tek ikon ailesi (MIT; Lucide ISC) — lib/tarus/tarus_ikon.dart
+  lucide_icons_flutter: ^3.1.22
 
   sbn:
     path: packages/sbn
-
-  dynamic_color: ^2.1.0
 
   flutter_staggered_grid_view: ^0.7.0
 
@@ -81,8 +79,6 @@ dependencies:
 
   flex_color_picker: ^4.0.0
 
-  font_awesome_flutter: ^11.0.0
-
   flutter_svg: ^2.0.0+1
 
   defer_pointer: ^0.0.2
@@ -120,15 +116,11 @@ dependencies:
 
   bson: ^5.0.0
 
-  flutter_speed_dial: ^7.0.0
-
   logging: ^1.2.0
 
   fixnum: ^1.1.0
 
   device_info_plus: ^13.2.0
-
-  yaru: ^10.2.0
 
   one_dollar_unistroke_recognizer: ^1.1.1
 
@@ -158,7 +150,6 @@ dependencies:
   background_downloader: ^9.6.3
 
   flutter_hooks: ^0.21.3+1
-  dynamic_yaru: ^0.2.0
   image: ^4.8.0
   pool: ^1.5.2
 
@@ -184,13 +175,6 @@ dev_dependencies:
   sentry_dart_plugin: ^3.1.1
 
 dependency_overrides:
-  # https://github.com/darioielardi/flutter_speed_dial/pull/344
-  # Note: flutter_speed_dial hasn't been updated in 3 years, maybe replace it.
-  flutter_speed_dial:
-    git:
-      url: https://github.com/adil192/flutter_speed_dial.git
-      ref: fix/remove-Future.delayed
-
   # https://github.com/GregoryConrad/native_toolchain_rust/issues/103
   native_toolchain_rust: 1.0.4+0
 
@@ -207,10 +191,10 @@ flutter:
 
   assets:
     - assets/icon/icon.svg
-    - assets/images/
     - assets/google_fonts/Atkinson_Hyperlegible_Next/OFL.txt
     - assets/google_fonts/Dekko/OFL.txt
     - assets/google_fonts/Fira_Mono/OFL.txt
+    - assets/google_fonts/Inter/OFL.txt
     - assets/google_fonts/Neucha/OFL.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -256,6 +240,17 @@ flutter:
         - asset: assets/google_fonts/Atkinson_Hyperlegible_Next/AtkinsonHyperlegibleNext-SemiBoldItalic.ttf
           weight: 600
           style: italic
+    # tarus arayüz yazı tipi (STANDARTLAR §10, OFL-1.1; Google Fonts statik kesimleri)
+    - family: Inter
+      fonts:
+        - asset: assets/google_fonts/Inter/Inter-Regular.ttf
+          weight: 400
+        - asset: assets/google_fonts/Inter/Inter-Medium.ttf
+          weight: 500
+        - asset: assets/google_fonts/Inter/Inter-SemiBold.ttf
+          weight: 600
+        - asset: assets/google_fonts/Inter/Inter-Bold.ttf
+          weight: 700
     - family: Dekko
       fonts:
         - asset: assets/google_fonts/Dekko/Dekko-Regular.ttf

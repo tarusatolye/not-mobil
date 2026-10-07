@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:saber/components/theming/adaptive_alert_dialog.dart';
-import 'package:saber/components/theming/adaptive_icon.dart';
-import 'package:saber/components/theming/adaptive_text_field.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 class NewFolderDialog extends StatefulWidget {
   const new({
@@ -41,32 +40,29 @@ class _NewFolderDialogState extends State<NewFolderDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AdaptiveAlertDialog(
+    return TarusDialog(
       title: Text(t.home.newFolder.newFolder),
       content: Form(
         key: _formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: AdaptiveTextField(
+        child: TarusMetinAlani(
           controller: _controller,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.done,
           focusOrder: const NumericFocusOrder(1),
           placeholder: t.home.newFolder.folderName,
-          prefixIcon: const AdaptiveIcon(
-            icon: Icons.create_new_folder,
-            cupertinoIcon: CupertinoIcons.folder_badge_plus,
-          ),
+          prefixIcon: const Icon(TarusIkon.yeniKlasor),
           validator: validateFolderName,
         ),
       ),
       actions: [
-        CupertinoDialogAction(
+        TarusDialogDugmesi(
           onPressed: () {
             Navigator.of(context).pop();
           },
           child: Text(t.common.cancel),
         ),
-        CupertinoDialogAction(
+        TarusDialogDugmesi(
           onPressed: () {
             if (!_formKey.currentState!.validate()) return;
             final folderName = reformatFolderName(_controller.text);

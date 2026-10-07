@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 import 'package:stow_codecs/stow_codecs.dart';
 
 class const BrowseSortButton({super.key}) extends HookWidget {
@@ -72,7 +72,7 @@ class _SortDialogOption extends StatelessWidget {
         .lastModifiedNewToOld => t.home.sort.lastModifiedNewToOld,
         .lastModifiedOldToNew => t.home.sort.lastModifiedOldToNew,
       }),
-      trailing: selected ? const Icon(Icons.check) : null,
+      trailing: selected ? const Icon(TarusIkon.tamam) : null,
       selected: selected,
       selectedTileColor: Colors.transparent,
     );
@@ -88,9 +88,9 @@ enum SortMetric {
   static const codec = EnumCodec(values);
 
   Widget get icon => switch (this) {
-    .nameAToZ => const FaIcon(FontAwesomeIcons.arrowDownAZ),
-    .nameZToA => const FaIcon(FontAwesomeIcons.arrowUpAZ),
-    .lastModifiedNewToOld => const Icon(Icons.hourglass_bottom),
-    .lastModifiedOldToNew => const Icon(Icons.hourglass_top),
+    .nameAToZ => const Icon(TarusIkon.siralaAZ),
+    .nameZToA => const Icon(TarusIkon.siralaZA),
+    .lastModifiedNewToOld => const Icon(TarusIkon.siralaYeni),
+    .lastModifiedOldToNew => const Icon(TarusIkon.siralaEski),
   };
 }

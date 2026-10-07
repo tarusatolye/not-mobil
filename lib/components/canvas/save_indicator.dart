@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:saber/components/theming/adaptive_circular_progress_indicator.dart';
 import 'package:saber/data/is_this_a_test.dart';
 import 'package:saber/data/routes.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 /// Replaces the back button as the
 /// [AppBar.leading] widget in the [AppBar]
@@ -26,9 +26,9 @@ class SaveIndicator extends StatelessWidget {
             key: ValueKey(savingState.value),
             onPressed: () => _onPressed(context),
             icon: switch (savingState.value) {
-              .waitingToSave => const Icon(Icons.save),
-              .saving => const AdaptiveCircularProgressIndicator(),
-              .saved => const Icon(Icons.arrow_back),
+              .waitingToSave => const Icon(TarusIkon.kaydet),
+              .saving => const CircularProgressIndicator(),
+              .saved => const Icon(TarusIkon.geri),
             },
           ),
         );

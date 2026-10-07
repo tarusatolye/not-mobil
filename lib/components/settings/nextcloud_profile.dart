@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nextcloud/provisioning_api.dart';
-import 'package:saber/components/theming/adaptive_icon.dart';
-import 'package:saber/components/theming/adaptive_linear_progress_indicator.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/data/nextcloud/nextcloud_client_extension.dart';
 import 'package:saber/data/nextcloud/saber_syncer.dart';
@@ -13,6 +10,10 @@ import 'package:saber/data/quota.dart';
 import 'package:saber/data/routes.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/user/login.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 
 class const NextcloudProfile({super.key}) extends HookWidget {
   /// If non-null, this will be used instead of the actual login state.
@@ -42,45 +43,66 @@ class const NextcloudProfile({super.key}) extends HookWidget {
       .enc => t.login.status.almostDone,
       .done => t.login.status.loggedIn,
     };
-    const pfpSize = 48.0;
+    const pfpSize = 44.0;
+    final r = TarusRenkler.of(context);
 
-    return ListTile(
-      visualDensity: VisualDensity.standard,
+    return TarusKart(
       onTap: () => context.push(RoutePaths.login),
-      leading: ClipRSuperellipse(
-        borderRadius: const .all(.circular(18)),
-        child: pfp == null
-            ? const _UnknownPfp(size: pfpSize)
-            : Image.memory(pfp, width: pfpSize, height: pfpSize),
-      ),
-      title: Text(heading),
-      subtitle: Text(subheading),
-      trailing: loginStep == .done
-          ? Row(
-              mainAxisSize: .min,
-              spacing: 8,
+      padding: const .fromLTRB(TarusOlcu.kart, 12, 8, 12),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: const .all(.circular(TarusOlcu.rLg)),
+            child: pfp == null
+                ? const _UnknownPfp(size: pfpSize)
+                : Image.memory(pfp, width: pfpSize, height: pfpSize),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: .start,
               children: [
-                _QuotaSummary(quota: quota),
-                IconButton(
-                  icon: const AdaptiveIcon(
-                    icon: Icons.cloud_upload,
-                    cupertinoIcon: CupertinoIcons.cloud_upload,
+                Text(
+                  heading,
+                  maxLines: 1,
+                  overflow: .ellipsis,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: r.text,
                   ),
-                  tooltip: t.settings.resyncEverything,
-                  onPressed: () async {
-                    stows.fileSyncResyncEverythingDate.value = DateTime.now();
-                    final allFiles = await FileManager.getAllFiles(
-                      includeExtensions: true,
-                      includeAssets: true,
-                    );
-                    for (final file in allFiles) {
-                      syncer.uploader.enqueueRel(file);
-                    }
-                  },
                 ),
+                const SizedBox(height: 2),
+                Text(
+                  subheading,
+                  style: TextStyle(fontSize: 12, color: r.muted2),
+                ),
+                if (loginStep == .done) ...[
+                  const SizedBox(height: 8),
+                  _QuotaSummary(quota: quota),
+                ],
               ],
+            ),
+          ),
+          if (loginStep == .done)
+            IconButton(
+              icon: const Icon(TarusIkon.buluttaYukle),
+              tooltip: t.settings.resyncEverything,
+              onPressed: () async {
+                stows.fileSyncResyncEverythingDate.value = DateTime.now();
+                final allFiles = await FileManager.getAllFiles(
+                  includeExtensions: true,
+                  includeAssets: true,
+                );
+                for (final file in allFiles) {
+                  syncer.uploader.enqueueRel(file);
+                }
+              },
             )
-          : null,
+          else
+            Icon(TarusIkon.ileri, size: 18, color: r.muted2),
+        ],
+      ),
     );
   }
 
@@ -103,17 +125,13 @@ class _UnknownPfp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = ColorScheme.of(context);
+    final r = TarusRenkler.of(context);
     return SizedBox(
       width: size,
       height: size,
       child: ColoredBox(
-        color: colorScheme.primaryContainer,
-        child: Icon(
-          Icons.person,
-          color: colorScheme.onPrimaryContainer,
-          size: size * 0.7,
-        ),
+        color: r.accent.withValues(alpha: TarusOlcu.seciliZeminAlfa),
+        child: Icon(TarusIkon.kullanici, color: r.accent, size: size * 0.5),
       ),
     );
   }
@@ -126,23 +144,23 @@ class _QuotaSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = ColorScheme.of(context);
-
-    return IntrinsicWidth(
-      child: Column(
-        mainAxisSize: .min,
-        spacing: 2,
-        children: [
-          AdaptiveLinearProgressIndicator(
-            semanticsLabel: 'Storage usage',
-            value: quota?.progressIndicatorValue,
-            backgroundColor: colorScheme.primary.withValues(alpha: 0.3),
-            color: colorScheme.primary.withValues(alpha: 0.8),
-            minHeight: 8,
-          ),
-          Text(quota?.describeConcise() ?? Quota.describeConcisePlaceholder()),
-        ],
-      ),
+    final r = TarusRenkler.of(context);
+    return Column(
+      crossAxisAlignment: .start,
+      mainAxisSize: .min,
+      spacing: 4,
+      children: [
+        LinearProgressIndicator(
+          semanticsLabel: 'Storage usage',
+          value: quota?.progressIndicatorValue,
+          minHeight: 6,
+          borderRadius: const .all(.circular(3)),
+        ),
+        Text(
+          quota?.describeConcise() ?? Quota.describeConcisePlaceholder(),
+          style: TextStyle(fontSize: 11, color: r.muted),
+        ),
+      ],
     );
   }
 }

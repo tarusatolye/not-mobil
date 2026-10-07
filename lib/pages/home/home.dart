@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:saber/components/baglam_menusu.dart';
 import 'package:saber/components/home/sentry_consent_dialog.dart';
@@ -67,10 +66,10 @@ class _HomePageState extends State<HomePage> {
 
   /// tarus: basılı tutunca Hata bildir menüsündeki ekran adı.
   String get _modul => switch (widget.subpage) {
-    HomePage.browseSubpage => 'Gözat',
+    HomePage.browseSubpage => 'Notlar',
     HomePage.whiteboardSubpage => 'Beyaz tahta',
     HomePage.settingsSubpage => 'Ayarlar',
-    _ => 'Son notlar',
+    _ => 'Hızlı Bakış',
   };
 
   @override
@@ -88,6 +87,7 @@ class _HomePageState extends State<HomePage> {
       child: ResponsiveNavbar(
         selectedIndex: HomePage.subpages.indexOf(widget.subpage),
         body: body,
+        klasor: widget.subpage == HomePage.browseSubpage ? widget.path : null,
       ),
     );
   }

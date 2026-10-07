@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:saber/components/theming/adaptive_icon.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 class SelectionBar extends StatelessWidget {
   final VoidCallback duplicateSelection;
@@ -26,10 +25,7 @@ class SelectionBar extends StatelessWidget {
             shape: const CircleBorder(),
           ),
           tooltip: t.editor.selectionBar.duplicate,
-          icon: const AdaptiveIcon(
-            icon: Icons.content_copy,
-            cupertinoIcon: CupertinoIcons.doc_on_clipboard,
-          ),
+          icon: const Icon(TarusIkon.kopyala),
         ),
         IconButton(
           onPressed: deleteSelection,
@@ -39,10 +35,7 @@ class SelectionBar extends StatelessWidget {
             shape: const CircleBorder(),
           ),
           tooltip: t.editor.selectionBar.delete,
-          icon: const AdaptiveIcon(
-            icon: Icons.delete,
-            cupertinoIcon: CupertinoIcons.delete,
-          ),
+          icon: const Icon(TarusIkon.sil),
         ),
       ],
     );

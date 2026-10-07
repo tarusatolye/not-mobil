@@ -1,12 +1,11 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:saber/components/theming/adaptive_alert_dialog.dart';
-import 'package:saber/components/theming/adaptive_text_field.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/editor/editor.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 class RenameNoteButton extends StatelessWidget {
   const new({
@@ -34,7 +33,7 @@ class RenameNoteButton extends StatelessWidget {
           },
         );
       },
-      icon: const Icon(Icons.edit_square),
+      icon: const Icon(TarusIkon.yenidenAdlandir),
     );
   }
 }
@@ -93,29 +92,29 @@ class _RenameNoteDialogState extends State<_RenameNoteDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AdaptiveAlertDialog(
+    return TarusDialog(
       title: Text(t.home.renameNote.renameNote),
       content: Form(
         key: _formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: AdaptiveTextField(
+        child: TarusMetinAlani(
           controller: _controller,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.done,
           focusOrder: const NumericFocusOrder(1),
           placeholder: t.home.renameNote.noteName,
-          prefixIcon: const Icon(Icons.edit_square),
+          prefixIcon: const Icon(TarusIkon.not),
           validator: validateNoteName,
         ),
       ),
       actions: [
-        CupertinoDialogAction(
+        TarusDialogDugmesi(
           onPressed: () {
             Navigator.of(context).pop();
           },
           child: Text(t.common.cancel),
         ),
-        CupertinoDialogAction(
+        TarusDialogDugmesi(
           onPressed: () async {
             if (!_formKey.currentState!.validate()) return;
             if (_controller.text != oldName) {

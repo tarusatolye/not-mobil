@@ -1,11 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:saber/components/settings/settings_dropdown.dart';
-import 'package:saber/components/theming/adaptive_toggle_buttons.dart';
-import 'package:saber/components/theming/uni_icon.dart';
+import 'package:saber/components/settings/settings_subtitle.dart';
 import 'package:saber/pages/home/settings.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 import 'package:stow/stow.dart';
 
+/// Ayarlar satırı: birkaç seçenekten biri (sağda bölümlü seçici; yer
+/// yetmezse açılır liste).
 class SettingsSelection<T extends num> extends StatefulWidget {
   const new({
     super.key,
@@ -16,8 +19,8 @@ class SettingsSelection<T extends num> extends StatefulWidget {
     required this.pref,
     required this.options,
     this.afterChange,
-    this.optionsWidth = 72,
-    this.optionsHeight = 40,
+    this.optionsWidth = 48,
+    this.optionsHeight = 32,
   }) : assert(
          icon == null || iconBuilder == null,
          'Cannot set both icon and iconBuilder',
@@ -25,8 +28,8 @@ class SettingsSelection<T extends num> extends StatefulWidget {
 
   final String title;
   final String? subtitle;
-  final Object? icon;
-  final Object? Function(T)? iconBuilder;
+  final IconData? icon;
+  final IconData? Function(T)? iconBuilder;
 
   final Stow<dynamic, T, dynamic> pref;
   final List<ToggleButtonsOption<T>> options;
@@ -40,10 +43,6 @@ class SettingsSelection<T extends num> extends StatefulWidget {
 
 class _SettingsSelectionState<T extends num>
     extends State<SettingsSelection<T>> {
-  late final dropdownFocusNode = FocusNode(
-    debugLabel: 'dropdownFocusNode(${widget.pref.key})',
-  );
-
   @override
   void initState() {
     widget.pref.addListener(onChanged);
@@ -67,11 +66,11 @@ class _SettingsSelectionState<T extends num>
       widget.pref.value = widget.options.first.value;
     }
 
-    final expSelectionWidth = widget.options.length * widget.optionsWidth;
+    final expSelectionWidth = widget.options.length * (widget.optionsWidth + 6);
     final useDropdownInstead =
         MediaQuery.sizeOf(context).width * 0.48 < expSelectionWidth;
     if (useDropdownInstead) {
-      // Use dropdown if there isn't enough horizontal space
+      // Yer yetmiyorsa açılır liste
       return SettingsDropdown<T>(
         pref: widget.pref,
         options: widget.options,
@@ -83,19 +82,12 @@ class _SettingsSelectionState<T extends num>
       );
     }
 
-    var icon = widget.icon;
-    icon ??= widget.iconBuilder?.call(widget.pref.value);
-    icon ??= Icons.settings;
+    final icon =
+        widget.icon ??
+        widget.iconBuilder?.call(widget.pref.value) ??
+        TarusIkon.ayarlar;
 
     return ListTile(
-      onTap: () {
-        // cycle through options
-        final int i = widget.options.indexWhere(
-          (ToggleButtonsOption option) => option.value == widget.pref.value,
-        );
-        widget.pref.value =
-            widget.options[(i + 1) % widget.options.length].value;
-      },
       onLongPress: () {
         SettingsPage.showResetDialog(
           context: context,
@@ -103,32 +95,21 @@ class _SettingsSelectionState<T extends num>
           prefTitle: widget.title,
         );
       },
-      contentPadding: const .symmetric(vertical: 4, horizontal: 16),
-      leading: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 100),
-        child: UniIcon(icon, key: ValueKey(icon)),
-      ),
-      title: Text(
+      contentPadding: AyarSatiri.ic,
+      leading: AyarSatiri.ikon(icon),
+      title: AyarSatiri.baslik(
         widget.title,
-        style: TextStyle(
-          fontSize: 18,
-          fontStyle: widget.pref.value != widget.pref.defaultValue
-              ? FontStyle.italic
-              : null,
-        ),
+        degisti: widget.pref.value != widget.pref.defaultValue,
       ),
-      subtitle: Text(
-        widget.subtitle ?? '',
-        style: const TextStyle(fontSize: 13),
-      ),
-      trailing: AdaptiveToggleButtons(
+      subtitle: widget.subtitle == null || widget.subtitle!.isEmpty
+          ? null
+          : Text(widget.subtitle!),
+      trailing: TarusSecmeli<T>(
         value: widget.pref.value,
         options: widget.options,
         onChange: (T? value) {
-          // setState is automatically called when the pref changes
-          if (value != null) {
-            widget.pref.value = value;
-          }
+          // pref değişince setState kendiliğinden çağrılır
+          if (value != null) widget.pref.value = value;
         },
         optionsWidth: widget.optionsWidth,
         optionsHeight: widget.optionsHeight,

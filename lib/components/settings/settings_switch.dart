@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:saber/components/theming/adaptive_switch_list_tile.dart';
-import 'package:saber/components/theming/uni_icon.dart';
+import 'package:saber/components/settings/settings_subtitle.dart';
 import 'package:saber/pages/home/settings.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 import 'package:stow/stow.dart';
 
+/// Ayarlar satırı: açma/kapama. Basılı tutunca varsayılana döndürme sorar.
 class SettingsSwitch extends StatefulWidget {
   const new({
     super.key,
@@ -20,8 +21,8 @@ class SettingsSwitch extends StatefulWidget {
 
   final String title;
   final String? subtitle;
-  final Object? icon;
-  final Object? Function(bool)? iconBuilder;
+  final IconData? icon;
+  final IconData? Function(bool)? iconBuilder;
 
   final Stow<dynamic, bool, dynamic> pref;
   final ValueChanged<bool>? afterChange;
@@ -44,9 +45,10 @@ class _SettingsSwitchState extends State<SettingsSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    var icon = widget.icon;
-    icon ??= widget.iconBuilder?.call(widget.pref.value);
-    icon ??= Icons.settings;
+    final icon =
+        widget.icon ??
+        widget.iconBuilder?.call(widget.pref.value) ??
+        TarusIkon.ayarlar;
 
     return GestureDetector(
       onLongPress: () {
@@ -56,25 +58,16 @@ class _SettingsSwitchState extends State<SettingsSwitch> {
           prefTitle: widget.title,
         );
       },
-      child: AdaptiveSwitchListTile(
-        contentPadding: const .symmetric(vertical: 4, horizontal: 16),
-        secondary: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 100),
-          child: UniIcon(icon, key: ValueKey(icon)),
-        ),
-        title: Text(
+      child: SwitchListTile(
+        contentPadding: AyarSatiri.ic,
+        secondary: AyarSatiri.ikon(icon),
+        title: AyarSatiri.baslik(
           widget.title,
-          style: TextStyle(
-            fontSize: 18,
-            fontStyle: widget.pref.value != widget.pref.defaultValue
-                ? FontStyle.italic
-                : null,
-          ),
+          degisti: widget.pref.value != widget.pref.defaultValue,
         ),
-        subtitle: Text(
-          widget.subtitle ?? '',
-          style: const TextStyle(fontSize: 13),
-        ),
+        subtitle: widget.subtitle == null || widget.subtitle!.isEmpty
+            ? null
+            : Text(widget.subtitle!),
         value: widget.pref.value,
         onChanged: (bool value) {
           widget.pref.value = value;

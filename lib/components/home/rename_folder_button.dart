@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:saber/components/theming/adaptive_alert_dialog.dart';
-import 'package:saber/components/theming/adaptive_text_field.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 class RenameFolderButton extends StatelessWidget {
   const new({
@@ -16,24 +15,33 @@ class RenameFolderButton extends StatelessWidget {
   final bool Function(String) doesFolderExist;
   final Future<void> Function(String newName) renameFolder;
 
+  /// Klasör yeniden adlandırma penceresi (klasör kartının menüsünden).
+  static Future<void> dialogAc(
+    BuildContext context, {
+    required String folderName,
+    required bool Function(String) doesFolderExist,
+    required Future<void> Function(String newName) renameFolder,
+  }) => showDialog(
+    context: context,
+    builder: (context) => _RenameFolderDialog(
+      folderName: folderName,
+      doesFolderExist: doesFolderExist,
+      renameFolder: renameFolder,
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
       padding: .zero,
       tooltip: t.home.renameFolder.renameFolder,
-      onPressed: () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return _RenameFolderDialog(
-              folderName: folderName,
-              doesFolderExist: doesFolderExist,
-              renameFolder: renameFolder,
-            );
-          },
-        );
-      },
-      icon: const Icon(Icons.edit_square),
+      onPressed: () => dialogAc(
+        context,
+        folderName: folderName,
+        doesFolderExist: doesFolderExist,
+        renameFolder: renameFolder,
+      ),
+      icon: const Icon(TarusIkon.yenidenAdlandir),
     );
   }
 }
@@ -78,29 +86,29 @@ class _RenameFolderDialogState extends State<_RenameFolderDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AdaptiveAlertDialog(
+    return TarusDialog(
       title: Text(t.home.renameFolder.renameFolder),
       content: Form(
         key: _formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: AdaptiveTextField(
+        child: TarusMetinAlani(
           controller: _controller,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.done,
           focusOrder: const NumericFocusOrder(1),
           placeholder: t.home.renameFolder.folderName,
-          prefixIcon: const Icon(Icons.edit_square),
+          prefixIcon: const Icon(TarusIkon.klasor),
           validator: validateFolderName,
         ),
       ),
       actions: [
-        CupertinoDialogAction(
+        TarusDialogDugmesi(
           onPressed: () {
             Navigator.of(context).pop();
           },
           child: Text(t.common.cancel),
         ),
-        CupertinoDialogAction(
+        TarusDialogDugmesi(
           onPressed: () async {
             if (!_formKey.currentState!.validate()) return;
             if (_controller.text != widget.folderName) {

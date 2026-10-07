@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:saber/data/nextcloud/hata_bildir.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 /// Hata bildir ekranı: başlık, açıklama, isteğe bağlı ekran görüntüsü.
 /// Kayıt sistem.tarus.tr Hata Panosu'nda `not.tarus.tr` altında görünür.
@@ -87,7 +88,7 @@ class _HataBildirSayfasiState extends State<HataBildirSayfasi> {
         children: [
           Row(
             children: [
-              Icon(Icons.bug_report, size: 16, color: renk.error),
+              Icon(TarusIkon.hataBildir, size: 16, color: renk.error),
               const SizedBox(width: 8),
               Text(
                 'Ekran: ${widget.modul}',
@@ -137,7 +138,7 @@ class _HataBildirSayfasiState extends State<HataBildirSayfasi> {
                   right: 8,
                   child: IconButton.filledTonal(
                     tooltip: 'Görüntüyü kaldır',
-                    icon: const Icon(Icons.close),
+                    icon: const Icon(TarusIkon.kapat),
                     onPressed: () => setState(() => _goruntu = null),
                   ),
                 ),
@@ -146,7 +147,7 @@ class _HataBildirSayfasiState extends State<HataBildirSayfasi> {
           else
             OutlinedButton.icon(
               onPressed: _goruntuSec,
-              icon: const Icon(Icons.add_photo_alternate_outlined),
+              icon: const Icon(TarusIkon.gorselEkle),
               label: const Text('Ekran görüntüsü ekle (isteğe bağlı)'),
             ),
           const SizedBox(height: 24),
@@ -157,7 +158,7 @@ class _HataBildirSayfasiState extends State<HataBildirSayfasi> {
                     dimension: 16,
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
-                : const Icon(Icons.send),
+                : const Icon(TarusIkon.gonder),
             label: const Text('Gönder'),
           ),
         ],

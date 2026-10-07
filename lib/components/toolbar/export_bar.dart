@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:saber/components/theming/adaptive_circular_progress_indicator.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
 
 class ExportBar extends StatefulWidget {
   const new({
@@ -52,7 +52,7 @@ class _ExportBarState extends State<ExportBar> {
       return Text(text);
     } else {
       // if this is currently exporting, show a loading icon
-      return AdaptiveCircularProgressIndicator.textStyled(alpha: 0.4);
+      return const TarusMetinCarki(alfa: 0.4);
     }
   }
 

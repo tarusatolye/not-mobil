@@ -7,17 +7,17 @@ import 'package:golden_screenshot/golden_screenshot.dart';
 import 'package:saber/components/canvas/pencil_shader.dart';
 import 'package:saber/components/home/syncing_button.dart';
 import 'package:saber/components/settings/nextcloud_profile.dart';
-import 'package:saber/components/theming/saber_theme.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/data/flavor_config.dart';
 import 'package:saber/data/locales.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/sentry/sentry_init.dart';
+import 'package:saber/data/tarus_tema.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/editor/editor.dart';
 import 'package:saber/pages/home/home.dart';
 import 'package:saber/pages/user/login.dart';
-import 'package:yaru/yaru.dart';
+import 'package:saber/tarus/tarus_tema_kur.dart';
 
 import 'utils/test_mock_channel_handlers.dart';
 import 'utils/test_user.dart';
@@ -77,44 +77,26 @@ void main() {
       await setupDemoFiles();
     });
 
-    const seedColor = YaruColors.blue;
-    final materialTheme = SaberTheme.createThemeFromSeed(
-      seedColor,
-      .light,
-      .android,
-    );
-    final cupertinoTheme = SaberTheme.createThemeFromSeed(
-      seedColor,
-      .light,
-      .iOS,
-    );
-    final yaruTheme = SaberTheme.createThemeFromSeed(seedColor, .light, .linux);
+    // tarus: bütün platformlarda tek görünüm (Modern Işık).
+    final materialTheme = TarusTemaKur.kur(TarusTema.varsayilan);
 
     _screenshot(
       materialTheme: materialTheme,
-      cupertinoTheme: cupertinoTheme,
-      yaruTheme: yaruTheme,
       goldenFileName: '1_home',
       child: const HomePage(subpage: HomePage.recentSubpage, path: ''),
     );
     _screenshot(
       materialTheme: materialTheme,
-      cupertinoTheme: cupertinoTheme,
-      yaruTheme: yaruTheme,
       goldenFileName: '2_editor',
       child: Editor(path: '/Metric Spaces Week 1'),
     );
     _screenshot(
       materialTheme: materialTheme,
-      cupertinoTheme: cupertinoTheme,
-      yaruTheme: yaruTheme,
       goldenFileName: '3_login',
       child: const NcLoginPage(forceAppBarLeading: true),
     );
     _screenshot(
       materialTheme: materialTheme,
-      cupertinoTheme: cupertinoTheme,
-      yaruTheme: yaruTheme,
       goldenFileName: '4_settings',
       child: const HomePage(subpage: HomePage.settingsSubpage, path: ''),
     );
@@ -124,18 +106,12 @@ void main() {
 void _screenshot({
   ScreenshotFrameColors? frameColors,
   required ThemeData materialTheme,
-  required ThemeData cupertinoTheme,
-  required ThemeData yaruTheme,
   required String goldenFileName,
   required Widget child,
 }) {
   /// These locales aren't supported by my InterNotoSansHybrid font:
   /// https://github.com/adil192/inter-noto-hybrid
   const localesWithNoFonts = {'ja', 'zh-Hans-CN', 'zh-Hant-TW'};
-
-  /// These locales are supported by InterNotoSansHybrid but not
-  /// Apple or Ubuntu fonts.
-  const localesWithOnlyMaterialFonts = {'ar', 'fa', 'he', 'th'};
 
   const allScreenshots = bool.fromEnvironment('ALL_SCREENSHOTS');
   final localeDeviceMatrix = allScreenshots
@@ -163,7 +139,6 @@ void _screenshot({
     for (final (localeCode, goldenDevice) in localeDeviceMatrix) {
       testGoldens('for ${goldenDevice.name} in $localeCode', (tester) async {
         final device = goldenDevice.device;
-        stows.platform.value = device.platform;
         await tester.runAsync(() => LocaleSettings.setLocaleRaw(localeCode));
 
         if (goldenFileName == '4_settings') {
@@ -171,14 +146,7 @@ void _screenshot({
           addTearDown(() => NextcloudProfile.forceLoginStep = null);
         }
 
-        var theme = switch (device.platform) {
-          .linux => yaruTheme,
-          .iOS || .macOS => cupertinoTheme,
-          _ => materialTheme,
-        };
-        if (localesWithOnlyMaterialFonts.contains(localeCode)) {
-          theme = theme.copyWith(textTheme: materialTheme.textTheme);
-        }
+        final theme = materialTheme;
 
         final widget = ScreenshotApp.withConditionalTitlebar(
           theme: theme,

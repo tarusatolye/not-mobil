@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart' show CupertinoIcons;
 import 'package:flutter/material.dart';
 import 'package:saber/components/canvas/canvas_gesture_detector.dart';
 import 'package:saber/components/canvas/canvas_preview.dart';
-import 'package:saber/components/theming/adaptive_icon.dart';
-import 'package:saber/components/theming/saber_theme.dart';
 import 'package:saber/data/editor/editor_core_info.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 class EditorPageManager extends StatefulWidget {
   const new({
@@ -45,11 +43,8 @@ class _EditorPageManagerState extends State<EditorPageManager> {
 
   @override
   Widget build(BuildContext context) {
-    final platform = Theme.of(context).platform;
-    final cupertino = platform.isCupertino;
     return SizedBox(
-      width: cupertino ? null : 300,
-      height: cupertino ? 600 : null,
+      width: 300,
       child: ReorderableListView.builder(
         buildDefaultDragHandles: false,
         itemCount: widget.coreInfo.pages.length,
@@ -71,8 +66,8 @@ class _EditorPageManagerState extends State<EditorPageManager> {
                         '${pageIndex + 1} / ${widget.coreInfo.pages.length}',
                       ),
                       ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxWidth: cupertino ? 100 : 150,
+                        constraints: const BoxConstraints(
+                          maxWidth: 150,
                           maxHeight: 250,
                         ),
                         child: FittedBox(
@@ -89,7 +84,7 @@ class _EditorPageManagerState extends State<EditorPageManager> {
                           index: pageIndex,
                           child: const Padding(
                             padding: .all(8),
-                            child: Icon(Icons.drag_handle),
+                            child: Icon(TarusIkon.tutamac),
                           ),
                         ),
                       ),
@@ -100,10 +95,7 @@ class _EditorPageManagerState extends State<EditorPageManager> {
                     children: [
                       IconButton(
                         tooltip: t.editor.menu.insertPage,
-                        icon: const AdaptiveIcon(
-                          icon: Icons.insert_page_break,
-                          cupertinoIcon: CupertinoIcons.add,
-                        ),
+                        icon: const Icon(TarusIkon.sayfaEkle),
                         onPressed: () => setState(() {
                           widget.insertPageAfter(pageIndex);
                           scrollToPage(pageIndex + 1);
@@ -111,10 +103,7 @@ class _EditorPageManagerState extends State<EditorPageManager> {
                       ),
                       IconButton(
                         tooltip: t.editor.menu.duplicatePage,
-                        icon: const AdaptiveIcon(
-                          icon: Icons.content_copy,
-                          cupertinoIcon: CupertinoIcons.doc_on_clipboard,
-                        ),
+                        icon: const Icon(TarusIkon.kopyala),
                         onPressed: () => setState(() {
                           widget.duplicatePage(pageIndex);
                           scrollToPage(pageIndex + 1);
@@ -125,7 +114,7 @@ class _EditorPageManagerState extends State<EditorPageManager> {
                           page: pageIndex + 1,
                           totalPages: widget.coreInfo.pages.length,
                         ),
-                        icon: const Icon(Icons.cleaning_services),
+                        icon: const Icon(TarusIkon.temizle),
                         onPressed: isEmptyLastPage
                             ? null
                             : () => setState(() {
@@ -135,10 +124,7 @@ class _EditorPageManagerState extends State<EditorPageManager> {
                       ),
                       IconButton(
                         tooltip: t.editor.menu.deletePage,
-                        icon: const AdaptiveIcon(
-                          icon: Icons.delete,
-                          cupertinoIcon: CupertinoIcons.delete,
-                        ),
+                        icon: const Icon(TarusIkon.sil),
                         onPressed: isEmptyLastPage
                             ? null
                             : () => setState(() {

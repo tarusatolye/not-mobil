@@ -15,6 +15,7 @@ import 'package:saber/components/canvas/canvas_preview.dart';
 import 'package:saber/components/canvas/inner_canvas.dart';
 import 'package:saber/data/editor/editor_core_info.dart';
 import 'package:saber/data/is_this_a_test.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 import 'package:screenshot/screenshot.dart';
 
 abstract class EditorExporter {
@@ -211,9 +212,10 @@ class EditorExporterTheme extends StatelessWidget {
 
   static final theme = ThemeData(
     brightness: .light,
+    // Uygulamadaki kağıt da aynı renkleri kullanır (TarusKagit).
     colorScheme: const ColorScheme.light(
-      primary: Colors.blue,
-      secondary: Colors.red,
+      primary: TarusKagit.cizgi,
+      secondary: TarusKagit.kenar,
     ),
   );
 

@@ -6,6 +6,7 @@ import 'package:saber/data/prefs.dart';
 import 'package:saber/data/routes.dart';
 import 'package:saber/main.dart';
 import 'package:saber/pages/home/home.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 void main() {
   group('Home subpage transition', () {
@@ -38,12 +39,12 @@ void main() {
           ),
         );
 
-        await tester.tap(find.byIcon(Icons.settings));
+        await tester.tap(find.byIcon(TarusIkon.ayarlar));
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 150));
 
         expect(
-          [find.text('Welcome to Not'), find.text('Logged out')],
+          [find.text('No notes yet'), find.text('Sync is off')],
           [findsOneWidget, findsOneWidget],
         );
       });

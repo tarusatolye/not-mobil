@@ -1,11 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:saber/components/theming/adaptive_toggle_buttons.dart';
-import 'package:saber/components/theming/uni_icon.dart';
+import 'package:saber/components/settings/settings_subtitle.dart';
 import 'package:saber/pages/home/settings.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 import 'package:stow/stow.dart';
-import 'package:yaru/yaru.dart';
 
+/// Ayarlar satırı: açılır liste (sağda seçili değer ve aşağı ok).
 class SettingsDropdown<T> extends StatefulWidget {
   const new({
     super.key,
@@ -23,8 +26,8 @@ class SettingsDropdown<T> extends StatefulWidget {
 
   final String title;
   final String? subtitle;
-  final Object? icon;
-  final Object? Function(T)? iconBuilder;
+  final IconData? icon;
+  final IconData? Function(T)? iconBuilder;
 
   final Stow<dynamic, T, dynamic> pref;
   final List<ToggleButtonsOption<T>> options;
@@ -63,9 +66,11 @@ class _SettingsDropdownState<T> extends State<SettingsDropdown<T>> {
       widget.pref.value = widget.options.first.value;
     }
 
-    var icon = widget.icon;
-    icon ??= widget.iconBuilder?.call(widget.pref.value);
-    icon ??= Icons.settings;
+    final r = TarusRenkler.of(context);
+    final icon =
+        widget.icon ??
+        widget.iconBuilder?.call(widget.pref.value) ??
+        TarusIkon.ayarlar;
 
     return MergeSemantics(
       child: ListTile(
@@ -76,34 +81,19 @@ class _SettingsDropdownState<T> extends State<SettingsDropdown<T>> {
             prefTitle: widget.title,
           );
         },
-        contentPadding: const .symmetric(vertical: 4, horizontal: 16),
-        leading: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 100),
-          child: UniIcon(icon, key: ValueKey(icon)),
-        ),
-        title: Text(
+        contentPadding: AyarSatiri.ic,
+        leading: AyarSatiri.ikon(icon),
+        title: AyarSatiri.baslik(
           widget.title,
-          style: TextStyle(
-            fontSize: 18,
-            fontStyle: widget.pref.value != widget.pref.defaultValue
-                ? FontStyle.italic
-                : null,
-          ),
+          degisti: widget.pref.value != widget.pref.defaultValue,
         ),
-        subtitle: Text(
-          widget.subtitle ?? '',
-          style: const TextStyle(fontSize: 13),
-        ),
-        trailing: YaruPopupMenuButton<T>(
+        subtitle: widget.subtitle == null || widget.subtitle!.isEmpty
+            ? null
+            : Text(widget.subtitle!),
+        trailing: PopupMenuButton<T>(
           initialValue: widget.pref.value,
           onSelected: (value) => widget.pref.value = value,
-          style:
-              OutlinedButtonTheme.of(context).style ??
-              OutlinedButton.styleFrom(
-                shape: const RoundedRectangleBorder(
-                  borderRadius: .all(.circular(8)),
-                ),
-              ),
+          tooltip: widget.title,
           itemBuilder: (context) => [
             for (final option in widget.options)
               PopupMenuItem(
@@ -112,16 +102,41 @@ class _SettingsDropdownState<T> extends State<SettingsDropdown<T>> {
                   constraints: BoxConstraints(
                     maxWidth: MediaQuery.sizeOf(context).width * 0.45,
                   ),
-                  child: Padding(
-                    padding: const .symmetric(horizontal: 16),
-                    child: option.widget,
-                  ),
+                  child: option.widget,
                 ),
               ),
           ],
-          child: widget.options
-              .firstWhere((option) => option.value == widget.pref.value)
-              .widget,
+          child: Container(
+            constraints: BoxConstraints(
+              minHeight: 34,
+              maxWidth: MediaQuery.sizeOf(context).width * 0.4,
+            ),
+            padding: const EdgeInsets.only(left: 10, right: 6),
+            decoration: BoxDecoration(
+              color: r.inputBg,
+              borderRadius: BorderRadius.circular(TarusOlcu.rSm),
+              border: Border.all(color: r.bdr2),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Flexible(
+                  child: DefaultTextStyle.merge(
+                    style: TextStyle(fontSize: 12.5, color: r.text),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    child: widget.options
+                        .firstWhere(
+                          (option) => option.value == widget.pref.value,
+                        )
+                        .widget,
+                  ),
+                ),
+                const SizedBox(width: 4),
+                Icon(TarusIkon.asagi, size: 16, color: r.muted2),
+              ],
+            ),
+          ),
         ),
       ),
     );

@@ -8,13 +8,22 @@ import 'package:saber/data/prefs.dart';
 import 'package:saber/data/routes.dart';
 import 'package:saber/pages/home/home.dart';
 import 'package:saber/pages/home/whiteboard.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
 import 'package:stow_codecs/stow_codecs.dart';
 
 class ResponsiveNavbar extends HookWidget {
-  const new({super.key, required this.body, this.selectedIndex = 0});
+  const new({
+    super.key,
+    required this.body,
+    this.selectedIndex = 0,
+    this.klasor,
+  });
 
   final Widget body;
   final int selectedIndex;
+
+  /// Notlar sekmesindeki klasör: «+» yeni notu buraya oluşturur.
+  final String? klasor;
 
   static var isLargeScreen = true;
 
@@ -52,7 +61,7 @@ class ResponsiveNavbar extends HookWidget {
     isLargeScreen = useListenableSelector(
       stows.layoutSize,
       () => switch (stows.layoutSize.value) {
-        .auto => screenSize.width >= 600,
+        .auto => screenSize.width >= TarusOlcu.genisEkran,
         .phone => false,
         .tablet => true,
       },
@@ -66,6 +75,7 @@ class ResponsiveNavbar extends HookWidget {
             VerticalNavbar(
               selectedIndex: selectedIndex,
               onDestinationSelected: (i) => onDestinationSelected(context, i),
+              klasor: klasor,
             ),
             Expanded(child: body),
           ],
@@ -87,12 +97,14 @@ class ResponsiveNavbar extends HookWidget {
             ),
             child: body,
           ),
-          PositionedDirectional(
+          Positioned(
+            left: 0,
+            right: 0,
             bottom: 0,
-            end: 0,
             child: HorizontalNavbar(
               selectedIndex: selectedIndex,
               onDestinationSelected: (i) => onDestinationSelected(context, i),
+              klasor: klasor,
             ),
           ),
         ],

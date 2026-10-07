@@ -2,15 +2,16 @@ import 'dart:io';
 
 import 'package:android_file_picker/android_file_picker.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:saber/components/theming/adaptive_alert_dialog.dart';
+import 'package:saber/components/settings/settings_subtitle.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/data/nextcloud/saber_syncer.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 import 'package:sbn/font_fallbacks.dart';
 
 class SettingsDirectorySelector extends StatelessWidget {
@@ -32,7 +33,7 @@ class SettingsDirectorySelector extends StatelessWidget {
     final oldDirIsEmpty = oldDir.existsSync()
         ? oldDir.listSync().isEmpty
         : true;
-    await showAdaptiveDialog(
+    await showDialog(
       context: context,
       builder: (context) => DirectorySelector(
         title: title,
@@ -44,31 +45,17 @@ class SettingsDirectorySelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return ListTile(
       onTap: () => onPressed(context),
-      child: ListTile(
-        contentPadding: const .symmetric(vertical: 4, horizontal: 16),
-        leading: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 100),
-          child: Icon(icon, key: ValueKey(icon)),
-        ),
-        title: Text(
-          title,
-          style: TextStyle(
-            fontSize: 18,
-            fontStyle:
-                stows.customDataDir.value != stows.customDataDir.defaultValue
-                ? FontStyle.italic
-                : null,
-          ),
-        ),
-        subtitle: ValueListenableBuilder(
-          valueListenable: stows.customDataDir,
-          builder: (context, _, _) => Text(
-            FileManager.documentsDirectory,
-            style: const TextStyle(fontSize: 13),
-          ),
-        ),
+      contentPadding: AyarSatiri.ic,
+      leading: AyarSatiri.ikon(icon),
+      title: AyarSatiri.baslik(
+        title,
+        degisti: stows.customDataDir.value != stows.customDataDir.defaultValue,
+      ),
+      subtitle: ValueListenableBuilder(
+        valueListenable: stows.customDataDir,
+        builder: (context, _, _) => Text(FileManager.documentsDirectory),
       ),
     );
   }
@@ -149,7 +136,7 @@ class _DirectorySelectorState extends State<DirectorySelector> {
         (syncer.uploader.numPending > 0 || syncer.downloader.numPending > 0);
     final anyErrors = emptyError || syncingError;
 
-    return AdaptiveAlertDialog(
+    return TarusDialog(
       title: Text(widget.title),
       content: Column(
         mainAxisSize: .min,
@@ -170,10 +157,13 @@ class _DirectorySelectorState extends State<DirectorySelector> {
                   ),
                 ),
               ),
-              IconButton(icon: const Icon(Icons.folder), onPressed: _pickDir),
+              IconButton(
+                icon: const Icon(TarusIkon.klasor),
+                onPressed: _pickDir,
+              ),
               if (stows.customDataDir.value != null)
                 IconButton(
-                  icon: const Icon(Icons.undo),
+                  icon: const Icon(TarusIkon.geriAl),
                   onPressed: _pickDefaultDir,
                 ),
             ],
@@ -191,11 +181,11 @@ class _DirectorySelectorState extends State<DirectorySelector> {
         ],
       ),
       actions: [
-        CupertinoDialogAction(
+        TarusDialogDugmesi(
           onPressed: () => context.pop(),
           child: Text(t.settings.customDataDir.cancel),
         ),
-        CupertinoDialogAction(
+        TarusDialogDugmesi(
           isDefaultAction: true,
           onPressed: anyErrors ? null : _onConfirm,
           child: Text(t.settings.customDataDir.select),

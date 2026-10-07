@@ -1,10 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:saber/components/home/grid_folders.dart';
-import 'package:saber/components/theming/adaptive_alert_dialog.dart';
+import 'package:saber/components/home/new_folder_dialog.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/editor/editor.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 
 class MoveNoteButton extends StatelessWidget {
   const new({
@@ -32,7 +34,7 @@ class MoveNoteButton extends StatelessWidget {
           },
         );
       },
-      icon: const Icon(Icons.drive_file_move),
+      icon: const Icon(TarusIkon.tasi),
     );
   }
 }
@@ -155,40 +157,74 @@ class _MoveNoteDialogState extends State<_MoveNoteDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AdaptiveAlertDialog(
+    return TarusDialog(
       title: originalFileNames.length < 5
           ? Text(t.home.moveNote.moveName(f: originalFileNames.join(', ')))
           : Text(t.home.moveNote.moveNotes(n: originalFileNames.length)),
+      kaydir: false,
       content: SizedBox(
-        width: 300,
-        height: 300,
+        width: 320,
+        height: 340,
         child: Column(
+          crossAxisAlignment: .stretch,
           children: [
-            Text(currentFolder),
+            Row(
+              children: [
+                if (currentFolder != '/')
+                  IconButton(
+                    tooltip: t.home.backFolder,
+                    icon: const Icon(TarusIkon.geri, size: 18),
+                    onPressed: () => setState(() {
+                      currentFolder = currentFolder.substring(
+                        0,
+                        currentFolder.lastIndexOf(
+                              '/',
+                              currentFolder.length - 2,
+                            ) +
+                            1,
+                      );
+                    }),
+                  ),
+                Expanded(
+                  child: Text(
+                    currentFolder == '/' ? t.home.titles.browse : currentFolder,
+                    maxLines: 1,
+                    overflow: .ellipsis,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: TarusRenkler.of(context).text,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  tooltip: t.home.newFolder.newFolder,
+                  icon: const Icon(TarusIkon.yeniKlasor, size: 18),
+                  onPressed: () => showDialog(
+                    context: context,
+                    builder: (context) => NewFolderDialog(
+                      createFolder: createFolder,
+                      doesFolderExist: (String folderName) =>
+                          currentFolderChildren?.directories.contains(
+                            folderName,
+                          ) ??
+                          false,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
             Expanded(
               child: CustomScrollView(
-                shrinkWrap: true,
                 slivers: [
                   GridFolders(
-                    isAtRoot: currentFolder == '/',
-                    crossAxisCount: 3,
+                    crossAxisCount: 2,
                     onTap: (String folder) {
                       setState(() {
-                        if (folder == '..') {
-                          currentFolder = currentFolder.substring(
-                            0,
-                            currentFolder.lastIndexOf(
-                                  '/',
-                                  currentFolder.length - 2,
-                                ) +
-                                1,
-                          );
-                        } else {
-                          currentFolder = '$currentFolder$folder/';
-                        }
+                        currentFolder = '$currentFolder$folder/';
                       });
                     },
-                    createFolder: createFolder,
                     doesFolderExist: (String folderName) {
                       return currentFolderChildren?.directories.contains(
                             folderName,
@@ -234,13 +270,13 @@ class _MoveNoteDialogState extends State<_MoveNoteDialog> {
         ),
       ),
       actions: [
-        CupertinoDialogAction(
+        TarusDialogDugmesi(
           onPressed: () {
             Navigator.of(context).pop();
           },
           child: Text(t.common.cancel),
         ),
-        CupertinoDialogAction(
+        TarusDialogDugmesi(
           onPressed: () async {
             for (int i = 0; i < widget.filesToMove.length; ++i) {
               final extension = oldExtensions[i]

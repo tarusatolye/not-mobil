@@ -1,16 +1,11 @@
 import 'dart:io';
 
 import 'package:collapsible/collapsible.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:keybinder/keybinder.dart';
-import 'package:material_symbols_icons/symbols.dart';
-import 'package:saber/components/theming/adaptive_icon.dart';
 import 'package:saber/components/theming/dynamic_material_app.dart';
-import 'package:saber/components/theming/uni_icon.dart';
 import 'package:saber/components/toolbar/color_bar.dart';
 import 'package:saber/components/toolbar/export_bar.dart';
 import 'package:saber/components/toolbar/pen_modal.dart';
@@ -28,6 +23,9 @@ import 'package:saber/data/tools/pen.dart';
 import 'package:saber/data/tools/pencil.dart';
 import 'package:saber/data/tools/select.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 
 class Toolbar extends StatefulWidget {
   const new({
@@ -84,8 +82,8 @@ class Toolbar extends StatefulWidget {
   @override
   State<Toolbar> createState() => _ToolbarState();
 
-  static const _buttonPaddingHorizontal = EdgeInsets.symmetric(horizontal: 6);
-  static const _buttonPaddingVertical = EdgeInsets.symmetric(vertical: 6);
+  static const _buttonPaddingHorizontal = EdgeInsets.symmetric(horizontal: 2);
+  static const _buttonPaddingVertical = EdgeInsets.symmetric(vertical: 2);
 }
 
 class _ToolbarState extends State<Toolbar> {
@@ -173,7 +171,7 @@ class _ToolbarState extends State<Toolbar> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = ColorScheme.of(context);
+    final r = TarusRenkler.of(context);
 
     final brightness = Theme.brightnessOf(context);
     final invert = stows.editorAutoInvert.value && brightness == .dark;
@@ -280,13 +278,22 @@ class _ToolbarState extends State<Toolbar> {
             iconButtonUnselectedData: IconButtonData(
               style: baseButtonStyle.copyWith(
                 backgroundColor: WidgetStateProperty.all(Colors.transparent),
-                foregroundColor: WidgetStateProperty.all(colorScheme.primary),
+                foregroundColor: WidgetStateProperty.all(r.muted2),
               ),
             ),
             iconButtonSelectedData: IconButtonData(
               style: baseButtonStyle.copyWith(
-                backgroundColor: WidgetStateProperty.all(colorScheme.primary),
-                foregroundColor: WidgetStateProperty.all(colorScheme.onPrimary),
+                backgroundColor: WidgetStateProperty.all(
+                  r.accent.withValues(alpha: TarusOlcu.seciliZeminAlfa),
+                ),
+                foregroundColor: WidgetStateProperty.all(r.accent),
+                side: WidgetStateProperty.all(
+                  BorderSide(
+                    color: r.accent.withValues(
+                      alpha: TarusOlcu.seciliKenarAlfa,
+                    ),
+                  ),
+                ),
               ),
             ),
           );
@@ -344,7 +351,7 @@ class _ToolbarState extends State<Toolbar> {
                   }
                 },
                 padding: buttonPadding,
-                child: UniIcon(Pen.currentPen.icon, size: 16),
+                child: Icon(Pen.currentPen.icon),
               ),
               ToolbarIconButton(
                 tooltip: t.editor.pens.pencil,
@@ -363,7 +370,7 @@ class _ToolbarState extends State<Toolbar> {
                   }
                 },
                 padding: buttonPadding,
-                child: const FaIcon(Pencil.pencilIcon, size: 16),
+                child: const Icon(Pencil.pencilIcon),
               ),
               ToolbarIconButton(
                 tooltip: t.editor.pens.highlighter,
@@ -382,7 +389,7 @@ class _ToolbarState extends State<Toolbar> {
                   }
                 },
                 padding: buttonPadding,
-                child: const FaIcon(Highlighter.highlighterIcon, size: 16),
+                child: const Icon(Highlighter.highlighterIcon),
               ),
               ValueListenableBuilder(
                 valueListenable: showColorOptions,
@@ -397,19 +404,16 @@ class _ToolbarState extends State<Toolbar> {
                   );
                 },
                 child: currentColor == null
-                    ? const Icon(Icons.palette)
+                    ? const Icon(TarusIkon.renkler)
                     : Container(
-                        width: 18,
-                        height: 18,
+                        width: 20,
+                        height: 20,
                         decoration: BoxDecoration(
                           color: currentColor
                               .withInversion(invert)
                               .withValues(alpha: 1),
                           shape: .circle,
-                          border: Border.all(
-                            color: colorScheme.primary,
-                            width: 2,
-                          ),
+                          border: Border.all(color: r.bdr3, width: 2),
                         ),
                       ),
               ),
@@ -422,19 +426,7 @@ class _ToolbarState extends State<Toolbar> {
                   widget.setTool(Select.currentSelect);
                 },
                 padding: buttonPadding,
-                child: Icon(
-                  CupertinoIcons.lasso,
-                  shadows: !widget.readOnly
-                      ? [
-                          BoxShadow(
-                            color: colorScheme.primary,
-                            blurRadius: 0.1,
-                            spreadRadius: 10,
-                            blurStyle: BlurStyle.solid,
-                          ),
-                        ]
-                      : null,
-                ),
+                child: const Icon(TarusIkon.sec),
               ),
               ToolbarIconButton(
                 tooltip: t.editor.pens.laserPointer,
@@ -446,7 +438,7 @@ class _ToolbarState extends State<Toolbar> {
                   widget.setTool(LaserPointer.currentLaserPointer);
                 },
                 padding: buttonPadding,
-                child: const Icon(Symbols.stylus_laser_pointer),
+                child: const Icon(TarusIkon.lazer),
               ),
               ToolbarIconButton(
                 tooltip: t.editor.toolbar.toggleEraser,
@@ -454,17 +446,14 @@ class _ToolbarState extends State<Toolbar> {
                 enabled: !widget.readOnly,
                 onPressed: toggleEraser,
                 padding: buttonPadding,
-                child: const FaIcon(FontAwesomeIcons.eraser, size: 16),
+                child: const Icon(TarusIkon.silgi),
               ),
               ToolbarIconButton(
                 tooltip: t.editor.toolbar.photo,
                 enabled: !widget.readOnly,
                 onPressed: widget.pickPhoto,
                 padding: buttonPadding,
-                child: const AdaptiveIcon(
-                  icon: Icons.photo,
-                  cupertinoIcon: CupertinoIcons.photo,
-                ),
+                child: const Icon(TarusIkon.gorsel),
               ),
               ToolbarIconButton(
                 tooltip: t.editor.toolbar.text,
@@ -472,10 +461,7 @@ class _ToolbarState extends State<Toolbar> {
                 enabled: !widget.readOnly,
                 onPressed: widget.toggleTextEditing,
                 padding: buttonPadding,
-                child: const AdaptiveIcon(
-                  icon: Icons.text_fields,
-                  cupertinoIcon: CupertinoIcons.text_cursor,
-                ),
+                child: const Icon(TarusIkon.metin),
               ),
               if (!stows.hideFingerDrawingToggle.value)
                 ValueListenableBuilder(
@@ -487,7 +473,7 @@ class _ToolbarState extends State<Toolbar> {
                       enabled: !widget.readOnly,
                       onPressed: widget.toggleFingerDrawing,
                       padding: buttonPadding,
-                      child: const Icon(CupertinoIcons.hand_draw),
+                      child: const Icon(TarusIkon.parmakla),
                     );
                   },
                 ),
@@ -497,13 +483,10 @@ class _ToolbarState extends State<Toolbar> {
                 enabled: !widget.readOnly,
                 onPressed: toggleFullscreen,
                 padding: buttonPadding,
-                child: AdaptiveIcon(
-                  icon: DynamicMaterialApp.isFullscreen
-                      ? Icons.fullscreen_exit
-                      : Icons.fullscreen,
-                  cupertinoIcon: DynamicMaterialApp.isFullscreen
-                      ? CupertinoIcons.fullscreen_exit
-                      : CupertinoIcons.fullscreen,
+                child: Icon(
+                  DynamicMaterialApp.isFullscreen
+                      ? TarusIkon.tamEkrandanCik
+                      : TarusIkon.tamEkran,
                 ),
               ),
               Wrap(
@@ -514,20 +497,14 @@ class _ToolbarState extends State<Toolbar> {
                     enabled: !widget.readOnly && widget.isUndoPossible,
                     onPressed: widget.undo,
                     padding: buttonPadding,
-                    child: const AdaptiveIcon(
-                      icon: Icons.undo,
-                      cupertinoIcon: CupertinoIcons.arrow_uturn_left,
-                    ),
+                    child: const Icon(TarusIkon.geriAl),
                   ),
                   ToolbarIconButton(
                     tooltip: t.editor.toolbar.redo,
                     enabled: !widget.readOnly && widget.isRedoPossible,
                     onPressed: widget.redo,
                     padding: buttonPadding,
-                    child: const AdaptiveIcon(
-                      icon: Icons.redo,
-                      cupertinoIcon: CupertinoIcons.arrow_uturn_right,
-                    ),
+                    child: const Icon(TarusIkon.yinele),
                   ),
                 ],
               ),
@@ -543,10 +520,7 @@ class _ToolbarState extends State<Toolbar> {
                     child: child!,
                   );
                 },
-                child: const AdaptiveIcon(
-                  icon: Icons.share,
-                  cupertinoIcon: CupertinoIcons.share,
-                ),
+                child: const Icon(TarusIkon.disaAktar),
               ),
             ],
           ),
@@ -554,19 +528,31 @@ class _ToolbarState extends State<Toolbar> {
       ),
     ];
 
-    return Flex(
-      direction: isToolbarVertical ? Axis.horizontal : Axis.vertical,
-      textDirection: switch (stows.editorToolbarAlignment.value) {
-        AxisDirection.left => .rtl,
-        AxisDirection.right => .ltr,
-        _ => null,
-      },
-      verticalDirection: switch (stows.editorToolbarAlignment.value) {
-        AxisDirection.down => VerticalDirection.down,
-        AxisDirection.up => VerticalDirection.up,
-        _ => VerticalDirection.down,
-      },
-      children: bars,
+    final kenar = BorderSide(color: r.bdr2);
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: r.card,
+        border: switch (stows.editorToolbarAlignment.value) {
+          AxisDirection.up => Border(bottom: kenar),
+          AxisDirection.left => Border(right: kenar),
+          AxisDirection.right => Border(left: kenar),
+          AxisDirection.down => Border(top: kenar),
+        },
+      ),
+      child: Flex(
+        direction: isToolbarVertical ? Axis.horizontal : Axis.vertical,
+        textDirection: switch (stows.editorToolbarAlignment.value) {
+          AxisDirection.left => .rtl,
+          AxisDirection.right => .ltr,
+          _ => null,
+        },
+        verticalDirection: switch (stows.editorToolbarAlignment.value) {
+          AxisDirection.down => VerticalDirection.down,
+          AxisDirection.up => VerticalDirection.up,
+          _ => VerticalDirection.down,
+        },
+        children: bars,
+      ),
     );
   }
 

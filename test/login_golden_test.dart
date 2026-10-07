@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_screenshot/golden_screenshot.dart';
-import 'package:saber/components/theming/saber_theme.dart';
 import 'package:saber/data/flavor_config.dart';
 import 'package:saber/data/prefs.dart';
+import 'package:saber/data/tarus_tema.dart';
 import 'package:saber/pages/user/login.dart';
+import 'package:saber/tarus/tarus_tema_kur.dart';
 
 import 'utils/test_user.dart';
 
@@ -15,11 +16,7 @@ void main() {
   group('LoginPage', () {
     setUp(() {
       FlavorConfig.setup();
-      _theme = SaberTheme.createThemeFromSeed(
-        Colors.yellow,
-        .light,
-        _device.platform,
-      );
+      _theme = TarusTemaKur.kur(TarusTema.varsayilan);
       stows.username.value = 'testuser';
       stows.ncPassword.value = 'testpassword';
       stows.encPassword.value = 'encpassword';

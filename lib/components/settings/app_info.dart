@@ -1,13 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:saber/data/flavor_config.dart';
 import 'package:saber/data/is_this_a_test.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/tarus_baglantilar.dart';
 import 'package:saber/data/version.dart';
 import 'package:saber/i18n/strings.g.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:saber/pages/user/hakkinda_sayfasi.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 
 class const AppInfo({super.key}) extends StatelessWidget {
   /// tarus gizlilik politikası (Saber'in sayfası değil; TarusBaglantilar).
@@ -37,66 +38,37 @@ class const AppInfo({super.key}) extends StatelessWidget {
 
   static String get info => [
     // Tests use static values to improve reducibility
-    if (isThisATest) 'v1.35.1' else 'v$buildName',
+    if (isThisATest) '1.35.1' else buildName,
     if (FlavorConfig.flavor.isNotEmpty) FlavorConfig.flavor,
     if (kDebugMode && !isThisATest) t.appInfo.debug,
     if (isThisATest) '(135010)' else '($buildNumber)',
   ].join(' ');
 
+  /// Hakkında sayfasını açar.
+  static void hakkindaAc(BuildContext context) => Navigator.of(context)
+      .push(MaterialPageRoute<void>(builder: (_) => const HakkindaSayfasi()));
+
+  /// Ayarlar'ın altındaki sürüm tetikleyicisi (STANDARTLAR §19e: sürüm
+  /// numarası Hakkında'yı açar).
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () => _showAboutDialog(context),
-      child: ValueListenableBuilder(
-        valueListenable: stows.locale,
-        builder: (context, _, _) => Text(info),
+    final r = TarusRenkler.of(context);
+    return Center(
+      child: TextButton.icon(
+        onPressed: () => hakkindaAc(context),
+        icon: const TarusNotIsareti(boyut: 18),
+        label: ValueListenableBuilder(
+          valueListenable: stows.locale,
+          builder: (context, _, _) => Text(
+            'tarus Not $info',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              color: r.muted2,
+            ),
+          ),
+        ),
       ),
     );
   }
-
-  void _showAboutDialog(BuildContext context) => showAboutDialog(
-    context: context,
-    applicationVersion: info,
-    applicationIcon: SvgPicture.asset(
-      'assets/icon/icon.svg',
-      width: 50,
-      height: 50,
-    ),
-    applicationLegalese: t.appInfo.licenseNotice(buildYear: buildYear),
-    children: [
-      const SizedBox(height: 10),
-      Text(tarusLisansNotu),
-      const SizedBox(height: 10),
-      TextButton(
-        onPressed: () => launchUrl(kaynakKoduUrl),
-        child: const SizedBox(
-          width: double.infinity,
-          child: Text('tarus Not kaynak kodu'),
-        ),
-      ),
-      TextButton(
-        onPressed: () => launchUrl(saberKaynakUrl),
-        child: const SizedBox(
-          width: double.infinity,
-          child: Text('Saber (temel alınan proje)'),
-        ),
-      ),
-      // tarus: Saber geliştiricisine bağış/depolama düğmesi kaldırıldı
-      // (tarus Not kullanıcısını Saber'in ücretli sunucusuna yönlendiriyordu).
-      TextButton(
-        onPressed: () => launchUrl(licenseUrl),
-        child: SizedBox(
-          width: double.infinity,
-          child: Text(t.appInfo.licenseButton),
-        ),
-      ),
-      TextButton(
-        onPressed: () => launchUrl(privacyPolicyUrl),
-        child: SizedBox(
-          width: double.infinity,
-          child: Text(t.appInfo.privacyPolicyButton),
-        ),
-      ),
-    ],
-  );
 }

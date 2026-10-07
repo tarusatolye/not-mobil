@@ -1,16 +1,13 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:flutter/cupertino.dart' show CupertinoIcons;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:saber/components/canvas/image/editor_image.dart';
-import 'package:saber/components/theming/adaptive_icon.dart';
-import 'package:saber/components/theming/adaptive_switch.dart';
-import 'package:saber/components/theming/saber_theme.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 class CanvasImageDialog extends StatefulWidget {
   const new({
@@ -45,19 +42,18 @@ class _CanvasImageDialogState extends State<CanvasImageDialog> {
 
   @override
   Widget build(BuildContext context) {
-    final platform = Theme.of(context).platform;
     final children = <Widget>[
       MergeSemantics(
         child: _CanvasImageDialogItem(
           onTap: stows.editorAutoInvert.value ? setInvertible : null,
           title: t.editor.imageOptions.invertible,
-          child: AdaptiveSwitch(
+          child: Switch(
             value: widget.image.invertible,
             onChanged: stows.editorAutoInvert.value ? setInvertible : null,
             thumbIcon: WidgetStateProperty.all(
               widget.image.invertible
-                  ? const Icon(Icons.invert_colors)
-                  : const Icon(Icons.invert_colors_off),
+                  ? const Icon(TarusIkon.renkCevir)
+                  : const Icon(TarusIkon.renkCevir),
             ),
           ),
         ),
@@ -117,10 +113,7 @@ class _CanvasImageDialogState extends State<CanvasImageDialog> {
           Navigator.of(context).pop();
         },
         title: t.editor.imageOptions.download,
-        child: const AdaptiveIcon(
-          icon: Icons.download,
-          cupertinoIcon: CupertinoIcons.arrow_down_circle_fill,
-        ),
+        child: const Icon(TarusIkon.indir),
       ),
       _CanvasImageDialogItem(
         onTap: () {
@@ -130,10 +123,7 @@ class _CanvasImageDialogState extends State<CanvasImageDialog> {
         title: widget.isBackground
             ? t.editor.imageOptions.removeAsBackground
             : t.editor.imageOptions.setAsBackground,
-        child: const AdaptiveIcon(
-          icon: Icons.wallpaper,
-          cupertinoIcon: CupertinoIcons.photo_fill_on_rectangle_fill,
-        ),
+        child: const Icon(TarusIkon.arkaPlanYap),
       ),
       _CanvasImageDialogItem(
         onTap: () {
@@ -142,10 +132,7 @@ class _CanvasImageDialogState extends State<CanvasImageDialog> {
           Navigator.of(context).pop();
         },
         title: t.editor.imageOptions.delete,
-        child: const AdaptiveIcon(
-          icon: Icons.delete,
-          cupertinoIcon: CupertinoIcons.trash_fill,
-        ),
+        child: const Icon(TarusIkon.sil),
       ),
     ];
 
@@ -156,15 +143,7 @@ class _CanvasImageDialogState extends State<CanvasImageDialog> {
       shrinkWrap: true,
       children: children,
     );
-    // issues with intrinsic sizes with each type of dialog
-    if (platform.isCupertino) {
-      return AspectRatio(
-        aspectRatio: widget.singleRow ? children.length / 1 : 2,
-        child: gridView,
-      );
-    } else {
-      return SizedBox(width: 250, child: gridView);
-    }
+    return SizedBox(width: 250, child: gridView);
   }
 }
 

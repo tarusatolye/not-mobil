@@ -1,14 +1,13 @@
 import 'dart:typed_data';
 
 import 'package:archive/archive_io.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:saber/components/theming/adaptive_circular_progress_indicator.dart';
 import 'package:saber/data/editor/editor_core_info.dart';
 import 'package:saber/data/editor/editor_exporter.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 class ExportNoteButton extends StatefulWidget {
   const new({super.key, required this.selectedFiles});
@@ -20,7 +19,6 @@ class ExportNoteButton extends StatefulWidget {
 }
 
 class _ExportNoteButtonState extends State<ExportNoteButton> {
-  final ValueNotifier<bool> isDialOpen = ValueNotifier(false);
   var _currentlyExporting = false;
 
   Future exportFile(List<String> selectedFiles, bool exportPdf) async {
@@ -77,33 +75,36 @@ class _ExportNoteButtonState extends State<ExportNoteButton> {
 
   @override
   Widget build(BuildContext context) {
-    return SpeedDial(
-      spacing: 3,
-      mini: true,
-      openCloseDial: isDialOpen,
-      childPadding: const .all(5),
-      spaceBetweenChildren: 4,
-      switchLabelPosition: Directionality.of(context) == .rtl,
-      dialRoot: (context, open, toggleChildren) {
-        return _currentlyExporting
-            ? AdaptiveCircularProgressIndicator.textStyled()
-            : IconButton(
-                padding: .zero,
-                tooltip: t.home.tooltips.exportNote,
-                onPressed: toggleChildren,
-                icon: const Icon(Icons.share),
-              );
-      },
-      children: [
-        SpeedDialChild(
-          child: const Icon(CupertinoIcons.doc_text),
-          label: 'PDF',
-          onTap: () => exportFile(widget.selectedFiles, true),
+    if (_currentlyExporting) {
+      return const SizedBox.square(
+        dimension: 40,
+        child: Center(child: TarusMetinCarki()),
+      );
+    }
+    return PopupMenuButton<bool>(
+      tooltip: t.home.tooltips.exportNote,
+      icon: const Icon(TarusIkon.disaAktar),
+      onSelected: (pdf) => exportFile(widget.selectedFiles, pdf),
+      itemBuilder: (context) => const [
+        PopupMenuItem(
+          value: true,
+          child: Row(
+            children: [
+              Icon(TarusIkon.kagit, size: 18),
+              SizedBox(width: 10),
+              Text('PDF'),
+            ],
+          ),
         ),
-        SpeedDialChild(
-          child: const Icon(Icons.note),
-          label: 'SBA',
-          onTap: () => exportFile(widget.selectedFiles, false),
+        PopupMenuItem(
+          value: false,
+          child: Row(
+            children: [
+              Icon(TarusIkon.not, size: 18),
+              SizedBox(width: 10),
+              Text('SBA'),
+            ],
+          ),
         ),
       ],
     );

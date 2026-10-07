@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:perfect_freehand/perfect_freehand.dart';
 import 'package:saber/components/canvas/_stroke.dart';
 import 'package:saber/data/editor/page.dart';
@@ -8,6 +7,7 @@ import 'package:saber/data/tools/_tool.dart';
 import 'package:saber/data/tools/highlighter.dart';
 import 'package:saber/data/tools/pencil.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 import 'package:sbn/tool_id.dart';
 
 class Pen extends Tool {
@@ -51,13 +51,13 @@ class Pen extends Tool {
   final double sizeMin, sizeMax, sizeStep;
   late final int sizeStepsBetweenMinAndMax = ((sizeMax - sizeMin) / sizeStep)
       .round();
-  final Object icon;
+  final IconData icon;
 
   @override
   final ToolId toolId;
 
-  static const fountainPenIcon = FontAwesomeIcons.penFancy;
-  static const ballpointPenIcon = FontAwesomeIcons.pen;
+  static const fountainPenIcon = TarusIkon.dolmaKalem;
+  static const ballpointPenIcon = TarusIkon.tukenmezKalem;
 
   static Stroke? currentStroke;
   Color color;

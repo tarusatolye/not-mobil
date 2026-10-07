@@ -1,28 +1,24 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nextcloud/core.dart';
 import 'package:nextcloud/nextcloud.dart';
 import 'package:regexed_validator/regexed_validator.dart';
 import 'package:saber/components/settings/app_info.dart';
-import 'package:saber/components/theming/adaptive_circular_progress_indicator.dart';
 import 'package:saber/data/nextcloud/login_flow.dart';
 import 'package:saber/data/nextcloud/nextcloud_client_extension.dart';
 import 'package:saber/data/nextcloud/pusula_belirteci.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const _width = 400.0;
-
-/// Lighter than the actual Saber color for better contrast
-const _saberColor = Color(0xFFffd642);
-const _onSaberColor = Colors.black;
-const _ncColor = Color(0xFF0082c9);
 
 class NcLoginStep extends HookWidget {
   const new({super.key, required this.recheckCurrentStep});
@@ -32,7 +28,7 @@ class NcLoginStep extends HookWidget {
   SaberLoginFlow _createLoginFlow(BuildContext context, Uri serverUrl) {
     final loginFlow = SaberLoginFlow.start(serverUrl: serverUrl);
 
-    showAdaptiveDialog(
+    showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) => _LoginFlowDialog(loginFlow: loginFlow),
@@ -75,125 +71,76 @@ class NcLoginStep extends HookWidget {
     useEffect(() => loginFlow.value?.dispose, [loginFlow.value]);
 
     final screenSize = MediaQuery.sizeOf(context);
-    final shouldUseTwoColumns = _shouldUseTwoColumns(screenSize);
-    if (shouldUseTwoColumns) {
-      return Center(
-        child: Padding(
-          padding: const .all(64),
-          child: SizedBox(
-            width: _width * 3,
-            child: Row(
-              mainAxisAlignment: .center,
-              crossAxisAlignment: .start,
-              spacing: 64,
-              children: [
-                Expanded(
-                  child: _Header(shouldUseTwoColumns: shouldUseTwoColumns),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: .min,
-                    spacing: 48,
-                    children: [
-                      _LoginWithPusula(onBaglandi: recheckCurrentStep),
-                      _LoginWithNextcloud(
-                        login: (url) => loginFlow.value = _createLoginFlow(
-                          context,
-                          Uri.parse(url),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+    return ListView(
+      padding: .symmetric(
+        horizontal: screenSize.width > _width + 32
+            ? (screenSize.width - _width) / 2
+            : TarusOlcu.sayfaYatay + 4,
+        vertical: 24,
+      ),
+      children: [
+        const _Header(),
+        const SizedBox(height: 20),
+        _LoginWithPusula(onBaglandi: recheckCurrentStep),
+        const SizedBox(height: TarusOlcu.blokArasi),
+        _LoginWithNextcloud(
+          login: (url) =>
+              loginFlow.value = _createLoginFlow(context, Uri.parse(url)),
         ),
-      );
-    } else {
-      return ListView(
-        padding: .symmetric(
-          horizontal: screenSize.width > _width
-              ? (screenSize.width - _width) / 2
-              : 16,
-          vertical: 16,
-        ),
-        children: [
-          const SizedBox(height: 16),
-          _Header(shouldUseTwoColumns: shouldUseTwoColumns),
-          const SizedBox(height: 32),
-          _LoginWithPusula(onBaglandi: recheckCurrentStep),
-          const SizedBox(height: 32),
-          _LoginWithNextcloud(
-            login: (url) =>
-                loginFlow.value = _createLoginFlow(context, Uri.parse(url)),
-          ),
-        ],
-      );
-    }
+      ],
+    );
   }
 }
 
-class const _Header({required final bool shouldUseTwoColumns})
-    extends StatelessWidget {
+/// Üst bölüm: Not işareti, ad, kısa açıklama ve gizlilik onayı.
+class const _Header() extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final r = TarusRenkler.of(context);
     return Column(
       mainAxisSize: .min,
-      crossAxisAlignment: .stretch,
+      crossAxisAlignment: .start,
       children: [
-        if (!shouldUseTwoColumns)
-          _HeaderImage(shouldUseTwoColumns: shouldUseTwoColumns),
-        Text(
-          t.login.ncLoginStep.whereToStoreData,
-          style: theme.textTheme.headlineSmall,
+        Row(
+          children: [
+            const TarusNotIsareti(boyut: 52),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Text(
+                'tarus Not',
+                style: TextStyle(
+                  fontSize: TarusOlcu.yaziSayfaBasligi,
+                  fontWeight: FontWeight.w700,
+                  color: r.text,
+                ),
+              ),
+            ),
+          ],
         ),
+        const SizedBox(height: 12),
+        Text(
+          t.tarus.giris.altBaslik,
+          style: TextStyle(fontSize: 14, color: r.text, height: 1.45),
+        ),
+        const SizedBox(height: 6),
         Text.rich(
           t.login.form.agreeToPrivacyPolicy(
             linkToPrivacyPolicy: (text) => TextSpan(
               text: text,
-              style: TextStyle(color: theme.colorScheme.primary),
+              style: TextStyle(color: r.accent, fontWeight: FontWeight.w600),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   launchUrl(AppInfo.privacyPolicyUrl);
                 },
             ),
           ),
+          style: TextStyle(fontSize: 12, color: r.muted2, height: 1.45),
         ),
-        if (shouldUseTwoColumns)
-          _HeaderImage(shouldUseTwoColumns: shouldUseTwoColumns),
       ],
     );
   }
 }
 
-class const _HeaderImage({required final bool shouldUseTwoColumns})
-    extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final screenSize = MediaQuery.sizeOf(context);
-
-    // Remove banner image on tiny screens to save space
-    if (screenSize.height < 500) return const SizedBox();
-
-    final maxHeight = shouldUseTwoColumns
-        ? screenSize.height * 0.3
-        : screenSize.height * 0.25;
-
-    return Padding(
-      padding: .only(bottom: min(64, screenSize.height * 0.05)),
-      child: SvgPicture.asset(
-        'assets/images/undraw_cloud_sync_re_02p1.svg',
-        width: _width,
-        height: min(_width * 576 / 844.6693, maxHeight),
-        excludeFromSemantics: true,
-      ),
-    );
-  }
-}
-
-/// tarus Not (not.tarus.tr): Pusula Ayarlar'dan alınan eşitleme belirteciyle bağlanır.
 class const _LoginWithPusula({required final VoidCallback onBaglandi})
     extends HookWidget {
   @override
@@ -204,10 +151,6 @@ class const _LoginWithPusula({required final VoidCallback onBaglandi})
     final gecerli = useListenableSelector(
       belirtecController,
       () => PusulaBelirteci.gecerliMi(belirtecController.text),
-    );
-    final buttonStyle = useMemoized(
-      () => _buttonStyleFromBrand(_saberColor, _onSaberColor),
-      const [],
     );
 
     Future<void> baglan() async {
@@ -236,49 +179,72 @@ class const _LoginWithPusula({required final VoidCallback onBaglandi})
       }
     }
 
-    final theme = Theme.of(context);
-    return Column(
-      crossAxisAlignment: .stretch,
-      children: [
-        Row(
-          mainAxisAlignment: .end,
-          children: [
-            SvgPicture.asset('assets/icon/icon.svg', width: 32, height: 32),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Text('tarus Not', style: theme.textTheme.headlineSmall),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        const Text(
-          'Pusula → Ayarlar → Not eşitleme ekranında bu cihaz için bir '
-          'eşitleme belirteci oluşturun ve buraya yapıştırın.',
-        ),
-        const SizedBox(height: 8),
-        TextField(
-          autocorrect: false,
-          enableSuggestions: false,
-          controller: belirtecController,
-          decoration: InputDecoration(
-            labelText: 'Eşitleme belirteci',
-            hintText: '${PusulaBelirteci.onek}…',
-            errorText: hata.value,
-            errorMaxLines: 4,
+    final r = TarusRenkler.of(context);
+    return TarusKart(
+      padding: const .all(TarusOlcu.kart + 2),
+      child: Column(
+        crossAxisAlignment: .stretch,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 34,
+                height: 34,
+                decoration: BoxDecoration(
+                  color: r.accent.withValues(alpha: TarusOlcu.seciliZeminAlfa),
+                  borderRadius: const .all(.circular(TarusOlcu.rMd)),
+                ),
+                child: Icon(TarusIkon.esitle, size: 17, color: r.accent),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  t.tarus.giris.pusulaBaslik,
+                  style: TextStyle(
+                    fontSize: TarusOlcu.yaziBolumBasligi,
+                    fontWeight: FontWeight.w700,
+                    color: r.text,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: 4),
-        ElevatedButton(
-          onPressed: gecerli && !bekliyor.value ? baglan : null,
-          style: buttonStyle,
-          child: bekliyor.value
-              ? const SizedBox.square(
-                  dimension: 16,
-                  child: AdaptiveCircularProgressIndicator(),
-                )
-              : const Text('Pusula ile bağlan'),
-        ),
-      ],
+          const SizedBox(height: 10),
+          Text(
+            t.tarus.giris.pusulaAciklama,
+            style: TextStyle(fontSize: 13, color: r.muted2, height: 1.45),
+          ),
+          const SizedBox(height: 14),
+          TextField(
+            autocorrect: false,
+            enableSuggestions: false,
+            controller: belirtecController,
+            decoration: InputDecoration(
+              labelText: t.tarus.giris.belirtec,
+              hintText: '${PusulaBelirteci.onek}…',
+              prefixIcon: const Icon(TarusIkon.kilit, size: 18),
+              errorText: hata.value,
+              errorMaxLines: 4,
+            ),
+          ),
+          const SizedBox(height: 12),
+          FilledButton(
+            onPressed: gecerli && !bekliyor.value ? baglan : null,
+            style: FilledButton.styleFrom(
+              minimumSize: const Size.fromHeight(TarusOlcu.birincilDugme),
+            ),
+            child: bekliyor.value
+                ? const SizedBox.square(
+                    dimension: 18,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: Colors.white,
+                    ),
+                  )
+                : Text(t.tarus.giris.baglan),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -295,56 +261,60 @@ class const _LoginWithNextcloud({
       return validator.url(url);
     });
 
-    final buttonStyle = useMemoized(
-      () => _buttonStyleFromBrand(_ncColor),
-      const [],
-    );
-
-    final theme = Theme.of(context);
-    return Column(
-      crossAxisAlignment: .stretch,
-      children: [
-        Row(
-          mainAxisAlignment: .end,
-          children: [
-            SvgPicture.asset(
-              'assets/images/nextcloud-logo.svg',
-              width: 32,
-              height: 32,
+    final r = TarusRenkler.of(context);
+    return TarusKart(
+      golge: false,
+      child: Theme(
+        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+        child: ExpansionTile(
+          tilePadding: const .symmetric(horizontal: TarusOlcu.kart + 2),
+          childrenPadding: const .fromLTRB(
+            TarusOlcu.kart + 2,
+            0,
+            TarusOlcu.kart + 2,
+            TarusOlcu.kart + 2,
+          ),
+          leading: Icon(TarusIkon.baglanti, size: 18, color: r.muted2),
+          title: Text(
+            t.login.ncLoginStep.otherNcServer,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: r.text,
             ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Text(
-                t.login.ncLoginStep.otherNcServer,
-                style: theme.textTheme.headlineSmall,
+          ),
+          expandedCrossAxisAlignment: .stretch,
+          children: [
+            Text(
+              t.tarus.giris.kendiSunucunuzAciklama,
+              style: TextStyle(fontSize: 13, color: r.muted2, height: 1.45),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              autocorrect: false,
+              autofillHints: const [AutofillHints.url],
+              controller: serverUrlController,
+              keyboardType: TextInputType.url,
+              decoration: InputDecoration(
+                labelText: t.login.ncLoginStep.serverUrl,
+                hintText: 'https://sunucu.ornek.com',
               ),
+            ),
+            const SizedBox(height: 12),
+            OutlinedButton(
+              onPressed: isServerUrlValid
+                  ? () {
+                      serverUrlController.text = _prependHttpsIfMissing(
+                        serverUrlController.text,
+                      );
+                      login(serverUrlController.text);
+                    }
+                  : null,
+              child: Text(t.login.ncLoginStep.loginWithNextcloud),
             ),
           ],
         ),
-        const SizedBox(height: 16),
-        TextField(
-          autocorrect: false,
-          autofillHints: const [AutofillHints.url],
-          controller: serverUrlController,
-          decoration: InputDecoration(
-            labelText: t.login.ncLoginStep.serverUrl,
-            hintText: 'https://nc.example.com',
-          ),
-        ),
-        const SizedBox(height: 4),
-        ElevatedButton(
-          onPressed: isServerUrlValid
-              ? () {
-                  serverUrlController.text = _prependHttpsIfMissing(
-                    serverUrlController.text,
-                  );
-                  login(serverUrlController.text);
-                }
-              : null,
-          style: buttonStyle,
-          child: Text(t.login.ncLoginStep.loginWithNextcloud),
-        ),
-      ],
+      ),
     );
   }
 }
@@ -361,7 +331,7 @@ class const _LoginFlowDialog({required final SaberLoginFlow loginFlow})
       [loginFlow],
     );
 
-    return AlertDialog.adaptive(
+    return AlertDialog(
       title: Text(t.login.ncLoginStep.loginFlow.pleaseAuthorize),
       content: Column(
         mainAxisSize: .min,
@@ -414,33 +384,12 @@ class const _FakeDoneButton({required final Widget child}) extends HookWidget {
           ? const SizedBox(
               width: 16,
               height: 16,
-              child: AdaptiveCircularProgressIndicator(),
+              child: CircularProgressIndicator(),
             )
           : child,
     );
   }
 }
 
-bool _shouldUseTwoColumns(Size screenSize) {
-  const minWidthForTwoColumns = _width * 2;
-  const minHeightForTwoColumns = _width * 1.5;
-  final landscape = screenSize.width >= screenSize.height;
-  return landscape &&
-      screenSize.width > minWidthForTwoColumns &&
-      screenSize.height > minHeightForTwoColumns;
-}
-
 String _prependHttpsIfMissing(String url) =>
     url.startsWith(RegExp(r'https?://')) ? url : 'https://$url';
-
-ButtonStyle _buttonStyleFromBrand(Color primary, [Color? onPrimary]) {
-  final colorScheme = ColorScheme.fromSeed(
-    seedColor: primary,
-    primary: primary,
-    onPrimary: onPrimary,
-  );
-  return ElevatedButton.styleFrom(
-    backgroundColor: colorScheme.primary,
-    foregroundColor: colorScheme.onPrimary,
-  );
-}

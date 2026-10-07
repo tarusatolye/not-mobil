@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
-import 'package:material_symbols_icons/symbols.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 import 'package:stow_codecs/stow_codecs.dart';
 
 class const HomeLayoutButton({super.key}) extends HookWidget {
@@ -73,7 +73,7 @@ class _HomeLayoutDialogOption extends StatelessWidget {
         .masonryGrid => t.home.layout.masonryGrid,
         .simpleGrid => t.home.layout.simpleGrid,
       }),
-      trailing: selected ? const Icon(Icons.check) : null,
+      trailing: selected ? const Icon(TarusIkon.tamam) : null,
       selected: selected,
       selectedTileColor: Colors.transparent,
     );
@@ -90,7 +90,7 @@ enum HomeLayout({
   static const codec = EnumCodec(values);
 
   Widget get icon => switch (this) {
-    .masonryGrid => const Icon(Symbols.browse),
-    .simpleGrid => const Icon(Icons.grid_view),
+    .masonryGrid => const Icon(TarusIkon.duzenDuvar),
+    .simpleGrid => const Icon(TarusIkon.duzenIzgara),
   };
 }

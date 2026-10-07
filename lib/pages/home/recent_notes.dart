@@ -1,24 +1,19 @@
 import 'dart:async';
 
-import 'package:collapsible/collapsible.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
-import 'package:saber/components/home/delete_note_button.dart';
-import 'package:saber/components/home/export_note_button.dart';
 import 'package:saber/components/home/home_layout_button.dart';
 import 'package:saber/components/home/masonry_files.dart';
-import 'package:saber/components/home/move_note_button.dart';
-import 'package:saber/components/home/new_note_button.dart';
-import 'package:saber/components/home/rename_note_button.dart';
+import 'package:saber/components/home/secim_cubugu.dart';
 import 'package:saber/components/home/syncing_button.dart';
-import 'package:saber/components/home/welcome.dart';
-import 'package:saber/components/theming/saber_theme.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/routes.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
 
 class const RecentPage({super.key}) extends StatefulHookWidget {
   @override
@@ -110,43 +105,41 @@ class _RecentPageState extends State<RecentPage> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = ColorScheme.of(context);
-    final platform = Theme.of(context).platform;
     final crossAxisCount = MediaQuery.sizeOf(context).width ~/ 300 + 1;
     useListenable(stows.homeLayout);
 
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverPadding(
-            padding: const .only(bottom: 8),
-            sliver: SliverAppBar(
-              collapsedHeight: kToolbarHeight,
-              expandedHeight: 200,
-              pinned: true,
-              scrolledUnderElevation: 1,
-              flexibleSpace: FlexibleSpaceBar(
-                title: Text(
-                  t.home.titles.home,
-                  style: TextStyle(color: colorScheme.onSurface),
-                ),
-                centerTitle: false,
-                titlePadding: const EdgeInsetsDirectional.only(
-                  start: 16,
-                  bottom: 16,
-                ),
-              ),
-              actions: const [HomeLayoutButton(), SyncingButton()],
-            ),
+          TarusSayfaUstu(
+            baslik: t.home.titles.home,
+            eylemler: const [HomeLayoutButton(), SyncingButton()],
           ),
           if (failed) ...[
-            const SliverSafeArea(sliver: SliverToBoxAdapter(child: Welcome())),
-          ] else ...[
             SliverSafeArea(
-              minimum: const .only(
-                // Allow space for the FloatingActionButton
-                bottom: 70,
+              top: false,
+              sliver: SliverFillRemaining(
+                hasScrollBody: false,
+                child: TarusBosDurum(
+                  isaret: true,
+                  baslik: t.tarus.bos.hicNotYok,
+                  aciklama: t.tarus.bos.yeniNotIcinArti,
+                ),
               ),
+            ),
+          ] else ...[
+            SliverPadding(
+              padding: const .symmetric(horizontal: TarusOlcu.sayfaYatay),
+              sliver: SliverToBoxAdapter(
+                child: TarusBolumEtiketi(
+                  t.tarus.sonNotlar,
+                  padding: const .fromLTRB(4, 4, 4, 4),
+                ),
+              ),
+            ),
+            SliverSafeArea(
+              top: false,
+              minimum: const .only(bottom: TarusOlcu.aralik),
               sliver: MasonryFiles(
                 crossAxisCount: crossAxisCount,
                 files: [for (final filePath in filePaths) filePath],
@@ -156,30 +149,9 @@ class _RecentPageState extends State<RecentPage> {
           ],
         ],
       ),
-      floatingActionButton: NewNoteButton(cupertino: platform.isCupertino),
-      persistentFooterButtons: selectedFiles.value.isEmpty
+      bottomNavigationBar: selectedFiles.value.isEmpty
           ? null
-          : [
-              Collapsible(
-                axis: CollapsibleAxis.vertical,
-                collapsed: selectedFiles.value.length != 1,
-                child: RenameNoteButton(
-                  existingPath: selectedFiles.value.isEmpty
-                      ? ''
-                      : selectedFiles.value.first,
-                  unselectNotes: () => selectedFiles.value = [],
-                ),
-              ),
-              MoveNoteButton(
-                filesToMove: selectedFiles.value,
-                unselectNotes: () => selectedFiles.value = [],
-              ),
-              DeleteNoteButton(
-                filesToDelete: selectedFiles.value,
-                unselectNotes: () => selectedFiles.value = [],
-              ),
-              ExportNoteButton(selectedFiles: selectedFiles.value),
-            ],
+          : SecimCubugu(selectedFiles: selectedFiles),
     );
   }
 }

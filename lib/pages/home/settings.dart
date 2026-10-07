@@ -1,10 +1,7 @@
 import 'dart:io';
 
 import 'package:collapsible/collapsible.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:saber/components/navbar/responsive_navbar.dart';
 import 'package:saber/components/settings/app_info.dart';
@@ -18,13 +15,8 @@ import 'package:saber/components/settings/settings_subtitle.dart';
 import 'package:saber/components/settings/settings_switch.dart';
 import 'package:saber/components/settings/tarus_tema_secici.dart';
 import 'package:saber/components/settings/update_manager.dart';
-import 'package:saber/components/theming/adaptive_alert_dialog.dart';
-import 'package:saber/components/theming/adaptive_toggle_buttons.dart';
-import 'package:saber/components/theming/saber_theme.dart';
-import 'package:saber/components/theming/uni_icon.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/data/flavor_config.dart';
-import 'package:saber/data/is_this_a_test.dart';
 import 'package:saber/data/locales.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/routes.dart';
@@ -32,6 +24,9 @@ import 'package:saber/data/sentry/sentry_init.dart';
 import 'package:saber/data/tools/shape_pen.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/user/hata_bildir_sayfasi.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
 import 'package:stow/stow.dart';
 
 class const SettingsPage({super.key}) extends StatefulWidget {
@@ -46,17 +41,17 @@ class const SettingsPage({super.key}) extends StatefulWidget {
     if (pref.value == pref.defaultValue) return null;
     return await showDialog(
       context: context,
-      builder: (context) => AdaptiveAlertDialog(
+      builder: (context) => TarusDialog(
         title: Text(t.settings.reset.title),
         content: Text(prefTitle),
         actions: [
-          CupertinoDialogAction(
+          TarusDialogDugmesi(
             onPressed: () {
               Navigator.of(context).pop(false);
             },
             child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
           ),
-          CupertinoDialogAction(
+          TarusDialogDugmesi(
             isDestructiveAction: true,
             onPressed: () {
               pref.value = pref.defaultValue;
@@ -71,12 +66,6 @@ class const SettingsPage({super.key}) extends StatefulWidget {
 }
 
 abstract class _SettingsStows {
-  static final platform = TransformedStow(
-    stows.platform,
-    (TargetPlatform value) => value.index,
-    (int value) => TargetPlatform.values[value],
-  );
-
   static final layoutSize = TransformedStow(
     stows.layoutSize,
     (LayoutSize value) => value.index,
@@ -91,8 +80,6 @@ abstract class _SettingsStows {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  late TargetPlatform platform;
-
   @override
   void initState() {
     stows.locale.addListener(onChanged);
@@ -104,476 +91,432 @@ class _SettingsPageState extends State<SettingsPage> {
     setState(() {});
   }
 
-  // In tests, pretend the current platform is the defaultTargetPlatform
-  bool get usesCupertinoByDefault =>
-      switch (isThisATest ? platform : defaultTargetPlatform) {
-        .iOS => true,
-        .macOS => true,
-        _ => false,
-      };
-  bool get usesYaruByDefault =>
-      switch (isThisATest ? platform : defaultTargetPlatform) {
-        .linux => true,
-        _ => false,
-      };
-  bool get usesMaterialByDefault =>
-      !usesCupertinoByDefault && !usesYaruByDefault;
-
-  static const cupertinoDirectionIcons = [
-    CupertinoIcons.arrow_up_to_line,
-    CupertinoIcons.arrow_right_to_line,
-    CupertinoIcons.arrow_down_to_line,
-    CupertinoIcons.arrow_left_to_line,
-  ];
-  static const materialDirectionIcons = [
-    Icons.north,
-    Icons.east,
-    Icons.south,
-    Icons.west,
+  /// Araç çubuğu konumu: yukarı, sağ, aşağı, sol.
+  static const yonIkonlari = [
+    TarusIkon.yukari,
+    TarusIkon.saga,
+    TarusIkon.asagiCizgi,
+    TarusIkon.sola,
   ];
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = ColorScheme.of(context);
-    platform = Theme.of(context).platform;
-    final cupertino = platform.isCupertino;
-
     final requiresManualUpdates = FlavorConfig.appStore.isEmpty;
-
-    final materialIcon = switch (defaultTargetPlatform) {
-      .windows => FontAwesomeIcons.windows,
-      _ => Icons.android,
-    };
 
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverPadding(
-            padding: const .only(bottom: 8),
-            sliver: SliverAppBar(
-              collapsedHeight: kToolbarHeight,
-              expandedHeight: 200,
-              pinned: true,
-              scrolledUnderElevation: 1,
-              flexibleSpace: FlexibleSpaceBar(
-                title: Text(
-                  t.home.titles.settings,
-                  style: TextStyle(color: colorScheme.onSurface),
-                ),
-                centerTitle: false,
-                titlePadding: const EdgeInsetsDirectional.only(
-                  start: 16,
-                  bottom: 16,
-                ),
-              ),
-              actions: [
-                if (UpdateManager.status.value != .upToDate)
-                  IconButton(
-                    tooltip: t.home.tooltips.showUpdateDialog,
-                    icon: const Icon(Icons.system_update),
-                    onPressed: () {
-                      UpdateManager.showUpdateDialog(
-                        context,
-                        userTriggered: true,
-                      );
-                    },
-                  ),
-              ],
-            ),
-          ),
-          SliverSafeArea(
-            sliver: SliverList.list(
-              children: [
-                const NextcloudProfile(),
-                const Padding(padding: .all(8), child: AppInfo()),
-                SettingsButton(
-                  title: 'Hata bildir',
-                  icon: Icons.bug_report_outlined,
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const HataBildirSayfasi(modul: 'Ayarlar'),
-                    ),
-                  ),
-                ),
-                SettingsSubtitle(subtitle: t.settings.prefCategories.general),
-                SettingsDropdown(
-                  title: t.settings.prefLabels.locale,
-                  icon: cupertino ? CupertinoIcons.globe : Icons.language,
-                  pref: stows.locale,
-                  options: [
-                    ToggleButtonsOption('', Text(t.settings.systemLanguage)),
-                    ...AppLocaleUtils.supportedLocales.map((locale) {
-                      final localeCode = locale.toLanguageTag();
-                      final localeName = localeNames[localeCode];
-                      assert(
-                        localeName != null,
-                        'Missing locale name for $localeCode',
-                      );
-                      return ToggleButtonsOption(
-                        localeCode,
-                        Text(localeName ?? localeCode),
-                      );
-                    }),
-                  ],
-                ),
-                const TarusTemaSecici(),
-                SettingsSelection(
-                  title: t.settings.prefLabels.platform,
-                  iconBuilder: (i) => switch (stows.platform.value) {
-                    .iOS || .macOS => Icons.apple,
-                    .linux => FontAwesomeIcons.ubuntu,
-                    _ => materialIcon,
-                  },
-                  pref: _SettingsStows.platform,
-                  optionsWidth: 60,
-                  options: [
-                    ToggleButtonsOption(() {
-                      if (usesMaterialByDefault)
-                        return defaultTargetPlatform.index;
-                      return TargetPlatform.android.index;
-                    }(), UniIcon(materialIcon, semanticLabel: 'Material')),
-                    ToggleButtonsOption(() {
-                      // Hack to allow screenshot golden tests
-                      if (kDebugMode && stows.platform.value.isCupertino)
-                        return stows.platform.value.index;
-                      if (usesCupertinoByDefault)
-                        return defaultTargetPlatform.index;
-                      return TargetPlatform.iOS.index;
-                    }(), const Icon(Icons.apple, semanticLabel: 'Cupertino')),
-                    ToggleButtonsOption(
-                      () {
-                        if (usesYaruByDefault)
-                          return defaultTargetPlatform.index;
-                        return TargetPlatform.linux.index;
-                      }(),
-                      const UniIcon(
-                        FontAwesomeIcons.ubuntu,
-                        semanticLabel: 'Yaru',
-                      ),
-                    ),
-                  ],
-                ),
-                SettingsSelection(
-                  title: t.settings.prefLabels.layoutSize,
-                  subtitle: switch (stows.layoutSize.value) {
-                    .auto => t.settings.layoutSizes.auto,
-                    .phone => t.settings.layoutSizes.phone,
-                    .tablet => t.settings.layoutSizes.tablet,
-                  },
-                  afterChange: (_) => setState(() {}),
-                  iconBuilder: (i) => switch (LayoutSize.values[i]) {
-                    .auto => Icons.aspect_ratio,
-                    .phone => Icons.smartphone,
-                    .tablet => Icons.tablet,
-                  },
-                  pref: _SettingsStows.layoutSize,
-                  optionsWidth: 60,
-                  options: [
-                    ToggleButtonsOption(
-                      LayoutSize.auto.index,
-                      Icon(
-                        Icons.aspect_ratio,
-                        semanticLabel: t.settings.layoutSizes.auto,
-                      ),
-                    ),
-                    ToggleButtonsOption(
-                      LayoutSize.phone.index,
-                      Icon(
-                        Icons.smartphone,
-                        semanticLabel: t.settings.layoutSizes.phone,
-                      ),
-                    ),
-                    ToggleButtonsOption(
-                      LayoutSize.tablet.index,
-                      Icon(
-                        Icons.tablet,
-                        semanticLabel: t.settings.layoutSizes.tablet,
-                      ),
-                    ),
-                  ],
-                ),
-                SettingsSwitch(
-                  title: t.settings.prefLabels.hyperlegibleFont,
-                  subtitle: t.settings.prefDescriptions.hyperlegibleFont,
-                  iconBuilder: (b) {
-                    if (b)
-                      return cupertino
-                          ? CupertinoIcons.textformat
-                          : Icons.font_download;
-                    return cupertino
-                        ? CupertinoIcons.textformat_alt
-                        : Icons.font_download_off;
-                  },
-                  pref: stows.hyperlegibleFont,
-                ),
-
-                SettingsSubtitle(subtitle: t.settings.prefCategories.writing),
-                SettingsSwitch(
-                  title: t.settings.prefLabels.preferGreyscale,
-                  subtitle: t.settings.prefDescriptions.preferGreyscale,
-                  iconBuilder: (b) {
-                    return b
-                        ? Icons.monochrome_photos
-                        : Icons.enhance_photo_translate;
-                  },
-                  pref: stows.preferGreyscale,
-                ),
-                SettingsSwitch(
-                  title: t.settings.prefLabels.autoClearWhiteboardOnExit,
-                  subtitle:
-                      t.settings.prefDescriptions.autoClearWhiteboardOnExit,
-                  icon: Icons.cleaning_services,
-                  pref: stows.autoClearWhiteboardOnExit,
-                ),
-                SettingsSwitch(
-                  title: t.settings.prefLabels.disableEraserAfterUse,
-                  subtitle: t.settings.prefDescriptions.disableEraserAfterUse,
-                  icon: FontAwesomeIcons.eraser,
-                  pref: stows.disableEraserAfterUse,
-                ),
-                ValueListenableBuilder(
-                  valueListenable: stows.hideFingerDrawingToggle,
-                  builder: (context, _, _) {
-                    return SettingsSwitch(
-                      title: t.settings.prefLabels.hideFingerDrawingToggle,
-                      subtitle: () {
-                        if (!stows.hideFingerDrawingToggle.value) {
-                          return t
-                              .settings
-                              .prefDescriptions
-                              .hideFingerDrawing
-                              .shown;
-                        } else if (stows.editorFingerDrawing.value) {
-                          return t
-                              .settings
-                              .prefDescriptions
-                              .hideFingerDrawing
-                              .fixedOn;
-                        } else {
-                          return t
-                              .settings
-                              .prefDescriptions
-                              .hideFingerDrawing
-                              .fixedOff;
-                        }
-                      }(),
-                      icon: CupertinoIcons.hand_draw_fill,
-                      pref: stows.hideFingerDrawingToggle,
+          TarusSayfaUstu(
+            baslik: t.home.titles.settings,
+            eylemler: [
+              if (UpdateManager.status.value != .upToDate)
+                IconButton(
+                  tooltip: t.home.tooltips.showUpdateDialog,
+                  icon: const Icon(TarusIkon.guncelleme),
+                  onPressed: () {
+                    UpdateManager.showUpdateDialog(
+                      context,
+                      userTriggered: true,
                     );
                   },
                 ),
-                ValueListenableBuilder(
-                  valueListenable: stows.hideFingerDrawingToggle,
-                  builder: (context, hideFingerDrawing, _) {
-                    return Collapsible(
-                      collapsed: hideFingerDrawing,
-                      axis: CollapsibleAxis.vertical,
-                      child: SettingsSwitch(
-                        title: t
-                            .settings
-                            .prefLabels
-                            .autoDisableFingerDrawingWhenStylusDetected,
+            ],
+          ),
+          SliverSafeArea(
+            top: false,
+            sliver: SliverPadding(
+              padding: const .fromLTRB(
+                TarusOlcu.sayfaYatay,
+                0,
+                TarusOlcu.sayfaYatay,
+                TarusOlcu.aralik,
+              ),
+              sliver: SliverList.list(
+                children: [
+                  TarusBolumEtiketi(
+                    t.tarus.ayar.esitleme,
+                    padding: const .fromLTRB(4, 4, 4, 8),
+                  ),
+                  const NextcloudProfile(),
+
+                  TarusBolumEtiketi(t.tarus.ayar.gorunum),
+                  AyarGrubu(
+                    children: [
+                      SettingsDropdown(
+                        title: t.settings.prefLabels.locale,
+                        icon: TarusIkon.dil,
+                        pref: stows.locale,
+                        options: [
+                          ToggleButtonsOption(
+                            '',
+                            Text(t.settings.systemLanguage),
+                          ),
+                          ...AppLocaleUtils.supportedLocales.map((locale) {
+                            final localeCode = locale.toLanguageTag();
+                            final localeName = localeNames[localeCode];
+                            assert(
+                              localeName != null,
+                              'Missing locale name for $localeCode',
+                            );
+                            return ToggleButtonsOption(
+                              localeCode,
+                              Text(localeName ?? localeCode),
+                            );
+                          }),
+                        ],
+                      ),
+                      SettingsSelection(
+                        title: t.settings.prefLabels.layoutSize,
+                        subtitle: switch (stows.layoutSize.value) {
+                          .auto => t.settings.layoutSizes.auto,
+                          .phone => t.settings.layoutSizes.phone,
+                          .tablet => t.settings.layoutSizes.tablet,
+                        },
+                        afterChange: (_) => setState(() {}),
+                        icon: TarusIkon.duzenBoyutu,
+                        pref: _SettingsStows.layoutSize,
+                        options: [
+                          ToggleButtonsOption(
+                            LayoutSize.auto.index,
+                            Icon(
+                              TarusIkon.otomatik,
+                              semanticLabel: t.settings.layoutSizes.auto,
+                            ),
+                          ),
+                          ToggleButtonsOption(
+                            LayoutSize.phone.index,
+                            Icon(
+                              TarusIkon.telefon,
+                              semanticLabel: t.settings.layoutSizes.phone,
+                            ),
+                          ),
+                          ToggleButtonsOption(
+                            LayoutSize.tablet.index,
+                            Icon(
+                              TarusIkon.tablet,
+                              semanticLabel: t.settings.layoutSizes.tablet,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SettingsSwitch(
+                        title: t.settings.prefLabels.hyperlegibleFont,
+                        subtitle: t.settings.prefDescriptions.hyperlegibleFont,
+                        icon: TarusIkon.yaziTipi,
+                        pref: stows.hyperlegibleFont,
+                      ),
+                    ],
+                  ),
+
+                  TarusBolumEtiketi(t.tarus.ayar.tema),
+                  const TarusTemaSecici(),
+
+                  TarusBolumEtiketi(t.settings.prefCategories.writing),
+                  AyarGrubu(
+                    children: [
+                      SettingsSwitch(
+                        title: t.settings.prefLabels.preferGreyscale,
+                        subtitle: t.settings.prefDescriptions.preferGreyscale,
+                        icon: TarusIkon.griTon,
+                        pref: stows.preferGreyscale,
+                      ),
+                      SettingsSwitch(
+                        title: t.settings.prefLabels.autoClearWhiteboardOnExit,
                         subtitle: t
                             .settings
                             .prefDescriptions
-                            .autoDisableFingerDrawingWhenStylusDetected,
-                        icon: CupertinoIcons.pencil,
-                        pref: stows.autoDisableFingerDrawingWhenStylusDetected,
+                            .autoClearWhiteboardOnExit,
+                        icon: TarusIkon.temizle,
+                        pref: stows.autoClearWhiteboardOnExit,
                       ),
-                    );
-                  },
-                ),
+                      SettingsSwitch(
+                        title: t.settings.prefLabels.disableEraserAfterUse,
+                        subtitle:
+                            t.settings.prefDescriptions.disableEraserAfterUse,
+                        icon: TarusIkon.silgi,
+                        pref: stows.disableEraserAfterUse,
+                      ),
+                      ValueListenableBuilder(
+                        valueListenable: stows.hideFingerDrawingToggle,
+                        builder: (context, _, _) {
+                          return SettingsSwitch(
+                            title:
+                                t.settings.prefLabels.hideFingerDrawingToggle,
+                            subtitle: () {
+                              final d =
+                                  t.settings.prefDescriptions.hideFingerDrawing;
+                              if (!stows.hideFingerDrawingToggle.value) {
+                                return d.shown;
+                              } else if (stows.editorFingerDrawing.value) {
+                                return d.fixedOn;
+                              } else {
+                                return d.fixedOff;
+                              }
+                            }(),
+                            icon: TarusIkon.parmakla,
+                            pref: stows.hideFingerDrawingToggle,
+                          );
+                        },
+                      ),
+                      ValueListenableBuilder(
+                        valueListenable: stows.hideFingerDrawingToggle,
+                        builder: (context, hideFingerDrawing, _) {
+                          return Collapsible(
+                            collapsed: hideFingerDrawing,
+                            axis: CollapsibleAxis.vertical,
+                            child: SettingsSwitch(
+                              title: t
+                                  .settings
+                                  .prefLabels
+                                  .autoDisableFingerDrawingWhenStylusDetected,
+                              subtitle: t
+                                  .settings
+                                  .prefDescriptions
+                                  .autoDisableFingerDrawingWhenStylusDetected,
+                              icon: TarusIkon.kalem,
+                              pref: stows
+                                  .autoDisableFingerDrawingWhenStylusDetected,
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
 
-                SettingsSubtitle(subtitle: t.settings.prefCategories.editor),
-                SettingsSelection(
-                  title: t.settings.prefLabels.editorToolbarAlignment,
-                  subtitle:
-                      t.settings.axisDirections[_SettingsStows
-                          .editorToolbarAlignment
-                          .value],
-                  iconBuilder: (num i) {
-                    if (i is! int || i >= materialDirectionIcons.length)
-                      return null;
-                    return cupertino
-                        ? cupertinoDirectionIcons[i]
-                        : materialDirectionIcons[i];
-                  },
-                  pref: _SettingsStows.editorToolbarAlignment,
-                  optionsWidth: 60,
-                  options: [
-                    for (final AxisDirection direction in AxisDirection.values)
-                      ToggleButtonsOption(
-                        direction.index,
-                        Icon(
-                          cupertino
-                              ? cupertinoDirectionIcons[direction.index]
-                              : materialDirectionIcons[direction.index],
-                          semanticLabel:
-                              t.settings.axisDirections[direction.index],
+                  TarusBolumEtiketi(t.settings.prefCategories.editor),
+                  AyarGrubu(
+                    children: [
+                      SettingsSelection(
+                        title: t.settings.prefLabels.editorToolbarAlignment,
+                        subtitle:
+                            t.settings.axisDirections[_SettingsStows
+                                .editorToolbarAlignment
+                                .value],
+                        iconBuilder: (num i) {
+                          if (i is! int || i >= yonIkonlari.length) return null;
+                          return yonIkonlari[i];
+                        },
+                        pref: _SettingsStows.editorToolbarAlignment,
+                        optionsWidth: 40,
+                        options: [
+                          for (final AxisDirection direction
+                              in AxisDirection.values)
+                            ToggleButtonsOption(
+                              direction.index,
+                              Icon(
+                                yonIkonlari[direction.index],
+                                semanticLabel:
+                                    t.settings.axisDirections[direction.index],
+                              ),
+                            ),
+                        ],
+                        afterChange: (_) => setState(() {}),
+                      ),
+                      SettingsSwitch(
+                        title:
+                            t.settings.prefLabels.editorToolbarShowInFullscreen,
+                        icon: TarusIkon.tamEkran,
+                        pref: stows.editorToolbarShowInFullscreen,
+                      ),
+                      SettingsSwitch(
+                        title: t.settings.prefLabels.editorAutoInvert,
+                        icon: TarusIkon.renkCevir,
+                        pref: stows.editorAutoInvert,
+                      ),
+                      SettingsSwitch(
+                        title: t.settings.prefLabels.editorPromptRename,
+                        subtitle:
+                            t.settings.prefDescriptions.editorPromptRename,
+                        iconBuilder: (b) =>
+                            b ? TarusIkon.klavye : TarusIkon.klavyeKapali,
+                        pref: stows.editorPromptRename,
+                      ),
+                      SettingsSwitch(
+                        title:
+                            t.settings.prefLabels.recentColorsDontSavePresets,
+                        icon: TarusIkon.renkler,
+                        pref: stows.recentColorsDontSavePresets,
+                      ),
+                      SettingsSelection(
+                        title: t.settings.prefLabels.recentColorsLength,
+                        icon: TarusIkon.gecmis,
+                        pref: stows.recentColorsLength,
+                        options: const [
+                          ToggleButtonsOption(5, Text('5')),
+                          ToggleButtonsOption(10, Text('10')),
+                        ],
+                      ),
+                      SettingsSwitch(
+                        title: t.settings.prefLabels.printPageIndicators,
+                        subtitle:
+                            t.settings.prefDescriptions.printPageIndicators,
+                        icon: TarusIkon.sayfaNumarasi,
+                        pref: stows.printPageIndicators,
+                      ),
+                    ],
+                  ),
+
+                  TarusBolumEtiketi(t.settings.prefCategories.performance),
+                  AyarGrubu(
+                    children: [
+                      SettingsSelection(
+                        title: t.settings.prefLabels.maxImageSize,
+                        subtitle: t.settings.prefDescriptions.maxImageSize,
+                        icon: TarusIkon.gorselBoyutu,
+                        pref: stows.maxImageSize,
+                        options: const <ToggleButtonsOption<double>>[
+                          ToggleButtonsOption(500, Text('500')),
+                          ToggleButtonsOption(1000, Text('1000')),
+                          ToggleButtonsOption(2000, Text('2000')),
+                        ],
+                      ),
+                      SettingsSelection(
+                        title: t.settings.prefLabels.autosave,
+                        subtitle: t.settings.prefDescriptions.autosave,
+                        icon: TarusIkon.kaydet,
+                        pref: stows.autosaveDelay,
+                        options: [
+                          const ToggleButtonsOption(5000, Text('5s')),
+                          const ToggleButtonsOption(10000, Text('10s')),
+                          ToggleButtonsOption(
+                            -1,
+                            Text(t.settings.autosaveDisabled),
+                          ),
+                        ],
+                      ),
+                      SettingsSelection(
+                        title: t.settings.prefLabels.shapeRecognitionDelay,
+                        subtitle:
+                            t.settings.prefDescriptions.shapeRecognitionDelay,
+                        icon: TarusIkon.sekilKalemi,
+                        pref: stows.shapeRecognitionDelay,
+                        options: [
+                          const ToggleButtonsOption(500, Text('0.5s')),
+                          const ToggleButtonsOption(1000, Text('1s')),
+                          ToggleButtonsOption(
+                            -1,
+                            Text(t.settings.shapeRecognitionDisabled),
+                          ),
+                        ],
+                        afterChange: (ms) {
+                          ShapePen.debounceDuration =
+                              ShapePen.getDebounceFromPref();
+                        },
+                      ),
+                      SettingsSwitch(
+                        title: t.settings.prefLabels.autoStraightenLines,
+                        subtitle:
+                            t.settings.prefDescriptions.autoStraightenLines,
+                        icon: TarusIkon.cizgiDuzelt,
+                        pref: stows.autoStraightenLines,
+                      ),
+                    ],
+                  ),
+
+                  TarusBolumEtiketi(t.settings.prefCategories.advanced),
+                  AyarGrubu(
+                    children: [
+                      if (isSentryAvailable) const SettingsSentryConsent(),
+                      if (Platform.isAndroid)
+                        SettingsDirectorySelector(
+                          title: t.settings.prefLabels.customDataDir,
+                          icon: TarusIkon.klasor,
+                        ),
+                      if (Platform.isWindows ||
+                          Platform.isLinux ||
+                          Platform.isMacOS)
+                        SettingsButton(
+                          title: t.settings.openDataDir,
+                          icon: TarusIkon.klasorAcik,
+                          onPressed: () {
+                            if (Platform.isWindows) {
+                              Process.run('explorer', [
+                                FileManager.documentsDirectory,
+                              ]);
+                            } else if (Platform.isLinux) {
+                              Process.run('xdg-open', [
+                                FileManager.documentsDirectory,
+                              ]);
+                            } else if (Platform.isMacOS) {
+                              Process.run('open', [
+                                FileManager.documentsDirectory,
+                              ]);
+                            }
+                          },
+                        ),
+                      if (UpdateManager.etkin &&
+                          (requiresManualUpdates ||
+                              stows.shouldCheckForUpdates.value !=
+                                  stows
+                                      .shouldCheckForUpdates
+                                      .defaultValue)) ...[
+                        SettingsSwitch(
+                          title: t.settings.prefLabels.shouldCheckForUpdates,
+                          icon: TarusIkon.guncelleme,
+                          pref: stows.shouldCheckForUpdates,
+                          afterChange: (_) => setState(() {}),
+                        ),
+                        Collapsible(
+                          collapsed: !stows.shouldCheckForUpdates.value,
+                          axis: CollapsibleAxis.vertical,
+                          child: SettingsSwitch(
+                            title: t
+                                .settings
+                                .prefLabels
+                                .shouldAlwaysAlertForUpdates,
+                            subtitle: t
+                                .settings
+                                .prefDescriptions
+                                .shouldAlwaysAlertForUpdates,
+                            icon: TarusIkon.uyari,
+                            pref: stows.shouldAlwaysAlertForUpdates,
+                          ),
+                        ),
+                      ],
+                      SettingsSwitch(
+                        title: t.settings.prefLabels.allowInsecureConnections,
+                        subtitle: t
+                            .settings
+                            .prefDescriptions
+                            .allowInsecureConnections,
+                        icon: TarusIkon.guvenlik,
+                        pref: stows.allowInsecureConnections,
+                      ),
+                    ],
+                  ),
+
+                  TarusBolumEtiketi(t.tarus.ayar.destek),
+                  AyarGrubu(
+                    children: [
+                      SettingsButton(
+                        title: t.tarus.hataBildir,
+                        subtitle: t.tarus.hataBildirAciklama,
+                        icon: TarusIkon.hataBildir,
+                        onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) =>
+                                const HataBildirSayfasi(modul: 'Ayarlar'),
+                          ),
                         ),
                       ),
-                  ],
-                  afterChange: (_) => setState(() {}),
-                ),
-                SettingsSwitch(
-                  title: t.settings.prefLabels.editorToolbarShowInFullscreen,
-                  icon: cupertino
-                      ? CupertinoIcons.fullscreen
-                      : Icons.fullscreen,
-                  pref: stows.editorToolbarShowInFullscreen,
-                ),
-                SettingsSwitch(
-                  title: t.settings.prefLabels.editorAutoInvert,
-                  iconBuilder: (b) {
-                    return b ? Icons.invert_colors_on : Icons.invert_colors_off;
-                  },
-                  pref: stows.editorAutoInvert,
-                ),
-                SettingsSwitch(
-                  title: t.settings.prefLabels.editorPromptRename,
-                  subtitle: t.settings.prefDescriptions.editorPromptRename,
-                  iconBuilder: (b) {
-                    if (b)
-                      return cupertino
-                          ? CupertinoIcons.keyboard
-                          : Icons.keyboard;
-                    return cupertino
-                        ? CupertinoIcons.keyboard_chevron_compact_down
-                        : Icons.keyboard_hide;
-                  },
-                  pref: stows.editorPromptRename,
-                ),
-                SettingsSwitch(
-                  title: t.settings.prefLabels.recentColorsDontSavePresets,
-                  icon: Icons.palette,
-                  pref: stows.recentColorsDontSavePresets,
-                ),
-                SettingsSelection(
-                  title: t.settings.prefLabels.recentColorsLength,
-                  icon: Icons.history,
-                  pref: stows.recentColorsLength,
-                  options: const [
-                    ToggleButtonsOption(5, Text('5')),
-                    ToggleButtonsOption(10, Text('10')),
-                  ],
-                ),
-                SettingsSwitch(
-                  title: t.settings.prefLabels.printPageIndicators,
-                  subtitle: t.settings.prefDescriptions.printPageIndicators,
-                  icon: Icons.numbers,
-                  pref: stows.printPageIndicators,
-                ),
-                SettingsSubtitle(
-                  subtitle: t.settings.prefCategories.performance,
-                ),
-                SettingsSelection(
-                  title: t.settings.prefLabels.maxImageSize,
-                  subtitle: t.settings.prefDescriptions.maxImageSize,
-                  icon: Icons.photo_size_select_large,
-                  pref: stows.maxImageSize,
-                  options: const <ToggleButtonsOption<double>>[
-                    ToggleButtonsOption(500, Text('500')),
-                    ToggleButtonsOption(1000, Text('1000')),
-                    ToggleButtonsOption(2000, Text('2000')),
-                  ],
-                ),
-                SettingsSelection(
-                  title: t.settings.prefLabels.autosave,
-                  subtitle: t.settings.prefDescriptions.autosave,
-                  icon: Icons.save,
-                  pref: stows.autosaveDelay,
-                  options: [
-                    const ToggleButtonsOption(5000, Text('5s')),
-                    const ToggleButtonsOption(10000, Text('10s')),
-                    ToggleButtonsOption(-1, Text(t.settings.autosaveDisabled)),
-                  ],
-                ),
-                SettingsSelection(
-                  title: t.settings.prefLabels.shapeRecognitionDelay,
-                  subtitle: t.settings.prefDescriptions.shapeRecognitionDelay,
-                  icon: FontAwesomeIcons.shapes,
-                  pref: stows.shapeRecognitionDelay,
-                  options: [
-                    const ToggleButtonsOption(500, Text('0.5s')),
-                    const ToggleButtonsOption(1000, Text('1s')),
-                    ToggleButtonsOption(
-                      -1,
-                      Text(t.settings.shapeRecognitionDisabled),
-                    ),
-                  ],
-                  afterChange: (ms) {
-                    ShapePen.debounceDuration = ShapePen.getDebounceFromPref();
-                  },
-                ),
-                SettingsSwitch(
-                  title: t.settings.prefLabels.autoStraightenLines,
-                  subtitle: t.settings.prefDescriptions.autoStraightenLines,
-                  icon: Icons.straighten,
-                  pref: stows.autoStraightenLines,
-                ),
-                SettingsSubtitle(subtitle: t.settings.prefCategories.advanced),
-                if (isSentryAvailable) const SettingsSentryConsent(),
-                if (Platform.isAndroid)
-                  SettingsDirectorySelector(
-                    title: t.settings.prefLabels.customDataDir,
-                    icon: Icons.folder,
+                      SettingsButton(
+                        title: t.logs.viewLogs,
+                        subtitle: t.logs.debuggingInfo,
+                        icon: TarusIkon.kayitlar,
+                        onPressed: () => context.push(RoutePaths.logs),
+                      ),
+                      SettingsButton(
+                        title: t.tarus.hakkinda,
+                        subtitle: t.tarus.hakkindaAciklama,
+                        icon: TarusIkon.hakkinda,
+                        onPressed: () => AppInfo.hakkindaAc(context),
+                      ),
+                    ],
                   ),
-                if (Platform.isWindows || Platform.isLinux || Platform.isMacOS)
-                  SettingsButton(
-                    title: t.settings.openDataDir,
-                    icon: Icons.folder_open,
-                    onPressed: () {
-                      if (Platform.isWindows) {
-                        Process.run('explorer', [
-                          FileManager.documentsDirectory,
-                        ]);
-                      } else if (Platform.isLinux) {
-                        Process.run('xdg-open', [
-                          FileManager.documentsDirectory,
-                        ]);
-                      } else if (Platform.isMacOS) {
-                        Process.run('open', [FileManager.documentsDirectory]);
-                      }
-                    },
-                  ),
-                if (UpdateManager.etkin &&
-                    (requiresManualUpdates ||
-                        stows.shouldCheckForUpdates.value !=
-                            stows.shouldCheckForUpdates.defaultValue)) ...[
-                  SettingsSwitch(
-                    title: t.settings.prefLabels.shouldCheckForUpdates,
-                    icon: Icons.system_update,
-                    pref: stows.shouldCheckForUpdates,
-                    afterChange: (_) => setState(() {}),
-                  ),
-                  Collapsible(
-                    collapsed: !stows.shouldCheckForUpdates.value,
-                    axis: CollapsibleAxis.vertical,
-                    child: SettingsSwitch(
-                      title: t.settings.prefLabels.shouldAlwaysAlertForUpdates,
-                      subtitle: t
-                          .settings
-                          .prefDescriptions
-                          .shouldAlwaysAlertForUpdates,
-                      icon: Icons.system_security_update_warning,
-                      pref: stows.shouldAlwaysAlertForUpdates,
-                    ),
-                  ),
+                  const SizedBox(height: 12),
+                  const AppInfo(),
                 ],
-                SettingsSwitch(
-                  title: t.settings.prefLabels.allowInsecureConnections,
-                  subtitle:
-                      t.settings.prefDescriptions.allowInsecureConnections,
-                  icon: Icons.private_connectivity,
-                  pref: stows.allowInsecureConnections,
-                ),
-                SettingsButton(
-                  title: t.logs.viewLogs,
-                  subtitle: t.logs.debuggingInfo,
-                  icon: Icons.receipt_long,
-                  onPressed: () => context.push(RoutePaths.logs),
-                ),
-              ],
+              ),
             ),
           ),
         ],

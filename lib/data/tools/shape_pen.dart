@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logging/logging.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart';
 import 'package:saber/components/canvas/_circle_stroke.dart';
@@ -10,6 +9,7 @@ import 'package:saber/components/canvas/_stroke.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/tools/pen.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 class ShapePen extends Pen {
   new()
@@ -27,7 +27,7 @@ class ShapePen extends Pen {
 
   static final log = Logger('ShapePen');
 
-  static const shapePenIcon = FontAwesomeIcons.shapes;
+  static const shapePenIcon = TarusIkon.sekilKalemi;
 
   static RecognizedUnistroke? detectedShape;
   void _detectShape() {

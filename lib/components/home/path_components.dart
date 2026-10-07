@@ -1,49 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 
+/// Konum çubuğu (STANDARTLAR §tarusBreadcrumb): kökte «Notlar», alt
+/// klasörlerde solda üst klasöre dönüş düğmesi; öğeler 12 px, ayraç 14 px
+/// `ChevronRight`, son öğe 600 ve tıklanamaz.
 class PathComponents extends StatelessWidget {
-  new(String? path, {super.key, required this.onPathComponentTap})
+  new(String? path, {super.key, required this.onPathComponentTap, this.onBack})
     : components = _splitPath(path);
 
   final List<String> components;
   final void Function(String? path) onPathComponentTap;
 
+  /// Üst klasöre dön; null ise düğme gösterilmez.
+  final VoidCallback? onBack;
+
   @override
   Widget build(BuildContext context) {
-    final colorScheme = ColorScheme.of(context);
-    return ElevatedButtonTheme(
-      data: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          foregroundColor: colorScheme.onSurface,
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          minimumSize: const Size(24, 8),
-          padding: const .all(8),
-          shape: const RoundedRectangleBorder(borderRadius: .all(.circular(4))),
-        ),
+    final r = TarusRenkler.of(context);
+    final ogeler = <Widget>[
+      _Oge(
+        metin: t.home.titles.browse,
+        aktif: components.isEmpty,
+        onTap: () => onPathComponentTap(null),
       ),
-      child: Padding(
-        padding: const .symmetric(horizontal: 16),
-        child: Wrap(
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            if (components.isNotEmpty)
-              ElevatedButton(
-                onPressed: () {
-                  onPathComponentTap(null);
-                },
-                child: const Text('/'),
-              ),
-            for (var i = 0; i < components.length; i++) ...[
-              const Icon(Icons.chevron_right, size: 16),
-              ElevatedButton(
-                onPressed: () {
-                  final path = '/${components.sublist(0, i + 1).join('/')}';
-                  onPathComponentTap(path);
-                },
-                child: Text(components[i]),
-              ),
-            ],
-          ],
+      for (var i = 0; i < components.length; i++) ...[
+        Icon(TarusIkon.ileri, size: 14, color: r.muted2),
+        _Oge(
+          metin: components[i],
+          aktif: i == components.length - 1,
+          onTap: () =>
+              onPathComponentTap('/${components.sublist(0, i + 1).join('/')}'),
         ),
+      ],
+    ];
+    return SizedBox(
+      height: 40,
+      child: Row(
+        children: [
+          if (components.isNotEmpty && onBack != null) ...[
+            IconButton(
+              tooltip: t.home.backFolder,
+              onPressed: onBack,
+              icon: const Icon(TarusIkon.geri, size: 18),
+            ),
+            const SizedBox(width: 2),
+          ] else
+            const SizedBox(width: 4),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              reverse: true,
+              child: Row(spacing: 4, children: ogeler),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -53,5 +65,32 @@ class PathComponents extends StatelessWidget {
         .split(RegExp(r'[\\/]'))
         .where((s) => s.isNotEmpty)
         .toList(growable: false);
+  }
+}
+
+class const _Oge({
+  required final String metin,
+  required final bool aktif,
+  required final VoidCallback onTap,
+}) extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final r = TarusRenkler.of(context);
+    final yazi = Text(
+      metin,
+      style: TextStyle(
+        fontSize: 12.5,
+        fontWeight: aktif ? FontWeight.w600 : FontWeight.w500,
+        color: aktif ? r.text : r.muted2,
+      ),
+    );
+    if (aktif) {
+      return Padding(padding: const EdgeInsets.all(4), child: yazi);
+    }
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(6),
+      child: Padding(padding: const EdgeInsets.all(4), child: yazi),
+    );
   }
 }

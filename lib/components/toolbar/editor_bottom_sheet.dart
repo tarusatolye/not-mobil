@@ -10,6 +10,7 @@ import 'package:saber/data/prefs.dart';
 import 'package:saber/i18n/extensions/box_fit_localized.dart';
 import 'package:saber/i18n/extensions/canvas_background_pattern_localized.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 import 'package:sbn/canvas_background_pattern.dart';
 
 class EditorBottomSheet extends StatefulWidget {
@@ -82,7 +83,7 @@ class _EditorBottomSheetState extends State<EditorBottomSheet> {
             Wrap(
               spacing: 8,
               children: [
-                ElevatedButton(
+                OutlinedButton(
                   onPressed: widget.coreInfo.isNotEmpty
                       ? () {
                           widget.clearPage();
@@ -91,7 +92,7 @@ class _EditorBottomSheetState extends State<EditorBottomSheet> {
                       : null,
                   child: Wrap(
                     children: [
-                      const Icon(Icons.cleaning_services),
+                      const Icon(TarusIkon.temizle),
                       const SizedBox(width: 8),
                       Text(
                         t.editor.menu.clearPage(
@@ -104,7 +105,7 @@ class _EditorBottomSheetState extends State<EditorBottomSheet> {
                     ],
                   ),
                 ),
-                ElevatedButton(
+                OutlinedButton(
                   onPressed: widget.coreInfo.isNotEmpty
                       ? () {
                           widget.clearAllPages();
@@ -113,7 +114,7 @@ class _EditorBottomSheetState extends State<EditorBottomSheet> {
                       : null,
                   child: Wrap(
                     children: [
-                      const Icon(Icons.cleaning_services),
+                      const Icon(TarusIkon.temizle),
                       const SizedBox(width: 8),
                       Text(t.editor.menu.clearAllPages),
                     ],
@@ -293,7 +294,7 @@ class _EditorBottomSheetState extends State<EditorBottomSheet> {
             Wrap(
               spacing: 8,
               children: [
-                ElevatedButton(
+                OutlinedButton(
                   onPressed: () async {
                     final photosPicked = await widget.pickPhotos();
                     if (photosPicked > 0) {
@@ -304,7 +305,7 @@ class _EditorBottomSheetState extends State<EditorBottomSheet> {
                   child: Text(t.editor.toolbar.photo),
                 ),
                 if (widget.canRasterPdf)
-                  ElevatedButton(
+                  OutlinedButton(
                     onPressed: () async {
                       final pdfImported = await widget.importPdf();
                       if (pdfImported) {
@@ -321,7 +322,7 @@ class _EditorBottomSheetState extends State<EditorBottomSheet> {
               StatefulBuilder(
                 builder: (context, setState) {
                   final isWatchingServer = widget.getIsWatchingServer();
-                  return CheckboxListTile.adaptive(
+                  return CheckboxListTile(
                     value: isWatchingServer,
                     title: Text(t.editor.menu.watchServer),
                     subtitle: isWatchingServer

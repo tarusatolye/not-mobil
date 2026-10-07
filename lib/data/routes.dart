@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:path_to_regexp/path_to_regexp.dart';
-import 'package:saber/components/theming/adaptive_icon.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/home/home.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 // workaround to assign strings as enum values
 abstract class RoutePaths {
@@ -39,48 +38,30 @@ abstract class HomeRoutes {
   static List<HomeRoute> get routes => <HomeRoute>[
     HomeRoute._(
       _homeFunction({'subpage': HomePage.recentSubpage}),
-      destination: NavigationDestination(
-        label: t.home.tabs.home,
-        icon: const AdaptiveIcon(
-          icon: Icons.home,
-          cupertinoIcon: CupertinoIcons.house_fill,
-        ),
-      ),
+      label: t.home.tabs.home,
+      ikon: TarusIkon.hizliBakis,
     ),
     HomeRoute._(
       _homeFunction({'subpage': HomePage.browseSubpage}),
-      destination: NavigationDestination(
-        label: t.home.tabs.browse,
-        icon: const AdaptiveIcon(
-          icon: Icons.folder,
-          cupertinoIcon: CupertinoIcons.folder_fill,
-        ),
-      ),
+      label: t.home.tabs.browse,
+      ikon: TarusIkon.notlar,
     ),
     HomeRoute._(
       _homeFunction({'subpage': HomePage.whiteboardSubpage}),
-      destination: NavigationDestination(
-        label: t.home.tabs.whiteboard,
-        icon: const AdaptiveIcon(
-          icon: Icons.draw,
-          cupertinoIcon: CupertinoIcons.pencil_outline,
-        ),
-      ),
+      label: t.home.tabs.whiteboard,
+      ikon: TarusIkon.beyazTahta,
     ),
     HomeRoute._(
       _homeFunction({'subpage': HomePage.settingsSubpage}),
-      destination: NavigationDestination(
-        label: t.home.tabs.settings,
-        icon: const AdaptiveIcon(
-          icon: Icons.settings,
-          cupertinoIcon: CupertinoIcons.settings_solid,
-        ),
-      ),
+      label: t.home.tabs.settings,
+      ikon: TarusIkon.ayarlar,
     ),
   ];
 }
 
+/// Ana sekme: adres, etiket ve Lucide ikonu (alt çubuk ve kenar rayı).
 class const HomeRoute._(
   final String path, {
-  required final NavigationDestination destination,
+  required final String label,
+  required final IconData ikon,
 });

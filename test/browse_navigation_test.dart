@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:saber/components/theming/dynamic_material_app.dart';
-import 'package:saber/components/theming/saber_theme.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/data/flavor_config.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/routes.dart';
+import 'package:saber/data/tarus_tema.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/home/browse.dart';
 import 'package:saber/pages/home/home.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_tema_kur.dart';
 
 import 'utils/test_mock_channel_handlers.dart';
 
@@ -28,32 +30,32 @@ void main() {
     testWidgets('No back folder at root', (tester) async {
       await tester.pumpWidget(const _BrowseApp());
       await tester.pump();
-      expect(find.byIcon(Icons.arrow_back), findsNothing);
+      expect(find.byIcon(TarusIkon.geri), findsNothing);
     });
     testWidgets('Back folder present in subfolder', (tester) async {
       await tester.pumpWidget(const _BrowseApp(path: '/helloworld'));
       await tester.pump();
-      expect(find.byIcon(Icons.arrow_back), findsOneWidget);
+      expect(find.byIcon(TarusIkon.geri), findsOneWidget);
     });
     testWidgets('Navigate back to root', (tester) async {
       await tester.pumpWidget(const _BrowseApp(path: '/helloworld'));
       await tester.pump();
-      await tester.tap(find.byIcon(Icons.arrow_back));
+      await tester.tap(find.byIcon(TarusIkon.geri));
       await tester.pump();
-      expect(find.byIcon(Icons.arrow_back), findsNothing);
+      expect(find.byIcon(TarusIkon.geri), findsNothing);
     });
     testWidgets('Navigate back twice to root', (tester) async {
       await tester.pumpWidget(const _BrowseApp(path: '/helloworld'));
       await tester.pump();
       await tester.tap(find.text('subfolder1'));
       await tester.pump();
-      expect(find.byIcon(Icons.arrow_back), findsOneWidget);
-      await tester.tap(find.byIcon(Icons.arrow_back));
+      expect(find.byIcon(TarusIkon.geri), findsOneWidget);
+      await tester.tap(find.byIcon(TarusIkon.geri));
       await tester.pump();
-      expect(find.byIcon(Icons.arrow_back), findsOneWidget);
-      await tester.tap(find.byIcon(Icons.arrow_back));
+      expect(find.byIcon(TarusIkon.geri), findsOneWidget);
+      await tester.tap(find.byIcon(TarusIkon.geri));
       await tester.pump();
-      expect(find.byIcon(Icons.arrow_back), findsNothing);
+      expect(find.byIcon(TarusIkon.geri), findsNothing);
     });
   });
 }
@@ -63,11 +65,7 @@ class _BrowseApp extends StatelessWidget {
   final String? path;
   @override
   Widget build(BuildContext context) {
-    final theme = SaberTheme.createThemeFromSeed(
-      Colors.yellow,
-      .light,
-      .android,
-    );
+    final theme = TarusTemaKur.kur(TarusTema.varsayilan);
     final router = GoRouter(
       initialLocation: HomeRoutes.browseFilePath(path ?? ''),
       routes: [

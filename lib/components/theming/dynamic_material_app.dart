@@ -7,11 +7,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:go_router/go_router.dart';
-import 'package:saber/components/theming/saber_theme.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/tarus_tema.dart';
 import 'package:saber/i18n/extensions/redirecting_localization_delegate.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_tema_kur.dart';
 import 'package:window_manager/window_manager.dart';
 
 class DynamicMaterialApp extends StatefulHookWidget {
@@ -83,15 +83,15 @@ class DynamicMaterialAppState extends State<DynamicMaterialApp>
 
   @override
   Widget build(BuildContext context) {
-    final platform = useValueListenable(stows.platform);
-    useListenable(stows.hyperlegibleFont);
+    final okunakli = useValueListenable(stows.hyperlegibleFont);
     final tarusTemaId = useValueListenable(stows.tarusTema);
 
-    // tarus: 8 kanonik tema (lib/data/tarus_tema.dart); Saber'in sistem vurgu
-    // rengi, Yaru ve elle vurgu seçimi kullanılmaz.
+    // tarus: 8 kanonik tema (lib/data/tarus_tema.dart) ve tek ThemeData
+    // kaynağı (lib/tarus/tarus_tema_kur.dart); Saber'in platform seçici,
+    // Cupertino/Yaru görünümü ve vurgu rengi kullanılmaz.
     // Kayıt yoksa ya da bilinmiyorsa Modern (kullanıcı kararı 2026-10-04).
     final secili = TarusTema.coz(tarusTemaId);
-    final tema = SaberTheme.createTheme(secili.renkSemasi, platform);
+    final tema = TarusTemaKur.kur(secili, okunakli: okunakli);
     return ExplicitlyThemedApp(
       title: widget.title,
       router: widget.router,

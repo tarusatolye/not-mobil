@@ -1,209 +1,91 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:saber/components/home/new_note_button.dart';
 import 'package:saber/components/navbar/responsive_navbar.dart';
-import 'package:saber/components/theming/saber_theme.dart';
 import 'package:saber/data/routes.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 
+/// Telefonda yüzen alt çubuk (Pusula Mobil `AppNavigator` alt çubuğu):
+/// Hızlı Bakış, Notlar, ortada «+» (yeni not), Beyaz tahta, Ayarlar.
 class const HorizontalNavbar({
   super.key,
   final int selectedIndex = 0,
   final ValueChanged<int>? onDestinationSelected,
+
+  /// «+» ile oluşturulan notun klasörü (Notlar sekmesindeki konum).
+  final String? klasor,
 }) extends StatelessWidget {
-  /// The height that should be cleared at the bottom of the screen,
-  /// excluding padding/safe area, to avoid overlapping the navbar.
+  /// Çubuğun kendi yüksekliği (iç boşluk dahil, dış boşluk hariç).
+  static const yukseklik = 62.0;
+
+  /// Ortadaki «+» düğmesinin çapı.
+  static const ekleCapi = 52.0;
+
+  /// İçeriğin alt çubuğun altında kalmaması için ekranın altında
+  /// (güvenli alan hariç) bırakılacak yükseklik.
   static double clearanceHeightOf(BuildContext context) {
     if (ResponsiveNavbar.isLargeScreen) return 0;
-    final platform = Theme.of(context).platform;
-    MediaQuery.sizeOf(context); // ensure context is listening to size changes
-    return _heightForPlatform(platform) + 16 + 16 - 8; // -8 for toolbar padding
-  }
-
-  static double _heightForPlatform(TargetPlatform platform) {
-    return platform.isCupertino ? 56.0 : 64.0;
+    MediaQuery.sizeOf(context); // boyut değişince yeniden hesapla
+    return yukseklik + TarusOlcu.altCubukAralik + 10;
   }
 
   @override
   Widget build(BuildContext context) {
-    final platform = Theme.of(context).platform;
+    final r = TarusRenkler.of(context);
     final routes = HomeRoutes.routes;
+    final acik = Theme.brightnessOf(context) == Brightness.light;
+    final altBosluk = MediaQuery.paddingOf(context).bottom;
 
-    return SafeArea(
-      child: Padding(
-        padding: const .all(16),
-        child: Align(
-          alignment: AlignmentDirectional.bottomEnd,
-          child: GlassyContainer(
-            child: Padding(
-              padding: platform.isCupertino ? const .all(4) : const .all(8),
-              child: Semantics(
-                role: SemanticsRole.tabBar,
-                explicitChildNodes: true,
-                container: true,
-                child: Row(
-                  mainAxisSize: .min,
-                  spacing: platform.isCupertino ? 0 : 4,
-                  children: [
-                    for (int i = 0; i < routes.length; i++)
-                      MergeSemantics(
-                        child: Semantics(
-                          role: SemanticsRole.tab,
-                          selected: i == selectedIndex,
-                          child: _ToolbarButton(
-                            destination: routes[i].destination,
-                            selected: i == selectedIndex,
-                            select: () {
-                              onDestinationSelected?.call(i);
-                            },
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+    Widget sekme(int i) => Expanded(
+      child: _Sekme(
+        route: routes[i],
+        secili: i == selectedIndex,
+        onTap: () => onDestinationSelected?.call(i),
       ),
     );
-  }
-}
 
-class GlassyContainer extends StatelessWidget {
-  const new({super.key, required this.child, this.height, this.borderRadius});
-  final Widget child;
-  final double? height;
-  final BorderRadius? borderRadius;
-  @override
-  Widget build(BuildContext context) {
-    final platform = Theme.of(context).platform;
-    final colorScheme = ColorScheme.of(context);
-    final height = this.height ?? HorizontalNavbar._heightForPlatform(platform);
-    final borderRadius = this.borderRadius ?? .circular(height / 2);
-
-    final Color background;
-    if (platform.isCupertino) {
-      background = colorScheme.surfaceContainer.withValues(alpha: 0.7);
-    } else {
-      background = colorScheme.primaryContainer;
-    }
-
-    return SizedBox(
-      height: height,
-      child: DecoratedBox(
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        TarusOlcu.sayfaYatay,
+        TarusOlcu.altCubukAralik,
+        TarusOlcu.sayfaYatay,
+        (altBosluk > 0 ? altBosluk : 10) + 4,
+      ),
+      child: Container(
+        height: yukseklik,
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
         decoration: BoxDecoration(
-          color: background,
-          borderRadius: borderRadius,
+          color: r.barBg,
+          borderRadius: BorderRadius.circular(TarusOlcu.rAltCubuk),
+          border: Border.all(color: r.border),
           boxShadow: [
             BoxShadow(
-              color: colorScheme.shadow.withValues(alpha: 0.5),
-              spreadRadius: -1,
-              blurRadius: platform.isCupertino ? 2 : 4,
-              offset: const Offset(0, 1),
-              blurStyle: platform.isCupertino
-                  ? BlurStyle.outer
-                  : BlurStyle.normal,
+              color: Colors.black.withValues(alpha: acik ? 0.10 : 0.35),
+              blurRadius: 16,
+              offset: const Offset(0, 6),
             ),
           ],
         ),
-        child: ClipRRect(
-          clipBehavior: platform.isCupertino ? Clip.antiAlias : Clip.none,
-          borderRadius: borderRadius,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              border: (platform.isCupertino && colorScheme.brightness == .dark)
-                  ? _GlintBorder(width: 1)
-                  : null,
-              borderRadius: borderRadius,
-            ),
-            child: BackdropFilter(
-              enabled: platform.isCupertino,
-              filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-              child: Material(
-                type: MaterialType.transparency,
-                color: Colors.transparent,
-                elevation: 3,
-                shadowColor: Colors.white,
-                borderRadius: borderRadius,
-                child: child,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ToolbarButton extends StatelessWidget {
-  const new({required this.destination, required this.selected, this.select});
-
-  final NavigationDestination destination;
-  final bool selected;
-  final VoidCallback? select;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = ColorScheme.of(context);
-    final platform = Theme.of(context).platform;
-    const borderRadius = BorderRadius.all(.circular(32));
-    final selectedBgColor = platform.isCupertino
-        ? colorScheme.onPrimaryContainer.withValues(alpha: 0.15)
-        : (platform == .linux && colorScheme.brightness == .light
-              ? colorScheme.shadow.withValues(alpha: 0.15)
-              : colorScheme.surface);
-    final bgColor = selected ? selectedBgColor : Colors.transparent;
-    final fgColor = selected
-        ? (platform.isCupertino
-              ? Color.lerp(
-                  CupertinoColors.systemBlue,
-                  colorScheme.onSurface,
-                  0.4,
-                )
-              : colorScheme.onSurface)
-        : colorScheme.onPrimaryContainer;
-    return AspectRatio(
-      aspectRatio: platform.isCupertino ? 1.5 : 1.4,
-      child: DecoratedBox(
-        decoration: BoxDecoration(color: bgColor, borderRadius: borderRadius),
-        child: InkWell(
-          borderRadius: borderRadius,
-          onTap: select,
-          hoverColor: selectedBgColor.withValues(
-            alpha: selectedBgColor.a * 0.5,
-          ),
-          focusColor: selectedBgColor.withValues(
-            alpha: selectedBgColor.a * 0.7,
-          ),
-          splashColor: platform.isCupertino
-              ? CupertinoColors.systemBlue.withValues(alpha: 0.5)
-              : colorScheme.primary.withValues(alpha: 0.5),
-          child: Column(
-            mainAxisAlignment: .center,
+        child: Semantics(
+          explicitChildNodes: true,
+          container: true,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Flexible(
-                flex: 7,
-                child: IconTheme.merge(
-                  data: IconThemeData(color: fgColor),
-                  child: destination.icon,
-                ),
-              ),
-              Flexible(
-                flex: 3,
-                child: Text(
-                  destination.label,
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: .w500,
-                    height: 1,
-                    overflow: .clip,
-                    color: fgColor,
+              sekme(0),
+              sekme(1),
+              Expanded(
+                child: OverflowBox(
+                  maxHeight: yukseklik + 40,
+                  alignment: Alignment.center,
+                  child: Transform.translate(
+                    offset: const Offset(0, -14),
+                    child: YeniNotDugmesi(klasor: klasor),
                   ),
-                  textAlign: .center,
-                  maxLines: 1,
                 ),
               ),
+              sekme(2),
+              sekme(3),
             ],
           ),
         ),
@@ -212,57 +94,57 @@ class _ToolbarButton extends StatelessWidget {
   }
 }
 
-/// A border that lights up the top-left and bottom-right corners.
-class _GlintBorder extends Border {
-  new({double width = 1})
-    : super.fromBorderSide(
-        BorderSide(color: const Color(0x33FFFFFF), width: width),
-      );
-
-  static const gradient = LinearGradient(
-    colors: [
-      Color(0x77FFFFFF),
-      Color(0x33FFFFFF),
-      Color(0x00FFFFFF),
-      Color(0x33FFFFFF),
-      Color(0x77FFFFFF),
-    ],
-    stops: [0.0, 0.2, 0.5, 0.8, 1.0],
-    begin: Alignment(-0.5, -1.5),
-    end: Alignment(0.5, 1.5),
-  );
-
-  /// Copied from [BoxBorder._paintUniformBorderWithRadius] but with a
-  /// gradient shader instead of a solid color.
+class const _Sekme({
+  required final HomeRoute route,
+  required final bool secili,
+  required final VoidCallback onTap,
+}) extends StatelessWidget {
   @override
-  void paint(
-    Canvas canvas,
-    Rect rect, {
-    TextDirection? textDirection,
-    BoxShape shape = .rectangle,
-    BorderRadius? borderRadius,
-  }) {
-    borderRadius ??= .zero;
-    assert(top.style != .none);
-    final paint = Paint()
-      ..color = Colors.white
-      ..shader = gradient.createShader(rect);
-    if (top.width == 0.0) {
-      paint
-        ..style = .stroke
-        ..strokeWidth = 0.0;
-      canvas.drawRRect(borderRadius.toRRect(rect), paint);
-    } else {
-      final borderRect = borderRadius.toRRect(rect);
-      final inner = borderRect.deflate(top.strokeInset);
-      final outer = borderRect.inflate(top.strokeOutset);
-      canvas.drawDRRect(outer, inner, paint);
-    }
+  Widget build(BuildContext context) {
+    final r = TarusRenkler.of(context);
+    final renk = secili ? r.accent : r.muted;
+    final radius = BorderRadius.circular(22);
+    return MergeSemantics(
+      child: Semantics(
+        selected: secili,
+        button: true,
+        child: Material(
+          type: MaterialType.transparency,
+          child: InkWell(
+            onTap: secili ? null : onTap,
+            borderRadius: radius,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 150),
+              decoration: BoxDecoration(
+                // Pusula Mobil: `${accent}18`
+                color: secili
+                    ? r.accent.withValues(alpha: 0x18 / 0xFF)
+                    : Colors.transparent,
+                borderRadius: radius,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(route.ikon, size: 21, color: renk),
+                  const SizedBox(height: 3),
+                  Text(
+                    route.label,
+                    maxLines: 1,
+                    overflow: TextOverflow.clip,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 10,
+                      height: 1.1,
+                      fontWeight: secili ? FontWeight.w700 : FontWeight.w500,
+                      color: renk,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
-
-  @override
-  bool get isUniform => true;
-
-  @override
-  Border scale(double t) => _GlintBorder(width: top.width * t);
 }

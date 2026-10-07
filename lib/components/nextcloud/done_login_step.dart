@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:logging/logging.dart';
 import 'package:saber/components/misc/faq.dart';
 import 'package:saber/components/nextcloud/hesap_silme_dialog.dart';
@@ -10,6 +7,9 @@ import 'package:saber/data/nextcloud/nextcloud_client_extension.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/quota.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DoneLoginStep extends StatelessWidget {
@@ -37,7 +37,6 @@ class DoneLoginStep extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = TextTheme.of(context);
     final screenWidth = MediaQuery.sizeOf(context).width;
-    final screenHeight = MediaQuery.sizeOf(context).height;
     final quota = stows.lastStorageQuota.value;
     final serverName =
         stows.url.value.ifNotEmpty ?? t.login.ncLoginStep.saberNcServer;
@@ -51,22 +50,13 @@ class DoneLoginStep extends StatelessWidget {
       ),
       children: [
         const SizedBox(height: 16),
-        if (screenHeight > 500) ...[
-          SvgPicture.asset(
-            'assets/images/undraw_my_files_swob.svg',
-            width: width,
-            height: min(width * 576 / 844.6693, screenHeight * 0.25),
-            excludeFromSemantics: true,
-          ),
-          SizedBox(height: min(64, screenHeight * 0.05)),
-        ],
         Row(
           children: [
             if (stows.pfp.value == null)
               if (stows.url.value.isEmpty)
-                SvgPicture.asset('assets/icon/icon.svg', width: 32, height: 32)
+                const TarusNotIsareti(boyut: 36)
               else
-                const Icon(Icons.account_circle, size: 32)
+                const Icon(TarusIkon.kullanici, size: 32)
             else
               Image.memory(stows.pfp.value!, width: 32, height: 32),
             const SizedBox(width: 16),
@@ -81,13 +71,18 @@ class DoneLoginStep extends StatelessWidget {
         const SizedBox(height: 2),
         Text(quota?.describe() ?? Quota.describePlaceholder()),
         const SizedBox(height: 2),
+        const SizedBox(height: 4),
         LinearProgressIndicator(
           value: quota?.progressIndicatorValue,
-          minHeight: 32,
-          borderRadius: _elevatedButtonBorderRadiusOf(context),
+          minHeight: 8,
+          borderRadius: const .all(.circular(4)),
         ),
-        const SizedBox(height: 4),
-        ElevatedButton(onPressed: _logout, child: Text(t.profile.logout)),
+        const SizedBox(height: 12),
+        OutlinedButton.icon(
+          onPressed: _logout,
+          icon: const Icon(TarusIkon.cikis, size: 18),
+          label: Text(t.profile.logout),
+        ),
         const SizedBox(height: 32),
         Text(t.profile.connectedTo, style: const TextStyle(height: 0.8)),
         Text(serverName, style: textTheme.headlineSmall),
@@ -96,7 +91,7 @@ class DoneLoginStep extends StatelessWidget {
           children: [
             Flexible(
               fit: FlexFit.tight,
-              child: ElevatedButton(
+              child: OutlinedButton(
                 onPressed: () {
                   log.info('Opening URL: $serverUri');
                   launchUrl(serverUri);
@@ -107,7 +102,10 @@ class DoneLoginStep extends StatelessWidget {
             const SizedBox(width: 8),
             Flexible(
               fit: FlexFit.tight,
-              child: ElevatedButton(
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: TarusRenkler.of(context).danger,
+                ),
                 // tarus: Nextcloud'un hesap silme sayfası yerine tarus'taki
                 // silme yolları (Pusula belirteci, cihaz, sunucu verisi).
                 onPressed: () => HesapSilmeDialog.goster(context),
@@ -124,14 +122,5 @@ class DoneLoginStep extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-BorderRadius _elevatedButtonBorderRadiusOf(BuildContext context) {
-  final shape = ElevatedButtonTheme.of(context).style?.shape?.resolve({});
-  if (shape is RoundedRectangleBorder) {
-    return shape.borderRadius.resolve(TextDirection.ltr);
-  } else {
-    return const .all(.circular(8));
   }
 }

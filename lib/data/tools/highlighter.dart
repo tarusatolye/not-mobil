@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/tools/pen.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 class Highlighter extends Pen {
   new()
@@ -22,5 +22,5 @@ class Highlighter extends Pen {
 
   static Pen currentHighlighter = Highlighter();
 
-  static const highlighterIcon = FontAwesomeIcons.highlighter;
+  static const highlighterIcon = TarusIkon.fosforluKalem;
 }

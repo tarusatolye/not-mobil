@@ -92,32 +92,10 @@ class Stows {
     volatile: !_isOnMainIsolate,
   );
 
-  final appTheme = PlainStow(
-    'appTheme',
-    ThemeMode.system,
-    codec: const EnumCodec(ThemeMode.values),
-    volatile: !_isOnMainIsolate,
-  );
-
-  /// The type of platform to theme. Default value is [defaultTargetPlatform].
-  final platform = PlainStow(
-    'platform',
-    defaultTargetPlatform,
-    codec: const EnumCodec(TargetPlatform.values),
-    volatile: !_isOnMainIsolate,
-  );
   final layoutSize = PlainStow(
     'layoutSize',
     LayoutSize.auto,
     codec: LayoutSize.codec,
-    volatile: !_isOnMainIsolate,
-  );
-
-  /// The accent color of the app. If 0, the system accent color will be used.
-  final accentColor = PlainStow<Color?>(
-    'accentColor',
-    null,
-    codec: const ColorCodec(),
     volatile: !_isOnMainIsolate,
   );
 

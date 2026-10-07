@@ -4,6 +4,8 @@ import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/data/nextcloud/saber_syncer.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/pages/editor/editor.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 
 class SyncIndicator extends HookWidget {
   const new({super.key, required this.filePath});
@@ -63,12 +65,30 @@ class SyncIndicator extends HookWidget {
             builder: (context, status, _) {
               return AnimatedSwitcher(
                 duration: const Duration(milliseconds: 200),
-                child: switch (status) {
-                  .done => null,
-                  .uploading => const Icon(Icons.upload),
-                  .downloading => const Icon(Icons.download),
-                  .merging => const Icon(Icons.sync),
-                },
+                child: status == .done
+                    ? null
+                    : DecoratedBox(
+                        key: ValueKey(status),
+                        decoration: BoxDecoration(
+                          color: TarusRenkler.of(context).card,
+                          shape: .circle,
+                          border: Border.all(
+                            color: TarusRenkler.of(context).border,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const .all(5),
+                          child: Icon(
+                            switch (status) {
+                              .uploading => TarusIkon.yukle,
+                              .downloading => TarusIkon.indir,
+                              _ => TarusIkon.esitle,
+                            },
+                            size: 14,
+                            color: TarusRenkler.of(context).accent,
+                          ),
+                        ),
+                      ),
               );
             },
           ),

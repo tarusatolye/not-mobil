@@ -17,22 +17,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  animated_vector:
-    dependency: transitive
-    description:
-      name: animated_vector
-      sha256: f1beb10e6fcfd8bd15abb788e20345def786d1c7391d7c1426bb2a1f2adf2132
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.2"
-  animated_vector_annotations:
-    dependency: transitive
-    description:
-      name: animated_vector_annotations
-      sha256: "07c1ea603a2096f7eb6f1c2b8f16c3c330c680843ea78b7782a3217c3c53f979"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.2"
   animations:
     dependency: "direct main"
     description:
@@ -73,14 +57,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.6.5"
-  assorted_layout_widgets:
-    dependency: transitive
-    description:
-      name: assorted_layout_widgets
-      sha256: "86c6942f569f7f70bfb03b9cb0ada9bf5aee72264aaefdb0e2be0fbee70cfb06"
-      url: "https://pub.dev"
-    source: hosted
-    version: "11.0.0"
   async:
     dependency: transitive
     description:
@@ -249,14 +225,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      sha256: "41e005c33bd814be4d3096aff55b1908d419fde52ca656c8c47719ec745873cd"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.9"
   cupertino_ui:
     dependency: transitive
     description:
@@ -329,22 +297,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.1"
-  dynamic_color:
-    dependency: "direct main"
-    description:
-      name: dynamic_color
-      sha256: "869b3bce0100eb519768ecd71c0111f0b5ea679f5f62e1f59c49d80067e730c5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
-  dynamic_yaru:
-    dependency: "direct main"
-    description:
-      name: dynamic_yaru
-      sha256: "94aff2474bd07f8b2bd200035c38e854cd793bd8e657044290a3eba45920e317"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
   dynamite_runtime:
     dependency: transitive
     description:
@@ -648,15 +600,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.4"
-  flutter_speed_dial:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: "fix/remove-Future.delayed"
-      resolved-ref: "272a4949ac52438969c7a73db575cfa551f88f66"
-      url: "https://github.com/adil192/flutter_speed_dial.git"
-    source: git
-    version: "7.0.0"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -699,14 +642,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  font_awesome_flutter:
-    dependency: "direct main"
-    description:
-      name: font_awesome_flutter
-      sha256: "09dcde8ab90ffae1a7d65ff2ef96fc62a17ad9d0ce7c127b317ded676b0d5935"
-      url: "https://pub.dev"
-    source: hosted
-    version: "11.0.0"
   fuchsia_remote_debug_protocol:
     dependency: transitive
     description: flutter
@@ -744,22 +679,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "11.1.1"
-  gsettings:
-    dependency: transitive
-    description:
-      name: gsettings
-      sha256: "1b0ce661f5436d2db1e51f3c4295a49849f03d304003a7ba177d01e3a858249c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.8"
-  gtk:
-    dependency: transitive
-    description:
-      name: gtk
-      sha256: "4ff85b2a16724029dd9e5bbb5a94b6918f9973f74ba571c949d2002801879cf5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
   hooks:
     dependency: transitive
     description:
@@ -808,14 +727,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.10.1"
-  ini:
-    dependency: transitive
-    description:
-      name: ini
-      sha256: "12a76c53591ffdf86d1265be3f986888a6dfeb34a85957774bc65912d989a173"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   injector:
     dependency: transitive
     description:
@@ -941,6 +852,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
+  lucide_icons_flutter:
+    dependency: "direct main"
+    description:
+      name: lucide_icons_flutter
+      sha256: abfff57c1f4de40204e25a15809d566b17c1a085d2aa58e00203649758c7fed4
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.22"
   markdown:
     dependency: transitive
     description:
@@ -965,14 +884,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.13.0"
-  material_symbols_icons:
-    dependency: "direct main"
-    description:
-      name: material_symbols_icons
-      sha256: bd513edc2bc9b034108d5518c48cf5cebbb67d0653728cc452368cb27ca80bb0
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.2960.0"
   material_ui:
     dependency: transitive
     description:
@@ -981,14 +892,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.0"
-  matrix4_transform:
-    dependency: transitive
-    description:
-      name: matrix4_transform
-      sha256: "1346e53517e3081d3e8362377be97e285e2bd348855c177eae2a18aa965cafa0"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.1"
   meta:
     dependency: "direct main"
     description:
@@ -1372,14 +1275,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
-  platform_linux:
-    dependency: transitive
-    description:
-      name: platform_linux
-      sha256: "907b7c6da6ee6eea61cd1266b7bd72e2d5bbf7e85160221e8ac5583a44e7a1c7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.2+1"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -2200,54 +2095,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.4"
-  yaru:
-    dependency: "direct main"
-    description:
-      name: yaru
-      sha256: "95e801c52dfda458bcb772baee6b2575c711fd951616a24910d6d30e70f5fb0d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "10.2.0"
-  yaru_window:
-    dependency: transitive
-    description:
-      name: yaru_window
-      sha256: "58539a9abe9901891dadce142c7a5d303920b780dd0f7bd21f076a80adeeb744"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.2"
-  yaru_window_linux:
-    dependency: transitive
-    description:
-      name: yaru_window_linux
-      sha256: "885ad0ba5832d350c42862ce02da478599ef550280eb7f6b15285481fcff6f53"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.2"
-  yaru_window_manager:
-    dependency: transitive
-    description:
-      name: yaru_window_manager
-      sha256: "6288fd6ccd8bb9d5be56073c6f277e2da08dd38e346507bf88bc9332b08dd180"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.3"
-  yaru_window_platform_interface:
-    dependency: transitive
-    description:
-      name: yaru_window_platform_interface
-      sha256: d514387cc96750112ecf1933b6f12a1912beca199178d00052c0e87a94e232fa
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.3"
-  yaru_window_web:
-    dependency: transitive
-    description:
-      name: yaru_window_web
-      sha256: cf4d79e0760fbdcb78d4bbca3b5563f99518629224b9e5611f0ebd592befe1d9
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.4"
 sdks:
   dart: ">=3.13.0 <4.0.0"
   flutter: ">=3.47.0"

@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:saber/pages/user/hata_bildir_sayfasi.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 /// Basılı tutma menüsü: web'deki sağ tık menüsünün mobil karşılığı
 /// (pusula-mobil ve posta-mobil `BaglamMenusu` ile aynı davranış).
@@ -47,7 +48,7 @@ class BaglamMenusu extends StatelessWidget {
           mainAxisSize: .min,
           children: [
             ListTile(
-              leading: Icon(Icons.bug_report_outlined, color: renk.error),
+              leading: Icon(TarusIkon.hataBildir, color: renk.error),
               title: Text(
                 'Hata bildir',
                 style: TextStyle(color: renk.error, fontWeight: .w600),
@@ -55,7 +56,7 @@ class BaglamMenusu extends StatelessWidget {
               onTap: () => Navigator.of(context).pop(true),
             ),
             ListTile(
-              leading: const Icon(Icons.close),
+              leading: const Icon(TarusIkon.kapat),
               title: const Text('Vazgeç'),
               onTap: () => Navigator.of(context).pop(false),
             ),

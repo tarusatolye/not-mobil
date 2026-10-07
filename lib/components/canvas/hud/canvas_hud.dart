@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:material_symbols_icons/symbols.dart';
 import 'package:saber/components/canvas/hud/canvas_gesture_lock_btn.dart';
 import 'package:saber/components/canvas/hud/canvas_zoom_indicator.dart';
 import 'package:saber/data/extensions/matrix4_extensions.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 class CanvasHud extends HookWidget {
   const new({
@@ -63,7 +63,7 @@ class CanvasHud extends HookWidget {
               child: CanvasGestureLockBtn(
                 lock: zoomLock,
                 setLock: setZoomLock,
-                icon: zoomLock ? Icons.lock : Icons.lock_open,
+                icon: zoomLock ? TarusIkon.kilit : TarusIkon.kilitAcik,
                 tooltip: zoomLock
                     ? t.editor.hud.unlockZoom
                     : t.editor.hud.lockZoom,
@@ -75,7 +75,9 @@ class CanvasHud extends HookWidget {
               child: CanvasGestureLockBtn(
                 lock: singleFingerPanLock,
                 setLock: setSingleFingerPanLock,
-                icon: singleFingerPanLock ? Icons.pinch : Icons.swipe_up,
+                icon: singleFingerPanLock
+                    ? TarusIkon.ikiParmakKaydir
+                    : TarusIkon.tekParmakKaydir,
                 tooltip: singleFingerPanLock
                     ? t.editor.hud.unlockSingleFingerPan
                     : t.editor.hud.lockSingleFingerPan,
@@ -93,7 +95,7 @@ class CanvasHud extends HookWidget {
                 child: AnimatedRotation(
                   duration: const Duration(milliseconds: 200),
                   turns: axisAlignedPanLock ? 0 : 1 / 8,
-                  child: const Icon(Symbols.drag_pan),
+                  child: const Icon(TarusIkon.kaydir),
                 ),
               ),
             ),

@@ -13,7 +13,9 @@ import 'package:saber/data/prefs.dart';
 import 'package:saber/data/routes.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/editor/editor.dart';
-import 'package:yaru/yaru.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 
 class PreviewCard extends StatefulWidget {
   new({
@@ -93,12 +95,14 @@ class _PreviewCardState extends State<PreviewCard> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final r = TarusRenkler.of(context);
     final disableAnimations = MediaQuery.disableAnimationsOf(context);
     final transitionDuration = Duration(
       milliseconds: disableAnimations ? 0 : 300,
     );
     final invert = theme.brightness == .dark && stows.editorAutoInvert.value;
+    const kose = TarusOlcu.rKart;
+    const icKose = Radius.circular(kose - 1);
 
     final Widget card = MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -106,109 +110,118 @@ class _PreviewCardState extends State<PreviewCard> {
         onTap: widget.isAnythingSelected ? _toggleCardSelection : null,
         onSecondaryTap: _toggleCardSelection,
         onLongPress: _toggleCardSelection,
-        child: Column(
-          mainAxisSize: stows.homeLayout.value.fillVertical ? .max : .min,
+        child: Stack(
           children: [
-            Flexible(
-              fit: stows.homeLayout.value.fillVertical ? .tight : .loose,
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    top: kYaruContainerRadius,
-                    left: kYaruFocusBorderWidth,
-                    right: kYaruFocusBorderWidth,
-                    child: ColoredBox(
-                      color: InnerCanvas.defaultBackgroundColor.withInversion(
-                        invert,
-                      ),
-                    ),
-                  ),
-                  ListenableBuilder(
-                    listenable: thumbnail,
-                    builder: (context, _) => AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 300),
-                      child: ConstrainedBox(
-                        key: ValueKey(thumbnail.updateCount),
-                        constraints: const BoxConstraints(
-                          minWidth: double.infinity,
-                          minHeight: 100,
+            Column(
+              mainAxisSize: stows.homeLayout.value.fillVertical ? .max : .min,
+              children: [
+                Flexible(
+                  fit: stows.homeLayout.value.fillVertical ? .tight : .loose,
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
+                        top: kose,
+                        child: ColoredBox(
+                          color: InnerCanvas.defaultBackgroundColor
+                              .withInversion(invert),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            top: kYaruFocusBorderWidth,
-                            left: kYaruFocusBorderWidth,
-                            right: kYaruFocusBorderWidth,
-                          ),
-                          child: ClipRRect(
-                            borderRadius: const .only(
-                              topLeft: .circular(
-                                kYaruContainerRadius - kYaruFocusBorderWidth,
-                              ),
-                              topRight: .circular(
-                                kYaruContainerRadius - kYaruFocusBorderWidth,
-                              ),
+                      ),
+                      ListenableBuilder(
+                        listenable: thumbnail,
+                        builder: (context, _) => AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 300),
+                          child: ConstrainedBox(
+                            key: ValueKey(thumbnail.updateCount),
+                            constraints: const BoxConstraints(
+                              minWidth: double.infinity,
+                              minHeight: 100,
                             ),
-                            child: InvertWidget(
-                              invert: invert,
-                              child: thumbnail.doesImageExist
-                                  ? Image(
-                                      image: thumbnail.image!,
-                                      alignment: .topCenter,
-                                      fit: .cover,
-                                    )
-                                  : const _FallbackThumbnail(),
+                            child: ClipRRect(
+                              borderRadius: const .only(
+                                topLeft: icKose,
+                                topRight: icKose,
+                              ),
+                              child: InvertWidget(
+                                invert: invert,
+                                child: thumbnail.doesImageExist
+                                    ? Image(
+                                        image: thumbnail.image!,
+                                        alignment: .topCenter,
+                                        fit: .cover,
+                                      )
+                                    : const _FallbackThumbnail(),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
+                      SyncIndicator(filePath: widget.filePath),
+                    ],
                   ),
-                  Positioned.fill(
-                    left: -1,
-                    top: -1,
-                    right: -1,
-                    bottom: -1,
-                    child: ValueListenableBuilder(
-                      valueListenable: expanded,
-                      builder: (context, expanded, child) => AnimatedOpacity(
-                        opacity: expanded ? 1 : 0,
-                        duration: const Duration(milliseconds: 200),
-                        child: IgnorePointer(
-                          ignoring: !expanded,
-                          child: child!,
+                ),
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    border: Border(top: BorderSide(color: r.bdr1)),
+                  ),
+                  child: Padding(
+                    padding: const .fromLTRB(12, 9, 12, 11),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        widget.filePath.substring(
+                          widget.filePath.lastIndexOf('/') + 1,
+                        ),
+                        maxLines: 2,
+                        overflow: .ellipsis,
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          height: 1.3,
+                          color: r.text,
                         ),
                       ),
-                      child: GestureDetector(
-                        onTap: _toggleCardSelection,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Positioned.fill(
+              child: ValueListenableBuilder(
+                valueListenable: expanded,
+                builder: (context, expanded, child) => AnimatedOpacity(
+                  opacity: expanded ? 1 : 0,
+                  duration: const Duration(milliseconds: 150),
+                  child: IgnorePointer(ignoring: !expanded, child: child!),
+                ),
+                child: GestureDetector(
+                  onTap: _toggleCardSelection,
+                  child: ColoredBox(
+                    color: r.accent.withValues(
+                      alpha: TarusOlcu.seciliZeminAlfa,
+                    ),
+                    child: Align(
+                      alignment: .topLeft,
+                      child: Padding(
+                        padding: const .all(8),
                         child: DecoratedBox(
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: .topCenter,
-                              end: .bottomCenter,
-                              colors: [
-                                colorScheme.surface.withValues(alpha: 0.2),
-                                colorScheme.surface.withValues(alpha: 0.8),
-                                colorScheme.surface.withValues(alpha: 1),
-                              ],
-                            ),
+                            color: r.accent,
+                            shape: .circle,
+                            border: Border.all(color: r.card, width: 2),
                           ),
-                          child: ColoredBox(
-                            color: colorScheme.primary.withValues(alpha: 0.05),
+                          child: const Padding(
+                            padding: .all(3),
+                            child: Icon(
+                              TarusIkon.tamam,
+                              size: 14,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                  SyncIndicator(filePath: widget.filePath),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const .all(8),
-              child: Text(
-                widget.filePath.substring(widget.filePath.lastIndexOf('/') + 1),
-                maxLines: 2,
-                overflow: .ellipsis,
+                ),
               ),
             ),
           ],
@@ -219,27 +232,32 @@ class _PreviewCardState extends State<PreviewCard> {
     return ValueListenableBuilder(
       valueListenable: expanded,
       builder: (context, expanded, _) {
-        return OpenContainer(
-          clipBehavior: Clip.none,
-          closedColor: colorScheme.surface,
-          closedShape: RoundedRectangleBorder(
-            side: BorderSide(
-              color: expanded
-                  ? colorScheme.primary
-                  : colorScheme.onSurface.withValues(alpha: 0.12),
-              width: kYaruFocusBorderWidth,
+        return DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: const .all(.circular(kose)),
+            boxShadow: r.elev1,
+          ),
+          child: OpenContainer(
+            clipBehavior: Clip.antiAlias,
+            closedColor: r.card,
+            closedShape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: expanded
+                    ? r.accent.withValues(alpha: TarusOlcu.seciliKenarAlfa)
+                    : r.border,
+              ),
+              borderRadius: const .all(.circular(kose)),
             ),
-            borderRadius: const .all(.circular(kYaruContainerRadius)),
+            closedElevation: 0,
+            closedBuilder: (context, action) => card,
+            openColor: r.bg,
+            openBuilder: (context, action) => Editor(path: widget.filePath),
+            transitionDuration: transitionDuration,
+            routeSettings: RouteSettings(
+              name: RoutePaths.editFilePath(widget.filePath),
+            ),
+            onClosed: (_) => _refreshThumbnailAfterDelay(),
           ),
-          closedElevation: 0,
-          closedBuilder: (context, action) => card,
-          openColor: colorScheme.surface,
-          openBuilder: (context, action) => Editor(path: widget.filePath),
-          transitionDuration: transitionDuration,
-          routeSettings: RouteSettings(
-            name: RoutePaths.editFilePath(widget.filePath),
-          ),
-          onClosed: (_) => _refreshThumbnailAfterDelay(),
         );
       },
     );

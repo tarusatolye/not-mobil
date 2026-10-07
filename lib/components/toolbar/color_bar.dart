@@ -1,12 +1,11 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:saber/components/theming/adaptive_alert_dialog.dart';
 import 'package:saber/components/toolbar/color_option.dart';
 import 'package:saber/data/extensions/color_extensions.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 typedef NamedColor = ({String name, Color color});
 
@@ -173,7 +172,7 @@ class _ColorBarState extends State<ColorBar> {
     final children = <Widget>[
       // pinned colors
       if (stows.pinnedColors.value.isNotEmpty) ...[
-        const ColorOptionSeparatorIcon(icon: Icons.pin_drop),
+        const ColorOptionSeparatorIcon(icon: TarusIkon.sabitle),
         for (final colorString in stows.pinnedColors.value)
           ColorOption(
             isSelected:
@@ -198,7 +197,7 @@ class _ColorBarState extends State<ColorBar> {
           ),
       ],
 
-      const ColorOptionSeparatorIcon(icon: Icons.history),
+      const ColorOptionSeparatorIcon(icon: TarusIkon.gecmis),
 
       // recent colors
       for (final colorString in stows.recentColorsPositioned.value.reversed)
@@ -247,7 +246,7 @@ class _ColorBarState extends State<ColorBar> {
           ),
         ),
 
-      const ColorOptionSeparatorIcon(icon: Icons.palette),
+      const ColorOptionSeparatorIcon(icon: TarusIkon.renkler),
 
       // custom color
       ColorOption(
@@ -259,7 +258,7 @@ class _ColorBarState extends State<ColorBar> {
         tooltip: t.editor.colors.colorPicker,
         child: const DecoratedBox(
           decoration: BoxDecoration(color: Colors.transparent, shape: .circle),
-          child: Center(child: FaIcon(FontAwesomeIcons.droplet, size: 16)),
+          child: Center(child: Icon(TarusIkon.damla, size: 16)),
         ),
       ),
 
@@ -306,7 +305,7 @@ class _ColorBarState extends State<ColorBar> {
     }
   }
 
-  Widget _colorPickerDialog(BuildContext context) => AdaptiveAlertDialog(
+  Widget _colorPickerDialog(BuildContext context) => TarusDialog(
     title: Text(t.settings.accentColorPicker.pickAColor),
     content: SingleChildScrollView(
       child: ColorPicker(
@@ -318,7 +317,7 @@ class _ColorBarState extends State<ColorBar> {
       ),
     ),
     actions: [
-      CupertinoDialogAction(
+      TarusDialogDugmesi(
         child: Text(MaterialLocalizations.of(context).saveButtonLabel),
         onPressed: () {
           Navigator.of(context).pop(true);

@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:saber/components/theming/adaptive_alert_dialog.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 
 class DeleteFolderButton extends StatelessWidget {
   const new({
@@ -15,22 +15,33 @@ class DeleteFolderButton extends StatelessWidget {
   final Future<void> Function(String) deleteFolder;
   final Future<bool> Function(String) isFolderEmpty;
 
+  /// Klasör silme penceresi (klasör kartının menüsünden).
+  static Future<void> dialogAc(
+    BuildContext context, {
+    required String folderName,
+    required Future<void> Function(String) deleteFolder,
+    required Future<bool> Function(String) isFolderEmpty,
+  }) => showDialog(
+    context: context,
+    builder: (context) => _DeleteFolderDialog(
+      folderName: folderName,
+      deleteFolder: deleteFolder,
+      isFolderEmpty: isFolderEmpty,
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
       padding: .zero,
       tooltip: t.home.deleteFolder.deleteFolder,
-      onPressed: () async {
-        await showDialog(
-          context: context,
-          builder: (context) => _DeleteFolderDialog(
-            folderName: folderName,
-            deleteFolder: deleteFolder,
-            isFolderEmpty: isFolderEmpty,
-          ),
-        );
-      },
-      icon: const Icon(Icons.delete_forever),
+      onPressed: () => dialogAc(
+        context,
+        folderName: folderName,
+        deleteFolder: deleteFolder,
+        isFolderEmpty: isFolderEmpty,
+      ),
+      icon: const Icon(TarusIkon.sil),
     );
   }
 }
@@ -69,29 +80,25 @@ class _DeleteFolderDialogState extends State<_DeleteFolderDialog> {
   @override
   Widget build(BuildContext context) {
     final deleteAllowed = isFolderEmpty || alsoDeleteContents;
-    return AdaptiveAlertDialog(
+    return TarusDialog(
       title: Text(t.home.deleteFolder.deleteName(f: widget.folderName)),
       content: isFolderEmpty
           ? const SizedBox.shrink()
-          : Row(
-              children: [
-                Checkbox(
-                  value: alsoDeleteContents,
-                  onChanged: isFolderEmpty
-                      ? null
-                      : (value) {
-                          setState(() => alsoDeleteContents = value!);
-                        },
-                ),
-                Expanded(child: Text(t.home.deleteFolder.alsoDeleteContents)),
-              ],
+          : CheckboxListTile(
+              value: alsoDeleteContents,
+              onChanged: (value) {
+                setState(() => alsoDeleteContents = value!);
+              },
+              controlAffinity: .leading,
+              contentPadding: .zero,
+              title: Text(t.home.deleteFolder.alsoDeleteContents),
             ),
       actions: [
-        CupertinoDialogAction(
+        TarusDialogDugmesi(
           onPressed: () => Navigator.of(context).pop(),
           child: Text(t.common.cancel),
         ),
-        CupertinoDialogAction(
+        TarusDialogDugmesi(
           onPressed: deleteAllowed
               ? () async {
                   await widget.deleteFolder(widget.folderName);

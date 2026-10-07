@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 
 class FaqListView extends StatelessWidget {
   const new({super.key, required this.items, this.shrinkWrap = false});
@@ -26,12 +26,25 @@ class _FaqTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return YaruExpandable(
-      header: Text(item.question),
-      child: Padding(
-        padding: const .all(16),
-        child: SelectableText(item.answer),
+    final r = TarusRenkler.of(context);
+    return ExpansionTile(
+      tilePadding: const .symmetric(horizontal: 4),
+      childrenPadding: const .fromLTRB(4, 0, 4, 12),
+      expandedAlignment: .centerLeft,
+      title: Text(
+        item.question,
+        style: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          color: r.text,
+        ),
       ),
+      children: [
+        SelectableText(
+          item.answer,
+          style: TextStyle(fontSize: 13, color: r.muted2, height: 1.5),
+        ),
+      ],
     );
   }
 }
