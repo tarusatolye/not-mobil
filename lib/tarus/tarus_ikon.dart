@@ -49,6 +49,7 @@ abstract final class TarusIkon {
   static const IconData yukle = LucideIcons.upload;
   static const IconData indir = LucideIcons.download;
   static const IconData buluttaYukle = LucideIcons.cloudUpload;
+  static const IconData bulutKapali = LucideIcons.cloudOff;
   static const IconData kullanici = LucideIcons.circleUser;
   static const IconData cikis = LucideIcons.logOut;
   static const IconData kilit = LucideIcons.lockKeyhole;

@@ -25,11 +25,8 @@ class DoneLoginStep extends StatelessWidget {
     stows.url.value = '';
     stows.username.value = '';
     stows.ncPassword.value = '';
-    stows.encPassword.value = '';
     stows.pfp.value = null;
     stows.lastStorageQuota.value = null;
-    stows.key.value = '';
-    stows.iv.value = '';
     recheckCurrentStep();
   }
 

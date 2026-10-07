@@ -160,7 +160,6 @@ class _Translations$login$tr extends Translations$login$en {
 	]);
 	@override late final _Translations$login$status$tr status = _Translations$login$status$tr._(_root);
 	@override late final _Translations$login$ncLoginStep$tr ncLoginStep = _Translations$login$ncLoginStep$tr._(_root);
-	@override late final _Translations$login$encLoginStep$tr encLoginStep = _Translations$login$encLoginStep$tr._(_root);
 }
 
 // Path: profile
@@ -180,7 +179,6 @@ class _Translations$profile$tr extends Translations$profile$en {
 		_Translations$profile$faq$0$tr._(_root),
 		_Translations$profile$faq$1$tr._(_root),
 		_Translations$profile$faq$2$tr._(_root),
-		_Translations$profile$faq$3$tr._(_root),
 	];
 	@override String quotaUsageUncapped({required Object used}) => '${used} kullanıyorsunuz';
 }
@@ -266,6 +264,7 @@ class _Translations$tarus$tr extends Translations$tarus$en {
 	@override late final _Translations$tarus$bos$tr bos = _Translations$tarus$bos$tr._(_root);
 	@override late final _Translations$tarus$ayar$tr ayar = _Translations$tarus$ayar$tr._(_root);
 	@override late final _Translations$tarus$giris$tr giris = _Translations$tarus$giris$tr._(_root);
+	@override late final _Translations$tarus$esitleme$tr esitleme = _Translations$tarus$esitleme$tr._(_root);
 }
 
 // Path: home.tabs
@@ -603,7 +602,6 @@ class _Translations$login$status$tr extends Translations$login$status$en {
 	@override String get loggedOut => 'Eşitleme kapalı';
 	@override String get tapToLogin => 'Pusula eşitleme belirteciyle bağlanmak için dokunun';
 	@override String hi({required Object u}) => 'Merhaba, ${u}!';
-	@override String get almostDone => 'Eşitlemeye neredeyse hazır, tamamlamak için dokunun';
 	@override String get loggedIn => 'Notlarınız eşitleniyor';
 }
 
@@ -621,26 +619,6 @@ class _Translations$login$ncLoginStep$tr extends Translations$login$ncLoginStep$
 	@override String get loginWithSaber => 'tarus Not ile giriş yap';
 	@override String get loginWithNextcloud => 'Sunucuya bağlan';
 	@override late final _Translations$login$ncLoginStep$loginFlow$tr loginFlow = _Translations$login$ncLoginStep$loginFlow$tr._(_root);
-}
-
-// Path: login.encLoginStep
-class _Translations$login$encLoginStep$tr extends Translations$login$encLoginStep$en {
-	_Translations$login$encLoginStep$tr._(TranslationsTr root) : this._root = root, super.internal(root);
-
-	final TranslationsTr _root; // ignore: unused_field
-
-	// Translations
-	@override String get enterEncPassword => 'Verilerinizi korumak için lütfen şifreleme parolanızı girin:';
-	@override String get newToSaber => 'tarus Not\'ta ilk kez mi? Yeni bir şifreleme parolası girin.';
-	@override String get encPassword => 'Şifreleme parolası';
-	@override String get encFaqTitle => 'Sıkça sorulan sorular';
-	@override String get wrongEncPassword => 'Verilen parola ile şifre çözülemedi. Lütfen parolayı tekrar girin.';
-	@override String get connectionFailed => 'Sunucuya bağlanılamadı. Lütfen daha sonra tekrar deneyin.';
-	@override List<dynamic> get encFaq => [
-		_Translations$login$encLoginStep$encFaq$0$tr._(_root),
-		_Translations$login$encLoginStep$encFaq$1$tr._(_root),
-		_Translations$login$encLoginStep$encFaq$2$tr._(_root),
-	];
 }
 
 // Path: profile.quickLinks
@@ -679,17 +657,6 @@ class _Translations$profile$faq$1$tr extends Translations$profile$faq$1$en {
 // Path: profile.faq.2
 class _Translations$profile$faq$2$tr extends Translations$profile$faq$2$en {
 	_Translations$profile$faq$2$tr._(TranslationsTr root) : this._root = root, super.internal(root);
-
-	final TranslationsTr _root; // ignore: unused_field
-
-	// Translations
-	@override String get q => 'Şifreleme parolamı nasıl değiştirebilirim?';
-	@override String get a => '1. tarus Not\'tan çıkış yapın. Veri kaybı yaşamamak için çıkış yapmadan önce senkronizasyonun tamamlandığından emin olun (ana sayfada senkronizasyon ilerlemesini görebilirsiniz).\n2. Sunucu websitesine gidin ve \'Saber\' klasörünü silin. Bu sunucudaki tüm notları silecek.\n3. tarus Not\'a yeniden giriş yapın. Tekrar giriş yaparken yeni şifreleme parolanızı belirleyebilirsiniz.\n4. Diğer cihazlarınızda da tarus Not\'tan çıkış yapıp tekrar giriş yapmayı unutmayın.';
-}
-
-// Path: profile.faq.3
-class _Translations$profile$faq$3$tr extends Translations$profile$faq$3$en {
-	_Translations$profile$faq$3$tr._(TranslationsTr root) : this._root = root, super.internal(root);
 
 	final TranslationsTr _root; // ignore: unused_field
 
@@ -937,6 +904,17 @@ class _Translations$tarus$giris$tr extends Translations$tarus$giris$en {
 	@override String get kendiSunucunuzAciklama => 'Notları kendi sunucunuzda saklamak için adresini girin.';
 }
 
+// Path: tarus.esitleme
+class _Translations$tarus$esitleme$tr extends Translations$tarus$esitleme$en {
+	_Translations$tarus$esitleme$tr._(TranslationsTr root) : this._root = root, super.internal(root);
+
+	final TranslationsTr _root; // ignore: unused_field
+
+	// Translations
+	@override String get gecici => 'Sunucu şu an yanıt vermiyor. Notlarınız bu cihazda duruyor; eşitleme kendiliğinden yeniden denenecek.';
+	@override String get reddedildi => 'Sunucu eşitlemeyi reddetti.';
+}
+
 // Path: sentry.consent.description
 class _Translations$sentry$consent$description$tr extends Translations$sentry$consent$description$en {
 	_Translations$sentry$consent$description$tr._(TranslationsTr root) : this._root = root, super.internal(root);
@@ -1002,39 +980,6 @@ class _Translations$login$ncLoginStep$loginFlow$tr extends Translations$login$nc
 	@override String get pleaseAuthorize => 'Lütfen tarus Not\'un sunucudaki hesabınıza erişmesine izin verin';
 	@override String get followPrompts => 'Lütfen tarayıcıda açılan sunucu sayfasındaki adımları izleyin';
 	@override String get browserDidntOpen => 'Giriş sayfası açılmadıysa buraya tıklayın';
-}
-
-// Path: login.encLoginStep.encFaq.0
-class _Translations$login$encLoginStep$encFaq$0$tr extends Translations$login$encLoginStep$encFaq$0$en {
-	_Translations$login$encLoginStep$encFaq$0$tr._(TranslationsTr root) : this._root = root, super.internal(root);
-
-	final TranslationsTr _root; // ignore: unused_field
-
-	// Translations
-	@override String get q => 'Şifreleme parolası nedir? Neden iki parola kullanıyorum?';
-	@override String get a => 'Hesap parolası (ya da eşitleme belirteci) sunucuya bağlanmak için kullanılıyor. Şifreleme parolası ise verilerinizi buluta aktarmadan önce gizlemek için kullanılıyor.\nEğer birisi sunucudaki hesabınızı ele geçirseydi bile notlarınız güvenli ve şifreli kalmaya devam edecekti. Böylece ikinci bir güvenlik katmanı sağlamış oluyoruz.\nBuluttaki verilerinize, şifreleme parolası olmayan kimse erişemez; dolayısıyla bu parolayı kaybetmeniz durumunda siz de erişemezsiniz.';
-}
-
-// Path: login.encLoginStep.encFaq.1
-class _Translations$login$encLoginStep$encFaq$1$tr extends Translations$login$encLoginStep$encFaq$1$en {
-	_Translations$login$encLoginStep$encFaq$1$tr._(TranslationsTr root) : this._root = root, super.internal(root);
-
-	final TranslationsTr _root; // ignore: unused_field
-
-	// Translations
-	@override String get q => 'Henüz bir şifreleme parolası belirlemedim. Nereden alacağım?';
-	@override String get a => 'Yeni bir şifreleme parolası belirleyip yukarıya yazın.\ntarus Not şifreleme anahtarını bu paroladan üretir.';
-}
-
-// Path: login.encLoginStep.encFaq.2
-class _Translations$login$encLoginStep$encFaq$2$tr extends Translations$login$encLoginStep$encFaq$2$en {
-	_Translations$login$encLoginStep$encFaq$2$tr._(TranslationsTr root) : this._root = root, super.internal(root);
-
-	final TranslationsTr _root; // ignore: unused_field
-
-	// Translations
-	@override String get q => 'Hesap parolamla şifreleme parolam aynı olabilir mi?';
-	@override String get a => 'Evet fakat unutmayın ki bu durumda hesap parolanıza sahip herhangi birisi notlarınıza da erişebilir.';
 }
 
 // Path: editor.menu.boxFits

@@ -50,7 +50,6 @@ class NcLoginStep extends HookWidget {
           : credentials.server;
       stows.username.value = username;
       stows.ncPassword.value = credentials.appPassword;
-      stows.encPassword.value = '';
 
       stows.pfp.value = null;
       client.core.avatar

@@ -2,7 +2,7 @@ Not is the handwriting and sketch notes app of the tarus ecosystem.
 
 Write and draw with a stylus or your finger: pens, highlighter, shapes, images and PDFs on pages or a whiteboard. In dark mode your notes can be inverted, so you write with light ink on a dark background; images and PDFs are inverted too.
 
-Your notes are end-to-end encrypted on your device with an encryption password only you know, before they leave the device. The Not server (not.tarus.tr) stores only encrypted files and cannot read them. If you forget the encryption password, your synced notes cannot be recovered.
+Your notes live in one list on your phone and on the web (not.tarus.tr): a note written on the phone appears on the web and vice versa. Transfers are encrypted with HTTPS, and the Not server stores notes encrypted on disk and in backups. No separate encryption password is needed.
 
 Not has no separate account: you connect with a sync token from your Pusula account (Pusula > Settings > Not sync). You can revoke the token at any time, and the device stops syncing within 30 seconds. Notes sync between your devices; when the same note changes in two places, the older version is kept as a conflict copy instead of being lost.
 

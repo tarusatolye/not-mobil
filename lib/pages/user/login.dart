@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:saber/components/nextcloud/done_login_step.dart';
-import 'package:saber/components/nextcloud/enc_login_step.dart';
 import 'package:saber/components/nextcloud/nc_login_step.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/tarus_baglantilar.dart';
@@ -31,20 +30,14 @@ class NcLoginPage extends StatefulWidget {
   static LoginStep getCurrentStep() {
     if (!stows.url.loaded ||
         !stows.username.loaded ||
-        !stows.ncPassword.loaded ||
-        !stows.encPassword.loaded ||
-        !stows.key.loaded ||
-        !stows.iv.loaded) {
+        !stows.ncPassword.loaded) {
       return .waitingForPrefs;
     }
 
+    // Şifreleme parolası adımı yok (1.1.6): notlar düz eşitlenir,
+    // sunucu diskte şifreli saklar.
     if (stows.username.value.isEmpty || stows.ncPassword.value.isEmpty) {
       return .nc;
-    }
-    if (stows.encPassword.value.isEmpty ||
-        stows.key.value.isEmpty ||
-        stows.iv.value.isEmpty) {
-      return .enc;
     }
     return .done;
   }
@@ -69,19 +62,11 @@ class _NcLoginPageState extends State<NcLoginPage> {
 
     step = .waitingForPrefs;
 
-    if (!stows.url.loaded ||
-        !stows.username.loaded ||
-        !stows.ncPassword.loaded ||
-        !stows.encPassword.loaded ||
-        !stows.key.loaded ||
-        !stows.iv.loaded)
+    if (!stows.url.loaded || !stows.username.loaded || !stows.ncPassword.loaded)
       await Future.wait([
         stows.url.waitUntilRead(),
         stows.username.waitUntilRead(),
         stows.ncPassword.waitUntilRead(),
-        stows.encPassword.waitUntilRead(),
-        stows.key.waitUntilRead(),
-        stows.iv.waitUntilRead(),
       ]);
 
     recheckCurrentStep();
@@ -123,7 +108,6 @@ class _NcLoginPageState extends State<NcLoginPage> {
       body: switch (step) {
         .waitingForPrefs => const Center(child: CircularProgressIndicator()),
         .nc => NcLoginStep(recheckCurrentStep: recheckCurrentStep),
-        .enc => EncLoginStep(recheckCurrentStep: recheckCurrentStep),
         .done => DoneLoginStep(recheckCurrentStep: recheckCurrentStep),
       },
     );
@@ -139,9 +123,6 @@ enum LoginStep(
 
   /// The user needs to authenticate with the Nextcloud server
   nc(0.2),
-
-  /// The user needs to provide their encryption password
-  enc(0.6),
 
   /// The user is fully logged in
   done(1),

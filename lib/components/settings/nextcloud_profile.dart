@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nextcloud/provisioning_api.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
+import 'package:saber/data/nextcloud/esitleme_uyarisi.dart';
 import 'package:saber/data/nextcloud/nextcloud_client_extension.dart';
 import 'package:saber/data/nextcloud/saber_syncer.dart';
 import 'package:saber/data/prefs.dart';
@@ -23,24 +24,22 @@ class const NextcloudProfile({super.key}) extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final username = useValueListenable(stows.username);
-    final encPassword = useValueListenable(stows.encPassword);
-    final key = useValueListenable(stows.key);
-    final iv = useValueListenable(stows.iv);
+    final ncPassword = useValueListenable(stows.ncPassword);
     final pfp = useValueListenable(stows.pfp);
+    final uyari = useValueListenable(EsitlemeUyarisi.son);
 
     final quota = useValueListenable(stows.lastStorageQuota);
-    useMemoized(getStorageQuota, [username, encPassword, key, iv]);
+    useMemoized(getStorageQuota, [username, ncPassword]);
 
     final loginStep = forceLoginStep ?? NcLoginPage.getCurrentStep();
     final heading = switch (loginStep) {
       .waitingForPrefs => '',
       .nc => t.login.status.loggedOut,
-      .enc || .done => t.login.status.hi(u: stows.username.value),
+      .done => t.login.status.hi(u: stows.username.value),
     };
     final subheading = switch (loginStep) {
       .waitingForPrefs => '',
       .nc => t.login.status.tapToLogin,
-      .enc => t.login.status.almostDone,
       .done => t.login.status.loggedIn,
     };
     const pfpSize = 44.0;
@@ -80,6 +79,10 @@ class const NextcloudProfile({super.key}) extends HookWidget {
                 if (loginStep == .done) ...[
                   const SizedBox(height: 8),
                   _QuotaSummary(quota: quota),
+                  if (uyari != null) ...[
+                    const SizedBox(height: 8),
+                    EsitlemeUyariSatiri(uyari: uyari),
+                  ],
                 ],
               ],
             ),
@@ -159,6 +162,44 @@ class _QuotaSummary extends StatelessWidget {
         Text(
           quota?.describeConcise() ?? Quota.describeConcisePlaceholder(),
           style: TextStyle(fontSize: 11, color: r.muted),
+        ),
+      ],
+    );
+  }
+}
+
+/// Eşitleme kartında sunucu uyarısı: 503 (geçici, yeniden denenir) ya da
+/// 403 (sunucu reddetti; Not sunucusunun Türkçe açıklaması olduğu gibi gösterilir).
+class EsitlemeUyariSatiri extends StatelessWidget {
+  const new({super.key, required this.uyari});
+
+  final EsitlemeUyarisi uyari;
+
+  @override
+  Widget build(BuildContext context) {
+    final r = TarusRenkler.of(context);
+    final gecici = uyari.tur == .gecici;
+    final renk = gecici ? r.warning : r.danger;
+    final metin = gecici
+        ? t.tarus.esitleme.gecici
+        : (uyari.mesaj ?? t.tarus.esitleme.reddedildi);
+    return Row(
+      crossAxisAlignment: .start,
+      children: [
+        Padding(
+          padding: const .only(top: 1),
+          child: Icon(
+            gecici ? TarusIkon.bulutKapali : TarusIkon.uyari,
+            size: 14,
+            color: renk,
+          ),
+        ),
+        const SizedBox(width: 6),
+        Expanded(
+          child: Text(
+            metin,
+            style: TextStyle(fontSize: 12, height: 1.35, color: r.text),
+          ),
         ),
       ],
     );

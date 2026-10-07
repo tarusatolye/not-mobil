@@ -19,9 +19,6 @@ void main() {
       _theme = TarusTemaKur.kur(TarusTema.varsayilan);
       stows.username.value = 'testuser';
       stows.ncPassword.value = 'testpassword';
-      stows.encPassword.value = 'encpassword';
-      stows.key.value = 'encryptionkey';
-      stows.iv.value = 'encryptioniv';
       stows.lastStorageQuota.value = TestUser.getQuota();
     });
 
@@ -44,7 +41,7 @@ void main() {
       await tester.loadAssets();
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('How do I change my encryption password?'));
+      await tester.tap(find.text('How do I change my account password?'));
       await tester.pumpAndSettle();
 
       // scroll down

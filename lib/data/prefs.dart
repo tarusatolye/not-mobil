@@ -63,22 +63,45 @@ class Stows {
   /// the password used to login to Nextcloud
   final ncPassword = SecureStow('ncPassword', '', volatile: !_isOnMainIsolate);
 
-  /// the password used to encrypt/decrypt notes
-  final encPassword = SecureStow(
+  /// Whether the user is logged in (Pusula eşitleme belirteci kayıtlı).
+  /// Please ensure that the relevant Prefs are loaded before using this.
+  bool get loggedIn => username.value.isNotEmpty && ncPassword.value.isNotEmpty;
+
+  /// 1.1.5 ve öncesinin uçtan uca şifreleme kayıtları (parola, anahtar, IV).
+  /// 1.1.6'dan beri notlar düz eşitlenir, sunucu diskte şifreli saklar;
+  /// bunlar yalnız [eskiSifrelemeKayitlariniSil] ile bir kez silinmek için var.
+  final eskiEncPassword = SecureStow(
     'encPassword',
     '',
     volatile: !_isOnMainIsolate,
   );
+  final eskiKey = SecureStow('key', '', volatile: !_isOnMainIsolate);
+  final eskiIv = SecureStow('iv', '', volatile: !_isOnMainIsolate);
 
-  /// Whether the user is logged in and has provided both passwords.
-  /// Please ensure that the relevant Prefs are loaded before using this.
-  bool get loggedIn =>
-      username.value.isNotEmpty &&
-      ncPassword.value.isNotEmpty &&
-      encPassword.value.isNotEmpty;
+  /// Eski şifreleme kayıtları silindi mi (güncellemeden sonraki ilk açılış).
+  final eskiSifrelemeSilindi = PlainStow(
+    'eskiSifrelemeSilindi',
+    false,
+    volatile: !_isOnMainIsolate,
+  );
 
-  final key = SecureStow('key', '', volatile: !_isOnMainIsolate);
-  final iv = SecureStow('iv', '', volatile: !_isOnMainIsolate);
+  /// Güncellemeden sonraki ilk açılışta eski şifreleme parolasını, anahtarı ve
+  /// IV'yi siler (bir kez). Yerel notlar zaten düzdür; sonraki eşitleme onları
+  /// sunucuya düz yükler. Silme yapıldıysa `true`.
+  Future<bool> eskiSifrelemeKayitlariniSil() async {
+    await Future.wait([
+      eskiSifrelemeSilindi.waitUntilRead(),
+      eskiEncPassword.waitUntilRead(),
+      eskiKey.waitUntilRead(),
+      eskiIv.waitUntilRead(),
+    ]);
+    if (eskiSifrelemeSilindi.value) return false;
+    eskiEncPassword.value = '';
+    eskiKey.value = '';
+    eskiIv.value = '';
+    eskiSifrelemeSilindi.value = true;
+    return true;
+  }
 
   final pfp = PlainStow<Uint8List?>(
     'pfp',

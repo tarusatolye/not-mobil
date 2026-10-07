@@ -214,7 +214,6 @@ class Translations$login$en {
 
 	late final Translations$login$status$en status = Translations$login$status$en.internal(_root);
 	late final Translations$login$ncLoginStep$en ncLoginStep = Translations$login$ncLoginStep$en.internal(_root);
-	late final Translations$login$encLoginStep$en encLoginStep = Translations$login$encLoginStep$en.internal(_root);
 }
 
 // Path: profile
@@ -249,7 +248,6 @@ class Translations$profile$en {
 		Translations$profile$faq$0$en.internal(_root),
 		Translations$profile$faq$1$en.internal(_root),
 		Translations$profile$faq$2$en.internal(_root),
-		Translations$profile$faq$3$en.internal(_root),
 	];
 }
 
@@ -399,6 +397,7 @@ class Translations$tarus$en {
 	late final Translations$tarus$bos$en bos = Translations$tarus$bos$en.internal(_root);
 	late final Translations$tarus$ayar$en ayar = Translations$tarus$ayar$en.internal(_root);
 	late final Translations$tarus$giris$en giris = Translations$tarus$giris$en.internal(_root);
+	late final Translations$tarus$esitleme$en esitleme = Translations$tarus$esitleme$en.internal(_root);
 }
 
 // Path: home.tabs
@@ -978,9 +977,6 @@ class Translations$login$status$en {
 	/// en: 'Hi, $u!'
 	String hi({required Object u}) => 'Hi, ${u}!';
 
-	/// en: 'Almost ready to sync, tap to finish'
-	String get almostDone => 'Almost ready to sync, tap to finish';
-
 	/// en: 'Your notes are syncing'
 	String get loggedIn => 'Your notes are syncing';
 }
@@ -1012,39 +1008,6 @@ class Translations$login$ncLoginStep$en {
 	String get loginWithNextcloud => 'Connect to server';
 
 	late final Translations$login$ncLoginStep$loginFlow$en loginFlow = Translations$login$ncLoginStep$loginFlow$en.internal(_root);
-}
-
-// Path: login.encLoginStep
-class Translations$login$encLoginStep$en {
-	Translations$login$encLoginStep$en.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-
-	/// en: 'To protect your data, please enter your encryption password:'
-	String get enterEncPassword => 'To protect your data, please enter your encryption password:';
-
-	/// en: 'New to tarus Not? Just enter a new encryption password.'
-	String get newToSaber => 'New to tarus Not? Just enter a new encryption password.';
-
-	/// en: 'Encryption password'
-	String get encPassword => 'Encryption password';
-
-	/// en: 'Frequently asked questions'
-	String get encFaqTitle => 'Frequently asked questions';
-
-	/// en: 'Decryption failed with the provided password. Please try entering it again.'
-	String get wrongEncPassword => 'Decryption failed with the provided password. Please try entering it again.';
-
-	/// en: 'Something went wrong connecting to the server. Please try again later.'
-	String get connectionFailed => 'Something went wrong connecting to the server. Please try again later.';
-
-	List<dynamic> get encFaq => [
-		Translations$login$encLoginStep$encFaq$0$en.internal(_root),
-		Translations$login$encLoginStep$encFaq$1$en.internal(_root),
-		Translations$login$encLoginStep$encFaq$2$en.internal(_root),
-	];
 }
 
 // Path: profile.quickLinks
@@ -1095,21 +1058,6 @@ class Translations$profile$faq$1$en {
 // Path: profile.faq.2
 class Translations$profile$faq$2$en {
 	Translations$profile$faq$2$en.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-
-	/// en: 'How do I change my encryption password?'
-	String get q => 'How do I change my encryption password?';
-
-	/// en: '0. Make sure syncing is complete (see the sync progress on the home screen). 1. Log out of tarus Not. 2. Go to your server website and delete your 'Saber' folder. This will delete all your notes from the server. 3. Log back in to tarus Not. You can choose a new encryption password when logging in. 4. Don't forget to log out and log back in to tarus Not on your other devices too.'
-	String get a => '0. Make sure syncing is complete (see the sync progress on the home screen).\n1. Log out of tarus Not.\n2. Go to your server website and delete your \'Saber\' folder. This will delete all your notes from the server.\n3. Log back in to tarus Not. You can choose a new encryption password when logging in.\n4. Don\'t forget to log out and log back in to tarus Not on your other devices too.';
-}
-
-// Path: profile.faq.3
-class Translations$profile$faq$3$en {
-	Translations$profile$faq$3$en.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -1566,6 +1514,21 @@ class Translations$tarus$giris$en {
 	String get kendiSunucunuzAciklama => 'Enter the address of your own server to store your notes there.';
 }
 
+// Path: tarus.esitleme
+class Translations$tarus$esitleme$en {
+	Translations$tarus$esitleme$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'The server is not responding right now. Your notes are safe on this device; syncing will retry automatically.'
+	String get gecici => 'The server is not responding right now. Your notes are safe on this device; syncing will retry automatically.';
+
+	/// en: 'The server rejected the sync.'
+	String get reddedildi => 'The server rejected the sync.';
+}
+
 // Path: sentry.consent.description
 class Translations$sentry$consent$description$en {
 	Translations$sentry$consent$description$en.internal(this._root);
@@ -1667,51 +1630,6 @@ class Translations$login$ncLoginStep$loginFlow$en {
 
 	/// en: 'Login page didn't open? Click here'
 	String get browserDidntOpen => 'Login page didn\'t open? Click here';
-}
-
-// Path: login.encLoginStep.encFaq.0
-class Translations$login$encLoginStep$encFaq$0$en {
-	Translations$login$encLoginStep$encFaq$0$en.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-
-	/// en: 'What is an encryption password? Why use two passwords?'
-	String get q => 'What is an encryption password? Why use two passwords?';
-
-	/// en: 'The account password (or sync token) is used to connect to the server. The encryption password "scrambles" your data before it ever reaches the cloud. Even if someone gains access to your server account, your notes will remain safe and encrypted with a separate password. This provides you a second layer of security to protect your data. No-one can access your notes on the server without your encryption password, but this also means that if you forget your encryption password, you will lose access to your data.'
-	String get a => 'The account password (or sync token) is used to connect to the server. The encryption password "scrambles" your data before it ever reaches the cloud.\nEven if someone gains access to your server account, your notes will remain safe and encrypted with a separate password. This provides you a second layer of security to protect your data.\nNo-one can access your notes on the server without your encryption password, but this also means that if you forget your encryption password, you will lose access to your data.';
-}
-
-// Path: login.encLoginStep.encFaq.1
-class Translations$login$encLoginStep$encFaq$1$en {
-	Translations$login$encLoginStep$encFaq$1$en.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-
-	/// en: 'I haven't set an encryption password yet. Where do I get it?'
-	String get q => 'I haven\'t set an encryption password yet. Where do I get it?';
-
-	/// en: 'Choose a new encryption password and enter it above. tarus Not will generate your encryption keys from this password automatically.'
-	String get a => 'Choose a new encryption password and enter it above.\ntarus Not will generate your encryption keys from this password automatically.';
-}
-
-// Path: login.encLoginStep.encFaq.2
-class Translations$login$encLoginStep$encFaq$2$en {
-	Translations$login$encLoginStep$encFaq$2$en.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-
-	/// en: 'Can I use the same password as my account?'
-	String get q => 'Can I use the same password as my account?';
-
-	/// en: 'Yes, but keep in mind that it would be easier for the server administrator or someone else to access your notes if they gain access to your account.'
-	String get a => 'Yes, but keep in mind that it would be easier for the server administrator or someone else to access your notes if they gain access to your account.';
 }
 
 // Path: editor.menu.boxFits

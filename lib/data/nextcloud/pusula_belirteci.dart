@@ -53,7 +53,6 @@ abstract final class PusulaBelirteci {
         : sunucu.toString();
     stows.username.value = kullaniciAdi;
     stows.ncPassword.value = temizle(belirtec);
-    stows.encPassword.value = '';
     stows.pfp.value = null;
   }
 }

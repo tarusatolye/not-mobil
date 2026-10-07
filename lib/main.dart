@@ -127,14 +127,16 @@ Future<void> appRunner(List<String> args) async {
 
 void startSyncAfterLoaded() async {
   await stows.username.waitUntilRead();
-  await stows.encPassword.waitUntilRead();
+  await stows.ncPassword.waitUntilRead();
+  // 1.1.6: uçtan uca şifreleme kalktı; eski parola/anahtar bir kez silinir.
+  await stows.eskiSifrelemeKayitlariniSil();
 
   stows.username.removeListener(startSyncAfterLoaded);
-  stows.encPassword.removeListener(startSyncAfterLoaded);
+  stows.ncPassword.removeListener(startSyncAfterLoaded);
   if (!stows.loggedIn) {
     // try again when logged in
     stows.username.addListener(startSyncAfterLoaded);
-    stows.encPassword.addListener(startSyncAfterLoaded);
+    stows.ncPassword.addListener(startSyncAfterLoaded);
     return;
   }
 

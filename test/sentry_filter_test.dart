@@ -217,11 +217,11 @@ void main() {
       expect(filteredEvent?.message?.formatted, 'john doe [redacted]');
     });
 
-    test('Redacts ncPassword and encPassword', () async {
+    test('Redacts ncPassword and legacy encPassword', () async {
       const ncPassword = 'myNcPassword';
       const encPassword = 'myEncPassword';
       stows.ncPassword.value = ncPassword;
-      stows.encPassword.value = encPassword;
+      stows.eskiEncPassword.value = encPassword;
       final originalEvent = SentryEvent(
         message: SentryMessage('Passwords: $ncPassword, $encPassword'),
       );
@@ -235,11 +235,11 @@ void main() {
       );
     });
 
-    test('Redacts key and iv', () async {
+    test('Redacts legacy key and iv', () async {
       const key = '0123456789abcdef';
       const iv = 'abc123';
-      stows.key.value = key;
-      stows.iv.value = iv;
+      stows.eskiKey.value = key;
+      stows.eskiIv.value = iv;
       final originalEvent = SentryEvent(
         message: SentryMessage('Key: $key, IV: $iv'),
       );

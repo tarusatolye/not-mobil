@@ -41,9 +41,10 @@ abstract class SentryFilter {
   static Set<String> getSecrets() => _previousSecrets
     ..add(stows.username.value)
     ..add(stows.ncPassword.value)
-    ..add(stows.encPassword.value)
-    ..add(stows.key.value)
-    ..add(stows.iv.value);
+    // Eski şifreleme kayıtları ilk açılışta silinene kadar da gizlenir.
+    ..add(stows.eskiEncPassword.value)
+    ..add(stows.eskiKey.value)
+    ..add(stows.eskiIv.value);
 
   static final _previousSecrets = <String>{};
 

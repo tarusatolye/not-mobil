@@ -2,7 +2,7 @@ Not, tarus ekosisteminin el yazısı ve eskiz not uygulamasıdır.
 
 Kalemle ya da parmağınızla yazın ve çizin: kalemler, vurgulayıcı, şekiller, görseller ve PDF'ler; sayfalı not ya da beyaz tahta. Karanlık modda notlarınız ters çevrilebilir, koyu zemine açık mürekkeple yazarsınız; görseller ve PDF'ler de birlikte çevrilir.
 
-Notlarınız cihazdan çıkmadan önce, yalnız sizin bildiğiniz şifreleme parolasıyla cihazınızda uçtan uca şifrelenir. Not sunucusu (not.tarus.tr) yalnız şifreli dosyaları saklar ve okuyamaz. Şifreleme parolasını unutursanız eşitlenen notlar kurtarılamaz.
+Notlarınız telefonda ve webde (not.tarus.tr) tek listede durur: telefonda yazdığınız not webde, webde açtığınız not telefonda görünür. Aktarım HTTPS ile şifrelidir; Not sunucusu notları diskte ve yedekte şifreli saklar. Ayrı bir şifreleme parolası gerekmez.
 
 Not'un ayrı bir hesabı yoktur: Pusula hesabınızdan aldığınız eşitleme belirteciyle bağlanırsınız (Pusula › Ayarlar › Not eşitleme). Belirteci istediğiniz an iptal edebilirsiniz; cihaz en geç 30 saniye içinde eşitlemeyi bırakır. Notlar cihazlarınız arasında eşitlenir; aynı not iki yerde değişirse eski sürüm kaybolmaz, çakışma kopyası olarak saklanır.
 

@@ -47,7 +47,7 @@ class HesapSilmeDialog extends StatelessWidget {
             const Text(
               "tarus Not'un ayrı bir hesabı yoktur; kimliğiniz Pusula "
               'hesabınızdır. Bu uygulamadan eşitlenen notlar Not sunucusunda '
-              'uçtan uca şifreli durur.',
+              'şifreli saklanır.',
             ),
             baslik('1. Bu cihazın erişimini kaldırın'),
             const Text(
@@ -59,7 +59,7 @@ class HesapSilmeDialog extends StatelessWidget {
             baslik('2. Bu cihazdaki verileri silin'),
             const Text(
               'Profil ekranından çıkış yapın, ardından uygulamayı kaldırın. '
-              'Kaldırınca cihazdaki notlar ve şifreleme anahtarları silinir.',
+              'Kaldırınca cihazdaki notlar silinir.',
             ),
             baslik('3. Sunucudaki notları ve hesabı sildirin'),
             const Text(

@@ -195,7 +195,6 @@ login:
     loggedOut: Eşitleme kapalı
     tapToLogin: Pusula eşitleme belirteciyle bağlanmak için dokunun
     hi: Merhaba, $u!
-    almostDone: Eşitlemeye neredeyse hazır, tamamlamak için dokunun
     loggedIn: Notlarınız eşitleniyor
   ncLoginStep:
     whereToStoreData: "Verilerinizi nerede saklamak istediğinizi seçin:"
@@ -208,25 +207,6 @@ login:
       pleaseAuthorize: Lütfen tarus Not'un sunucudaki hesabınıza erişmesine izin verin
       followPrompts: Lütfen tarayıcıda açılan sunucu sayfasındaki adımları izleyin
       browserDidntOpen: Giriş sayfası açılmadıysa buraya tıklayın
-  encLoginStep:
-    enterEncPassword: "Verilerinizi korumak için lütfen şifreleme parolanızı girin:"
-    newToSaber: tarus Not'ta ilk kez mi? Yeni bir şifreleme parolası girin.
-    encPassword: Şifreleme parolası
-    encFaqTitle: Sıkça sorulan sorular
-    wrongEncPassword: Verilen parola ile şifre çözülemedi. Lütfen parolayı tekrar girin.
-    connectionFailed: Sunucuya bağlanılamadı. Lütfen daha sonra tekrar deneyin.
-    encFaq:
-    - q: Şifreleme parolası nedir? Neden iki parola kullanıyorum?
-      a: |-
-        Hesap parolası (ya da eşitleme belirteci) sunucuya bağlanmak için kullanılıyor. Şifreleme parolası ise verilerinizi buluta aktarmadan önce gizlemek için kullanılıyor.
-        Eğer birisi sunucudaki hesabınızı ele geçirseydi bile notlarınız güvenli ve şifreli kalmaya devam edecekti. Böylece ikinci bir güvenlik katmanı sağlamış oluyoruz.
-        Buluttaki verilerinize, şifreleme parolası olmayan kimse erişemez; dolayısıyla bu parolayı kaybetmeniz durumunda siz de erişemezsiniz.
-    - q: Henüz bir şifreleme parolası belirlemedim. Nereden alacağım?
-      a: |-
-        Yeni bir şifreleme parolası belirleyip yukarıya yazın.
-        tarus Not şifreleme anahtarını bu paroladan üretir.
-    - q: Hesap parolamla şifreleme parolam aynı olabilir mi?
-      a: Evet fakat unutmayın ki bu durumda hesap parolanıza sahip herhangi birisi notlarınıza da erişebilir.
 profile:
   title: Profilim
   logout: Çıkış yap
@@ -241,12 +221,6 @@ profile:
     a: Hayır. Notlarınız hem cihazınızda hem de sunucuda tutuluyor olacak. Siz tekrardan giriş yapana dek notlarınız senkronize edilmeyecek. Veri kaybı yaşamamak için çıkış yapmadan önce senkronizasyonun tamamlandığından emin olun (ana sayfada senkronizasyon ilerlemesini görebilirsiniz).
   - q: Hesap parolamı nasıl değiştirebilirim?
     a: Sunucu websitesine gidin ve hesabınıza giriş yapın. Arayüzde Ayarlar > Güvenlik > Parola değiştir yolunu takip edin. Parolanızı değiştirdikten sonra tarus Not'tan çıkış yapıp tekrardan giriş yapmanız gerekecek.
-  - q: Şifreleme parolamı nasıl değiştirebilirim?
-    a: |-
-      1. tarus Not'tan çıkış yapın. Veri kaybı yaşamamak için çıkış yapmadan önce senkronizasyonun tamamlandığından emin olun (ana sayfada senkronizasyon ilerlemesini görebilirsiniz).
-      2. Sunucu websitesine gidin ve 'Saber' klasörünü silin. Bu sunucudaki tüm notları silecek.
-      3. tarus Not'a yeniden giriş yapın. Tekrar giriş yaparken yeni şifreleme parolanızı belirleyebilirsiniz.
-      4. Diğer cihazlarınızda da tarus Not'tan çıkış yapıp tekrar giriş yapmayı unutmayın.
   - q: Hesabımı nasıl silebilirim?
     a: |-
       Üstte yer alan "@:profile.quickLinks.deleteAccount" butonuna tıklayın, gerekirse giriş yapın.
@@ -423,3 +397,6 @@ tarus:
     belirtec: Eşitleme belirteci
     baglan: Pusula ile bağlan
     kendiSunucunuzAciklama: Notları kendi sunucunuzda saklamak için adresini girin.
+  esitleme:
+    gecici: Sunucu şu an yanıt vermiyor. Notlarınız bu cihazda duruyor; eşitleme kendiliğinden yeniden denenecek.
+    reddedildi: Sunucu eşitlemeyi reddetti.
