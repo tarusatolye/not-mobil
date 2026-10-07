@@ -101,11 +101,26 @@ Linux'ta testler için `libgtk-3-dev` gerekir (super_native_extensions).
 sunucu not.tarus.tr olduğu için adres testte açıkça verilir.
 
 Golden ekran görüntüleri (`test/goldens/`, `metadata/en-US/images/*Screenshots/`)
-arayüz bilerek değişince güncellenir: `flutter test --update-goldens <test dosyası>`
-(önce `dart run golden_screenshot:download_apple_fonts`; CI ile aynı sonuç için
-Linux'ta, `submodules/flutter` sürümüyle).
+arayüz bilerek değişince GitHub'da **Golden güncelle** iş akışıyla (Linux, CI ile aynı yazı
+tipleri) yeniden üretilir; Windows'ta üretilenler CI'da tutmaz.
+
+Windows'ta `flutter test`: `super_native_extensions` yerel parçası Windows'ta MSVC hedefiyle
+derlenir (Visual Studio Build Tools gerekir). Build Tools yoksa yerel deneme için git dışı
+`pubspec_overrides.yaml` ile `native_toolchain_rust`'ın Windows hedefini `x86_64-pc-windows-gnu`'ya
+çeviren yerel bir kopya kullanılabilir (2026-10-07 turunda böyle çalıştırıldı; commit edilmez).
 
 ## Sürüm notları
+- **1.1.5** (2026-10-07): arayüz tarus tasarım diline geçti (1–2. aşama). `lib/tarus/` tema katmanı
+  (`TarusRenkler` kabuk token'ları `tarus.css`'ten üretilir, `TarusOlcu` Pusula Mobil `ui.ts`
+  ölçüleri, `TarusTemaKur` tek ThemeData; Saber'in `SaberTheme`, platform seçici, Cupertino/Yaru
+  dalları ve ölü `settings_color`/`yaru_builder` kalktı), Inter yazı tipi, tek ikon ailesi Lucide
+  (`TarusIkon`), Pusula Mobil gibi yüzen alt çubuk + ortada «+» (tablette kenar rayı), sekmeler
+  Hızlı Bakış / Notlar / Beyaz tahta / Ayarlar, yeni kartlar (Karanlık temada not adı okunmuyordu),
+  klasör kartları, konum çubuğu, boş durumlar, tarus pencereleri, editör araç çubuğu (40 px,
+  seçili = vurgu %14 zemin + %45 kenarlık), Ayarlar baştan (gruplu satırlar, 3 sütun tema ızgarası),
+  uygulama içi Hakkında + sürüm notları, giriş ekranı görünümü (Nextcloud markası kalktı, eşitleme
+  ve şifreleme mantığı değişmedi). Kağıt çizgileri ve Quill başlık rengi temadan ayrıldı, dışa
+  aktarmayla aynı (`TarusKagit`). Diller yalnız Türkçe ve İngilizce.
 - **1.1.4** (2026-10-06): başlatıcı ikonu tarus Not işareti (`#AC865A` zeminde beyaz
   defter sayfası, monochrome katmanlı); Saber'in sarı «S» ikonu ve indigo `icon.svg` kalktı.
   İkonlar `ozluk/tarus-kabuk/marka/uret.mjs` ile üretilir (`--hedef flutter` + `--hedef android`).
@@ -122,8 +137,9 @@ tarus Not, [Saber](https://github.com/saber-notes/saber) (© 2022- Adil Hanney v
 katkıda bulunanlar) üzerine geliştirilmiştir ve Saber gibi **GNU GPL-3.0** ile
 lisanslıdır (`LICENSE.md`). APK dağıtılırken kaynak kodu da sunulmalıdır (GPL-3.0 §6):
 
-- Uygulamada: Ayarlar → en alttaki sürüm → Hakkında: Saber referansı, lisans notu,
-  kaynak kodu ve Saber bağlantıları (`lib/components/settings/app_info.dart`).
+- Uygulamada: Ayarlar → Destek → Hakkında (ya da en alttaki sürüm): Saber referansı, lisans notu,
+  kaynak kodu ve Saber bağlantıları (`lib/pages/user/hakkinda_sayfasi.dart`, metinler
+  `lib/components/settings/app_info.dart`).
 - Play mağaza açıklamasının sonunda aynı not var (`store/play/tr-TR/uzun-aciklama.txt`).
 - **Telif satırı:** `appInfo.licenseNotice` her dilde «Saber … Adil Hanney» kalır (ürün
   adı değil telif sahibi); `test/tarus_yayin_test.dart` denetler.
@@ -136,6 +152,26 @@ lisanslıdır (`LICENSE.md`). APK dağıtılırken kaynak kodu da sunulmalıdır
 - Kaynak bağlantısı APK'yı alan herkesin erişebileceği bir yerde olmalı: depo
   özelse ya açılmalı ya da kaynak arşivi indirme sayfasına konmalı.
 
+## Arayüz katmanı (`lib/tarus/`, 1.1.5)
+- `tarus_renkler.dart` + `tarus_renkler_veri.dart`: kabuk token'ları (`--card-2` → `card2`,
+  `--ovl-3` → `ovl3`, `--elev-1` → `elev1` …) `ThemeExtension` olarak; veri dosyası
+  `python scripts/tarus_renkler_uret.py ../ozluk/tarus-kabuk/css/tarus.css lib/tarus/tarus_renkler_veri.dart`
+  ile üretilir (ardından `dart format`), elle düzenlenmez. Widget'lar renkleri
+  `TarusRenkler.of(context)` ile okur.
+- `tarus_olcu.dart`: Pusula Mobil `app/theme/ui.ts` ölçüleri (kart 14, pencere 22, alan 8,
+  ikon düğmesi 40, yazı ölçeği) ve `TarusSecim` (seçili = vurgu `#..14` zemin, `#..45` kenarlık).
+- `tarus_tema_kur.dart`: tek `ThemeData` (Inter; okunaklı yazı tipi seçiliyse Atkinson Hyperlegible
+  Next). Bütün platformlarda aynı Material/tarus görünümü; Cupertino/Yaru yok.
+- `tarus_ikon.dart`: tek ikon ailesi Lucide (`lucide_icons_flutter`, MIT; ikonlar ISC). Başka ikon
+  paketi kullanılmaz (Font Awesome, Material Symbols, Cupertino ikonları kaldırıldı).
+- `tarus_bilesenler.dart`: `TarusKart`, `TarusDialog`, `TarusIkonDugmesi`, `TarusBosDurum`,
+  `TarusSayfaUstu`, `TarusMetinAlani`, `TarusSecmeli`, Not ve tarus işaretleri.
+- `surum_notlari.dart`: Hakkında → Sürüm notları (kullanıcı dili, en çok üç cümle; STANDARTLAR §19).
+  Her sürümde buraya bir kayıt eklenir.
+- Kağıt (`TarusKagit`): satır/ızgara çizgisi ve Quill başlık rengi temadan bağımsız, dışa aktarmayla
+  aynı mavi/kırmızı; not dosyası değişmez.
+- Saber'den güncelleme alınmaz (karar 2026-10-07); Saber dosyaları doğrudan düzenlenir.
+
 ## Tema
 Ayarlar → Tema: tarus 8 kanonik tema (`lib/data/tarus_tema.dart`). Kimlik, ad ve
 sıra `ozluk/tarus-kabuk/components/TemaSecici.tsx`, renkler `tarus-kabuk/css/tarus.css`
@@ -144,13 +180,13 @@ ile birebir; değişiklik önce kabukta yapılır, sonra buraya taşınır
 yokken (ya da kimlik bilinmiyorsa) **Modern** (kullanıcı kararı 2026-10-04; web
 ve `tarus-kabuk/mobil` `VARSAYILAN_TEMA` ile aynı); web'de olmadığı için "Sistem"
 seçeneği yok (1.1.1'de kaldırıldı). Saber'in tema modu, vurgu rengi
-ve Yaru teması kullanılmaz. Tema yalnız uygulama kabuğunu boyar; not sayfası
-Saber'in karanlık mod kuralıyla çizilir.
+ve Yaru teması kullanılmaz; vurgu temanın kendi `--accent`'i. Tema yalnız uygulama kabuğunu
+boyar; not sayfası Saber'in karanlık mod kuralıyla çizilir.
 
 ## Hata bildir
 Ayarlar → Hata bildir ya da ekranın boş bir yerinde ~0,7 sn basılı tutunca açılan
 menü (pusula-mobil / posta-mobil `BaglamMenusu` ile aynı davranış;
-`lib/components/baglam_menusu.dart`): Son notlar, Gözat, Ayarlar, Giriş ve
+`lib/components/baglam_menusu.dart`): Hızlı Bakış, Notlar, Ayarlar, Giriş ve
 Kayıtlar ekranlarında. Kendi basılı tutma işlevi olan öğe (not kartı seçimi,
 ayarı sıfırlama, metin seçimi) önce kazanır; yazı alanı odaktayken açılmaz.
 Düzenleyici ve beyaz tahta çizim yüzeyi olduğu için sarılmaz (kalemi kıpırdatmadan

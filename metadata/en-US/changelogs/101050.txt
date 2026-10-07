@@ -1,0 +1,4 @@
+• New look in the tarus design language: Inter font, one icon family, new cards, dialogs and settings; the accent colour comes from your theme
+• Floating bottom bar with a + button for new notes; the first tab is now called Overview
+• Paper lines keep the same colours as exported pages, whatever the theme
+• In-app About page with release notes; the app is now in Turkish and English
