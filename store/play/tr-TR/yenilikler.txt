@@ -1,5 +1,5 @@
-• Yeni uygulama simgesi: tarus Not işareti (Saber'in sarı «S» simgesi yerine)
+• Yeni uygulama simgesi: Not işareti (Saber'in sarı «S» simgesi yerine)
 • Gizlilik politikası ve hesap silme tarus'a bağlandı: uygulama içinde silme adımları ve web'den silme talebi
-• Mağaza metinleri ve eşitleme kimliği tarus Not
+• Mağaza metinleri ve eşitleme kimliği Not
 • Çeviri düzeltmeleri; Saber telif bildirimi 10 dilde geri getirildi
 • Play hazırlığı: hedef API 36

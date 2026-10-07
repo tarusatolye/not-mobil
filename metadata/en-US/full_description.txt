@@ -1,11 +1,11 @@
-tarus Not is the handwriting and sketch notes app of the tarus ecosystem.
+Not is the handwriting and sketch notes app of the tarus ecosystem.
 
 Write and draw with a stylus or your finger: pens, highlighter, shapes, images and PDFs on pages or a whiteboard. In dark mode your notes can be inverted, so you write with light ink on a dark background; images and PDFs are inverted too.
 
-Your notes are end-to-end encrypted on your device with an encryption password only you know, before they leave the device. The tarus Not server (not.tarus.tr) stores only encrypted files and cannot read them. If you forget the encryption password, your synced notes cannot be recovered.
+Your notes are end-to-end encrypted on your device with an encryption password only you know, before they leave the device. The Not server (not.tarus.tr) stores only encrypted files and cannot read them. If you forget the encryption password, your synced notes cannot be recovered.
 
-tarus Not has no separate account: you connect with a sync token from your Pusula account (Pusula > Settings > Not sync). You can revoke the token at any time, and the device stops syncing within 30 seconds. Notes sync between your devices; when the same note changes in two places, the older version is kept as a conflict copy instead of being lost.
+Not has no separate account: you connect with a sync token from your Pusula account (Pusula > Settings > Not sync). You can revoke the token at any time, and the device stops syncing within 30 seconds. Notes sync between your devices; when the same note changes in two places, the older version is kept as a conflict copy instead of being lost.
 
 Organise notes in nested folders, find recent notes on the home screen, and report a problem from inside the app (Settings > Hata bildir, or press and hold an empty area).
 
-tarus Not is based on the open source Saber app (© 2022- Adil Hanney and contributors) and, like Saber, is licensed under the GNU General Public License version 3 (GPL-3.0). Source code: https://github.com/tarusatolye/not-mobil
+Not is based on the open source Saber app (© 2022- Adil Hanney and contributors) and, like Saber, is licensed under the GNU General Public License version 3 (GPL-3.0). Source code: https://github.com/tarusatolye/not-mobil
