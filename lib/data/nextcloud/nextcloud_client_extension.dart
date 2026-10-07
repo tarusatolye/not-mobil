@@ -8,7 +8,14 @@ import 'package:saber/data/prefs.dart';
 import 'package:saber/data/version.dart';
 
 extension NextcloudClientExtension on NextcloudClient {
-  static final Uri defaultNextcloudUri = Uri.parse('https://not.tarus.tr');
+  /// Varsayılan (Pusula belirteciyle bağlanılan) Not sunucusu. Yerel deneme
+  /// için derlemede değişir: `--dart-define=TARUS_NOT_SUNUCU=http://10.0.2.2:3001`.
+  static final Uri defaultNextcloudUri = Uri.parse(
+    const String.fromEnvironment(
+      'TARUS_NOT_SUNUCU',
+      defaultValue: 'https://not.tarus.tr',
+    ),
+  );
 
   /// Not sunucusu (tarusatolye/not) User-Agent'a bakmaz; ad tarus Not'unki.
   static final userAgent =
