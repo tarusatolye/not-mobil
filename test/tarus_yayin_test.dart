@@ -43,12 +43,16 @@ void main() {
 
   test('GPL-3.0: Saber telif bildirimi her dilde Saber adını taşır', () {
     // 1.1.2'deki mekanik "Saber → tarus Not" değişimi bu satırı 10 dilde
-    // bozmuştu (telif Adil Hanney'in, ürün adı değil).
+    // bozmuştu (telif Adil Hanney'in, ürün adı değil). 1.1.5'ten beri yalnız
+    // Türkçe ve İngilizce (kullanıcı kararı 2026-10-07).
     final diller = Directory('lib/i18n')
         .listSync()
         .whereType<File>()
         .where((f) => f.path.endsWith('.i18n.yaml'));
-    expect(diller.length, greaterThanOrEqualTo(20));
+    expect(diller.map((f) => f.uri.pathSegments.last).toSet(), {
+      'en.i18n.yaml',
+      'tr.i18n.yaml',
+    });
     for (final dil in diller) {
       final satirlar = dil.readAsLinesSync();
       final i = satirlar.indexWhere(
@@ -72,7 +76,10 @@ void main() {
     }
     // yazilim.tarus.tr kapatılıyor (2026-10-06): gizlilik ve silme tarus.tr'de
     expect(AppInfo.privacyPolicyUrl.toString(), 'https://tarus.tr/gizlilik');
-    expect(TarusBaglantilar.hesapSilme.toString(), 'https://tarus.tr/hesap-silme');
+    expect(
+      TarusBaglantilar.hesapSilme.toString(),
+      'https://tarus.tr/hesap-silme',
+    );
     final profil = File('lib/components/nextcloud/done_login_step.dart')
         .readAsStringSync();
     expect(profil, isNot(contains('drop_account')));

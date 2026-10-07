@@ -4,13 +4,13 @@ common:
   cancel: İptal
 home:
   tabs:
-    home: Giriş
-    browse: Göz at
+    home: Hızlı Bakış
+    browse: Notlar
     whiteboard: Beyaz tahta
     settings: Ayarlar
   titles:
-    home: Son notlar
-    browse: Göz at
+    home: Hızlı Bakış
+    browse: Notlar
     whiteboard: Beyaz tahta
     settings: Ayarlar
   tooltips:
@@ -38,8 +38,8 @@ home:
     rename: Yeniden adlandır
     noteNameEmpty: Not adı boş bırakılamaz
     noteNameExists: Bu isimde bir not zaten var
-    noteNameForbiddenCharacters(OUTDATED): Not adı yasak karakterler içeriyor
-    noteNameReserved(OUTDATED): Not adı saklıdır
+    noteNameForbiddenCharacters: Not adı yasak karakterler içeriyor
+    noteNameReserved: Not adı saklıdır
   moveNote:
     moveNote: Notu taşı
     moveNotes: $n tane notu taşı
@@ -50,12 +50,12 @@ home:
     numberRenamedTo: $n tane not çakışma olmaması için yeniden adlandırılacak
   deleteNote: Notu sil
   deleteNoteDialog:
-    confirmDelete(OUTDATED):
-      one(OUTDATED): Seçilen notu kalıcı olarak sil?
-      other(OUTDATED): Seçilen notları kalıcı olarak silin?
-    deleteNotes(OUTDATED): $n notu'ları sil
-    deleteName(OUTDATED): $f'yi sil
-    delete(OUTDATED): Sil
+    confirmDelete:
+      one: Seçilen notu kalıcı olarak sil
+      other: Seçilen notları kalıcı olarak sil
+    deleteNotes: $n notu sil
+    deleteName: «$f» notunu sil
+    delete: Sil
   renameFolder:
     renameFolder: Klasörü adlandır
     folderName: Klasör ismi
@@ -69,29 +69,29 @@ home:
     delete: Sil
     alsoDeleteContents: Bu klasördeki tüm notları da sil
   sort:
-    sortBy(OUTDATED): Sırala
-    nameAToZ(OUTDATED): Adı (A-Z)
-    nameZToA(OUTDATED): Adı (A'dan Z'ye)
-    lastModifiedNewToOld(OUTDATED): Düzenlendi (En yeni ilk sırada)
-    lastModifiedOldToNew(OUTDATED): Düzenlendi (En eskiden önce)
+    sortBy: Sırala
+    nameAToZ: Adı (A-Z)
+    nameZToA: Adı (Z-A)
+    lastModifiedNewToOld: Düzenlenme (en yeni önce)
+    lastModifiedOldToNew: Düzenlenme (en eski önce)
   layout:
-    layout(OUTDATED): Düzen
-    masonryGrid(OUTDATED): Duvar örgü ızgarası
-    simpleGrid(OUTDATED): Basit ızgara
-  noPreviewAvailable(OUTDATED): Önizleme yok
+    layout: Düzen
+    masonryGrid: Serbest ızgara
+    simpleGrid: Basit ızgara
+  noPreviewAvailable: Önizleme yok
 sentry:
   consent:
     description:
-      question(OUTDATED): Beklenmedik hataları otomatik olarak bildirmek ister misiniz? Bu, sorunları daha hızlı tanımlamama ve düzeltmeme yardımcı olur.
-      scope(OUTDATED): Raporlar hata ve cihazınız hakkında bilgi içerebilir. Kişisel verileri filtrelemek için her türlü çabayı gösterdim, ancak bazıları kalabilir.
-      currentlyOff(OUTDATED): Onay verirseniz, uygulamayı yeniden başlattıktan sonra hata raporlaması etkinleştirilir.
-      currentlyOn(OUTDATED): Onayı iptal ederseniz, hata raporlamasını devre dışı bırakmak için lütfen uygulamayı yeniden başlatın.
-      learnMoreInPrivacyPolicy(rich, OUTDATED): ${link(Gizlilik Politikası)} 'da daha fazla bilgi edinin.
+      question: Beklenmedik hataları otomatik olarak bildirmek ister misiniz? Bu, sorunları daha hızlı tanımlamama ve düzeltmeme yardımcı olur.
+      scope: Raporlar hata ve cihazınız hakkında bilgi içerebilir. Kişisel verileri filtrelemek için her türlü çabayı gösterdim, ancak bazıları kalabilir.
+      currentlyOff: Onay verirseniz, uygulamayı yeniden başlattıktan sonra hata raporlaması etkinleştirilir.
+      currentlyOn: Onayı iptal ederseniz, hata raporlamasını devre dışı bırakmak için lütfen uygulamayı yeniden başlatın.
+      learnMoreInPrivacyPolicy(rich): Ayrıntılar ${link(gizlilik politikasında)}.
     answers:
-      yes(OUTDATED): Evet
-      no(OUTDATED): HAYIR
-      later(OUTDATED): Bana sonra sor
-    title(OUTDATED): tarus Not'u geliştirmeye yardım etmek ister misiniz?
+      yes: Evet
+      no: Hayır
+      later: Bana sonra sor
+    title: tarus Not'u geliştirmeye yardım etmek ister misiniz?
 settings:
   prefCategories:
     general: Genel
@@ -124,9 +124,9 @@ settings:
     shapeRecognitionDelay: Şekil tanıma gecikmesi
     autoStraightenLines: Çizgileri otomatik düzleştir
     customDataDir: Özel tarus Not klasörü
-    autoDisableFingerDrawingWhenStylusDetected(OUTDATED): Parmak çizimini otomatik olarak devre dışı bırak
-    sentry(OUTDATED): Hata raporlama
-    autosave(OUTDATED): Otomatik koruma
+    autoDisableFingerDrawingWhenStylusDetected: Parmak çizimini otomatik olarak devre dışı bırak
+    sentry: Hata raporlama
+    autosave: Otomatik kaydetme
   prefDescriptions:
     hyperlegibleFont: Atkinson Hyperlegible, görme sorunu yaşayanların okumasını kolaylaştıran bir fonttur
     allowInsecureConnections: (Önerilmez) tarus Not'un kendinden imzalı/güvensiz sertifika kullanan sunuculara bağlanmasına izin verir
@@ -144,12 +144,12 @@ settings:
     autoStraightenLines: Şekil aracını kullanmadığınızda da çizgileri düzleştirir
     shouldAlwaysAlertForUpdates: Güncelleme mevcut olduğu gibi bana haber ver
     sentry:
-      active(OUTDATED): Aktif
-      inactive(OUTDATED): Aktif olmayan
-      activeUntilRestart(OUTDATED): Uygulamayı yeniden başlatana kadar etkin
-      inactiveUntilRestart(OUTDATED): Uygulamayı yeniden başlatana kadar aktif olmayan
-    autoDisableFingerDrawingWhenStylusDetected(OUTDATED): Bir kalem algılandığında parmakla çizimi kapatın
-    autosave(OUTDATED): Kısa bir gecikmeden sonra otomatik kaydetme veya asla
+      active: Aktif
+      inactive: Aktif olmayan
+      activeUntilRestart: Uygulamayı yeniden başlatana kadar etkin
+      inactiveUntilRestart: Uygulamayı yeniden başlatana kadar aktif olmayan
+    autoDisableFingerDrawingWhenStylusDetected: Bir kalem algılandığında parmakla çizimi kapatın
+    autosave: Kısa bir gecikmeden sonra otomatik kaydetme veya asla
   themeModes:
     system: Sistem teması
     light: Aydınlık
@@ -176,15 +176,15 @@ settings:
     select: Seç
     mustBeEmpty: Seçilen klasör boş olmalı
     mustBeDoneSyncing: Klasörü değiştirmeden önce senkronizasyonun tamamlandığından emin olun
-    unsupported(OUTDATED): Bu özellik şu anda yalnızca geliştiriciler içindir. Bunu kullanmak muhtemelen veri kaybına neden olacaktır.
-  autosaveDisabled(OUTDATED): Asla
-  shapeRecognitionDisabled(OUTDATED): Asla
+    unsupported: Bu özellik şu anda yalnızca geliştiriciler içindir. Bunu kullanmak muhtemelen veri kaybına neden olacaktır.
+  autosaveDisabled: Asla
+  shapeRecognitionDisabled: Asla
 logs:
-  useTheApp(OUTDATED): Uygulamayı kullanırken günlükler burada görünecektir
-  logs(OUTDATED): Günlükler
-  viewLogs(OUTDATED): Günlükleri görüntüle
-  debuggingInfo(OUTDATED): Günlükler hata ayıklama ve geliştirme için yararlı bilgiler içerir
-  noLogs(OUTDATED): Burada kayıt yok!
+  useTheApp: Uygulamayı kullandıkça kayıtlar burada görünür.
+  logs: Kayıtlar
+  viewLogs: Kayıtları görüntüle
+  debuggingInfo: Hata ayıklama için uygulama kayıtları
+  noLogs: Henüz kayıt yok
 login:
   title: Giriş yap
   form:
@@ -192,21 +192,21 @@ login:
   signup(rich): Henüz hesabınız yok mu? ${linkToSignup(Hesap oluşturmak için tıklayın)}!
   notYou(rich): Siz değil misiniz? ${undoLogin(Başka bir hesap seçin)}.
   status:
-    loggedOut: Çıkış yapıldı
-    tapToLogin: Nextcloud oturumu açmak için tıklayın
+    loggedOut: Eşitleme kapalı
+    tapToLogin: Pusula eşitleme belirteciyle bağlanmak için dokunun
     hi: Merhaba, $u!
-    almostDone: Senkronizasyona hazırız, giriş yapmayı tamamlamak için tıklayın
-    loggedIn: Nextcloud'a giriş yapıldı
+    almostDone: Eşitlemeye neredeyse hazır, tamamlamak için dokunun
+    loggedIn: Notlarınız eşitleniyor
   ncLoginStep:
     whereToStoreData: "Verilerinizi nerede saklamak istediğinizi seçin:"
     saberNcServer: tarus Not sunucusu
-    otherNcServer: Diğer Nextcloud sunucusu
+    otherNcServer: Kendi sunucunuz
     serverUrl: Sunucu URL'i
     loginWithSaber: tarus Not ile giriş yap
-    loginWithNextcloud: Nextcloud ile giriş yap
+    loginWithNextcloud: Sunucuya bağlan
     loginFlow:
-      pleaseAuthorize: Lütfen tarus Not'un Nextcloud hesabınıza erişmesine izin verin
-      followPrompts: Lütfen Nextcloud arayüzündeki aşamaları takip edin
+      pleaseAuthorize: Lütfen tarus Not'un sunucudaki hesabınıza erişmesine izin verin
+      followPrompts: Lütfen tarayıcıda açılan sunucu sayfasındaki adımları izleyin
       browserDidntOpen: Giriş sayfası açılmadıysa buraya tıklayın
   encLoginStep:
     enterEncPassword: "Verilerinizi korumak için lütfen şifreleme parolanızı girin:"
@@ -218,15 +218,15 @@ login:
     encFaq:
     - q: Şifreleme parolası nedir? Neden iki parola kullanıyorum?
       a: |-
-        Nextcloud parolası bulutta oturum açmak için kullanılıyor. Şifreleme parolası ise verilerinizi buluta aktarmadan önce gizlemek için kullanılıyor.
-        Eğer birisi Nextcloud hesabınızı ele geçirseydi bile notlarınız güvenli ve şifreli kalmaya devam edecekti. Böylece ikinci bir güvenlik katmanı sağlamış oluyoruz.
+        Hesap parolası (ya da eşitleme belirteci) sunucuya bağlanmak için kullanılıyor. Şifreleme parolası ise verilerinizi buluta aktarmadan önce gizlemek için kullanılıyor.
+        Eğer birisi sunucudaki hesabınızı ele geçirseydi bile notlarınız güvenli ve şifreli kalmaya devam edecekti. Böylece ikinci bir güvenlik katmanı sağlamış oluyoruz.
         Buluttaki verilerinize, şifreleme parolası olmayan kimse erişemez; dolayısıyla bu parolayı kaybetmeniz durumunda siz de erişemezsiniz.
     - q: Henüz bir şifreleme parolası belirlemedim. Nereden alacağım?
       a: |-
         Yeni bir şifreleme parolası belirleyip yukarıya yazın.
         tarus Not şifreleme anahtarını bu paroladan üretir.
-    - q: Nextcloud parolamla şifreleme parolam aynı olabilir mi?
-      a: Evet fakat unutmayın ki bu durumda Nextcloud parolanıza sahip herhangi birisi notlarınıza da erişebilir.
+    - q: Hesap parolamla şifreleme parolam aynı olabilir mi?
+      a: Evet fakat unutmayın ki bu durumda hesap parolanıza sahip herhangi birisi notlarınıza da erişebilir.
 profile:
   title: Profilim
   logout: Çıkış yap
@@ -239,7 +239,7 @@ profile:
   faq:
   - q: Çıkış yaparsam notlarımı kaybedecek miyim?
     a: Hayır. Notlarınız hem cihazınızda hem de sunucuda tutuluyor olacak. Siz tekrardan giriş yapana dek notlarınız senkronize edilmeyecek. Veri kaybı yaşamamak için çıkış yapmadan önce senkronizasyonun tamamlandığından emin olun (ana sayfada senkronizasyon ilerlemesini görebilirsiniz).
-  - q: Nextcloud parolamı nasıl değiştirebilirim?
+  - q: Hesap parolamı nasıl değiştirebilirim?
     a: Sunucu websitesine gidin ve hesabınıza giriş yapın. Arayüzde Ayarlar > Güvenlik > Parola değiştir yolunu takip edin. Parolanızı değiştirdikten sonra tarus Not'tan çıkış yapıp tekrardan giriş yapmanız gerekecek.
   - q: Şifreleme parolamı nasıl değiştirebilirim?
     a: |-
@@ -252,7 +252,7 @@ profile:
       Üstte yer alan "@:profile.quickLinks.deleteAccount" butonuna tıklayın, gerekirse giriş yapın.
       tarus Not'un ayrı bir hesabı yoktur; kimliğiniz Pusula hesabınızdır. Bu cihazın eşitleme erişimini Pusula > Ayarlar > Not eşitleme bölümünden belirteci iptal ederek kaldırabilirsiniz. Sunucudaki notlarınızın ve hesap verilerinizin silinmesi için orada gösterilen silme talebi sayfasını kullanın.
       Eğer üçüncü parti bir sunucu kullanıyorsanız hesabınızı silme seçeneği sunulmuyor olabilir: daha fazla bilgi için ilgili sunucunun gizlilik politikasını inceleyin.
-  quotaUsageUncapped(OUTDATED): $used kullanıyorsunuz
+  quotaUsageUncapped: $used kullanıyorsunuz
 appInfo:
   licenseNotice: |-
     Saber  Copyright © 2022-$buildYear  Adil Hanney
@@ -353,12 +353,12 @@ editor:
       staffs: Porte (müzik)
       tablature: Nota kağıdı
       cornell: Cornell not şablonu
-    lineThickness(OUTDATED): Çizgi kalınlığı
-    lineThicknessDescription(OUTDATED): Arka plan çizgisi kalınlığı
+    lineThickness: Çizgi kalınlığı
+    lineThicknessDescription: Arka plan çizgisi kalınlığı
   readOnlyBanner:
     title: Yalnızca okunabilir mod
-    watchingServer(OUTDATED): Şu anda sunucudaki güncellemeleri izliyorsunuz. Bu modda düzenleme devre dışı bırakılır.
-    corrupted(OUTDATED): Not yüklenemedi. Bozulmuş veya hâlâ indiriliyor olabilir.
+    watchingServer: Şu anda sunucudaki güncellemeleri izliyorsunuz. Bu modda düzenleme devre dışı bırakılır.
+    corrupted: Not yüklenemedi. Bozulmuş veya hâlâ indiriliyor olabilir.
   versionTooNew:
     title: Bu not tarus Not'un daha yeni bir sürümünde düzenlenmiş
     subtitle: Bu notu düzenlemek veri kaybına sebep olabilir. Bunu görmezden gelerek düzenlemek ister misiniz?
@@ -375,3 +375,50 @@ editor:
   pages: Sayfalar
   untitled: İsimsiz
   needsToSaveBeforeExiting: Değişiklikler kaydediliyor… kayıt tamamlandığında editörden güvenli biçimde çıkabilirsiniz.
+tarus:
+  sonNotlar: Son notlar
+  klasorler: Klasörler
+  notlar: Notlar
+  klasorIslemleri: Klasör işlemleri
+  klasorAgaci: Klasör ağacı
+  seciliSayisi: $n seçili
+  hakkinda: Hakkında
+  hakkindaAciklama: Sürüm, sürüm notları ve lisans
+  hataBildir: Hata bildir
+  hataBildirAciklama: Sorunu ekran adıyla birlikte tarus'a gönderin
+  surumNotlari: Sürüm notları
+  uygulama: Uygulama
+  surum: Sürüm
+  ilkYayin: İlk yayın
+  gelistirici: Geliştirici
+  lisans: Lisans
+  kaynakKodu: tarus Not kaynak kodu
+  saberProjesi: Saber (temel alınan proje)
+  urunTanimi: El yazısı not ve eskiz defteri. Kalemle yazın, çizin, sayfaları klasörlerde düzenleyin; notlarınız Pusula hesabınızla cihazlar ve web arasında eşitlensin.
+  yetenek:
+    kalemBaslik: Kalemler ve araçlar
+    kalem: Dolma kalem, tükenmez, kurşun kalem ve fosforlu kalem; şekil tanıma, silgi, seçim ve lazer işaretçi.
+    sayfaBaslik: Sayfa ve kağıt
+    sayfa: Çizgili, kareli ve noktalı kağıt; sayfa ekleme, çoğaltma ve sıralama; görselin ve PDF'in üstüne yazma.
+    klasorBaslik: Klasörler
+    klasor: Notları klasörlerde düzenleyin, taşıyın ve yeniden adlandırın; Hızlı Bakış son açtıklarınızı gösterir.
+    esitlemeBaslik: Pusula ile eşitleme
+    esitleme: Pusula'dan alınan eşitleme belirteciyle notlar cihazlarınız ve web arasında eşitlenir.
+    disaAktarBaslik: Dışa aktarma
+    disaAktar: Notları PDF, PNG ya da arşiv (.sba) olarak paylaşın.
+  bos:
+    hicNotYok: Henüz not yok
+    klasordeNotYok: Bu klasörde henüz not yok
+    yeniNotIcinArti: Yeni not oluşturmak için alttaki + düğmesine dokunun.
+  ayar:
+    esitleme: Eşitleme
+    gorunum: Görünüm
+    tema: Tema
+    destek: Destek
+  giris:
+    altBaslik: Notlarınızı Pusula hesabınızla cihazlar ve web arasında eşitleyin.
+    pusulaBaslik: Pusula ile bağlan
+    pusulaAciklama: Pusula → Ayarlar → Not eşitleme ekranında bu cihaz için bir eşitleme belirteci oluşturun ve buraya yapıştırın.
+    belirtec: Eşitleme belirteci
+    baglan: Pusula ile bağlan
+    kendiSunucunuzAciklama: Notları kendi sunucunuzda saklamak için adresini girin.

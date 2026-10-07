@@ -44,6 +44,7 @@ class TranslationsTr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$appInfo$tr appInfo = _Translations$appInfo$tr._(_root);
 	@override late final _Translations$update$tr update = _Translations$update$tr._(_root);
 	@override late final _Translations$editor$tr editor = _Translations$editor$tr._(_root);
+	@override late final _Translations$tarus$tr tarus = _Translations$tarus$tr._(_root);
 }
 
 // Path: common
@@ -131,11 +132,11 @@ class _Translations$logs$tr extends Translations$logs$en {
 	final TranslationsTr _root; // ignore: unused_field
 
 	// Translations
-	@override String get useTheApp => 'Uygulamayı kullanırken günlükler burada görünecektir';
-	@override String get logs => 'Günlükler';
-	@override String get viewLogs => 'Günlükleri görüntüle';
-	@override String get debuggingInfo => 'Günlükler hata ayıklama ve geliştirme için yararlı bilgiler içerir';
-	@override String get noLogs => 'Burada kayıt yok!';
+	@override String get useTheApp => 'Uygulamayı kullandıkça kayıtlar burada görünür.';
+	@override String get logs => 'Kayıtlar';
+	@override String get viewLogs => 'Kayıtları görüntüle';
+	@override String get debuggingInfo => 'Hata ayıklama için uygulama kayıtları';
+	@override String get noLogs => 'Henüz kayıt yok';
 }
 
 // Path: login
@@ -234,6 +235,38 @@ class _Translations$editor$tr extends Translations$editor$en {
 	@override String get needsToSaveBeforeExiting => 'Değişiklikler kaydediliyor… kayıt tamamlandığında editörden güvenli biçimde çıkabilirsiniz.';
 }
 
+// Path: tarus
+class _Translations$tarus$tr extends Translations$tarus$en {
+	_Translations$tarus$tr._(TranslationsTr root) : this._root = root, super.internal(root);
+
+	final TranslationsTr _root; // ignore: unused_field
+
+	// Translations
+	@override String get sonNotlar => 'Son notlar';
+	@override String get klasorler => 'Klasörler';
+	@override String get notlar => 'Notlar';
+	@override String get klasorIslemleri => 'Klasör işlemleri';
+	@override String get klasorAgaci => 'Klasör ağacı';
+	@override String seciliSayisi({required Object n}) => '${n} seçili';
+	@override String get hakkinda => 'Hakkında';
+	@override String get hakkindaAciklama => 'Sürüm, sürüm notları ve lisans';
+	@override String get hataBildir => 'Hata bildir';
+	@override String get hataBildirAciklama => 'Sorunu ekran adıyla birlikte tarus\'a gönderin';
+	@override String get surumNotlari => 'Sürüm notları';
+	@override String get uygulama => 'Uygulama';
+	@override String get surum => 'Sürüm';
+	@override String get ilkYayin => 'İlk yayın';
+	@override String get gelistirici => 'Geliştirici';
+	@override String get lisans => 'Lisans';
+	@override String get kaynakKodu => 'tarus Not kaynak kodu';
+	@override String get saberProjesi => 'Saber (temel alınan proje)';
+	@override String get urunTanimi => 'El yazısı not ve eskiz defteri. Kalemle yazın, çizin, sayfaları klasörlerde düzenleyin; notlarınız Pusula hesabınızla cihazlar ve web arasında eşitlensin.';
+	@override late final _Translations$tarus$yetenek$tr yetenek = _Translations$tarus$yetenek$tr._(_root);
+	@override late final _Translations$tarus$bos$tr bos = _Translations$tarus$bos$tr._(_root);
+	@override late final _Translations$tarus$ayar$tr ayar = _Translations$tarus$ayar$tr._(_root);
+	@override late final _Translations$tarus$giris$tr giris = _Translations$tarus$giris$tr._(_root);
+}
+
 // Path: home.tabs
 class _Translations$home$tabs$tr extends Translations$home$tabs$en {
 	_Translations$home$tabs$tr._(TranslationsTr root) : this._root = root, super.internal(root);
@@ -241,8 +274,8 @@ class _Translations$home$tabs$tr extends Translations$home$tabs$en {
 	final TranslationsTr _root; // ignore: unused_field
 
 	// Translations
-	@override String get home => 'Giriş';
-	@override String get browse => 'Göz at';
+	@override String get home => 'Hızlı Bakış';
+	@override String get browse => 'Notlar';
 	@override String get whiteboard => 'Beyaz tahta';
 	@override String get settings => 'Ayarlar';
 }
@@ -254,8 +287,8 @@ class _Translations$home$titles$tr extends Translations$home$titles$en {
 	final TranslationsTr _root; // ignore: unused_field
 
 	// Translations
-	@override String get home => 'Son notlar';
-	@override String get browse => 'Göz at';
+	@override String get home => 'Hızlı Bakış';
+	@override String get browse => 'Notlar';
 	@override String get whiteboard => 'Beyaz tahta';
 	@override String get settings => 'Ayarlar';
 }
@@ -338,11 +371,11 @@ class _Translations$home$deleteNoteDialog$tr extends Translations$home$deleteNot
 
 	// Translations
 	@override String confirmDelete({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('tr'))(n,
-		one: 'Seçilen notu kalıcı olarak sil?',
-		other: 'Seçilen notları kalıcı olarak silin?',
+		one: 'Seçilen notu kalıcı olarak sil',
+		other: 'Seçilen notları kalıcı olarak sil',
 	);
-	@override String deleteNotes({required Object n}) => '${n} notu\'ları sil';
-	@override String deleteName({required Object f}) => '${f}\'yi sil';
+	@override String deleteNotes({required Object n}) => '${n} notu sil';
+	@override String deleteName({required Object f}) => '«${f}» notunu sil';
 	@override String get delete => 'Sil';
 }
 
@@ -383,9 +416,9 @@ class _Translations$home$sort$tr extends Translations$home$sort$en {
 	// Translations
 	@override String get sortBy => 'Sırala';
 	@override String get nameAToZ => 'Adı (A-Z)';
-	@override String get nameZToA => 'Adı (A\'dan Z\'ye)';
-	@override String get lastModifiedNewToOld => 'Düzenlendi (En yeni ilk sırada)';
-	@override String get lastModifiedOldToNew => 'Düzenlendi (En eskiden önce)';
+	@override String get nameZToA => 'Adı (Z-A)';
+	@override String get lastModifiedNewToOld => 'Düzenlenme (en yeni önce)';
+	@override String get lastModifiedOldToNew => 'Düzenlenme (en eski önce)';
 }
 
 // Path: home.layout
@@ -396,7 +429,7 @@ class _Translations$home$layout$tr extends Translations$home$layout$en {
 
 	// Translations
 	@override String get layout => 'Düzen';
-	@override String get masonryGrid => 'Duvar örgü ızgarası';
+	@override String get masonryGrid => 'Serbest ızgara';
 	@override String get simpleGrid => 'Basit ızgara';
 }
 
@@ -459,7 +492,7 @@ class _Translations$settings$prefLabels$tr extends Translations$settings$prefLab
 	@override String get customDataDir => 'Özel tarus Not klasörü';
 	@override String get autoDisableFingerDrawingWhenStylusDetected => 'Parmak çizimini otomatik olarak devre dışı bırak';
 	@override String get sentry => 'Hata raporlama';
-	@override String get autosave => 'Otomatik koruma';
+	@override String get autosave => 'Otomatik kaydetme';
 }
 
 // Path: settings.prefDescriptions
@@ -566,11 +599,11 @@ class _Translations$login$status$tr extends Translations$login$status$en {
 	final TranslationsTr _root; // ignore: unused_field
 
 	// Translations
-	@override String get loggedOut => 'Çıkış yapıldı';
-	@override String get tapToLogin => 'Nextcloud oturumu açmak için tıklayın';
+	@override String get loggedOut => 'Eşitleme kapalı';
+	@override String get tapToLogin => 'Pusula eşitleme belirteciyle bağlanmak için dokunun';
 	@override String hi({required Object u}) => 'Merhaba, ${u}!';
-	@override String get almostDone => 'Senkronizasyona hazırız, giriş yapmayı tamamlamak için tıklayın';
-	@override String get loggedIn => 'Nextcloud\'a giriş yapıldı';
+	@override String get almostDone => 'Eşitlemeye neredeyse hazır, tamamlamak için dokunun';
+	@override String get loggedIn => 'Notlarınız eşitleniyor';
 }
 
 // Path: login.ncLoginStep
@@ -582,10 +615,10 @@ class _Translations$login$ncLoginStep$tr extends Translations$login$ncLoginStep$
 	// Translations
 	@override String get whereToStoreData => 'Verilerinizi nerede saklamak istediğinizi seçin:';
 	@override String get saberNcServer => 'tarus Not sunucusu';
-	@override String get otherNcServer => 'Diğer Nextcloud sunucusu';
+	@override String get otherNcServer => 'Kendi sunucunuz';
 	@override String get serverUrl => 'Sunucu URL\'i';
 	@override String get loginWithSaber => 'tarus Not ile giriş yap';
-	@override String get loginWithNextcloud => 'Nextcloud ile giriş yap';
+	@override String get loginWithNextcloud => 'Sunucuya bağlan';
 	@override late final _Translations$login$ncLoginStep$loginFlow$tr loginFlow = _Translations$login$ncLoginStep$loginFlow$tr._(_root);
 }
 
@@ -638,7 +671,7 @@ class _Translations$profile$faq$1$tr extends Translations$profile$faq$1$en {
 	final TranslationsTr _root; // ignore: unused_field
 
 	// Translations
-	@override String get q => 'Nextcloud parolamı nasıl değiştirebilirim?';
+	@override String get q => 'Hesap parolamı nasıl değiştirebilirim?';
 	@override String get a => 'Sunucu websitesine gidin ve hesabınıza giriş yapın. Arayüzde Ayarlar > Güvenlik > Parola değiştir yolunu takip edin. Parolanızı değiştirdikten sonra tarus Not\'tan çıkış yapıp tekrardan giriş yapmanız gerekecek.';
 }
 
@@ -844,6 +877,65 @@ class _Translations$editor$hud$tr extends Translations$editor$hud$en {
 	@override String get lockAxisAlignedPan => 'Yatay ve dikey hareketi kilitle';
 }
 
+// Path: tarus.yetenek
+class _Translations$tarus$yetenek$tr extends Translations$tarus$yetenek$en {
+	_Translations$tarus$yetenek$tr._(TranslationsTr root) : this._root = root, super.internal(root);
+
+	final TranslationsTr _root; // ignore: unused_field
+
+	// Translations
+	@override String get kalemBaslik => 'Kalemler ve araçlar';
+	@override String get kalem => 'Dolma kalem, tükenmez, kurşun kalem ve fosforlu kalem; şekil tanıma, silgi, seçim ve lazer işaretçi.';
+	@override String get sayfaBaslik => 'Sayfa ve kağıt';
+	@override String get sayfa => 'Çizgili, kareli ve noktalı kağıt; sayfa ekleme, çoğaltma ve sıralama; görselin ve PDF\'in üstüne yazma.';
+	@override String get klasorBaslik => 'Klasörler';
+	@override String get klasor => 'Notları klasörlerde düzenleyin, taşıyın ve yeniden adlandırın; Hızlı Bakış son açtıklarınızı gösterir.';
+	@override String get esitlemeBaslik => 'Pusula ile eşitleme';
+	@override String get esitleme => 'Pusula\'dan alınan eşitleme belirteciyle notlar cihazlarınız ve web arasında eşitlenir.';
+	@override String get disaAktarBaslik => 'Dışa aktarma';
+	@override String get disaAktar => 'Notları PDF, PNG ya da arşiv (.sba) olarak paylaşın.';
+}
+
+// Path: tarus.bos
+class _Translations$tarus$bos$tr extends Translations$tarus$bos$en {
+	_Translations$tarus$bos$tr._(TranslationsTr root) : this._root = root, super.internal(root);
+
+	final TranslationsTr _root; // ignore: unused_field
+
+	// Translations
+	@override String get hicNotYok => 'Henüz not yok';
+	@override String get klasordeNotYok => 'Bu klasörde henüz not yok';
+	@override String get yeniNotIcinArti => 'Yeni not oluşturmak için alttaki + düğmesine dokunun.';
+}
+
+// Path: tarus.ayar
+class _Translations$tarus$ayar$tr extends Translations$tarus$ayar$en {
+	_Translations$tarus$ayar$tr._(TranslationsTr root) : this._root = root, super.internal(root);
+
+	final TranslationsTr _root; // ignore: unused_field
+
+	// Translations
+	@override String get esitleme => 'Eşitleme';
+	@override String get gorunum => 'Görünüm';
+	@override String get tema => 'Tema';
+	@override String get destek => 'Destek';
+}
+
+// Path: tarus.giris
+class _Translations$tarus$giris$tr extends Translations$tarus$giris$en {
+	_Translations$tarus$giris$tr._(TranslationsTr root) : this._root = root, super.internal(root);
+
+	final TranslationsTr _root; // ignore: unused_field
+
+	// Translations
+	@override String get altBaslik => 'Notlarınızı Pusula hesabınızla cihazlar ve web arasında eşitleyin.';
+	@override String get pusulaBaslik => 'Pusula ile bağlan';
+	@override String get pusulaAciklama => 'Pusula → Ayarlar → Not eşitleme ekranında bu cihaz için bir eşitleme belirteci oluşturun ve buraya yapıştırın.';
+	@override String get belirtec => 'Eşitleme belirteci';
+	@override String get baglan => 'Pusula ile bağlan';
+	@override String get kendiSunucunuzAciklama => 'Notları kendi sunucunuzda saklamak için adresini girin.';
+}
+
 // Path: sentry.consent.description
 class _Translations$sentry$consent$description$tr extends Translations$sentry$consent$description$en {
 	_Translations$sentry$consent$description$tr._(TranslationsTr root) : this._root = root, super.internal(root);
@@ -856,8 +948,9 @@ class _Translations$sentry$consent$description$tr extends Translations$sentry$co
 	@override String get currentlyOff => 'Onay verirseniz, uygulamayı yeniden başlattıktan sonra hata raporlaması etkinleştirilir.';
 	@override String get currentlyOn => 'Onayı iptal ederseniz, hata raporlamasını devre dışı bırakmak için lütfen uygulamayı yeniden başlatın.';
 	@override TextSpan learnMoreInPrivacyPolicy({required InlineSpanBuilder link}) => TextSpan(children: [
-		link('Gizlilik Politikası'),
-		const TextSpan(text: ' \'da daha fazla bilgi edinin.'),
+		const TextSpan(text: 'Ayrıntılar '),
+		link('gizlilik politikasında'),
+		const TextSpan(text: '.'),
 	]);
 }
 
@@ -869,7 +962,7 @@ class _Translations$sentry$consent$answers$tr extends Translations$sentry$consen
 
 	// Translations
 	@override String get yes => 'Evet';
-	@override String get no => 'HAYIR';
+	@override String get no => 'Hayır';
 	@override String get later => 'Bana sonra sor';
 }
 
@@ -905,8 +998,8 @@ class _Translations$login$ncLoginStep$loginFlow$tr extends Translations$login$nc
 	final TranslationsTr _root; // ignore: unused_field
 
 	// Translations
-	@override String get pleaseAuthorize => 'Lütfen tarus Not\'un Nextcloud hesabınıza erişmesine izin verin';
-	@override String get followPrompts => 'Lütfen Nextcloud arayüzündeki aşamaları takip edin';
+	@override String get pleaseAuthorize => 'Lütfen tarus Not\'un sunucudaki hesabınıza erişmesine izin verin';
+	@override String get followPrompts => 'Lütfen tarayıcıda açılan sunucu sayfasındaki adımları izleyin';
 	@override String get browserDidntOpen => 'Giriş sayfası açılmadıysa buraya tıklayın';
 }
 
@@ -918,7 +1011,7 @@ class _Translations$login$encLoginStep$encFaq$0$tr extends Translations$login$en
 
 	// Translations
 	@override String get q => 'Şifreleme parolası nedir? Neden iki parola kullanıyorum?';
-	@override String get a => 'Nextcloud parolası bulutta oturum açmak için kullanılıyor. Şifreleme parolası ise verilerinizi buluta aktarmadan önce gizlemek için kullanılıyor.\nEğer birisi Nextcloud hesabınızı ele geçirseydi bile notlarınız güvenli ve şifreli kalmaya devam edecekti. Böylece ikinci bir güvenlik katmanı sağlamış oluyoruz.\nBuluttaki verilerinize, şifreleme parolası olmayan kimse erişemez; dolayısıyla bu parolayı kaybetmeniz durumunda siz de erişemezsiniz.';
+	@override String get a => 'Hesap parolası (ya da eşitleme belirteci) sunucuya bağlanmak için kullanılıyor. Şifreleme parolası ise verilerinizi buluta aktarmadan önce gizlemek için kullanılıyor.\nEğer birisi sunucudaki hesabınızı ele geçirseydi bile notlarınız güvenli ve şifreli kalmaya devam edecekti. Böylece ikinci bir güvenlik katmanı sağlamış oluyoruz.\nBuluttaki verilerinize, şifreleme parolası olmayan kimse erişemez; dolayısıyla bu parolayı kaybetmeniz durumunda siz de erişemezsiniz.';
 }
 
 // Path: login.encLoginStep.encFaq.1
@@ -939,8 +1032,8 @@ class _Translations$login$encLoginStep$encFaq$2$tr extends Translations$login$en
 	final TranslationsTr _root; // ignore: unused_field
 
 	// Translations
-	@override String get q => 'Nextcloud parolamla şifreleme parolam aynı olabilir mi?';
-	@override String get a => 'Evet fakat unutmayın ki bu durumda Nextcloud parolanıza sahip herhangi birisi notlarınıza da erişebilir.';
+	@override String get q => 'Hesap parolamla şifreleme parolam aynı olabilir mi?';
+	@override String get a => 'Evet fakat unutmayın ki bu durumda hesap parolanıza sahip herhangi birisi notlarınıza da erişebilir.';
 }
 
 // Path: editor.menu.boxFits

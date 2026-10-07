@@ -1,33 +1,9 @@
-/// Maps a locale code to its name in that language
-/// e.g. 'en' -> 'English'
+/// Maps a locale code to its name in that language.
+///
+/// e.g. 'en' -> 'English'. tarus Not yalnız Türkçe ve İngilizce
+/// (kullanıcı kararı 2026-10-07).
 ///
 /// This was sourced from
 /// https://github.com/guidezpl/flutter-localized-locales/blob/master/lib/native_locale_names.dart
 /// (see https://pub.dev/packages/flutter_localized_locales)
-const localeNames = <String, String>{
-  'en': 'English',
-  'ar': 'العربية',
-  'ca': 'Català',
-  'cs': 'čeština',
-  'de': 'Deutsch',
-  'eo': 'Esperanto',
-  'es': 'español',
-  'fa': 'فارسی',
-  'fr': 'français',
-  'he': 'עברית',
-  'hu': 'magyar',
-  'it': 'italiano',
-  'ja': '日本語',
-  'nl': 'Nederlands',
-  'pl': 'polski',
-  'pt': 'português',
-  'pt-BR': 'português (Brasil)',
-  'ru': 'русский',
-  'sl': 'slovenňski',
-  'th': 'แบบไทย',
-  'tr': 'Türkçe',
-  'uk': 'українська',
-  'vi': 'Tiếng Việt',
-  'zh-Hans-CN': '中文 (简体中文, 中国)',
-  'zh-Hant-TW': '中文 (繁體, 台灣)',
-};
+const localeNames = <String, String>{'en': 'English', 'tr': 'Türkçe'};

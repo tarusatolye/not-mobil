@@ -4,13 +4,13 @@ common:
   cancel: Cancel
 home:
   tabs:
-    home: Home
-    browse: Browse
+    home: Overview
+    browse: Notes
     whiteboard: Whiteboard
     settings: Settings
   titles:
-    home: Recent notes
-    browse: Browse
+    home: Overview
+    browse: Notes
     whiteboard: Whiteboard
     settings: Settings
   tooltips:
@@ -192,21 +192,21 @@ login:
   signup(rich): Don't have an account yet? ${linkToSignup(Sign up now)}!
   notYou(rich): Not you? ${undoLogin(Choose another account)}.
   status:
-    loggedOut: Logged out
-    tapToLogin: Tap to log in with Nextcloud
+    loggedOut: Sync is off
+    tapToLogin: Tap to connect with a Pusula sync token
     hi: Hi, $u!
-    almostDone: Almost ready for syncing, tap to finish logging in
-    loggedIn: Logged in with Nextcloud
+    almostDone: Almost ready to sync, tap to finish
+    loggedIn: Your notes are syncing
   ncLoginStep:
     whereToStoreData: "Choose where you want to store your data:"
     saberNcServer: tarus Not server
-    otherNcServer: Other Nextcloud server
+    otherNcServer: Your own server
     serverUrl: Server URL
     loginWithSaber: Log in with tarus Not
-    loginWithNextcloud: Login with Nextcloud
+    loginWithNextcloud: Connect to server
     loginFlow:
-      pleaseAuthorize: Please authorize tarus Not to access your Nextcloud account
-      followPrompts: Please follow the prompts in the Nextcloud interface
+      pleaseAuthorize: Please authorize tarus Not to access your server account
+      followPrompts: Please follow the steps on the server page opened in your browser
       browserDidntOpen: Login page didn't open? Click here
   encLoginStep:
     enterEncPassword: "To protect your data, please enter your encryption password:"
@@ -218,15 +218,15 @@ login:
     encFaq:
     - q: What is an encryption password? Why use two passwords?
       a: |-
-        The Nextcloud password is used to access the cloud. The encryption password "scrambles" your data before it ever reaches the cloud.
-        Even if someone gains access to your Nextcloud account, your notes will remain safe and encrypted with a separate password. This provides you a second layer of security to protect your data.
+        The account password (or sync token) is used to connect to the server. The encryption password "scrambles" your data before it ever reaches the cloud.
+        Even if someone gains access to your server account, your notes will remain safe and encrypted with a separate password. This provides you a second layer of security to protect your data.
         No-one can access your notes on the server without your encryption password, but this also means that if you forget your encryption password, you will lose access to your data.
     - q: I haven't set an encryption password yet. Where do I get it?
       a: |-
         Choose a new encryption password and enter it above.
         tarus Not will generate your encryption keys from this password automatically.
-    - q: Can I use the same password as my Nextcloud account?
-      a: Yes, but keep in mind that it would be easier for the server administrator or someone else to access your notes if they gain access to your Nextcloud account.
+    - q: Can I use the same password as my account?
+      a: Yes, but keep in mind that it would be easier for the server administrator or someone else to access your notes if they gain access to your account.
 profile:
   title: My profile
   logout: Log out
@@ -240,7 +240,7 @@ profile:
   faq:
   - q: Will I lose my notes if I log out?
     a: No. Your notes will remain both on your device and on the server. They won't be synced with the server until you log back in. Make sure syncing is complete before logging out so you don't lose any data (see the sync progress on the home screen).
-  - q: How do I change my Nextcloud password?
+  - q: How do I change my account password?
     a: Go to your server website and log in. Then go to Settings > Security > Change password. You'll need to log out and log back in to tarus Not after changing your password.
   - q: How do I change my encryption password?
     a: |-
@@ -375,3 +375,50 @@ editor:
   pages: Pages
   untitled: Untitled
   needsToSaveBeforeExiting: Saving your changes… You can safely exit the editor when it's done
+tarus:
+  sonNotlar: Recent notes
+  klasorler: Folders
+  notlar: Notes
+  klasorIslemleri: Folder actions
+  klasorAgaci: Folder tree
+  seciliSayisi: $n selected
+  hakkinda: About
+  hakkindaAciklama: Version, release notes and license
+  hataBildir: Report a problem
+  hataBildirAciklama: Send the problem to tarus together with the screen name
+  surumNotlari: Release notes
+  uygulama: App
+  surum: Version
+  ilkYayin: First release
+  gelistirici: Developer
+  lisans: License
+  kaynakKodu: tarus Not source code
+  saberProjesi: Saber (the project it is based on)
+  urunTanimi: A handwritten notes and sketch book. Write and draw with a pen, keep pages in folders, and sync your notes across devices and the web with your Pusula account.
+  yetenek:
+    kalemBaslik: Pens and tools
+    kalem: Fountain pen, ballpoint, pencil and highlighter; shape recognition, eraser, selection and laser pointer.
+    sayfaBaslik: Pages and paper
+    sayfa: Lined, grid and dotted paper; add, duplicate and reorder pages; write on images and PDFs.
+    klasorBaslik: Folders
+    klasor: Organize, move and rename notes in folders; Overview shows what you opened last.
+    esitlemeBaslik: Sync with Pusula
+    esitleme: With a sync token from Pusula, notes stay in sync across your devices and the web.
+    disaAktarBaslik: Export
+    disaAktar: Share notes as PDF, PNG or an archive (.sba).
+  bos:
+    hicNotYok: No notes yet
+    klasordeNotYok: No notes in this folder yet
+    yeniNotIcinArti: Tap the + button below to create a new note.
+  ayar:
+    esitleme: Sync
+    gorunum: Appearance
+    tema: Theme
+    destek: Support
+  giris:
+    altBaslik: Sync your notes across devices and the web with your Pusula account.
+    pusulaBaslik: Connect with Pusula
+    pusulaAciklama: In Pusula → Settings → Not sync, create a sync token for this device and paste it here.
+    belirtec: Sync token
+    baglan: Connect with Pusula
+    kendiSunucunuzAciklama: Enter the address of your own server to store your notes there.

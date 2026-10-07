@@ -46,6 +46,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$appInfo$en appInfo = Translations$appInfo$en.internal(_root);
 	late final Translations$update$en update = Translations$update$en.internal(_root);
 	late final Translations$editor$en editor = Translations$editor$en.internal(_root);
+	late final Translations$tarus$en tarus = Translations$tarus$en.internal(_root);
 }
 
 // Path: common
@@ -326,6 +327,77 @@ class Translations$editor$en {
 	String get needsToSaveBeforeExiting => 'Saving your changes… You can safely exit the editor when it\'s done';
 }
 
+// Path: tarus
+class Translations$tarus$en {
+	Translations$tarus$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Recent notes'
+	String get sonNotlar => 'Recent notes';
+
+	/// en: 'Folders'
+	String get klasorler => 'Folders';
+
+	/// en: 'Notes'
+	String get notlar => 'Notes';
+
+	/// en: 'Folder actions'
+	String get klasorIslemleri => 'Folder actions';
+
+	/// en: 'Folder tree'
+	String get klasorAgaci => 'Folder tree';
+
+	/// en: '$n selected'
+	String seciliSayisi({required Object n}) => '${n} selected';
+
+	/// en: 'About'
+	String get hakkinda => 'About';
+
+	/// en: 'Version, release notes and license'
+	String get hakkindaAciklama => 'Version, release notes and license';
+
+	/// en: 'Report a problem'
+	String get hataBildir => 'Report a problem';
+
+	/// en: 'Send the problem to tarus together with the screen name'
+	String get hataBildirAciklama => 'Send the problem to tarus together with the screen name';
+
+	/// en: 'Release notes'
+	String get surumNotlari => 'Release notes';
+
+	/// en: 'App'
+	String get uygulama => 'App';
+
+	/// en: 'Version'
+	String get surum => 'Version';
+
+	/// en: 'First release'
+	String get ilkYayin => 'First release';
+
+	/// en: 'Developer'
+	String get gelistirici => 'Developer';
+
+	/// en: 'License'
+	String get lisans => 'License';
+
+	/// en: 'tarus Not source code'
+	String get kaynakKodu => 'tarus Not source code';
+
+	/// en: 'Saber (the project it is based on)'
+	String get saberProjesi => 'Saber (the project it is based on)';
+
+	/// en: 'A handwritten notes and sketch book. Write and draw with a pen, keep pages in folders, and sync your notes across devices and the web with your Pusula account.'
+	String get urunTanimi => 'A handwritten notes and sketch book. Write and draw with a pen, keep pages in folders, and sync your notes across devices and the web with your Pusula account.';
+
+	late final Translations$tarus$yetenek$en yetenek = Translations$tarus$yetenek$en.internal(_root);
+	late final Translations$tarus$bos$en bos = Translations$tarus$bos$en.internal(_root);
+	late final Translations$tarus$ayar$en ayar = Translations$tarus$ayar$en.internal(_root);
+	late final Translations$tarus$giris$en giris = Translations$tarus$giris$en.internal(_root);
+}
+
 // Path: home.tabs
 class Translations$home$tabs$en {
 	Translations$home$tabs$en.internal(this._root);
@@ -334,11 +406,11 @@ class Translations$home$tabs$en {
 
 	// Translations
 
-	/// en: 'Home'
-	String get home => 'Home';
+	/// en: 'Overview'
+	String get home => 'Overview';
 
-	/// en: 'Browse'
-	String get browse => 'Browse';
+	/// en: 'Notes'
+	String get browse => 'Notes';
 
 	/// en: 'Whiteboard'
 	String get whiteboard => 'Whiteboard';
@@ -355,11 +427,11 @@ class Translations$home$titles$en {
 
 	// Translations
 
-	/// en: 'Recent notes'
-	String get home => 'Recent notes';
+	/// en: 'Overview'
+	String get home => 'Overview';
 
-	/// en: 'Browse'
-	String get browse => 'Browse';
+	/// en: 'Notes'
+	String get browse => 'Notes';
 
 	/// en: 'Whiteboard'
 	String get whiteboard => 'Whiteboard';
@@ -894,20 +966,20 @@ class Translations$login$status$en {
 
 	// Translations
 
-	/// en: 'Logged out'
-	String get loggedOut => 'Logged out';
+	/// en: 'Sync is off'
+	String get loggedOut => 'Sync is off';
 
-	/// en: 'Tap to log in with Nextcloud'
-	String get tapToLogin => 'Tap to log in with Nextcloud';
+	/// en: 'Tap to connect with a Pusula sync token'
+	String get tapToLogin => 'Tap to connect with a Pusula sync token';
 
 	/// en: 'Hi, $u!'
 	String hi({required Object u}) => 'Hi, ${u}!';
 
-	/// en: 'Almost ready for syncing, tap to finish logging in'
-	String get almostDone => 'Almost ready for syncing, tap to finish logging in';
+	/// en: 'Almost ready to sync, tap to finish'
+	String get almostDone => 'Almost ready to sync, tap to finish';
 
-	/// en: 'Logged in with Nextcloud'
-	String get loggedIn => 'Logged in with Nextcloud';
+	/// en: 'Your notes are syncing'
+	String get loggedIn => 'Your notes are syncing';
 }
 
 // Path: login.ncLoginStep
@@ -924,8 +996,8 @@ class Translations$login$ncLoginStep$en {
 	/// en: 'tarus Not server'
 	String get saberNcServer => 'tarus Not server';
 
-	/// en: 'Other Nextcloud server'
-	String get otherNcServer => 'Other Nextcloud server';
+	/// en: 'Your own server'
+	String get otherNcServer => 'Your own server';
 
 	/// en: 'Server URL'
 	String get serverUrl => 'Server URL';
@@ -933,8 +1005,8 @@ class Translations$login$ncLoginStep$en {
 	/// en: 'Log in with tarus Not'
 	String get loginWithSaber => 'Log in with tarus Not';
 
-	/// en: 'Login with Nextcloud'
-	String get loginWithNextcloud => 'Login with Nextcloud';
+	/// en: 'Connect to server'
+	String get loginWithNextcloud => 'Connect to server';
 
 	late final Translations$login$ncLoginStep$loginFlow$en loginFlow = Translations$login$ncLoginStep$loginFlow$en.internal(_root);
 }
@@ -1010,8 +1082,8 @@ class Translations$profile$faq$1$en {
 
 	// Translations
 
-	/// en: 'How do I change my Nextcloud password?'
-	String get q => 'How do I change my Nextcloud password?';
+	/// en: 'How do I change my account password?'
+	String get q => 'How do I change my account password?';
 
 	/// en: 'Go to your server website and log in. Then go to Settings > Security > Change password. You'll need to log out and log back in to tarus Not after changing your password.'
 	String get a => 'Go to your server website and log in. Then go to Settings > Security > Change password. You\'ll need to log out and log back in to tarus Not after changing your password.';
@@ -1386,6 +1458,111 @@ class Translations$editor$hud$en {
 	String get lockAxisAlignedPan => 'Lock panning to horizontal or vertical';
 }
 
+// Path: tarus.yetenek
+class Translations$tarus$yetenek$en {
+	Translations$tarus$yetenek$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Pens and tools'
+	String get kalemBaslik => 'Pens and tools';
+
+	/// en: 'Fountain pen, ballpoint, pencil and highlighter; shape recognition, eraser, selection and laser pointer.'
+	String get kalem => 'Fountain pen, ballpoint, pencil and highlighter; shape recognition, eraser, selection and laser pointer.';
+
+	/// en: 'Pages and paper'
+	String get sayfaBaslik => 'Pages and paper';
+
+	/// en: 'Lined, grid and dotted paper; add, duplicate and reorder pages; write on images and PDFs.'
+	String get sayfa => 'Lined, grid and dotted paper; add, duplicate and reorder pages; write on images and PDFs.';
+
+	/// en: 'Folders'
+	String get klasorBaslik => 'Folders';
+
+	/// en: 'Organize, move and rename notes in folders; Overview shows what you opened last.'
+	String get klasor => 'Organize, move and rename notes in folders; Overview shows what you opened last.';
+
+	/// en: 'Sync with Pusula'
+	String get esitlemeBaslik => 'Sync with Pusula';
+
+	/// en: 'With a sync token from Pusula, notes stay in sync across your devices and the web.'
+	String get esitleme => 'With a sync token from Pusula, notes stay in sync across your devices and the web.';
+
+	/// en: 'Export'
+	String get disaAktarBaslik => 'Export';
+
+	/// en: 'Share notes as PDF, PNG or an archive (.sba).'
+	String get disaAktar => 'Share notes as PDF, PNG or an archive (.sba).';
+}
+
+// Path: tarus.bos
+class Translations$tarus$bos$en {
+	Translations$tarus$bos$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'No notes yet'
+	String get hicNotYok => 'No notes yet';
+
+	/// en: 'No notes in this folder yet'
+	String get klasordeNotYok => 'No notes in this folder yet';
+
+	/// en: 'Tap the + button below to create a new note.'
+	String get yeniNotIcinArti => 'Tap the + button below to create a new note.';
+}
+
+// Path: tarus.ayar
+class Translations$tarus$ayar$en {
+	Translations$tarus$ayar$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Sync'
+	String get esitleme => 'Sync';
+
+	/// en: 'Appearance'
+	String get gorunum => 'Appearance';
+
+	/// en: 'Theme'
+	String get tema => 'Theme';
+
+	/// en: 'Support'
+	String get destek => 'Support';
+}
+
+// Path: tarus.giris
+class Translations$tarus$giris$en {
+	Translations$tarus$giris$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Sync your notes across devices and the web with your Pusula account.'
+	String get altBaslik => 'Sync your notes across devices and the web with your Pusula account.';
+
+	/// en: 'Connect with Pusula'
+	String get pusulaBaslik => 'Connect with Pusula';
+
+	/// en: 'In Pusula → Settings → Not sync, create a sync token for this device and paste it here.'
+	String get pusulaAciklama => 'In Pusula → Settings → Not sync, create a sync token for this device and paste it here.';
+
+	/// en: 'Sync token'
+	String get belirtec => 'Sync token';
+
+	/// en: 'Connect with Pusula'
+	String get baglan => 'Connect with Pusula';
+
+	/// en: 'Enter the address of your own server to store your notes there.'
+	String get kendiSunucunuzAciklama => 'Enter the address of your own server to store your notes there.';
+}
+
 // Path: sentry.consent.description
 class Translations$sentry$consent$description$en {
 	Translations$sentry$consent$description$en.internal(this._root);
@@ -1479,11 +1656,11 @@ class Translations$login$ncLoginStep$loginFlow$en {
 
 	// Translations
 
-	/// en: 'Please authorize tarus Not to access your Nextcloud account'
-	String get pleaseAuthorize => 'Please authorize tarus Not to access your Nextcloud account';
+	/// en: 'Please authorize tarus Not to access your server account'
+	String get pleaseAuthorize => 'Please authorize tarus Not to access your server account';
 
-	/// en: 'Please follow the prompts in the Nextcloud interface'
-	String get followPrompts => 'Please follow the prompts in the Nextcloud interface';
+	/// en: 'Please follow the steps on the server page opened in your browser'
+	String get followPrompts => 'Please follow the steps on the server page opened in your browser';
 
 	/// en: 'Login page didn't open? Click here'
 	String get browserDidntOpen => 'Login page didn\'t open? Click here';
@@ -1500,8 +1677,8 @@ class Translations$login$encLoginStep$encFaq$0$en {
 	/// en: 'What is an encryption password? Why use two passwords?'
 	String get q => 'What is an encryption password? Why use two passwords?';
 
-	/// en: 'The Nextcloud password is used to access the cloud. The encryption password "scrambles" your data before it ever reaches the cloud. Even if someone gains access to your Nextcloud account, your notes will remain safe and encrypted with a separate password. This provides you a second layer of security to protect your data. No-one can access your notes on the server without your encryption password, but this also means that if you forget your encryption password, you will lose access to your data.'
-	String get a => 'The Nextcloud password is used to access the cloud. The encryption password "scrambles" your data before it ever reaches the cloud.\nEven if someone gains access to your Nextcloud account, your notes will remain safe and encrypted with a separate password. This provides you a second layer of security to protect your data.\nNo-one can access your notes on the server without your encryption password, but this also means that if you forget your encryption password, you will lose access to your data.';
+	/// en: 'The account password (or sync token) is used to connect to the server. The encryption password "scrambles" your data before it ever reaches the cloud. Even if someone gains access to your server account, your notes will remain safe and encrypted with a separate password. This provides you a second layer of security to protect your data. No-one can access your notes on the server without your encryption password, but this also means that if you forget your encryption password, you will lose access to your data.'
+	String get a => 'The account password (or sync token) is used to connect to the server. The encryption password "scrambles" your data before it ever reaches the cloud.\nEven if someone gains access to your server account, your notes will remain safe and encrypted with a separate password. This provides you a second layer of security to protect your data.\nNo-one can access your notes on the server without your encryption password, but this also means that if you forget your encryption password, you will lose access to your data.';
 }
 
 // Path: login.encLoginStep.encFaq.1
@@ -1527,11 +1704,11 @@ class Translations$login$encLoginStep$encFaq$2$en {
 
 	// Translations
 
-	/// en: 'Can I use the same password as my Nextcloud account?'
-	String get q => 'Can I use the same password as my Nextcloud account?';
+	/// en: 'Can I use the same password as my account?'
+	String get q => 'Can I use the same password as my account?';
 
-	/// en: 'Yes, but keep in mind that it would be easier for the server administrator or someone else to access your notes if they gain access to your Nextcloud account.'
-	String get a => 'Yes, but keep in mind that it would be easier for the server administrator or someone else to access your notes if they gain access to your Nextcloud account.';
+	/// en: 'Yes, but keep in mind that it would be easier for the server administrator or someone else to access your notes if they gain access to your account.'
+	String get a => 'Yes, but keep in mind that it would be easier for the server administrator or someone else to access your notes if they gain access to your account.';
 }
 
 // Path: editor.menu.boxFits
