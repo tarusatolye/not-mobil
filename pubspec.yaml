@@ -281,9 +281,9 @@ flutter:
 #   node uret.mjs --app not --out ../../../not-mobil --hedef flutter
 #   node uret.mjs --app not --out ../../../not-mobil/android/app/src/main/res --hedef android
 # Android başlatıcısı üreticinin mipmap'leriyle hazır; `dart run icons_launcher:create`
-# aynı kaynaktan yeniden yazar. iOS koyu/renklendirilebilir ve macOS ikonları
-# (icon_ios_dark/icon_ios_tintable/icon_macos) hâlâ Saber'in; Not işaretiyle
-# yeniden üretilene kadar iOS'ta yalnız açık ikon kullanılır.
+# aynı kaynaktan yeniden yazar. iOS (açık/koyu/renklendirilebilir, AppIcon.icon),
+# macOS, Linux ve Windows ikonları `node scripts/tarus_ikonlari.mjs .` ile aynı
+# marka verisinden üretilir (2026-10-07; Saber ikonu kalmadı).
 icons_launcher:
   image_path: "assets/icon/icon.png"
   platforms:
