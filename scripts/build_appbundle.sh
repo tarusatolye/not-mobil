@@ -3,7 +3,7 @@
 #
 #   ./scripts/build_appbundle.sh
 #
-# - FOSS derlemesi (ozluk/not-lisans-raporu.md §1.1): kapalı kaynak Onyx SDK'sı,
+# - FOSS derlemesi (ozluk/tarus.md §4.2, Not Mobil satırı: lisans): kapalı kaynak Onyx SDK'sı,
 #   şifresiz HTTP boox deposu ve Sentry çıkarılır. Yama çalışma ağacını geçici
 #   değiştirir; betik bitince (hata olsa da) HEAD'e geri alınır. Bu yüzden ağaç
 #   temiz olmalı.

@@ -44,6 +44,6 @@ sunucularında), **geçici işlenmiyor** (saklanıyor), reklam/pazarlama/analiti
 1. Play Console'da «Gizlilik politikası» = `https://tarus.tr/gizlilik`.
 2. ✓ Gizlilik politikasında tarus Not bölümü var (§10, 2026-10-06; uçtan uca şifreleme, Pusula belirteci, Hata bildir, silme yolu). Hukuki gözden geçirme yine önerilir:
    uçtan uca şifreleme, Pusula belirteci, Hata bildir verisi, silme yolu ve süresi. Metin hukuki
-   gözden geçirmeden geçmeli (`ozluk/not-lisans-raporu.md` §7.2).
+   gözden geçirmeden geçmeli (`ozluk/tarus.md` §4.2, Not Mobil satırı: lisans).
 3. Formu bu tabloya göre doldurun; yayımlanan derleme FOSS değilse (Onyx/Sentry SDK'ları içeride)
    SDK'ların veri toplamadığını yeniden doğrulayın.
