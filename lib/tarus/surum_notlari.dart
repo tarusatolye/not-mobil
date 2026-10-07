@@ -10,6 +10,12 @@ const ilkYayin = '2 Ekim 2026';
 
 const surumNotlari = <SurumNotu>[
   SurumNotu(
+    '1.1.6',
+    '8 Ekim 2026',
+    'Notlar telefonda ve webde tek listede; şifreleme parolası artık '
+        'gerekmiyor, notlar sunucuda şifreli saklanıyor.',
+  ),
+  SurumNotu(
     '1.1.5',
     '7 Ekim 2026',
     'Arayüz tarus tasarım diline geçti: Inter yazı tipi, tek ikon ailesi, '

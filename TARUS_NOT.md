@@ -88,6 +88,23 @@ gider; Not sunucusu (`tarusatolye/not`) onu Pusula'ya doğrulatır. Notlar sunuc
 `.sbn2` (Saber BSON) olarak durur; aynı not iki yerde birbirinden habersiz
 değişirse sunucu eski sürümü "(çakışma - cihaz - tarih)" adıyla saklar.
 
+### Düz eşitleme (1.1.6'dan beri; kullanıcı kararı 2026-10-08)
+Uçtan uca şifreleme kalktı: notlar telefonla web aynı listeyi görsün diye **düz** eşitlenir,
+Not sunucusu (0.2.19+) diskte ve yedekte şifreli saklar (saklama şifrelemesi, `TNOTENC1`,
+not deposu README «Saklama şifrelemesi»). Şifreleme parolası adımı yok; oturum = belirteç.
+- Yol: yerel `/<klasör>/<ad>.sbn2` ↔ sunucu `Saber/<klasör>/<ad>.sbn2` (`SaberSyncInterface.uzakYol`
+  / `yerelGoreliYol`); görseller `<ad>.sbn2.<n>`, önizleme `<ad>.sbn2.p`. Baytlar olduğu gibi gider.
+- Liste: tek `PROPFIND Depth: infinity` (`Saber/`); sunucu sınırı 64 düzey, 20 000 kayıt.
+  Klasörler ve `yoksayilirMi` dosyaları (`.sbe`, `.sbe.cakisma`, `config.sbc`, noktalı ad, Readme)
+  eşitlenmez. Silme = 0 baytlık PUT; `X-OC-Mtime` korunur.
+- Sunucu `X-Not-Cakisma` döndürürse liste yenilenir, çakışma kopyası telefona da iner.
+- **403** (eski şifreli dosya; gövde «… tarus Not'u güncelleyin.») ve **503** (anahtar servisi geçici
+  yok) Ayarlar › Eşitleme kartında gösterilir (`EsitlemeUyarisi`); 503'te liste boş döner, yerel
+  notlar silinmez, abstract_sync artan aralıkla yeniden dener.
+- Güncellemeden sonraki ilk açılışta eski `encPassword`/`key`/`iv` bir kez silinir
+  (`stows.eskiSifrelemeKayitlariniSil`, `main.dart`). Cihazdaki notlar zaten düzdü; sunucuda düz
+  kopyaları olmadığından ilk eşitleme hepsini yükler. Sunucudaki eski `.sbe` dosyalarına dokunulmaz.
+
 ## Testler
 ```bash
 flutter test test/pusula_belirteci_test.dart
@@ -96,13 +113,29 @@ NOT_SUNUCU_URL=http://127.0.0.1:3999 flutter test test/not_sunucu_esitleme_test.
 ```
 Linux'ta testler için `libgtk-3-dev` gerekir (super_native_extensions).
 
-`nc_upload_download_test` ve `nc_deletion_test` Saber'in Nextcloud test sunucusuna
-(`nc.saber.adil.hanney.org`, Saber'in test hesapları) karşı çalışır; varsayılan
-sunucu not.tarus.tr olduğu için adres testte açıkça verilir.
+`test/esitleme_duz_test.dart` yol eşlemesini, yok sayılan dosyaları, 403/503 davranışını (taklit
+sunucu) ve eski şifreleme kayıtlarının silinmesini sınar. `not_sunucu_esitleme_test` gerçek Not
+sunucusuna karşı çalışır (yerelde: not deposunda `NOT_YEREL_GELISTIRME=1 KMS_SAGLAYICI=yerel
+KMS_YEREL_ANAHTAR=<32 baytın base64'ü> NOT_VERI_DIZINI=<geçici klasör> PORT=3999 node server/server.js`).
+Saber'in şifreli Nextcloud testleri (`nc_upload_download_test`, `nc_deletion_test`) 1.1.6'da kalktı.
 
-Golden ekran görüntüleri (`test/goldens/`, `metadata/en-US/images/*Screenshots/`)
-arayüz bilerek değişince GitHub'da **Golden güncelle** iş akışıyla (Linux, CI ile aynı yazı
-tipleri) yeniden üretilir; Windows'ta üretilenler CI'da tutmaz.
+Emülatörde yerel Not sunucusuyla deneme: `flutter build apk --debug --target-platform android-x64
+--dart-define=TARUS_NOT_SUNUCU=http://10.0.2.2:<port>` (varsayılan sunucu adresi; «Pusula ile bağlan»
+bu adrese gider). Belirteç alanı `nes_…` biçimi ister, yerel sunucu ise yalnız `yerel-esitleme`'yi
+tanır: araya `Authorization` başlığını `yerel-esitleme`'ye çeviren küçük bir vekil konur (2026-10-08
+turunda böyle denendi; telefon→web ve web→telefon, 403/503 uyarıları).
+
+Golden ekran görüntüleri (`test/goldens/`, `metadata/en-US/images/*Screenshots/`) Linux'ta
+(CI ile aynı yazı tipleri) üretilir; Windows'ta üretilenler tutmaz. **GitHub Actions bu ekosistemde
+kapalı**, `golden-guncelle.yml` çalışmaz. Linux (WSL Ubuntu ya da `ubuntu` Docker) makinede:
+```bash
+sudo apt-get install -y libgtk-3-dev libx11-dev pkg-config cmake ninja-build curl \
+  libcurl4-openssl-dev libblkid-dev libsecret-1-dev libjsoncpp-dev ghostscript libunwind-dev
+git submodule update --init submodules/flutter && export PATH="$PWD/submodules/flutter/bin:$PATH"
+flutter pub get && dart run golden_screenshot:download_apple_fonts
+flutter test --update-goldens   # sonra yalnız *.png değişikliklerini commit edin
+```
+Rust (`rustup`) da gerekir (super_native_extensions).
 
 Windows'ta `flutter test`: `super_native_extensions` yerel parçası Windows'ta MSVC hedefiyle
 derlenir (Visual Studio Build Tools gerekir). Build Tools yoksa yerel deneme için git dışı
@@ -110,6 +143,11 @@ derlenir (Visual Studio Build Tools gerekir). Build Tools yoksa yerel deneme iç
 çeviren yerel bir kopya kullanılabilir (2026-10-07 turunda böyle çalıştırıldı; commit edilmez).
 
 ## Sürüm notları
+- **1.1.6** (2026-10-08): düz eşitleme (yukarıda). Şifreleme parolası adımı (`enc_login_step`),
+  `config.sbc`/anahtar üretimi ve yol şifrelemesi kalktı; liste tek `Depth: infinity` PROPFIND;
+  403/503 Ayarlar › Eşitleme'de; eski şifreleme kayıtları ilk açılışta silinir. Mağaza metinleri ve
+  veri güvenliği formu «uçtan uca» yerine saklama şifrelemesini anlatıyor (gizlilik politikası §10
+  da güncellenmeli). Golden'lar (giriş/Ayarlar) Linux'ta yeniden üretilmeli.
 - **1.1.5** (2026-10-07): arayüz tarus tasarım diline geçti (1–2. aşama). `lib/tarus/` tema katmanı
   (`TarusRenkler` kabuk token'ları `tarus.css`'ten üretilir, `TarusOlcu` Pusula Mobil `ui.ts`
   ölçüleri, `TarusTemaKur` tek ThemeData; Saber'in `SaberTheme`, platform seçici, Cupertino/Yaru

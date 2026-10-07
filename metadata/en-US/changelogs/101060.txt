@@ -1,0 +1,3 @@
+• Notes on your phone and on the web are now in one list
+• No encryption password needed any more; notes are stored encrypted on the server
+• If the server is temporarily unavailable, Settings › Sync shows a notice and syncing retries on its own

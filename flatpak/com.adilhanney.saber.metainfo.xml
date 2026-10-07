@@ -9,7 +9,7 @@
     <!-- tarus Not, Saber (© Adil Hanney ve katkıda bulunanlar, GPL-3.0) tabanlı.
          Bileşen kimliği değişmedi; tarus masaüstü paketi dağıtmıyor. -->
     <name>tarus Not</name>
-    <summary>Handwritten notes and sketches, end-to-end encrypted</summary>
+    <summary>Handwritten notes and sketches, synced between phone and web</summary>
     <url type="homepage">https://yazilim.tarus.tr/</url>
     <url type="vcs-browser">https://github.com/tarusatolye/not-mobil</url>
 
@@ -65,7 +65,7 @@
             Write and draw with a stylus or your finger: pens, highlighter, shapes, images and PDFs on pages or a whiteboard. In dark mode your notes can be inverted, so you write with light ink on a dark background; images and PDFs are inverted too.
         </p>
         <p>
-            Your notes are end-to-end encrypted on your device with an encryption password only you know, before they leave the device. The Not server (not.tarus.tr) stores only encrypted files and cannot read them. If you forget the encryption password, your synced notes cannot be recovered.
+            Your notes live in one list on your phone and on the web (not.tarus.tr): a note written on the phone appears on the web and vice versa. Transfers are encrypted with HTTPS, and the Not server stores notes encrypted on disk and in backups. No separate encryption password is needed.
         </p>
         <p>
             Not has no separate account: you connect with a sync token from your Pusula account (Pusula > Settings > Not sync). You can revoke the token at any time, and the device stops syncing within 30 seconds. Notes sync between your devices; when the same note changes in two places, the older version is kept as a conflict copy instead of being lost.
@@ -103,107 +103,116 @@
         -->
         <screenshot type="default">
             <caption>The home screen showing your recent notes</caption>
-            <image>https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/en-US/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="ar">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/ar/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="ca">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/ca/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="cs">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/cs/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="de">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/de/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="eo">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/eo/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="es">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/es/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="fa">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/fa/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="fr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/fr/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="he">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/he/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="hu">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/hu/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="it">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/it/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="nl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/nl/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="pl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/pl/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="pt">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/pt/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="pt-BR">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/pt-BR/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="ru">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/ru/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="sl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/sl/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="th">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/th/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="tr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/tr/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="uk">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/uk/images/flathubScreenshots/1_home.png</image>
-            <image xml:lang="vi">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/vi/images/flathubScreenshots/1_home.png</image>
+            <image>https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/en-US/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="ar">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/ar/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="ca">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/ca/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="cs">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/cs/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="de">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/de/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="eo">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/eo/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="es">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/es/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="fa">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/fa/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="fr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/fr/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="he">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/he/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="hu">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/hu/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="it">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/it/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="nl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/nl/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="pl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/pl/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="pt">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/pt/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="pt-BR">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/pt-BR/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="ru">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/ru/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="sl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/sl/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="th">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/th/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="tr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/tr/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="uk">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/uk/images/flathubScreenshots/1_home.png</image>
+            <image xml:lang="vi">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/vi/images/flathubScreenshots/1_home.png</image>
         </screenshot>
         <screenshot>
             <caption>The editor showing some notes from a maths lecture</caption>
-            <image>https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/en-US/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="ar">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/ar/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="ca">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/ca/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="cs">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/cs/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="de">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/de/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="eo">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/eo/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="es">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/es/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="fa">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/fa/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="fr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/fr/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="he">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/he/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="hu">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/hu/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="it">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/it/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="nl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/nl/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="pl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/pl/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="pt">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/pt/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="pt-BR">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/pt-BR/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="ru">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/ru/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="sl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/sl/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="th">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/th/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="tr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/tr/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="uk">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/uk/images/flathubScreenshots/2_editor.png</image>
-            <image xml:lang="vi">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/vi/images/flathubScreenshots/2_editor.png</image>
+            <image>https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/en-US/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="ar">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/ar/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="ca">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/ca/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="cs">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/cs/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="de">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/de/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="eo">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/eo/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="es">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/es/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="fa">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/fa/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="fr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/fr/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="he">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/he/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="hu">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/hu/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="it">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/it/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="nl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/nl/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="pl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/pl/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="pt">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/pt/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="pt-BR">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/pt-BR/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="ru">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/ru/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="sl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/sl/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="th">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/th/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="tr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/tr/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="uk">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/uk/images/flathubScreenshots/2_editor.png</image>
+            <image xml:lang="vi">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/vi/images/flathubScreenshots/2_editor.png</image>
         </screenshot>
         <screenshot>
             <caption>The login page for connecting with a Pusula sync token</caption>
-            <image>https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/en-US/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="ar">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/ar/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="ca">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/ca/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="cs">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/cs/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="de">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/de/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="eo">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/eo/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="es">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/es/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="fa">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/fa/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="fr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/fr/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="he">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/he/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="hu">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/hu/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="it">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/it/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="nl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/nl/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="pl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/pl/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="pt">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/pt/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="pt-BR">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/pt-BR/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="ru">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/ru/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="sl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/sl/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="th">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/th/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="tr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/tr/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="uk">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/uk/images/flathubScreenshots/3_login.png</image>
-            <image xml:lang="vi">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/vi/images/flathubScreenshots/3_login.png</image>
+            <image>https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/en-US/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="ar">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/ar/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="ca">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/ca/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="cs">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/cs/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="de">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/de/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="eo">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/eo/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="es">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/es/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="fa">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/fa/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="fr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/fr/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="he">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/he/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="hu">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/hu/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="it">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/it/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="nl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/nl/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="pl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/pl/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="pt">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/pt/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="pt-BR">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/pt-BR/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="ru">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/ru/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="sl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/sl/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="th">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/th/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="tr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/tr/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="uk">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/uk/images/flathubScreenshots/3_login.png</image>
+            <image xml:lang="vi">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/vi/images/flathubScreenshots/3_login.png</image>
         </screenshot>
         <screenshot>
             <caption>The settings page showing that the user is now logged in</caption>
-            <image>https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/en-US/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="ar">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/ar/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="ca">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/ca/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="cs">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/cs/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="de">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/de/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="eo">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/eo/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="es">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/es/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="fa">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/fa/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="fr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/fr/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="he">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/he/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="hu">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/hu/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="it">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/it/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="nl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/nl/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="pl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/pl/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="pt">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/pt/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="pt-BR">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/pt-BR/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="ru">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/ru/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="sl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/sl/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="th">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/th/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="tr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/tr/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="uk">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/uk/images/flathubScreenshots/4_settings.png</image>
-            <image xml:lang="vi">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.5/metadata/vi/images/flathubScreenshots/4_settings.png</image>
+            <image>https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/en-US/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="ar">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/ar/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="ca">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/ca/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="cs">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/cs/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="de">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/de/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="eo">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/eo/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="es">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/es/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="fa">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/fa/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="fr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/fr/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="he">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/he/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="hu">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/hu/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="it">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/it/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="nl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/nl/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="pl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/pl/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="pt">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/pt/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="pt-BR">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/pt-BR/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="ru">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/ru/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="sl">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/sl/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="th">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/th/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="tr">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/tr/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="uk">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/uk/images/flathubScreenshots/4_settings.png</image>
+            <image xml:lang="vi">https://raw.githubusercontent.com/tarusatolye/not-mobil/refs/tags/1.1.6/metadata/vi/images/flathubScreenshots/4_settings.png</image>
         </screenshot>
     </screenshots>
 
     <releases>
+        <release version="1.1.6" date="2026-10-08">
+            <description>
+                <ul>
+                    <li>Notes on your phone and on the web are now in one list</li>
+                    <li>No encryption password needed any more; notes are stored encrypted on the server</li>
+                    <li>If the server is temporarily unavailable, Settings › Sync shows a notice and syncing retries on its own</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.1.5" date="2026-10-07">
             <description>
                 <ul>

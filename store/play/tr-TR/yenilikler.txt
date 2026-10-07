@@ -1,4 +1,3 @@
-• Yeni görünüm: tarus tasarım dili, Inter yazı tipi, tek ikon ailesi, yeni kartlar, pencereler ve Ayarlar; vurgu rengi temanızdan
-• Yüzen alt çubuk ve ortada + ile yeni not; ilk sekme artık Hızlı Bakış
-• Kağıt çizgileri temadan bağımsız, dışa aktarılan sayfayla aynı renkte
-• Uygulama içi Hakkında ve sürüm notları; uygulama Türkçe ve İngilizce
+• Notlar telefonda ve webde tek listede
+• Şifreleme parolası artık gerekmiyor; notlar sunucuda şifreli saklanıyor
+• Sunucu geçici olarak yanıt vermezse Ayarlar › Eşitleme'de uyarı çıkar, eşitleme kendiliğinden yeniden dener
