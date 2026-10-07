@@ -62,7 +62,7 @@ class const YeniNotDugmesi({
               Padding(
                 padding: const EdgeInsets.only(left: 4, bottom: 12),
                 child: Text(
-                  t.home.tooltips.newNote,
+                  t.tarus.olustur,
                   style: Theme.of(sayfa).textTheme.titleMedium,
                 ),
               ),

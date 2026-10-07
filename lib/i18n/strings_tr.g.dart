@@ -242,6 +242,7 @@ class _Translations$tarus$tr extends Translations$tarus$en {
 	final TranslationsTr _root; // ignore: unused_field
 
 	// Translations
+	@override String get olustur => 'Oluştur';
 	@override String get sonNotlar => 'Son notlar';
 	@override String get klasorler => 'Klasörler';
 	@override String get notlar => 'Notlar';
@@ -471,7 +472,7 @@ class _Translations$settings$prefLabels$tr extends Translations$settings$prefLab
 	@override String get platform => 'Tema tipi';
 	@override String get layoutSize => 'Yerleşim tipi';
 	@override String get customAccentColor => 'Farklı ana renk';
-	@override String get hyperlegibleFont => 'Hyperlegible font';
+	@override String get hyperlegibleFont => 'Okunaklı yazı tipi';
 	@override String get shouldCheckForUpdates => 'tarus Not güncellemelerini otomatik denetle';
 	@override String get shouldAlwaysAlertForUpdates => 'Hızlı güncellemeler';
 	@override String get allowInsecureConnections => 'Güvensiz bağlantılara izin ver';
@@ -502,7 +503,7 @@ class _Translations$settings$prefDescriptions$tr extends Translations$settings$p
 	final TranslationsTr _root; // ignore: unused_field
 
 	// Translations
-	@override String get hyperlegibleFont => 'Atkinson Hyperlegible, görme sorunu yaşayanların okumasını kolaylaştıran bir fonttur';
+	@override String get hyperlegibleFont => 'Atkinson Hyperlegible; az gören kullanıcılar için okumayı kolaylaştırır';
 	@override String get allowInsecureConnections => '(Önerilmez) tarus Not\'un kendinden imzalı/güvensiz sertifika kullanan sunuculara bağlanmasına izin verir';
 	@override String get preferGreyscale => 'E-mürekkep ekranlar için';
 	@override String get autoClearWhiteboardOnExit => 'Diğer cihazlarınıza senkronize edilmeye devam edecek';

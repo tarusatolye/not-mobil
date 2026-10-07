@@ -376,6 +376,7 @@ editor:
   untitled: Untitled
   needsToSaveBeforeExiting: Saving your changes… You can safely exit the editor when it's done
 tarus:
+  olustur: Create
   sonNotlar: Recent notes
   klasorler: Folders
   notlar: Notes

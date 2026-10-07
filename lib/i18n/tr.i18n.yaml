@@ -105,7 +105,7 @@ settings:
     platform: Tema tipi
     layoutSize: Yerleşim tipi
     customAccentColor: Farklı ana renk
-    hyperlegibleFont: Hyperlegible font
+    hyperlegibleFont: Okunaklı yazı tipi
     shouldCheckForUpdates: tarus Not güncellemelerini otomatik denetle
     shouldAlwaysAlertForUpdates: Hızlı güncellemeler
     allowInsecureConnections: Güvensiz bağlantılara izin ver
@@ -128,7 +128,7 @@ settings:
     sentry: Hata raporlama
     autosave: Otomatik kaydetme
   prefDescriptions:
-    hyperlegibleFont: Atkinson Hyperlegible, görme sorunu yaşayanların okumasını kolaylaştıran bir fonttur
+    hyperlegibleFont: Atkinson Hyperlegible; az gören kullanıcılar için okumayı kolaylaştırır
     allowInsecureConnections: (Önerilmez) tarus Not'un kendinden imzalı/güvensiz sertifika kullanan sunuculara bağlanmasına izin verir
     preferGreyscale: E-mürekkep ekranlar için
     autoClearWhiteboardOnExit: Diğer cihazlarınıza senkronize edilmeye devam edecek
@@ -376,6 +376,7 @@ editor:
   untitled: İsimsiz
   needsToSaveBeforeExiting: Değişiklikler kaydediliyor… kayıt tamamlandığında editörden güvenli biçimde çıkabilirsiniz.
 tarus:
+  olustur: Oluştur
   sonNotlar: Son notlar
   klasorler: Klasörler
   notlar: Notlar

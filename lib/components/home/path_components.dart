@@ -35,6 +35,8 @@ class PathComponents extends StatelessWidget {
         ),
       ],
     ];
+    // Kökte başlık zaten «Notlar»; konum çubuğu yalnız alt klasörde.
+    if (components.isEmpty) return const SizedBox(height: 4);
     return SizedBox(
       height: 40,
       child: Row(
@@ -51,7 +53,6 @@ class PathComponents extends StatelessWidget {
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              reverse: true,
               child: Row(spacing: 4, children: ogeler),
             ),
           ),

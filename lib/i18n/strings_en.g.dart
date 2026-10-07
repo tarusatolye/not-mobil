@@ -335,6 +335,9 @@ class Translations$tarus$en {
 
 	// Translations
 
+	/// en: 'Create'
+	String get olustur => 'Create';
+
 	/// en: 'Recent notes'
 	String get sonNotlar => 'Recent notes';
 
