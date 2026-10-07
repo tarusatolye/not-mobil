@@ -10,6 +10,6 @@ tarus Not'un ayrı bir hesabı yoktur: Pusula hesabınızdan aldığınız eşit
 
 Reklam, analitik ya da üçüncü taraf izleme yoktur.
 
-Gizlilik politikası: https://yazilim.tarus.tr/gizlilik/
+Gizlilik politikası: https://tarus.tr/gizlilik
 
 Açık kaynak: tarus Not, açık kaynak Saber uygulaması (© 2022- Adil Hanney ve katkıda bulunanlar) üzerine geliştirilmiştir ve Saber gibi GNU Genel Kamu Lisansı sürüm 3 (GPL-3.0) ile lisanslıdır. Kaynak kodu: https://github.com/tarusatolye/not-mobil
