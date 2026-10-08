@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// tarus 8 kanonik tema (tarus-standartlar §Seçenek 3).
+/// tarus 8 kanonik tema (STANDARTLAR §9 Seçenek 3).
 ///
 /// Kimlik, ad ve sıra: `tarus-kabuk/components/TemaSecici.tsx` (`TEMALAR`);
 /// renkler: `tarus-kabuk/css/tarus.css`. Değerler oradan birebir alınır,
