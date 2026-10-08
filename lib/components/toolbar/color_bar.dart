@@ -306,15 +306,26 @@ class _ColorBarState extends State<ColorBar> {
     }
   }
 
-  /// Özel renk penceresi: renk çarkı (köşeler tarus ölçüsünde), onaltılı
-  /// kod alanı; İptal ve birincil Kaydet. Seçilen renk yalnız kalemin
+  /// Özel renk penceresi: renk çarkı (köşeler tarus ölçüsünde); İptal ve
+  /// birincil Kaydet. (Paketin onaltılı kod alanı çeviri katmanı
+  /// bulamadığı için kapalı.) Seçilen renk yalnız kalemin
   /// rengidir, not içeriğindeki renkler değişmez.
   Widget _colorPickerDialog(BuildContext context) => TarusDialog(
     title: Text(t.settings.accentColorPicker.pickAColor),
     genislik: 380,
     content: ColorPicker(
       color: pickedColor,
-      pickersEnabled: const {ColorPickerType.wheel: true},
+      // Yalnız çark: tek seçici olunca üstteki (çevrilmemiş) seçici
+      // sekmeleri görünmez.
+      pickersEnabled: const {
+        ColorPickerType.both: false,
+        ColorPickerType.primary: false,
+        ColorPickerType.accent: false,
+        ColorPickerType.bw: false,
+        ColorPickerType.custom: false,
+        ColorPickerType.customSecondary: false,
+        ColorPickerType.wheel: true,
+      },
       enableShadesSelection: false,
       wheelDiameter: 220,
       wheelWidth: 18,
@@ -322,8 +333,6 @@ class _ColorBarState extends State<ColorBar> {
       borderRadius: TarusOlcu.rSm,
       width: 36,
       height: 36,
-      showColorCode: true,
-      colorCodeHasColor: true,
       padding: EdgeInsets.zero,
       onColorChanged: (Color color) {
         pickedColor = color;

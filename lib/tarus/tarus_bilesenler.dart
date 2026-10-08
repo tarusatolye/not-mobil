@@ -59,11 +59,17 @@ class TarusKart extends StatelessWidget {
     this.golge = true,
     this.renk,
     this.kose = TarusOlcu.rKart,
+    this.icerigiBoya = true,
   });
 
   final Widget child;
   final VoidCallback? onTap, onLongPress, onSecondaryTap;
   final bool secili;
+
+  /// Seçiliyken vurgu katmanı içeriğin üstüne de düşer. Not önizlemesi
+  /// taşıyan kartlarda false: vurgu zemine karışır, önizleme renkleri
+  /// (mürekkep, kağıt) değişmez.
+  final bool icerigiBoya;
   final EdgeInsetsGeometry padding;
   final bool golge;
   final Color? renk;
@@ -76,7 +82,12 @@ class TarusKart extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 150),
       decoration: BoxDecoration(
-        color: renk ?? r.card,
+        color: secili && !icerigiBoya
+            ? Color.alphaBlend(
+                r.accent.withValues(alpha: TarusOlcu.seciliZeminAlfa),
+                renk ?? r.card,
+              )
+            : renk ?? r.card,
         borderRadius: radius,
         border: Border.all(
           color: secili
@@ -85,7 +96,7 @@ class TarusKart extends StatelessWidget {
         ),
         boxShadow: golge ? r.elev1 : null,
       ),
-      foregroundDecoration: secili
+      foregroundDecoration: secili && icerigiBoya
           ? BoxDecoration(
               color: r.accent.withValues(alpha: TarusOlcu.seciliZeminAlfa),
               borderRadius: radius,

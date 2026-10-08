@@ -146,7 +146,9 @@ derlenir (Visual Studio Build Tools gerekir). Build Tools yoksa yerel deneme iç
 - **1.1.7** (2026-10-08): arayüzün 3. aşaması. Düzenleyici alt sayfası (kağıt deseni önizlemeleri
   seçili = vurgu kenarlığı, satır aralığı/çizgi kalınlığı kaydırıcı kartları, «Tüm sayfaları
   temizle» tehlike renginde), sayfa yöneticisi (sayfa başına `TarusKart`, geçerli sayfa seçili,
-  `TarusIkonDugmesi`), renk seçici (İptal + Kaydet, onaltılı kod alanı), seçim çubuğu (araç
+  `TarusIkonDugmesi`; seçili vurgu `icerigiBoya: false` ile yalnız zemine düşer, önizleme renkleri
+  değişmez), renk seçici (yalnız çark, İptal + Kaydet; paketin onaltılı kod alanı çeviri katmanı
+  bulamayıp hata çizdiği için kapalı), seçim çubuğu (araç
   çubuğuna dik, sil tehlike renginde), tuval HUD'u (`tarusHudZemini`: yüzen çubuk zemini, kilitliyken
   `selectionStyle`), kaydet göstergesi (bekleyen kayıt vurgu renginde), salt okunur şeridi (uyarı
   rengi), «daha yeni sürüm» penceresi (izin düğmesi tehlike renginde), Hata bildir sayfası, güncelleme

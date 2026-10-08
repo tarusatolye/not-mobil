@@ -51,6 +51,7 @@ class _EditorPageManagerState extends State<EditorPageManager> {
     return SizedBox(
       width: 320,
       child: ReorderableListView.builder(
+        shrinkWrap: true,
         buildDefaultDragHandles: false,
         itemCount: sayfaSayisi,
         // Sürüklenen kart gölgesiyle yükselir, köşesi kartla aynı.
@@ -73,6 +74,7 @@ class _EditorPageManagerState extends State<EditorPageManager> {
             padding: const .only(bottom: TarusOlcu.aralik),
             child: TarusKart(
               secili: pageIndex == widget.currentPageIndex,
+              icerigiBoya: false,
               golge: false,
               onTap: () => scrollToPage(pageIndex),
               padding: const .fromLTRB(12, 10, 4, 6),
