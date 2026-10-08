@@ -35,7 +35,7 @@ class CanvasBackgroundPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = ColorScheme.of(context);
+    final r = TarusRenkler.of(context);
     final previewSize = Size(
       fixedWidth,
       pageSize.height / pageSize.width * fixedWidth,
@@ -45,11 +45,10 @@ class CanvasBackgroundPreview extends StatelessWidget {
       width: previewSize.width,
       height: previewSize.height,
       decoration: BoxDecoration(
+        // tarus seçili durumu: vurgu kenarlığı; seçili değilken `--bdr2`.
         border: Border.all(
-          color: colorScheme.primary
-              .withSaturation(selected ? 1 : 0)
-              .withValues(alpha: selected ? 1 : 0.1),
-          width: 2,
+          color: selected ? r.accent : r.bdr2,
+          width: selected ? 2 : 1,
         ),
         borderRadius: const .all(.circular(8)),
       ),

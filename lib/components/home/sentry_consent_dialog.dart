@@ -2,8 +2,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:saber/components/settings/app_info.dart';
 import 'package:saber/data/prefs.dart';
+import 'package:saber/data/sentry/sentry_consent.dart';
 import 'package:saber/data/sentry/sentry_init.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class const SentryConsentDialog({super.key}) extends StatelessWidget {
@@ -31,12 +34,16 @@ class const SentryConsentDialog({super.key}) extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
+    final r = TarusRenkler.of(context);
+    void yanitla(SentryConsent yanit) {
+      stows.sentryConsent.value = yanit;
+      Navigator.of(context).pop();
+    }
+
+    return TarusDialog(
       title: Text(t.sentry.consent.title),
-      scrollable: true,
-      content: RichText(
-        text: TextSpan(
-          style: TextTheme.of(context).bodyMedium,
+      content: Text.rich(
+        TextSpan(
           children: [
             TextSpan(text: t.sentry.consent.description.question),
             const TextSpan(text: '\n\n'),
@@ -51,7 +58,7 @@ class const SentryConsentDialog({super.key}) extends StatelessWidget {
             t.sentry.consent.description.learnMoreInPrivacyPolicy(
               link: (text) => TextSpan(
                 text: text,
-                style: TextStyle(color: ColorScheme.of(context).primary),
+                style: TextStyle(color: r.accent, fontWeight: FontWeight.w600),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     launchUrl(AppInfo.privacyPolicyUrl);
@@ -61,29 +68,21 @@ class const SentryConsentDialog({super.key}) extends StatelessWidget {
           ],
         ),
       ),
+      // Sonuncu düğme birincil (Evet); Daha sonra yalnız ilk soruda.
       actions: [
-        ElevatedButton(
-          onPressed: () {
-            stows.sentryConsent.value = .granted;
-            Navigator.of(context).pop();
-          },
-          child: Text(t.sentry.consent.answers.yes),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            stows.sentryConsent.value = .denied;
-            Navigator.of(context).pop();
-          },
-          child: Text(t.sentry.consent.answers.no),
-        ),
         if (stows.sentryConsent.value == .unknown)
-          ElevatedButton(
-            onPressed: () {
-              stows.sentryConsent.value = .unknown;
-              Navigator.of(context).pop();
-            },
+          TarusDialogDugmesi(
+            onPressed: () => yanitla(.unknown),
             child: Text(t.sentry.consent.answers.later),
           ),
+        TarusDialogDugmesi(
+          onPressed: () => yanitla(.denied),
+          child: Text(t.sentry.consent.answers.no),
+        ),
+        TarusDialogDugmesi(
+          onPressed: () => yanitla(.granted),
+          child: Text(t.sentry.consent.answers.yes),
+        ),
       ],
     );
   }

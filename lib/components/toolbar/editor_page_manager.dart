@@ -3,7 +3,10 @@ import 'package:saber/components/canvas/canvas_gesture_detector.dart';
 import 'package:saber/components/canvas/canvas_preview.dart';
 import 'package:saber/data/editor/editor_core_info.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 
 class EditorPageManager extends StatefulWidget {
   const new({
@@ -43,38 +46,78 @@ class _EditorPageManagerState extends State<EditorPageManager> {
 
   @override
   Widget build(BuildContext context) {
+    final r = TarusRenkler.of(context);
+    final sayfaSayisi = widget.coreInfo.pages.length;
     return SizedBox(
-      width: 300,
+      width: 320,
       child: ReorderableListView.builder(
         buildDefaultDragHandles: false,
-        itemCount: widget.coreInfo.pages.length,
+        itemCount: sayfaSayisi,
+        // Sürüklenen kart gölgesiyle yükselir, köşesi kartla aynı.
+        proxyDecorator: (child, _, _) => Material(
+          type: MaterialType.transparency,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: const .all(.circular(TarusOlcu.rKart)),
+              boxShadow: r.elev2,
+            ),
+            child: child,
+          ),
+        ),
         itemBuilder: (context, pageIndex) {
           final isEmptyLastPage =
-              pageIndex == widget.coreInfo.pages.length - 1 &&
+              pageIndex == sayfaSayisi - 1 &&
               widget.coreInfo.pages[pageIndex].isEmpty;
-          return InkWell(
+          return Padding(
             key: ValueKey(pageIndex),
-            onTap: () => scrollToPage(pageIndex),
-            child: Padding(
-              padding: const .all(8),
+            padding: const .only(bottom: TarusOlcu.aralik),
+            child: TarusKart(
+              secili: pageIndex == widget.currentPageIndex,
+              golge: false,
+              onTap: () => scrollToPage(pageIndex),
+              padding: const .fromLTRB(12, 10, 4, 6),
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment: .spaceAround,
+                    crossAxisAlignment: .start,
                     children: [
                       Text(
-                        '${pageIndex + 1} / ${widget.coreInfo.pages.length}',
-                      ),
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(
-                          maxWidth: 150,
-                          maxHeight: 250,
+                        '${pageIndex + 1} / $sayfaSayisi',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: r.muted2,
+                          fontFeatures: const [FontFeature.tabularFigures()],
                         ),
-                        child: FittedBox(
-                          child: CanvasPreview(
-                            pageIndex: pageIndex,
-                            height: null,
-                            coreInfo: widget.coreInfo,
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(
+                              maxWidth: 150,
+                              maxHeight: 220,
+                            ),
+                            child: DecoratedBox(
+                              position: DecorationPosition.foreground,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: r.bdr2),
+                                borderRadius: const .all(
+                                  .circular(TarusOlcu.rSm),
+                                ),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: const .all(
+                                  .circular(TarusOlcu.rSm),
+                                ),
+                                child: FittedBox(
+                                  child: CanvasPreview(
+                                    pageIndex: pageIndex,
+                                    height: null,
+                                    coreInfo: widget.coreInfo,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -82,39 +125,50 @@ class _EditorPageManagerState extends State<EditorPageManager> {
                         cursor: SystemMouseCursors.resizeUpDown,
                         child: ReorderableDragStartListener(
                           index: pageIndex,
-                          child: const Padding(
-                            padding: .all(8),
-                            child: Icon(TarusIkon.tutamac),
+                          child: Padding(
+                            padding: const .all(8),
+                            child: Icon(
+                              TarusIkon.tutamac,
+                              size: 18,
+                              color: r.muted,
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
+                  const SizedBox(height: 4),
                   Row(
                     mainAxisAlignment: .center,
                     children: [
-                      IconButton(
+                      TarusIkonDugmesi(
                         tooltip: t.editor.menu.insertPage,
-                        icon: const Icon(TarusIkon.sayfaEkle),
+                        ikon: TarusIkon.sayfaEkle,
+                        boyut: 36,
+                        ikonBoyutu: 18,
                         onPressed: () => setState(() {
                           widget.insertPageAfter(pageIndex);
                           scrollToPage(pageIndex + 1);
                         }),
                       ),
-                      IconButton(
+                      TarusIkonDugmesi(
                         tooltip: t.editor.menu.duplicatePage,
-                        icon: const Icon(TarusIkon.kopyala),
+                        ikon: TarusIkon.kopyala,
+                        boyut: 36,
+                        ikonBoyutu: 18,
                         onPressed: () => setState(() {
                           widget.duplicatePage(pageIndex);
                           scrollToPage(pageIndex + 1);
                         }),
                       ),
-                      IconButton(
+                      TarusIkonDugmesi(
                         tooltip: t.editor.menu.clearPage(
                           page: pageIndex + 1,
-                          totalPages: widget.coreInfo.pages.length,
+                          totalPages: sayfaSayisi,
                         ),
-                        icon: const Icon(TarusIkon.temizle),
+                        ikon: TarusIkon.temizle,
+                        boyut: 36,
+                        ikonBoyutu: 18,
                         onPressed: isEmptyLastPage
                             ? null
                             : () => setState(() {
@@ -122,9 +176,12 @@ class _EditorPageManagerState extends State<EditorPageManager> {
                                 scrollToPage(pageIndex);
                               }),
                       ),
-                      IconButton(
+                      TarusIkonDugmesi(
                         tooltip: t.editor.menu.deletePage,
-                        icon: const Icon(TarusIkon.sil),
+                        ikon: TarusIkon.sil,
+                        boyut: 36,
+                        ikonBoyutu: 18,
+                        renk: r.danger,
                         onPressed: isEmptyLastPage
                             ? null
                             : () => setState(() {

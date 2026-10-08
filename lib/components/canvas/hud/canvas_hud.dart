@@ -58,8 +58,8 @@ class CanvasHud extends HookWidget {
         child: Stack(
           children: [
             Positioned(
-              top: 5,
-              left: 5,
+              top: 8,
+              left: 8,
               child: CanvasGestureLockBtn(
                 lock: zoomLock,
                 setLock: setZoomLock,
@@ -70,8 +70,8 @@ class CanvasHud extends HookWidget {
               ),
             ),
             Positioned(
-              top: 45,
-              left: 5,
+              top: 8 + tarusHudBoyu + 6,
+              left: 8,
               child: CanvasGestureLockBtn(
                 lock: singleFingerPanLock,
                 setLock: setSingleFingerPanLock,
@@ -84,8 +84,8 @@ class CanvasHud extends HookWidget {
               ),
             ),
             Positioned(
-              top: 85,
-              left: 5,
+              top: 8 + (tarusHudBoyu + 6) * 2,
+              left: 8,
               child: CanvasGestureLockBtn(
                 lock: axisAlignedPanLock,
                 setLock: setAxisAlignedPanLock,
@@ -100,8 +100,8 @@ class CanvasHud extends HookWidget {
               ),
             ),
             Positioned(
-              top: 5,
-              right: 5,
+              top: 8,
+              right: 8,
               child: AnimatedBuilder(
                 animation: transformationController,
                 builder: (context, _) => CanvasZoomIndicator(

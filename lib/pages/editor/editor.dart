@@ -47,6 +47,7 @@ import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/home/whiteboard.dart';
 import 'package:saber/tarus/tarus_bilesenler.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 import 'package:sbn/change.dart';
 import 'package:super_clipboard/super_clipboard.dart';
 
@@ -1692,6 +1693,7 @@ class EditorState extends State<Editor> {
                   ),
                   IconButton(
                     icon: const Icon(TarusIkon.dahaFazla),
+                    tooltip: MaterialLocalizations.of(context).showMenuTooltip,
                     onPressed: () {
                       showModalBottomSheet(
                         context: context,
@@ -1984,13 +1986,27 @@ class EditorState extends State<Editor> {
           context: context,
           builder: (context) => TarusDialog(
             title: Text(t.editor.versionTooNew.title),
-            content: Text(t.editor.versionTooNew.subtitle),
+            content: Row(
+              crossAxisAlignment: .start,
+              children: [
+                Icon(
+                  TarusIkon.uyari,
+                  size: 18,
+                  color: TarusRenkler.of(context).warning,
+                ),
+                const SizedBox(width: 10),
+                Expanded(child: Text(t.editor.versionTooNew.subtitle)),
+              ],
+            ),
+            // Yeni sürümün kaydettiği notu düzenlemek veri kaybettirebilir:
+            // izin düğmesi tehlike renginde.
             actions: [
               TarusDialogDugmesi(
                 child: Text(t.common.cancel),
                 onPressed: () => Navigator.pop(context, false),
               ),
               TarusDialogDugmesi(
+                isDestructiveAction: true,
                 child: Text(t.editor.versionTooNew.allowEditing),
                 onPressed: () => Navigator.pop(context, true),
               ),

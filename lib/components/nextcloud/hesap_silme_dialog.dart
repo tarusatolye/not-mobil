@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:saber/data/tarus_baglantilar.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Profil › "Hesabı sil": tarus'ta hesap ve veri silmenin yolları.
@@ -24,10 +27,17 @@ class HesapSilmeDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = TextTheme.of(context);
+    final r = TarusRenkler.of(context);
     Widget baslik(String metin) => Padding(
       padding: const .only(top: 16, bottom: 4),
-      child: Text(metin, style: textTheme.titleSmall),
+      child: Text(
+        metin,
+        style: TextStyle(
+          fontSize: TarusOlcu.yaziKartBasligi,
+          fontWeight: FontWeight.w600,
+          color: r.text,
+        ),
+      ),
     );
     Widget baglanti(String metin, Uri adres) => Align(
       alignment: .centerLeft,
@@ -37,44 +47,42 @@ class HesapSilmeDialog extends StatelessWidget {
       ),
     );
 
-    return AlertDialog(
+    return TarusDialog(
       title: const Text('Hesap ve veri silme'),
-      content: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: .start,
-          mainAxisSize: .min,
-          children: [
-            const Text(
-              "tarus Not'un ayrı bir hesabı yoktur; kimliğiniz Pusula "
-              'hesabınızdır. Bu uygulamadan eşitlenen notlar Not sunucusunda '
-              'şifreli saklanır.',
-            ),
-            baslik('1. Bu cihazın erişimini kaldırın'),
-            const Text(
-              'Pusula › Ayarlar › Not eşitleme bölümünde bu cihazın '
-              'belirtecini iptal edin. Cihaz en geç 30 saniye içinde '
-              'eşitleyemez olur.',
-            ),
-            baglanti("Pusula Ayarlar'ı aç", TarusBaglantilar.pusulaAyarlar),
-            baslik('2. Bu cihazdaki verileri silin'),
-            const Text(
-              'Profil ekranından çıkış yapın, ardından uygulamayı kaldırın. '
-              'Kaldırınca cihazdaki notlar silinir.',
-            ),
-            baslik('3. Sunucudaki notları ve hesabı sildirin'),
-            const Text(
-              'Not sunucusundaki tüm notlarınızın ve hesap bilgilerinizin '
-              'silinmesini web sayfasından ya da '
-              '${TarusBaglantilar.iletisimEposta} adresine yazarak '
-              'isteyebilirsiniz. Talepler en geç 30 gün içinde sonuçlanır.',
-            ),
-            baglanti('Silme talebi (web)', TarusBaglantilar.hesapSilme),
-            baglanti('E-postayla iste', _eposta),
-          ],
-        ),
+      content: Column(
+        crossAxisAlignment: .start,
+        mainAxisSize: .min,
+        children: [
+          const Text(
+            "tarus Not'un ayrı bir hesabı yoktur; kimliğiniz Pusula "
+            'hesabınızdır. Bu uygulamadan eşitlenen notlar Not sunucusunda '
+            'şifreli saklanır.',
+          ),
+          baslik('1. Bu cihazın erişimini kaldırın'),
+          const Text(
+            'Pusula › Ayarlar › Not eşitleme bölümünde bu cihazın '
+            'belirtecini iptal edin. Cihaz en geç 30 saniye içinde '
+            'eşitleyemez olur.',
+          ),
+          baglanti("Pusula Ayarlar'ı aç", TarusBaglantilar.pusulaAyarlar),
+          baslik('2. Bu cihazdaki verileri silin'),
+          const Text(
+            'Profil ekranından çıkış yapın, ardından uygulamayı kaldırın. '
+            'Kaldırınca cihazdaki notlar silinir.',
+          ),
+          baslik('3. Sunucudaki notları ve hesabı sildirin'),
+          const Text(
+            'Not sunucusundaki tüm notlarınızın ve hesap bilgilerinizin '
+            'silinmesini web sayfasından ya da '
+            '${TarusBaglantilar.iletisimEposta} adresine yazarak '
+            'isteyebilirsiniz. Talepler en geç 30 gün içinde sonuçlanır.',
+          ),
+          baglanti('Silme talebi (web)', TarusBaglantilar.hesapSilme),
+          baglanti('E-postayla iste', _eposta),
+        ],
       ),
       actions: [
-        TextButton(
+        TarusDialogDugmesi(
           onPressed: () => Navigator.of(context).pop(),
           child: const Text('Kapat'),
         ),

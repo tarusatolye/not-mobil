@@ -96,10 +96,14 @@ abstract final class TarusIkon {
   // Ayarlar
   static const IconData dil = LucideIcons.languages;
   static const IconData tema = LucideIcons.sunMoon;
-  static const IconData duzenBoyutu = LucideIcons.monitorSmartphone;
-  static const IconData telefon = LucideIcons.smartphone;
-  static const IconData tablet = LucideIcons.tablet;
-  static const IconData otomatik = LucideIcons.scan;
+  static const IconData duzenBoyutu = LucideIcons.layoutPanelLeft;
+
+  // Düzen boyutu seçenekleri: Lucide `smartphone` ile `tablet` küçük boyda
+  // neredeyse aynı göründüğü için ikonlar düzenin kendisini çizer —
+  // telefonda alt çubuk, tablette kenar rayı; otomatik cihaza göre seçer.
+  static const IconData otomatik = LucideIcons.monitorSmartphone;
+  static const IconData telefon = LucideIcons.panelBottom;
+  static const IconData tablet = LucideIcons.panelLeft;
   static const IconData yaziTipi = LucideIcons.caseSensitive;
   static const IconData griTon = LucideIcons.contrast;
   static const IconData temizle = LucideIcons.brushCleaning;

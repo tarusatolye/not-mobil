@@ -6,6 +6,9 @@ import 'package:saber/components/settings/update_manager.dart';
 import 'package:saber/data/locales.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class const UpdateDialog({super.key}) extends StatefulWidget {
@@ -88,36 +91,66 @@ class _UpdateDialogState extends State<UpdateDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final r = TarusRenkler.of(context);
+    final degisiklikler = showTranslatedChangelog && translatedChangelog != null
+        ? translatedChangelog
+        : englishChangelog;
     return TarusDialog(
       title: Text(t.update.updateAvailable),
       content: Column(
-        crossAxisAlignment: .start,
+        crossAxisAlignment: .stretch,
         mainAxisSize: .min,
         children: [
           Text(t.update.updateAvailableDescription),
 
-          if (showTranslatedChangelog && translatedChangelog != null)
-            Text(translatedChangelog!)
-          else if (englishChangelog != null)
-            Text(englishChangelog!),
+          if (degisiklikler != null) ...[
+            const SizedBox(height: 12),
+            Container(
+              padding: const .all(12),
+              decoration: BoxDecoration(
+                color: r.card2,
+                borderRadius: const .all(.circular(TarusOlcu.rLg)),
+                border: Border.all(color: r.bdr1),
+              ),
+              child: Text(
+                degisiklikler,
+                style: TextStyle(fontSize: 12.5, color: r.text, height: 1.5),
+              ),
+            ),
+          ],
 
           if (translatedChangelog != null && englishChangelog != null)
-            TextButton(
-              onPressed: () => setState(() {
-                showTranslatedChangelog = !showTranslatedChangelog;
-              }),
-              child: Text(
-                showTranslatedChangelog
-                    ? localeNames[localeCode] ?? localeCode!
-                    : localeNames['en']!,
+            Align(
+              alignment: .centerLeft,
+              child: TextButton.icon(
+                onPressed: () => setState(() {
+                  showTranslatedChangelog = !showTranslatedChangelog;
+                }),
+                icon: const Icon(TarusIkon.dil, size: 16),
+                label: Text(
+                  showTranslatedChangelog
+                      ? localeNames[localeCode] ?? localeCode!
+                      : localeNames['en']!,
+                ),
               ),
             ),
 
-          if (downloadNotAvailableYet)
-            Text(
-              t.update.downloadNotAvailableYet,
-              style: TextStyle(color: ColorScheme.of(context).error),
+          if (downloadNotAvailableYet) ...[
+            const SizedBox(height: 12),
+            Row(
+              crossAxisAlignment: .start,
+              children: [
+                Icon(TarusIkon.uyari, size: 16, color: r.danger),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    t.update.downloadNotAvailableYet,
+                    style: TextStyle(color: r.danger),
+                  ),
+                ),
+              ],
             ),
+          ],
 
           ValueListenableBuilder(
             valueListenable: directDownloadProgress,
@@ -125,7 +158,15 @@ class _UpdateDialogState extends State<UpdateDialog> {
               if (progress == null) return const SizedBox();
               return Padding(
                 padding: const .only(top: 16.0),
-                child: LinearProgressIndicator(value: progress),
+                child: ClipRRect(
+                  borderRadius: const .all(.circular(999)),
+                  child: LinearProgressIndicator(
+                    value: progress,
+                    minHeight: 6,
+                    color: r.accent,
+                    backgroundColor: r.ovl2,
+                  ),
+                ),
               );
             },
           ),

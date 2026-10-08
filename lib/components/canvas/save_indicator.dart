@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:saber/data/is_this_a_test.dart';
 import 'package:saber/data/routes.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 
 /// Replaces the back button as the
 /// [AppBar.leading] widget in the [AppBar]
@@ -15,6 +16,8 @@ class SaveIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final r = TarusRenkler.of(context);
+    final yerel = MaterialLocalizations.of(context);
     return ValueListenableBuilder(
       valueListenable: savingState,
       builder: (context, isSaving, _) {
@@ -25,9 +28,22 @@ class SaveIndicator extends StatelessWidget {
           child: IconButton(
             key: ValueKey(savingState.value),
             onPressed: () => _onPressed(context),
+            // Kaydedilmemiş değişiklik vurgu renginde kaydet ikonu,
+            // kaydedilirken ikon boyunda çark, kaydedilince geri oku.
+            tooltip: switch (savingState.value) {
+              .waitingToSave => yerel.saveButtonLabel,
+              .saving => null,
+              .saved => yerel.backButtonTooltip,
+            },
             icon: switch (savingState.value) {
-              .waitingToSave => const Icon(TarusIkon.kaydet),
-              .saving => const CircularProgressIndicator(),
+              .waitingToSave => Icon(TarusIkon.kaydet, color: r.accent),
+              .saving => SizedBox.square(
+                dimension: 18,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: r.accent,
+                ),
+              ),
               .saved => const Icon(TarusIkon.geri),
             },
           ),

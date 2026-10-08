@@ -6,6 +6,7 @@ import 'package:saber/data/prefs.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/tarus/tarus_bilesenler.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
 
 typedef NamedColor = ({String name, Color color});
 
@@ -305,18 +306,34 @@ class _ColorBarState extends State<ColorBar> {
     }
   }
 
+  /// Özel renk penceresi: renk çarkı (köşeler tarus ölçüsünde), onaltılı
+  /// kod alanı; İptal ve birincil Kaydet. Seçilen renk yalnız kalemin
+  /// rengidir, not içeriğindeki renkler değişmez.
   Widget _colorPickerDialog(BuildContext context) => TarusDialog(
     title: Text(t.settings.accentColorPicker.pickAColor),
-    content: SingleChildScrollView(
-      child: ColorPicker(
-        color: pickedColor,
-        pickersEnabled: const {ColorPickerType.wheel: true},
-        onColorChanged: (Color color) {
-          pickedColor = color;
-        },
-      ),
+    genislik: 380,
+    content: ColorPicker(
+      color: pickedColor,
+      pickersEnabled: const {ColorPickerType.wheel: true},
+      enableShadesSelection: false,
+      wheelDiameter: 220,
+      wheelWidth: 18,
+      wheelSquareBorderRadius: TarusOlcu.rSm,
+      borderRadius: TarusOlcu.rSm,
+      width: 36,
+      height: 36,
+      showColorCode: true,
+      colorCodeHasColor: true,
+      padding: EdgeInsets.zero,
+      onColorChanged: (Color color) {
+        pickedColor = color;
+      },
     ),
     actions: [
+      TarusDialogDugmesi(
+        child: Text(t.common.cancel),
+        onPressed: () => Navigator.of(context).pop(false),
+      ),
       TarusDialogDugmesi(
         child: Text(MaterialLocalizations.of(context).saveButtonLabel),
         onPressed: () {

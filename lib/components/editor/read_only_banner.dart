@@ -1,7 +1,10 @@
 import 'package:collapsible/collapsible.dart';
 import 'package:flutter/material.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 import 'package:sbn/read_only_reason.dart';
 
 /// A banner that tells the user why the note is read-only.
@@ -42,18 +45,73 @@ class _ReadOnlyBannerState extends State<ReadOnlyBanner> {
     return Collapsible(
       collapsed: !needsBanner,
       axis: CollapsibleAxis.vertical,
-      child: SafeArea(
-        child: ListTile(
-          onTap: widget.action,
-          leading: const Icon(TarusIkon.duzenlemeKapali),
-          title: Text(t.editor.readOnlyBanner.title),
-          subtitle: Text(subtitle),
-          trailing: widget.action != null
-              ? IconButton(
-                  onPressed: widget.action,
-                  icon: const Icon(TarusIkon.disBaglanti),
-                )
-              : null,
+      child: _Serit(
+        baslik: t.editor.readOnlyBanner.title,
+        aciklama: subtitle,
+        action: widget.action,
+      ),
+    );
+  }
+}
+
+/// Uyarı şeridi (STANDARTLAR uyarı rengi): `--warning` %12 zemin, üst ve
+/// alt kenarlık %35 (araç çubuğu üstte ya da altta olabilir), solda kalem-kapalı ikonu, sağda isteğe bağlı eylem.
+class const _Serit({
+  required final String baslik,
+  required final String aciklama,
+  required final VoidCallback? action,
+}) extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final r = TarusRenkler.of(context);
+    return Material(
+      color: Color.alphaBlend(r.warning.withValues(alpha: 0.12), r.bg),
+      child: InkWell(
+        onTap: action,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            border: Border.symmetric(
+              horizontal: BorderSide(color: r.warning.withValues(alpha: 0.35)),
+            ),
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding: const .fromLTRB(TarusOlcu.sayfaYatay + 4, 10, 8, 10),
+              child: Row(
+                children: [
+                  Icon(TarusIkon.duzenlemeKapali, size: 18, color: r.warning),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: .start,
+                      mainAxisSize: .min,
+                      children: [
+                        Text(
+                          baslik,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: r.text,
+                          ),
+                        ),
+                        Text(
+                          aciklama,
+                          style: TextStyle(fontSize: 12, color: r.muted2),
+                        ),
+                      ],
+                    ),
+                  ),
+                  if (action != null)
+                    TarusIkonDugmesi(
+                      ikon: TarusIkon.disBaglanti,
+                      ikonBoyutu: 18,
+                      boyut: 36,
+                      onPressed: action,
+                    ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

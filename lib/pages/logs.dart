@@ -4,6 +4,8 @@ import 'package:logging/logging.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/tarus/tarus_bilesenler.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 import 'package:sbn/font_fallbacks.dart';
 
 final logsHistory = _LogsHistory();
@@ -42,6 +44,7 @@ class _LogsHistory extends ChangeNotifier {
 class const LogsPage({super.key}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final r = TarusRenkler.of(context);
     return Scaffold(
       body: ListenableBuilder(
         listenable: logsHistory,
@@ -54,7 +57,7 @@ class const LogsPage({super.key}) extends StatelessWidget {
                 actions: [
                   if (logsHistory.isFrozen)
                     IconButton(
-                      icon: const Icon(TarusIkon.oynat),
+                      icon: Icon(TarusIkon.oynat, color: r.accent),
                       onPressed: logsHistory.unfreeze,
                     )
                   else
@@ -64,6 +67,7 @@ class const LogsPage({super.key}) extends StatelessWidget {
                     ),
                   IconButton(
                     icon: const Icon(TarusIkon.kopyala),
+                    tooltip: MaterialLocalizations.of(context).copyButtonLabel,
                     onPressed: logsHistory.history.isEmpty
                         ? null
                         : () {
@@ -116,6 +120,8 @@ class const LogsPage({super.key}) extends StatelessWidget {
   }
 }
 
+/// Kayıt satırı: düzey rozeti ve saat, ileti; yığın izi `--card2` zeminde
+/// eş aralıklı yazıyla (sabit siyah/beyaz yerine tema token'ları).
 class _LogsItem extends StatelessWidget {
   const new({required this.record});
 
@@ -123,42 +129,78 @@ class _LogsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const hPadding = 16.0;
-    const vPadding = 8.0;
-    return Column(
-      crossAxisAlignment: .start,
-      children: [
-        const SizedBox(height: vPadding),
-        Padding(
-          padding: const .symmetric(horizontal: hPadding),
-          child: _LogLevel(level: record.level),
-        ),
-        Padding(
-          padding: const .symmetric(horizontal: hPadding),
-          child: Text(record.message),
-        ),
-        if (record.stackTrace != null)
-          ColoredBox(
-            color: const Color(0xCC000000),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Text(
-                record.stackTrace.toString(),
-                style: const TextStyle(
-                  fontFamily: 'FiraMono',
-                  fontFamilyFallback: saberMonoFontFallbacks,
-                  fontSize: 11,
-                  color: Colors.white,
+    final r = TarusRenkler.of(context);
+    const hPadding = TarusOlcu.sayfaYatay + 4;
+    final saat = record.time.toIso8601String().substring(11, 19);
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: r.bdr1)),
+      ),
+      child: Padding(
+        padding: const .symmetric(horizontal: hPadding, vertical: 10),
+        child: Column(
+          crossAxisAlignment: .start,
+          children: [
+            Row(
+              children: [
+                _LogLevel(level: record.level),
+                const SizedBox(width: 8),
+                Text(
+                  saat,
+                  style: TextStyle(
+                    fontSize: TarusOlcu.yaziMeta,
+                    color: r.muted,
+                    fontFeatures: const [FontFeature.tabularFigures()],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 4),
+            SelectableText(
+              record.message,
+              style: TextStyle(fontSize: 13, color: r.text, height: 1.4),
+            ),
+            if (record.error != null) ...[
+              const SizedBox(height: 2),
+              Text(
+                record.error.toString(),
+                style: TextStyle(fontSize: 12, color: r.danger, height: 1.4),
+              ),
+            ],
+            if (record.stackTrace != null) ...[
+              const SizedBox(height: 6),
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: r.card2,
+                  borderRadius: const .all(.circular(TarusOlcu.rSm)),
+                  border: Border.all(color: r.bdr1),
+                ),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const .all(8),
+                  child: Text(
+                    record.stackTrace.toString(),
+                    style: TextStyle(
+                      fontFamily: 'FiraMono',
+                      fontFamilyFallback: saberMonoFontFallbacks,
+                      fontSize: 11,
+                      height: 1.45,
+                      color: r.muted2,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-        const SizedBox(height: vPadding),
-      ],
+            ],
+          ],
+        ),
+      ),
     );
   }
 }
 
+/// Düzey rozeti: hata `--danger`, uyarı `--warning`, diğerleri nötr
+/// (rengin %14 zemini, %45 kenarlığı).
 class _LogLevel extends StatelessWidget {
   const new({required this.level});
 
@@ -166,24 +208,28 @@ class _LogLevel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = ColorScheme.of(context);
-    return DecoratedBox(
+    final r = TarusRenkler.of(context);
+    final Color? renk = switch (level) {
+      Level.SHOUT || Level.SEVERE => r.danger,
+      Level.WARNING => r.warning,
+      _ => null,
+    };
+    return Container(
+      padding: const .symmetric(horizontal: 6, vertical: 1),
       decoration: BoxDecoration(
-        color: switch (level) {
-          Level.SHOUT || Level.SEVERE => colorScheme.error,
-          Level.WARNING => colorScheme.tertiary,
-          _ => colorScheme.surfaceContainer,
-        },
-        borderRadius: const .all(.circular(2)),
+        color: renk?.withValues(alpha: TarusOlcu.seciliZeminAlfa) ?? r.ovl2,
+        borderRadius: const .all(.circular(6)),
+        border: Border.all(
+          color: renk?.withValues(alpha: TarusOlcu.seciliKenarAlfa) ?? r.bdr1,
+        ),
       ),
       child: Text(
         level.name,
         style: TextStyle(
-          color: switch (level) {
-            Level.SHOUT || Level.SEVERE => colorScheme.onError,
-            Level.WARNING => colorScheme.onTertiary,
-            _ => colorScheme.onSurface,
-          },
+          fontSize: TarusOlcu.yaziMeta,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 0.2,
+          color: renk ?? r.muted2,
         ),
       ),
     );
