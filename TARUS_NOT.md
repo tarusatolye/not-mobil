@@ -143,6 +143,17 @@ derlenir (Visual Studio Build Tools gerekir). Build Tools yoksa yerel deneme iç
 çeviren yerel bir kopya kullanılabilir (2026-10-07 turunda böyle çalıştırıldı; commit edilmez).
 
 ## Sürüm notları
+- **1.1.7** (2026-10-08): arayüzün 3. aşaması. Düzenleyici alt sayfası (kağıt deseni önizlemeleri
+  seçili = vurgu kenarlığı, satır aralığı/çizgi kalınlığı kaydırıcı kartları, «Tüm sayfaları
+  temizle» tehlike renginde), sayfa yöneticisi (sayfa başına `TarusKart`, geçerli sayfa seçili,
+  `TarusIkonDugmesi`), renk seçici (İptal + Kaydet, onaltılı kod alanı), seçim çubuğu (araç
+  çubuğuna dik, sil tehlike renginde), tuval HUD'u (`tarusHudZemini`: yüzen çubuk zemini, kilitliyken
+  `selectionStyle`), kaydet göstergesi (bekleyen kayıt vurgu renginde), salt okunur şeridi (uyarı
+  rengi), «daha yeni sürüm» penceresi (izin düğmesi tehlike renginde), Hata bildir sayfası, güncelleme
+  ve Sentry onay pencereleri (`TarusDialog`), hesap silme penceresi. Kayıtlar sayfasında sabit
+  siyah/beyaz yerine token'lar. Ayarlar › Düzen boyutu: telefon `panelBottom`, tablet `panelLeft`
+  (Lucide `smartphone`/`tablet` küçükte ayırt edilmiyordu). Mürekkep ve not içeriği renkleri değişmedi.
+  Arayüz metinlerinde Saber/Nextcloud yalnız GPL telif satırında ve Hakkında'daki kaynak notunda kalır.
 - **1.1.6** (2026-10-08): düz eşitleme (yukarıda). Şifreleme parolası adımı (`enc_login_step`),
   `config.sbc`/anahtar üretimi ve yol şifrelemesi kalktı; liste tek `Depth: infinity` PROPFIND;
   403/503 Ayarlar › Eşitleme'de; eski şifreleme kayıtları ilk açılışta silinir. Mağaza metinleri ve

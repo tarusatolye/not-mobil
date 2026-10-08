@@ -1,0 +1,3 @@
+• The note editor's menu, page list, colour picker and selection options now match the tarus design
+• Zoom and lock buttons on the page, the save button and the read-only notice are easier to read
+• Settings shows distinct icons for phone and tablet layouts; the Logs and Report a bug screens follow your theme

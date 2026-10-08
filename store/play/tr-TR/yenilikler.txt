@@ -1,3 +1,3 @@
-• Notlar telefonda ve webde tek listede
-• Şifreleme parolası artık gerekmiyor; notlar sunucuda şifreli saklanıyor
-• Sunucu geçici olarak yanıt vermezse Ayarlar › Eşitleme'de uyarı çıkar, eşitleme kendiliğinden yeniden dener
+• Not düzenleyicinin menüsü, sayfa listesi, renk seçici ve seçim seçenekleri tarus tasarımına geçti
+• Sayfadaki yakınlaştırma ve kilit düğmeleri, kaydet düğmesi ve salt okunur uyarısı daha okunaklı
+• Ayarlar'da telefon ve tablet düzeni ayrı ikonlarla; Kayıtlar ve Hata bildir ekranları temanızın renklerinde

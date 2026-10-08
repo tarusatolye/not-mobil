@@ -10,6 +10,14 @@ const ilkYayin = '2 Ekim 2026';
 
 const surumNotlari = <SurumNotu>[
   SurumNotu(
+    '1.1.7',
+    '8 Ekim 2026',
+    'Not düzenleyicinin menüsü, sayfa listesi, renk seçici ve sayfadaki '
+        'yakınlaştırma ve kilit düğmeleri tarus görünümüne geçti. Ayarlar’da '
+        'telefon ve tablet düzeni artık ayrı ikonlarla seçiliyor; Kayıtlar ve '
+        'Hata bildir ekranları temanızın renklerinde.',
+  ),
+  SurumNotu(
     '1.1.6',
     '8 Ekim 2026',
     'Notlar telefonda ve webde tek listede; şifreleme parolası artık '
