@@ -1,0 +1,7 @@
+# Release imzasi (Play App Signing yukleme anahtari). Bu dosyayi
+# android/key.properties adiyla kopyalayip doldurun; key.properties git disidir.
+# storeFile goreli ise android/app/ ya da android/ klasorune gore cozulur; anahtari repo disinda tutun.
+storeFile=
+storePassword=
+keyAlias=
+keyPassword=
