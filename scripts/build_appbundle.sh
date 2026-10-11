@@ -41,6 +41,8 @@ trap geri_al EXIT
 
 echo "== tarus Not $surum ($commit): FOSS yaması"
 ./patches/pre/remove_proprietary_dependencies.sh
+# Windows checkout'unda (core.autocrlf) pubspec.lock CRLF olur, yama LF: önce LF'ye çevir.
+sed -i 's/$//' pubspec.lock
 patch pubspec.lock < patches/pre/pubspec-fdroid.lock.patch
 
 echo "== flutter build appbundle --release"
