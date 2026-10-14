@@ -11,7 +11,7 @@ Formu göndermeden önce yayımlanan derlemeyle karşılaştırın; kod değişi
 | Uygulama gerekli kullanıcı verisi türlerinden herhangi birini topluyor ya da paylaşıyor mu? | **Evet** | Eşitleme açıksa notlar ve kimlik not.tarus.tr'ye gider; Hata bildir isteğe bağlı. |
 | Aktarılan tüm kullanıcı verileri şifreleniyor mu? | **Evet** | Tüm trafik HTTPS (not.tarus.tr). Notlar sunucuda diskte ve yedekte şifreli saklanır (1.1.6'dan beri uçtan uca değil). |
 | Kullanıcılar verilerinin silinmesini isteyebilir mi? | **Evet** | Uygulamada Profil › Hesabı sil (adımlar + web talebi), web: `https://tarus.tr/hesap-silme` (talep e-postayla yazilim@tarus.tr'ye, Pusula yöneticisi işler). |
-| Hesap oluşturma | Uygulamada hesap **oluşturulmaz**; kimlik Pusula'dır (web'de oluşturulur). Giriş: Pusula eşitleme belirteci. | `lib/components/nextcloud/nc_login_step.dart` |
+| Hesap oluşturma | Uygulamada hesap **oluşturulmaz**; kimlik Pusula'dır (web'de oluşturulur). Giriş (1.2.0): Pusula e-posta + parolası uygulama içinde girilir, yalnız Pusula'ya (`pusula.tarus.tr/auth/giris/`) gider, cihazda saklanmaz; karşılığında cihaz eşitleme belirteci alınır. | `lib/components/nextcloud/nc_login_step.dart`, `lib/data/nextcloud/pusula_giris.dart` |
 | Hesap silme URL'si (Play zorunlu alanı) | `https://tarus.tr/hesap-silme` (`TarusBaglantilar.hesapSilme`) | 2026-10-06'da açıldı (tarus#c3bb217). |
 
 ## Toplanan veri türleri
@@ -21,7 +21,7 @@ Formu göndermeden önce yayımlanan derlemeyle karşılaştırın; kod değişi
 | Play veri türü | Toplanıyor mu | Zorunlu / isteğe bağlı | Amaç | Not |
 |---|---|---|---|---|
 | **Uygulama içindeki diğer kullanıcı içeriği** (notlar, çizimler, görseller, PDF'ler) | Evet | İsteğe bağlı (eşitleme kapalıyken cihazda kalır) | Uygulama işlevselliği (eşitleme) | 1.1.6'dan beri **uçtan uca şifreli değil**: notlar HTTPS ile düz yolla (`Saber/<klasör>/<ad>.sbn2`) gider; web aynı notu açar. Not sunucusu diskte ve yedekte şirket anahtarıyla (AES-256-GCM, anahtar servisi) şifreli saklar. |
-| **Kullanıcı kimlikleri** (Pusula kullanıcı adı, eşitleme belirteci) | Evet | Eşitleme için zorunlu | Uygulama işlevselliği, hesap yönetimi | Belirteç Pusula'da üretilir/iptal edilir; Not sunucusu Pusula'ya doğrulatır. |
+| **Kişisel bilgiler › E-posta adresi** ve **Kullanıcı kimlikleri** (Pusula e-postası ve parolası girişte, Pusula kullanıcı adı, eşitleme belirteci, cihaz modeli adı) | Evet | Eşitleme için zorunlu | Uygulama işlevselliği, hesap yönetimi | E-posta/parola yalnız girişte Pusula'ya gider, saklanmaz. Belirteç girişte Pusula'dan alınır, çıkışta iptal edilir; cihaz modeli Pusula › Hesap › Bağlı cihazlar'da ad olarak görünür. Not sunucusu belirteci Pusula'ya doğrulatır. |
 | **Fotoğraflar** (Hata bildir ekran görüntüsü) | Evet | İsteğe bağlı, kullanıcı ekler | Uygulama işlevselliği / hata ayıklama | En çok 2 MB, yalnız kullanıcı gönderirse. |
 | **Uygulama etkinliği › diğer** (Hata bildir başlığı ve açıklaması) | Evet | İsteğe bağlı | Hata ayıklama | Kullanıcının yazdığı metin. |
 | **Uygulama bilgileri ve performans › diğer** (işletim sistemi, sürümü, uygulama sürümü) | Evet | İsteğe bağlı (yalnız Hata bildir ile) | Hata ayıklama | `meta.platform`, `platformVersion`, `appVersion`. |
@@ -35,7 +35,7 @@ sunucularında), **geçici işlenmiyor** (saklanıyor), reklam/pazarlama/analiti
 
 - Veriler aktarımda şifrelenir (HTTPS).
 - Notlar sunucuda diskte ve yedekte şifreli saklanır (saklama şifrelemesi; uçtan uca değil, 1.1.6).
-- Kullanıcı eşitleme erişimini Pusula › Ayarlar › Not eşitleme'den anında iptal edebilir.
+- Kullanıcı eşitleme erişimini çıkış yaparak ya da Pusula › Hesap › Bağlı cihazlar'dan anında kaldırabilir.
 - Reklam, analitik ve üçüncü taraf izleme SDK'sı yok.
 
 ## Kullanıcının yapacakları

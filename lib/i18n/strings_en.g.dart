@@ -971,8 +971,8 @@ class Translations$login$status$en {
 	/// en: 'Sync is off'
 	String get loggedOut => 'Sync is off';
 
-	/// en: 'Tap to connect with a Pusula sync token'
-	String get tapToLogin => 'Tap to connect with a Pusula sync token';
+	/// en: 'Tap to sign in with your Pusula account'
+	String get tapToLogin => 'Tap to sign in with your Pusula account';
 
 	/// en: 'Hi, $u!'
 	String hi({required Object u}) => 'Hi, ${u}!';
@@ -1066,8 +1066,8 @@ class Translations$profile$faq$2$en {
 	/// en: 'How can I delete my account?'
 	String get q => 'How can I delete my account?';
 
-	/// en: 'Tap on the "Delete account" button above, and login if needed. tarus Not has no separate account: your identity is your Pusula account. To remove this device's sync access, revoke its token in Pusula > Settings > Not sync. To have your notes and account data deleted from the server, use the deletion request page shown there. If you are using a third party server, there might not be an option to delete your account: you'll need to consult the server's privacy policy for more information.'
-	String get a => 'Tap on the "${_root.profile.quickLinks.deleteAccount}" button above, and login if needed.\ntarus Not has no separate account: your identity is your Pusula account. To remove this device\'s sync access, revoke its token in Pusula > Settings > Not sync. To have your notes and account data deleted from the server, use the deletion request page shown there.\nIf you are using a third party server, there might not be an option to delete your account: you\'ll need to consult the server\'s privacy policy for more information.';
+	/// en: 'Tap on the "Delete account" button above, and login if needed. tarus Not has no separate account: your identity is your Pusula account. To remove this device's sync access, sign out or remove it in Pusula > Account > Connected devices. To have your notes and account data deleted from the server, use the deletion request page shown there. If you are using a third party server, there might not be an option to delete your account: you'll need to consult the server's privacy policy for more information.'
+	String get a => 'Tap on the "${_root.profile.quickLinks.deleteAccount}" button above, and login if needed.\ntarus Not has no separate account: your identity is your Pusula account. To remove this device\'s sync access, sign out or remove it in Pusula > Account > Connected devices. To have your notes and account data deleted from the server, use the deletion request page shown there.\nIf you are using a third party server, there might not be an option to delete your account: you\'ll need to consult the server\'s privacy policy for more information.';
 }
 
 // Path: editor.toolbar
@@ -1438,8 +1438,8 @@ class Translations$tarus$yetenek$en {
 	/// en: 'Sync with Pusula'
 	String get esitlemeBaslik => 'Sync with Pusula';
 
-	/// en: 'With a sync token from Pusula, notes stay in sync across your devices and the web.'
-	String get esitleme => 'With a sync token from Pusula, notes stay in sync across your devices and the web.';
+	/// en: 'Sign in with your Pusula account and notes stay in sync across your devices and the web.'
+	String get esitleme => 'Sign in with your Pusula account and notes stay in sync across your devices and the web.';
 
 	/// en: 'Export'
 	String get disaAktarBaslik => 'Export';
@@ -1498,17 +1498,32 @@ class Translations$tarus$giris$en {
 	/// en: 'Sync your notes across devices and the web with your Pusula account.'
 	String get altBaslik => 'Sync your notes across devices and the web with your Pusula account.';
 
-	/// en: 'Connect with Pusula'
-	String get pusulaBaslik => 'Connect with Pusula';
+	/// en: 'Sign in with Pusula'
+	String get pusulaBaslik => 'Sign in with Pusula';
 
-	/// en: 'In Pusula → Settings → Not sync, create a sync token for this device and paste it here.'
-	String get pusulaAciklama => 'In Pusula → Settings → Not sync, create a sync token for this device and paste it here.';
+	/// en: 'Sign in with the email and password of your Pusula account.'
+	String get pusulaAciklama => 'Sign in with the email and password of your Pusula account.';
 
-	/// en: 'Sync token'
-	String get belirtec => 'Sync token';
+	/// en: 'Email'
+	String get eposta => 'Email';
 
-	/// en: 'Connect with Pusula'
-	String get baglan => 'Connect with Pusula';
+	/// en: 'Password'
+	String get parola => 'Password';
+
+	/// en: 'Sign in'
+	String get baglan => 'Sign in';
+
+	/// en: 'Two-step verification'
+	String get ikiAdimBaslik => 'Two-step verification';
+
+	/// en: 'Enter the code from your authenticator app or a recovery code.'
+	String get ikiAdimAciklama => 'Enter the code from your authenticator app or a recovery code.';
+
+	/// en: 'Verification code'
+	String get kod => 'Verification code';
+
+	/// en: 'Verify'
+	String get dogrula => 'Verify';
 
 	/// en: 'Enter the address of your own server to store your notes there.'
 	String get kendiSunucunuzAciklama => 'Enter the address of your own server to store your notes there.';

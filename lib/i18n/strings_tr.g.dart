@@ -600,7 +600,7 @@ class _Translations$login$status$tr extends Translations$login$status$en {
 
 	// Translations
 	@override String get loggedOut => 'Eşitleme kapalı';
-	@override String get tapToLogin => 'Pusula eşitleme belirteciyle bağlanmak için dokunun';
+	@override String get tapToLogin => 'Pusula hesabınızla giriş yapmak için dokunun';
 	@override String hi({required Object u}) => 'Merhaba, ${u}!';
 	@override String get loggedIn => 'Notlarınız eşitleniyor';
 }
@@ -662,7 +662,7 @@ class _Translations$profile$faq$2$tr extends Translations$profile$faq$2$en {
 
 	// Translations
 	@override String get q => 'Hesabımı nasıl silebilirim?';
-	@override String get a => 'Üstte yer alan "${_root.profile.quickLinks.deleteAccount}" butonuna tıklayın, gerekirse giriş yapın.\ntarus Not\'un ayrı bir hesabı yoktur; kimliğiniz Pusula hesabınızdır. Bu cihazın eşitleme erişimini Pusula > Ayarlar > Not eşitleme bölümünden belirteci iptal ederek kaldırabilirsiniz. Sunucudaki notlarınızın ve hesap verilerinizin silinmesi için orada gösterilen silme talebi sayfasını kullanın.\nEğer üçüncü parti bir sunucu kullanıyorsanız hesabınızı silme seçeneği sunulmuyor olabilir: daha fazla bilgi için ilgili sunucunun gizlilik politikasını inceleyin.';
+	@override String get a => 'Üstte yer alan "${_root.profile.quickLinks.deleteAccount}" butonuna tıklayın, gerekirse giriş yapın.\ntarus Not\'un ayrı bir hesabı yoktur; kimliğiniz Pusula hesabınızdır. Bu cihazın eşitleme erişimini çıkış yaparak ya da Pusula > Hesap > Bağlı cihazlar bölümünden kaldırabilirsiniz. Sunucudaki notlarınızın ve hesap verilerinizin silinmesi için orada gösterilen silme talebi sayfasını kullanın.\nEğer üçüncü parti bir sunucu kullanıyorsanız hesabınızı silme seçeneği sunulmuyor olabilir: daha fazla bilgi için ilgili sunucunun gizlilik politikasını inceleyin.';
 }
 
 // Path: editor.toolbar
@@ -859,7 +859,7 @@ class _Translations$tarus$yetenek$tr extends Translations$tarus$yetenek$en {
 	@override String get klasorBaslik => 'Klasörler';
 	@override String get klasor => 'Notları klasörlerde düzenleyin, taşıyın ve yeniden adlandırın; Hızlı Bakış son açtıklarınızı gösterir.';
 	@override String get esitlemeBaslik => 'Pusula ile eşitleme';
-	@override String get esitleme => 'Pusula\'dan alınan eşitleme belirteciyle notlar cihazlarınız ve web arasında eşitlenir.';
+	@override String get esitleme => 'Pusula hesabınızla giriş yapınca notlar cihazlarınız ve web arasında eşitlenir.';
 	@override String get disaAktarBaslik => 'Dışa aktarma';
 	@override String get disaAktar => 'Notları PDF, PNG ya da arşiv (.sba) olarak paylaşın.';
 }
@@ -897,10 +897,15 @@ class _Translations$tarus$giris$tr extends Translations$tarus$giris$en {
 
 	// Translations
 	@override String get altBaslik => 'Notlarınızı Pusula hesabınızla cihazlar ve web arasında eşitleyin.';
-	@override String get pusulaBaslik => 'Pusula ile bağlan';
-	@override String get pusulaAciklama => 'Pusula → Ayarlar → Not eşitleme ekranında bu cihaz için bir eşitleme belirteci oluşturun ve buraya yapıştırın.';
-	@override String get belirtec => 'Eşitleme belirteci';
-	@override String get baglan => 'Pusula ile bağlan';
+	@override String get pusulaBaslik => 'Pusula ile giriş';
+	@override String get pusulaAciklama => 'Pusula hesabınızın e-posta ve parolasıyla giriş yapın.';
+	@override String get eposta => 'E-posta';
+	@override String get parola => 'Parola';
+	@override String get baglan => 'Giriş yap';
+	@override String get ikiAdimBaslik => 'İki adımlı doğrulama';
+	@override String get ikiAdimAciklama => 'Authenticator uygulamasındaki kodu ya da bir kurtarma kodunu girin.';
+	@override String get kod => 'Doğrulama kodu';
+	@override String get dogrula => 'Doğrula';
 	@override String get kendiSunucunuzAciklama => 'Notları kendi sunucunuzda saklamak için adresini girin.';
 }
 

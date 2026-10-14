@@ -1,3 +1,3 @@
-• Not düzenleyicinin menüsü, sayfa listesi, renk seçici ve seçim seçenekleri tarus tasarımına geçti
-• Sayfadaki yakınlaştırma ve kilit düğmeleri, kaydet düğmesi ve salt okunur uyarısı daha okunaklı
-• Ayarlar'da telefon ve tablet düzeni ayrı ikonlarla; Kayıtlar ve Hata bildir ekranları temanızın renklerinde
+• Pusula hesabınızla giriş yapın; eşitleme belirteci kopyalamak artık gerekmiyor
+• Çıkış yapınca bu cihazın eşitleme erişimi kapanıyor
+• Kaybolan cihazı Pusula › Hesap › Bağlı cihazlar'dan kaldırabilirsiniz

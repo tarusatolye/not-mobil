@@ -5,10 +5,12 @@ import 'package:saber/data/prefs.dart';
 
 /// tarus Not sunucusuna Pusula eşitleme belirteciyle bağlanma.
 ///
-/// Not'un ayrı kullanıcı hesabı yoktur: kullanıcı Pusula → Ayarlar →
-/// Not eşitleme ekranında cihaz için bir belirteç (`nes_…`) üretir, burada
-/// yapıştırır. Belirteç Nextcloud istemcisinin parola alanında gider
-/// (HTTP Basic); Not sunucusu onu Pusula'ya doğrulatır. İptal Pusula'dan.
+/// Not'un ayrı kullanıcı hesabı yoktur: «Pusula ile giriş» (`PusulaGiris`)
+/// cihaz için bir belirteç (`nes_…`) alır. 1.2.0 öncesinde kullanıcı onu
+/// Pusula Ayarlar'da üretip yapıştırıyordu; o kurulumlar aynı biçimde
+/// çalışmaya devam eder. Belirteç Nextcloud istemcisinin parola alanında
+/// gider (HTTP Basic); Not sunucusu onu Pusula'ya doğrulatır. İptal:
+/// çıkış ya da Pusula › Hesap › Bağlı cihazlar.
 abstract final class PusulaBelirteci {
   static const onek = 'nes_';
 

@@ -1,0 +1,3 @@
+• Sign in with your Pusula account; copying a sync token is no longer needed
+• Signing out removes this device's sync access
+• Lost devices can be removed in Pusula › Account › Connected devices

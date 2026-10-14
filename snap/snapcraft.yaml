@@ -16,7 +16,7 @@ platforms:
 parts:
   saber:
     source: https://github.com/tarusatolye/not-mobil.git
-    source-tag: '1.1.7'
+    source-tag: '1.2.0'
     source-depth: 1
     plugin: flutter
     build-packages:
