@@ -76,12 +76,19 @@ Debug derlemeleri (`flutter run`) Android'in yerel debug anahtarını kullanır.
 - **Sentry** (`isSentryAvailable` yalnız testte): DSN Saber geliştiricisinin
   projesi; ilk açılışta çökme raporu için onay isteniyordu. Hatalar sistem.tarus.tr'ye.
 
-## Senkronizasyon (Pusula eşitleme belirteci)
+## Senkronizasyon (Pusula ile giriş, 1.2.0)
 Not'un ayrı kullanıcı hesabı yoktur; kimlik Pusula'dır.
 
-1. Pusula → Ayarlar → **Not eşitleme** → "Yeni belirteç" (ör. "Tablet"). Belirteç (`nes_…`) yalnız bir kez gösterilir.
-2. Uygulamada giriş ekranında **tarus Not** bölümüne belirteci yapıştırıp "Pusula ile bağlan".
-3. Cihaz kaybolursa belirteci Pusula'dan iptal edin; cihaz en geç 30 sn içinde eşitleyemez.
+1. Giriş ekranında **Pusula ile giriş**: Pusula e-postası + parolası (iki adımlı doğrulama açıksa
+   kod). Pusula Mobil ile aynı yol (`/auth/giris/`, `X-Client: mobile`); tarayıcı/OAuth yok.
+2. Uygulama bu cihaz için eşitleme belirteci (`nes_…`, adı cihaz modeli) alır ve Pusula oturumunu
+   hemen kapatır; cihazda yalnız belirteç kalır (`lib/data/nextcloud/pusula_giris.dart`).
+3. Çıkış belirteci iptal eder. Cihaz kaybolursa Pusula › Hesap › Güvenlik & Oturum › **Bağlı
+   cihazlar** › Kaldır; cihaz en geç 30 sn içinde eşitleyemez.
+
+1.2.0 öncesinde belirteç Pusula Ayarlar'da elle üretilip yapıştırılıyordu; o kurulumlar çıkışa
+kadar çalışır (belirteç biçimi aynı). Elle belirteç alanı bilerek kaldırıldı: Pusula hesabı olan
+herkes e-posta + parolayla girebiliyor, kendi Nextcloud sunucusu için «Başka sunucu» duruyor.
 
 Belirteç Nextcloud istemcisinin uygulama parolası olarak (`Authorization: Bearer`)
 gider; Not sunucusu (`tarusatolye/not`) onu Pusula'ya doğrulatır. Notlar sunucuda
@@ -143,6 +150,15 @@ derlenir (Visual Studio Build Tools gerekir). Build Tools yoksa yerel deneme iç
 çeviren yerel bir kopya kullanılabilir (2026-10-07 turunda böyle çalıştırıldı; commit edilmez).
 
 ## Sürüm notları
+- **1.2.0** (2026-10-14): «Pusula ile giriş» (kullanıcı kararı 2026-10-14). Belirteç yapıştırma
+  alanı kalktı; giriş kartı Pusula Mobil'deki gibi e-posta + parola, iki adımlı doğrulamada kod
+  (`lib/data/nextcloud/pusula_giris.dart`). Akış: `POST {pusula}/auth/giris/` (`X-Client: mobile`,
+  `X-Tarus-App: not-mobil`, `X-Device-Name`) → JWT ile `POST /not/belirtecler/ {ad: cihaz modeli}`
+  → `nes_` belirteci Not sunucusunda doğrulanıp kaydedilir → `POST /auth/cikis/` ile Pusula
+  oturumu hemen kapanır; cihazda yalnız `nes_` kalır. Çıkış `POST /not/belirtecler/birak/`
+  (Bearer `nes_…`) ile belirteci iptal eder; ağ yoksa Pusula › Hesap › Bağlı cihazlar'dan
+  kaldırılır (Pusula 1.28.0). Elle yapıştırılmış eski belirteçler çıkışa dek çalışır. Pusula
+  adresi `TARUS_PUSULA_API_URL` (varsayılan `https://pusula.tarus.tr`). OAuth/tarayıcı yok.
 - **1.1.7** (2026-10-08): arayüzün 3. aşaması. Düzenleyici alt sayfası (kağıt deseni önizlemeleri
   seçili = vurgu kenarlığı, satır aralığı/çizgi kalınlığı kaydırıcı kartları, «Tüm sayfaları
   temizle» tehlike renginde), sayfa yöneticisi (sayfa başına `TarusKart`, geçerli sayfa seçili,

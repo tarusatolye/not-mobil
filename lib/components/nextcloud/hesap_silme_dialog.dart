@@ -60,11 +60,12 @@ class HesapSilmeDialog extends StatelessWidget {
           ),
           baslik('1. Bu cihazın erişimini kaldırın'),
           const Text(
-            'Pusula › Ayarlar › Not eşitleme bölümünde bu cihazın '
-            'belirtecini iptal edin. Cihaz en geç 30 saniye içinde '
+            'Profil ekranından çıkış yapınca bu cihazın erişimi kapanır. '
+            'Cihaz elinizde değilse Pusula › Hesap › Bağlı cihazlar '
+            'bölümünden kaldırın; cihaz en geç 30 saniye içinde '
             'eşitleyemez olur.',
           ),
-          baglanti("Pusula Ayarlar'ı aç", TarusBaglantilar.pusulaAyarlar),
+          baglanti("Pusula Hesap'ı aç", TarusBaglantilar.pusulaHesabim),
           baslik('2. Bu cihazdaki verileri silin'),
           const Text(
             'Profil ekranından çıkış yapın, ardından uygulamayı kaldırın. '

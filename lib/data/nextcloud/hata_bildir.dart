@@ -9,8 +9,8 @@ import 'package:saber/data/version.dart';
 
 /// tarus Hata bildir (web'deki "Hata bildir"in mobil karşılığı).
 ///
-/// not-mobil'de Pusula oturumu yoktur (Pusula belirteci Not uygulamalarına
-/// inmez). Kayıt eşitleme belirteciyle Not sunucusuna (`POST /mobil/hata-bildir`)
+/// not-mobil'de Pusula oturumu yoktur: «Pusula ile giriş» oturum anahtarını
+/// yalnız eşitleme belirtecini almak için kullanır ve hemen kapatır. Kayıt eşitleme belirteciyle Not sunucusuna (`POST /mobil/hata-bildir`)
 /// gider; Not sunucusu onu Pusula'ya (`/not/hata-bildir/`) iletir, oradan
 /// sistem.tarus.tr Hata Panosu'na `not.tarus.tr` altında düşer.
 abstract final class HataBildir {

@@ -10,6 +10,14 @@ const ilkYayin = '2 Ekim 2026';
 
 const surumNotlari = <SurumNotu>[
   SurumNotu(
+    '1.2.0',
+    '14 Ekim 2026',
+    'Not Mobil’e artık Pusula hesabınızın e-posta ve parolasıyla giriş '
+        'yapılıyor; belirteç kopyalayıp yapıştırmak gerekmiyor. Çıkış yapınca '
+        'bu cihazın eşitleme erişimi kapanıyor. Kaybolan bir cihazı Pusula › '
+        'Hesap › Bağlı cihazlar’dan kaldırabilirsiniz.',
+  ),
+  SurumNotu(
     '1.1.7',
     '8 Ekim 2026',
     'Not düzenleyicinin menüsü, sayfa listesi, renk seçici ve sayfadaki '

@@ -38,11 +38,22 @@ abstract final class TarusBaglantilar {
     defaultValue: 'yazilim@tarus.tr',
   );
 
-  /// Pusula › Ayarlar (Not eşitleme belirteçleri burada iptal edilir).
-  static final Uri pusulaAyarlar = Uri.parse(
+  /// Pusula sunucusu (API kökü): «Pusula ile giriş» buraya `/auth/giris/`
+  /// ile girer ve cihaz belirtecini `/not/belirtecler/`'den alır. Pusula
+  /// Mobil ile aynı adres (pusula-mobil `CONFIG.DEFAULT_API_URL`).
+  static final Uri pusulaApi = Uri.parse(
     const String.fromEnvironment(
-      'TARUS_PUSULA_AYARLAR_URL',
-      defaultValue: 'https://pusula.tarus.tr/ayarlar',
+      'TARUS_PUSULA_API_URL',
+      defaultValue: 'https://pusula.tarus.tr',
+    ),
+  );
+
+  /// Pusula › Hesap (Güvenlik & Oturum › Bağlı cihazlar: cihazın Not
+  /// erişimi buradan kaldırılır).
+  static final Uri pusulaHesabim = Uri.parse(
+    const String.fromEnvironment(
+      'TARUS_PUSULA_HESABIM_URL',
+      defaultValue: 'https://pusula.tarus.tr/hesap',
     ),
   );
 

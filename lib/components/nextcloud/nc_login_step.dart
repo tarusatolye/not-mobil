@@ -9,7 +9,7 @@ import 'package:regexed_validator/regexed_validator.dart';
 import 'package:saber/components/settings/app_info.dart';
 import 'package:saber/data/nextcloud/login_flow.dart';
 import 'package:saber/data/nextcloud/nextcloud_client_extension.dart';
-import 'package:saber/data/nextcloud/pusula_belirteci.dart';
+import 'package:saber/data/nextcloud/pusula_giris.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/tarus/tarus_bilesenler.dart';
@@ -140,109 +140,215 @@ class const _Header() extends StatelessWidget {
   }
 }
 
+/// «Pusula ile giriş» (2026-10-14): Pusula Mobil'deki gibi e-posta + parola,
+/// gerekirse iki adımlı doğrulama kodu. Bu cihazın eşitleme belirteci
+/// arka planda alınır (bkz. [PusulaGiris]); belirteç yapıştırma alanı yok.
 class const _LoginWithPusula({required final VoidCallback onBaglandi})
     extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final belirtecController = useTextEditingController();
+    final epostaController = useTextEditingController();
+    final parolaController = useTextEditingController();
+    final kodController = useTextEditingController();
+    final parolaGizli = useState(true);
+    final challenge = useState<String?>(null);
     final bekliyor = useState(false);
     final hata = useState<String?>(null);
-    final gecerli = useListenableSelector(
-      belirtecController,
-      () => PusulaBelirteci.gecerliMi(belirtecController.text),
+    final alanlar = useMemoized(
+      () => Listenable.merge([
+        epostaController,
+        parolaController,
+        kodController,
+        challenge,
+      ]),
+    );
+    final girilebilir = useListenableSelector(
+      alanlar,
+      () => challenge.value == null
+          ? epostaController.text.trim().isNotEmpty &&
+                parolaController.text.isNotEmpty
+          : kodController.text.trim().length >= 6,
     );
 
-    Future<void> baglan() async {
+    Future<void> girisYap() async {
       bekliyor.value = true;
       hata.value = null;
-      final sunucu = NextcloudClientExtension.defaultNextcloudUri;
+      String? belirtec;
       try {
-        final kullaniciAdi = await PusulaBelirteci.dogrula(
-          sunucu: sunucu,
-          belirtec: belirtecController.text,
-        );
-        PusulaBelirteci.kaydet(
-          sunucu: sunucu,
-          kullaniciAdi: kullaniciAdi,
-          belirtec: belirtecController.text,
-        );
-        onBaglandi();
+        final sonuc = challenge.value == null
+            ? await PusulaGiris.girisYap(
+                eposta: epostaController.text,
+                parola: parolaController.text,
+              )
+            : await PusulaGiris.ikiAdimiTamamla(
+                challenge: challenge.value!,
+                kod: kodController.text,
+              );
+        switch (sonuc) {
+          case IkiAdimGerekli(challenge: final c):
+            kodController.clear();
+            challenge.value = c;
+            return;
+          case BelirtecAlindi(belirtec: final b):
+            belirtec = b;
+            await PusulaGiris.baglan(belirtec: b);
+            parolaController.clear();
+            onBaglandi();
+        }
+      } on PusulaGirisHatasi catch (e) {
+        hata.value = e.mesaj;
       } on DynamiteStatusCodeException catch (e) {
-        hata.value = e.statusCode == 401
-            ? 'Belirteç geçersiz ya da iptal edilmiş. Pusula → Ayarlar → Not eşitleme ekranından yeni bir belirteç oluşturun.'
-            : 'Sunucu yanıt vermedi (${e.statusCode}). Birazdan yeniden deneyin.';
+        hata.value =
+            'Not sunucusu eşitlemeyi kabul etmedi (${e.statusCode}). '
+            'Birazdan yeniden deneyin.';
       } catch (e) {
         hata.value = 'Bağlanılamadı: $e';
       } finally {
+        // Not sunucusu kabul etmediyse alınan belirteç boşta kalmasın.
+        if (belirtec != null && hata.value != null) {
+          unawaited(PusulaGiris.birak(belirtec));
+        }
         bekliyor.value = false;
       }
     }
 
     final r = TarusRenkler.of(context);
+    final ikiAdim = challenge.value != null;
     return TarusKart(
       padding: const .all(TarusOlcu.kart + 2),
-      child: Column(
-        crossAxisAlignment: .stretch,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 34,
-                height: 34,
-                decoration: BoxDecoration(
-                  color: r.accent.withValues(alpha: TarusOlcu.seciliZeminAlfa),
-                  borderRadius: const .all(.circular(TarusOlcu.rMd)),
+      child: AutofillGroup(
+        child: Column(
+          crossAxisAlignment: .stretch,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 34,
+                  height: 34,
+                  decoration: BoxDecoration(
+                    color: r.accent.withValues(
+                      alpha: TarusOlcu.seciliZeminAlfa,
+                    ),
+                    borderRadius: const .all(.circular(TarusOlcu.rMd)),
+                  ),
+                  child: Icon(
+                    ikiAdim ? TarusIkon.guvenlik : TarusIkon.esitle,
+                    size: 17,
+                    color: r.accent,
+                  ),
                 ),
-                child: Icon(TarusIkon.esitle, size: 17, color: r.accent),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    ikiAdim
+                        ? t.tarus.giris.ikiAdimBaslik
+                        : t.tarus.giris.pusulaBaslik,
+                    style: TextStyle(
+                      fontSize: TarusOlcu.yaziBolumBasligi,
+                      fontWeight: FontWeight.w700,
+                      color: r.text,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              ikiAdim
+                  ? t.tarus.giris.ikiAdimAciklama
+                  : t.tarus.giris.pusulaAciklama,
+              style: TextStyle(fontSize: 13, color: r.muted2, height: 1.45),
+            ),
+            const SizedBox(height: 14),
+            if (!ikiAdim) ...[
+              TextField(
+                controller: epostaController,
+                autocorrect: false,
+                enableSuggestions: false,
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                autofillHints: const [
+                  AutofillHints.email,
+                  AutofillHints.username,
+                ],
+                decoration: InputDecoration(
+                  labelText: t.tarus.giris.eposta,
+                  prefixIcon: const Icon(TarusIkon.kullanici, size: 18),
+                ),
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  t.tarus.giris.pusulaBaslik,
-                  style: TextStyle(
-                    fontSize: TarusOlcu.yaziBolumBasligi,
-                    fontWeight: FontWeight.w700,
-                    color: r.text,
+              const SizedBox(height: 10),
+              TextField(
+                controller: parolaController,
+                obscureText: parolaGizli.value,
+                autocorrect: false,
+                enableSuggestions: false,
+                textInputAction: TextInputAction.done,
+                autofillHints: const [AutofillHints.password],
+                onSubmitted: (_) {
+                  if (girilebilir && !bekliyor.value) girisYap();
+                },
+                decoration: InputDecoration(
+                  labelText: t.tarus.giris.parola,
+                  prefixIcon: const Icon(TarusIkon.kilit, size: 18),
+                  errorText: hata.value,
+                  errorMaxLines: 4,
+                  suffixIcon: IconButton(
+                    onPressed: () => parolaGizli.value = !parolaGizli.value,
+                    icon: Icon(
+                      parolaGizli.value ? TarusIkon.goster : TarusIkon.gizle,
+                      size: 18,
+                    ),
                   ),
                 ),
               ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Text(
-            t.tarus.giris.pusulaAciklama,
-            style: TextStyle(fontSize: 13, color: r.muted2, height: 1.45),
-          ),
-          const SizedBox(height: 14),
-          TextField(
-            autocorrect: false,
-            enableSuggestions: false,
-            controller: belirtecController,
-            decoration: InputDecoration(
-              labelText: t.tarus.giris.belirtec,
-              hintText: '${PusulaBelirteci.onek}…',
-              prefixIcon: const Icon(TarusIkon.kilit, size: 18),
-              errorText: hata.value,
-              errorMaxLines: 4,
-            ),
-          ),
-          const SizedBox(height: 12),
-          FilledButton(
-            onPressed: gecerli && !bekliyor.value ? baglan : null,
-            style: FilledButton.styleFrom(
-              minimumSize: const Size.fromHeight(TarusOlcu.birincilDugme),
-            ),
-            child: bekliyor.value
-                ? const SizedBox.square(
-                    dimension: 18,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: Colors.white,
+            ] else
+              TextField(
+                controller: kodController,
+                autofocus: true,
+                autocorrect: false,
+                enableSuggestions: false,
+                keyboardType: TextInputType.visiblePassword,
+                autofillHints: const [AutofillHints.oneTimeCode],
+                onSubmitted: (_) {
+                  if (girilebilir && !bekliyor.value) girisYap();
+                },
+                decoration: InputDecoration(
+                  labelText: t.tarus.giris.kod,
+                  prefixIcon: const Icon(TarusIkon.guvenlik, size: 18),
+                  errorText: hata.value,
+                  errorMaxLines: 4,
+                ),
+              ),
+            const SizedBox(height: 12),
+            FilledButton(
+              onPressed: girilebilir && !bekliyor.value ? girisYap : null,
+              style: FilledButton.styleFrom(
+                minimumSize: const Size.fromHeight(TarusOlcu.birincilDugme),
+              ),
+              child: bekliyor.value
+                  ? const SizedBox.square(
+                      dimension: 18,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    )
+                  : Text(
+                      ikiAdim ? t.tarus.giris.dogrula : t.tarus.giris.baglan,
                     ),
-                  )
-                : Text(t.tarus.giris.baglan),
-          ),
-        ],
+            ),
+            if (ikiAdim)
+              TextButton(
+                onPressed: bekliyor.value
+                    ? null
+                    : () {
+                        challenge.value = null;
+                        hata.value = null;
+                      },
+                child: Text(t.common.cancel),
+              ),
+          ],
+        ),
       ),
     );
   }

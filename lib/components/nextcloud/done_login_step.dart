@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:saber/components/misc/faq.dart';
 import 'package:saber/components/nextcloud/hesap_silme_dialog.dart';
 import 'package:saber/data/extensions/string_extensions.dart';
 import 'package:saber/data/nextcloud/nextcloud_client_extension.dart';
+import 'package:saber/data/nextcloud/pusula_giris.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/quota.dart';
 import 'package:saber/i18n/strings.g.dart';
@@ -22,6 +25,12 @@ class DoneLoginStep extends StatelessWidget {
   static final log = Logger('DoneLoginStep');
 
   void _logout() {
+    // Pusula eşitleme belirteci (girişle alınmış ya da eskiden yapıştırılmış)
+    // Pusula'da iptal edilir; ağ yoksa Pusula › Hesap › Bağlı cihazlar'dan
+    // kaldırılabilir. Çıkış bunu beklemez.
+    if (PusulaGiris.pusulaBelirteciyleMi) {
+      unawaited(PusulaGiris.birak(stows.ncPassword.value));
+    }
     stows.url.value = '';
     stows.username.value = '';
     stows.ncPassword.value = '';

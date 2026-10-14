@@ -193,7 +193,7 @@ login:
   notYou(rich): Not you? ${undoLogin(Choose another account)}.
   status:
     loggedOut: Sync is off
-    tapToLogin: Tap to connect with a Pusula sync token
+    tapToLogin: Tap to sign in with your Pusula account
     hi: Hi, $u!
     loggedIn: Your notes are syncing
   ncLoginStep:
@@ -225,7 +225,7 @@ profile:
   - q: How can I delete my account?
     a: |-
       Tap on the "@:profile.quickLinks.deleteAccount" button above, and login if needed.
-      tarus Not has no separate account: your identity is your Pusula account. To remove this device's sync access, revoke its token in Pusula > Settings > Not sync. To have your notes and account data deleted from the server, use the deletion request page shown there.
+      tarus Not has no separate account: your identity is your Pusula account. To remove this device's sync access, sign out or remove it in Pusula > Account > Connected devices. To have your notes and account data deleted from the server, use the deletion request page shown there.
       If you are using a third party server, there might not be an option to delete your account: you'll need to consult the server's privacy policy for more information.
 appInfo:
   licenseNotice: |-
@@ -377,7 +377,7 @@ tarus:
     klasorBaslik: Folders
     klasor: Organize, move and rename notes in folders; Overview shows what you opened last.
     esitlemeBaslik: Sync with Pusula
-    esitleme: With a sync token from Pusula, notes stay in sync across your devices and the web.
+    esitleme: Sign in with your Pusula account and notes stay in sync across your devices and the web.
     disaAktarBaslik: Export
     disaAktar: Share notes as PDF, PNG or an archive (.sba).
   bos:
@@ -391,10 +391,15 @@ tarus:
     destek: Support
   giris:
     altBaslik: Sync your notes across devices and the web with your Pusula account.
-    pusulaBaslik: Connect with Pusula
-    pusulaAciklama: In Pusula → Settings → Not sync, create a sync token for this device and paste it here.
-    belirtec: Sync token
-    baglan: Connect with Pusula
+    pusulaBaslik: Sign in with Pusula
+    pusulaAciklama: Sign in with the email and password of your Pusula account.
+    eposta: Email
+    parola: Password
+    baglan: Sign in
+    ikiAdimBaslik: Two-step verification
+    ikiAdimAciklama: Enter the code from your authenticator app or a recovery code.
+    kod: Verification code
+    dogrula: Verify
     kendiSunucunuzAciklama: Enter the address of your own server to store your notes there.
   esitleme:
     gecici: The server is not responding right now. Your notes are safe on this device; syncing will retry automatically.
