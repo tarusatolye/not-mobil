@@ -602,7 +602,7 @@ class _Translations$login$status$tr extends Translations$login$status$en {
 	@override String get loggedOut => 'Eşitleme kapalı';
 	@override String get tapToLogin => 'Pusula hesabınızla giriş yapmak için dokunun';
 	@override String hi({required Object u}) => 'Merhaba, ${u}!';
-	@override String get loggedIn => 'Notlarınız eşitleniyor';
+	@override String get loggedIn => 'not.tarus.tr ile eşitleniyor';
 }
 
 // Path: login.ncLoginStep
@@ -896,7 +896,7 @@ class _Translations$tarus$giris$tr extends Translations$tarus$giris$en {
 	final TranslationsTr _root; // ignore: unused_field
 
 	// Translations
-	@override String get altBaslik => 'Notlarınızı Pusula hesabınızla cihazlar ve web arasında eşitleyin.';
+	@override String get altBaslik => 'Notlarınızı Pusula hesabınızla tüm cihazlarınız ve not.tarus.tr arasında eşitleyin.';
 	@override String get pusulaBaslik => 'Pusula ile giriş';
 	@override String get pusulaAciklama => 'Pusula hesabınızın e-posta ve parolasıyla giriş yapın.';
 	@override String get eposta => 'E-posta';

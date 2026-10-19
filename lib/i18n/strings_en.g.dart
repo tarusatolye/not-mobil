@@ -977,8 +977,8 @@ class Translations$login$status$en {
 	/// en: 'Hi, $u!'
 	String hi({required Object u}) => 'Hi, ${u}!';
 
-	/// en: 'Your notes are syncing'
-	String get loggedIn => 'Your notes are syncing';
+	/// en: 'Syncing with not.tarus.tr'
+	String get loggedIn => 'Syncing with not.tarus.tr';
 }
 
 // Path: login.ncLoginStep
@@ -1495,8 +1495,8 @@ class Translations$tarus$giris$en {
 
 	// Translations
 
-	/// en: 'Sync your notes across devices and the web with your Pusula account.'
-	String get altBaslik => 'Sync your notes across devices and the web with your Pusula account.';
+	/// en: 'Sync your notes across all your devices and not.tarus.tr with your Pusula account.'
+	String get altBaslik => 'Sync your notes across all your devices and not.tarus.tr with your Pusula account.';
 
 	/// en: 'Sign in with Pusula'
 	String get pusulaBaslik => 'Sign in with Pusula';

@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 import 'package:stow_codecs/stow_codecs.dart';
 
 class const HomeLayoutButton({super.key}) extends HookWidget {
@@ -38,10 +41,9 @@ class _HomeLayoutDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      alignment: .topEnd,
-      insetPadding: const .all(8),
+    return TarusDialog(
       title: Text(t.home.layout.layout),
+      genislik: 340,
       content: Column(
         mainAxisSize: .min,
         children: [
@@ -64,18 +66,51 @@ class _HomeLayoutDialogOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: () {
-        context.pop(homeLayout);
-      },
-      leading: homeLayout.icon,
-      title: Text(switch (homeLayout) {
-        .masonryGrid => t.home.layout.masonryGrid,
-        .simpleGrid => t.home.layout.simpleGrid,
-      }),
-      trailing: selected ? const Icon(TarusIkon.tamam) : null,
-      selected: selected,
-      selectedTileColor: Colors.transparent,
+    final r = TarusRenkler.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      child: Material(
+        color: selected
+            ? r.accent.withValues(alpha: TarusOlcu.seciliZeminAlfa)
+            : Colors.transparent,
+        borderRadius: BorderRadius.circular(TarusOlcu.rMd),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(TarusOlcu.rMd),
+          onTap: () {
+            context.pop(homeLayout);
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
+            child: Row(
+              children: [
+                IconTheme(
+                  data: IconThemeData(
+                    color: selected ? r.accent : r.muted2,
+                    size: 20,
+                  ),
+                  child: homeLayout.icon,
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    switch (homeLayout) {
+                      .masonryGrid => t.home.layout.masonryGrid,
+                      .simpleGrid => t.home.layout.simpleGrid,
+                    },
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+                      color: selected ? r.accent : r.text,
+                    ),
+                  ),
+                ),
+                if (selected)
+                  Icon(TarusIkon.tamam, size: 18, color: r.accent),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

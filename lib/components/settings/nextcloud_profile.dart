@@ -153,11 +153,15 @@ class _QuotaSummary extends StatelessWidget {
       mainAxisSize: .min,
       spacing: 4,
       children: [
-        LinearProgressIndicator(
-          semanticsLabel: 'Storage usage',
-          value: quota?.progressIndicatorValue,
-          minHeight: 6,
-          borderRadius: const .all(.circular(3)),
+        ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(3)),
+          child: LinearProgressIndicator(
+            semanticsLabel: 'Storage usage',
+            value: quota?.progressIndicatorValue,
+            minHeight: 6,
+            backgroundColor: r.inputBg,
+            valueColor: AlwaysStoppedAnimation<Color>(r.accent),
+          ),
         ),
         Text(
           quota?.describeConcise() ?? Quota.describeConcisePlaceholder(),

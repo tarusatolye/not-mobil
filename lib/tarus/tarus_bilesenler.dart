@@ -307,7 +307,9 @@ class TarusIkonDugmesi extends StatelessWidget {
   }
 }
 
-/// Ana sekmelerin üst başlığı (sliver): 22 px / 700 sayfa başlığı ve
+/// Ana sekmelerin üst başlığı (sliver):
+/// Sol başta ekosistem marka rozeti (36x36 squircle Not işareti),
+/// yanında iki satırlı başlık («tarus Not» + sayfa adı),
 /// sağda 40 px ikon düğmeleri. Kaydırınca sabit kalır.
 class TarusSayfaUstu extends StatelessWidget {
   const new({
@@ -316,44 +318,82 @@ class TarusSayfaUstu extends StatelessWidget {
     this.altBaslik,
     this.eylemler = const [],
     this.alt,
+    this.rozet,
+    this.rozetGoster = true,
   });
 
   final String baslik;
   final String? altBaslik;
   final List<Widget> eylemler;
   final PreferredSizeWidget? alt;
+  final Widget? rozet;
+  final bool rozetGoster;
 
   @override
   Widget build(BuildContext context) {
     final r = TarusRenkler.of(context);
     return SliverAppBar(
       pinned: true,
-      toolbarHeight: 60,
+      toolbarHeight: 62,
       automaticallyImplyLeading: false,
       backgroundColor: r.bg,
+      surfaceTintColor: Colors.transparent,
       shape: const Border(),
       titleSpacing: TarusOlcu.sayfaYatay + 4,
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      title: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Semantics(
-            header: true,
-            child: Text(
-              baslik,
-              style: TextStyle(
-                fontSize: TarusOlcu.yaziSayfaBasligi,
-                fontWeight: FontWeight.w700,
-                color: r.text,
-                height: 1.2,
-              ),
+          if (rozetGoster) ...[
+            rozet ??
+                Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    color: r.accent.withValues(alpha: TarusOlcu.seciliZeminAlfa),
+                    borderRadius: BorderRadius.circular(TarusOlcu.rMd),
+                    border: Border.all(
+                      color: r.accent.withValues(alpha: 0.18),
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(7),
+                  child: const TarusNotIsareti(boyut: 20),
+                ),
+            const SizedBox(width: 10),
+          ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  altBaslik != null ? 'tarus Not · $altBaslik' : 'tarus Not',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                    color: r.muted2,
+                    height: 1.1,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Semantics(
+                  header: true,
+                  child: Text(
+                    baslik,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w700,
+                      color: r.text,
+                      height: 1.2,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          if (altBaslik != null)
-            Text(
-              altBaslik!,
-              style: TextStyle(fontSize: 12, color: r.muted2, height: 1.3),
-            ),
         ],
       ),
       actions: [

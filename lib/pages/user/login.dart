@@ -6,6 +6,7 @@ import 'package:saber/data/prefs.dart';
 import 'package:saber/data/tarus_baglantilar.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 
 class NcLoginPage extends StatefulWidget {
   const new({
@@ -86,27 +87,38 @@ class _NcLoginPageState extends State<NcLoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final r = TarusRenkler.of(context);
     return Scaffold(
+      backgroundColor: r.bg,
       appBar: AppBar(
         toolbarHeight: kToolbarHeight,
-        title: Text(switch (step) {
-          .waitingForPrefs => '',
-          .done => t.profile.title,
-          _ => t.login.title,
-        }),
-        leading: widget.forceAppBarLeading
-            ? IconButton(
-                icon: const Icon(TarusIkon.geri),
-                onPressed: () => Navigator.of(context).pop(),
+        elevation: 0,
+        backgroundColor: r.bg,
+        surfaceTintColor: Colors.transparent,
+        title: Text(
+          switch (step) {
+            .waitingForPrefs => '',
+            .done => t.profile.title,
+            _ => t.login.title,
+          },
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+            color: r.text,
+          ),
+        ),
+        leading: widget.forceAppBarLeading || Navigator.of(context).canPop()
+            ? Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: IconButton(
+                  icon: Icon(TarusIkon.geri, color: r.text),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
               )
             : null,
-        bottom: PreferredSize(
-          preferredSize: const .fromHeight(4),
-          child: LinearProgressIndicator(value: step.progress, minHeight: 4),
-        ),
       ),
       body: switch (step) {
-        .waitingForPrefs => const Center(child: CircularProgressIndicator()),
+        .waitingForPrefs => Center(child: CircularProgressIndicator(color: r.accent)),
         .nc => NcLoginStep(recheckCurrentStep: recheckCurrentStep),
         .done => DoneLoginStep(recheckCurrentStep: recheckCurrentStep),
       },

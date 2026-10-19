@@ -65,6 +65,14 @@ abstract final class TarusBaglantilar {
     ),
   );
 
+  /// tarus Not'un web sürümü (not.tarus.tr).
+  static final Uri notWeb = Uri.parse(
+    const String.fromEnvironment(
+      'TARUS_NOT_WEB_URL',
+      defaultValue: 'https://not.tarus.tr',
+    ),
+  );
+
   /// tarus Not'un kaynak kodu (GPL-3.0 §6: ikili dağıtımla birlikte kaynak).
   /// Depo herkese açık olmalı ya da bu adres herkese açık bir aynaya/kaynak
   /// arşivine çevrilmeli (TARUS_NOT.md → Lisans).

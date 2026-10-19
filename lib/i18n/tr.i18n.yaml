@@ -195,7 +195,7 @@ login:
     loggedOut: Eşitleme kapalı
     tapToLogin: Pusula hesabınızla giriş yapmak için dokunun
     hi: Merhaba, $u!
-    loggedIn: Notlarınız eşitleniyor
+    loggedIn: not.tarus.tr ile eşitleniyor
   ncLoginStep:
     whereToStoreData: "Verilerinizi nerede saklamak istediğinizi seçin:"
     saberNcServer: tarus Not sunucusu
@@ -391,7 +391,7 @@ tarus:
     tema: Tema
     destek: Destek
   giris:
-    altBaslik: Notlarınızı Pusula hesabınızla cihazlar ve web arasında eşitleyin.
+    altBaslik: Notlarınızı Pusula hesabınızla tüm cihazlarınız ve not.tarus.tr arasında eşitleyin.
     pusulaBaslik: Pusula ile giriş
     pusulaAciklama: Pusula hesabınızın e-posta ve parolasıyla giriş yapın.
     eposta: E-posta

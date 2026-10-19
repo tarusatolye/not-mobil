@@ -195,7 +195,7 @@ login:
     loggedOut: Sync is off
     tapToLogin: Tap to sign in with your Pusula account
     hi: Hi, $u!
-    loggedIn: Your notes are syncing
+    loggedIn: Syncing with not.tarus.tr
   ncLoginStep:
     whereToStoreData: "Choose where you want to store your data:"
     saberNcServer: tarus Not server
@@ -390,7 +390,7 @@ tarus:
     tema: Theme
     destek: Support
   giris:
-    altBaslik: Sync your notes across devices and the web with your Pusula account.
+    altBaslik: Sync your notes across all your devices and not.tarus.tr with your Pusula account.
     pusulaBaslik: Sign in with Pusula
     pusulaAciklama: Sign in with the email and password of your Pusula account.
     eposta: Email

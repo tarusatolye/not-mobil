@@ -2,32 +2,30 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'package:saber/components/misc/faq.dart';
 import 'package:saber/components/nextcloud/hesap_silme_dialog.dart';
-import 'package:saber/data/extensions/string_extensions.dart';
-import 'package:saber/data/nextcloud/nextcloud_client_extension.dart';
+import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/data/nextcloud/pusula_giris.dart';
+import 'package:saber/data/nextcloud/saber_syncer.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/quota.dart';
+import 'package:saber/data/tarus_baglantilar.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/tarus/tarus_bilesenler.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_olcu.dart';
 import 'package:saber/tarus/tarus_renkler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// tarus Not ekosistem kullanıcı profili ve eşitleme durumu ekranı.
 class DoneLoginStep extends StatelessWidget {
   const new({super.key, required this.recheckCurrentStep});
 
   final void Function() recheckCurrentStep;
 
-  static const width = 400.0;
-
+  static const width = 440.0;
   static final log = Logger('DoneLoginStep');
 
   void _logout() {
-    // Pusula eşitleme belirteci (girişle alınmış ya da eskiden yapıştırılmış)
-    // Pusula'da iptal edilir; ağ yoksa Pusula › Hesap › Bağlı cihazlar'dan
-    // kaldırılabilir. Çıkış bunu beklemez.
     if (PusulaGiris.pusulaBelirteciyleMi) {
       unawaited(PusulaGiris.birak(stows.ncPassword.value));
     }
@@ -39,92 +37,239 @@ class DoneLoginStep extends StatelessWidget {
     recheckCurrentStep();
   }
 
+  void _confirmLogout(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (context) => TarusDialog(
+        title: Text(t.profile.logout),
+        content: const Text(
+          'Pusula oturumunuz bu cihazda kapatılacaktır. Notlarınız cihazda '
+          've not.tarus.tr sunucusunda saklanmaya devam eder; tekrar giriş '
+          'yapana kadar eşitleme duraklatılır.',
+        ),
+        actions: [
+          TarusDialogDugmesi(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(t.common.cancel),
+          ),
+          TarusDialogDugmesi(
+            isDestructiveAction: true,
+            onPressed: () {
+              Navigator.of(context).pop();
+              _logout();
+            },
+            child: Text(t.profile.logout),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _resyncAll() async {
+    stows.fileSyncResyncEverythingDate.value = DateTime.now();
+    final allFiles = await FileManager.getAllFiles(
+      includeExtensions: true,
+      includeAssets: true,
+    );
+    for (final file in allFiles) {
+      syncer.uploader.enqueueRel(file);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final textTheme = TextTheme.of(context);
     final screenWidth = MediaQuery.sizeOf(context).width;
     final quota = stows.lastStorageQuota.value;
-    final serverName =
-        stows.url.value.ifNotEmpty ?? t.login.ncLoginStep.saberNcServer;
-    late final serverUri = stows.url.value.isEmpty
-        ? NextcloudClientExtension.defaultNextcloudUri
-        : Uri.parse(stows.url.value);
+    final r = TarusRenkler.of(context);
+    final pfp = stows.pfp.value;
+
     return ListView(
-      padding: .symmetric(
-        horizontal: screenWidth > width ? (screenWidth - width) / 2 : 16,
-        vertical: 16,
+      padding: EdgeInsets.symmetric(
+        horizontal: screenWidth > width ? (screenWidth - width) / 2 : TarusOlcu.sayfaYatay + 4,
+        vertical: 20,
       ),
       children: [
-        const SizedBox(height: 16),
-        Row(
-          children: [
-            if (stows.pfp.value == null)
-              if (stows.url.value.isEmpty)
-                const TarusNotIsareti(boyut: 36)
-              else
-                const Icon(TarusIkon.kullanici, size: 32)
-            else
-              Image.memory(stows.pfp.value!, width: 32, height: 32),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Text(
-                t.login.status.hi(u: stows.username.value),
-                style: textTheme.headlineSmall,
+        // 1. Profil Kartı
+        TarusKart(
+          padding: const EdgeInsets.all(TarusOlcu.kart + 2),
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(TarusOlcu.rLg),
+                child: pfp != null
+                    ? Image.memory(pfp, width: 52, height: 52, fit: BoxFit.cover)
+                    : Container(
+                        width: 52,
+                        height: 52,
+                        decoration: BoxDecoration(
+                          color: r.accent.withValues(alpha: TarusOlcu.seciliZeminAlfa),
+                          borderRadius: BorderRadius.circular(TarusOlcu.rLg),
+                        ),
+                        child: Icon(TarusIkon.kullanici, color: r.accent, size: 26),
+                      ),
               ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 2),
-        Text(quota?.describe() ?? Quota.describePlaceholder()),
-        const SizedBox(height: 2),
-        const SizedBox(height: 4),
-        LinearProgressIndicator(
-          value: quota?.progressIndicatorValue,
-          minHeight: 8,
-          borderRadius: const .all(.circular(4)),
-        ),
-        const SizedBox(height: 12),
-        OutlinedButton.icon(
-          onPressed: _logout,
-          icon: const Icon(TarusIkon.cikis, size: 18),
-          label: Text(t.profile.logout),
-        ),
-        const SizedBox(height: 32),
-        Text(t.profile.connectedTo, style: const TextStyle(height: 0.8)),
-        Text(serverName, style: textTheme.headlineSmall),
-        const SizedBox(height: 4),
-        Row(
-          children: [
-            Flexible(
-              fit: FlexFit.tight,
-              child: OutlinedButton(
-                onPressed: () {
-                  log.info('Opening URL: $serverUri');
-                  launchUrl(serverUri);
-                },
-                child: Text(t.profile.quickLinks.serverHomepage),
-              ),
-            ),
-            const SizedBox(width: 8),
-            Flexible(
-              fit: FlexFit.tight,
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: TarusRenkler.of(context).danger,
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      stows.username.value,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: r.text,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      'Pusula Hesabı',
+                      style: TextStyle(fontSize: 12, color: r.muted2),
+                    ),
+                    const SizedBox(height: 6),
+                    Row(
+                      children: [
+                        Container(
+                          width: 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: r.success,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          'not.tarus.tr ile senkronize',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            color: r.success,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                // tarus: Nextcloud'un hesap silme sayfası yerine tarus'taki
-                // silme yolları (Pusula belirteci, cihaz, sunucu verisi).
-                onPressed: () => HesapSilmeDialog.goster(context),
-                child: Text(t.profile.quickLinks.deleteAccount),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-        const SizedBox(height: 32),
-        Text(t.profile.faqTitle, style: textTheme.headlineSmall),
-        FaqListView(
-          shrinkWrap: true,
-          items: [for (final item in t.profile.faq) FaqItem(item.q, item.a)],
+
+        const SizedBox(height: 12),
+
+        // 2. Depolama & Eşitleme Kartı
+        TarusKart(
+          padding: const EdgeInsets.all(TarusOlcu.kart + 2),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      color: r.accent.withValues(alpha: TarusOlcu.seciliZeminAlfa),
+                      borderRadius: BorderRadius.circular(TarusOlcu.rSm),
+                    ),
+                    child: Icon(TarusIkon.buluttaYukle, size: 16, color: r.accent),
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    'Depolama & Eşitleme',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: r.text,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Text(
+                quota?.describe() ?? Quota.describePlaceholder(),
+                style: TextStyle(fontSize: 13, color: r.muted2),
+              ),
+              const SizedBox(height: 8),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: LinearProgressIndicator(
+                  value: quota?.progressIndicatorValue,
+                  minHeight: 7,
+                  backgroundColor: r.inputBg,
+                  valueColor: AlwaysStoppedAnimation<Color>(r.accent),
+                ),
+              ),
+              const SizedBox(height: 14),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 11),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(TarusOlcu.rMd),
+                        ),
+                      ),
+                      onPressed: () => launchUrl(TarusBaglantilar.notWeb),
+                      icon: const Icon(TarusIkon.baglanti, size: 16),
+                      label: const Text('Web sürümü (not.tarus.tr)', style: TextStyle(fontSize: 12)),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  OutlinedButton.icon(
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(TarusOlcu.rMd),
+                      ),
+                    ),
+                    onPressed: _resyncAll,
+                    icon: const Icon(TarusIkon.esitle, size: 16),
+                    label: const Text('Eşitle', style: TextStyle(fontSize: 12)),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: 12),
+
+        // 3. Oturum & Güvenlik Kartı
+        TarusKart(
+          padding: const EdgeInsets.all(TarusOlcu.kart + 2),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              OutlinedButton.icon(
+                style: OutlinedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(46),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(TarusOlcu.rMd),
+                  ),
+                ),
+                onPressed: () => _confirmLogout(context),
+                icon: const Icon(TarusIkon.cikis, size: 18),
+                label: Text(t.profile.logout, style: const TextStyle(fontWeight: FontWeight.w600)),
+              ),
+              const SizedBox(height: 10),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(44),
+                  foregroundColor: r.danger,
+                  side: BorderSide(color: r.danger.withValues(alpha: 0.4)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(TarusOlcu.rMd),
+                  ),
+                ),
+                onPressed: () => HesapSilmeDialog.goster(context),
+                child: Text(t.profile.quickLinks.deleteAccount, style: const TextStyle(fontSize: 13)),
+              ),
+            ],
+          ),
         ),
       ],
     );
