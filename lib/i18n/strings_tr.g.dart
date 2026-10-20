@@ -897,16 +897,20 @@ class _Translations$tarus$giris$tr extends Translations$tarus$giris$en {
 	final TranslationsTr _root; // ignore: unused_field
 
 	// Translations
-	@override String get altBaslik => 'Notlarınızı Pusula hesabınızla tüm cihazlarınız ve not.tarus.tr arasında eşitleyin.';
-	@override String get pusulaBaslik => 'Pusula ile giriş';
-	@override String get pusulaAciklama => 'Pusula hesabınızın e-posta ve parolasıyla giriş yapın.';
+	@override String get urunTanimi => 'El Yazısı ve Eskiz Notları';
+	@override String get girisYapin => 'Giriş Yapın';
 	@override String get eposta => 'E-posta';
-	@override String get parola => 'Parola';
-	@override String get baglan => 'Giriş yap';
-	@override String get ikiAdimBaslik => 'İki adımlı doğrulama';
-	@override String get ikiAdimAciklama => 'Authenticator uygulamasındaki kodu ya da bir kurtarma kodunu girin.';
-	@override String get kod => 'Doğrulama kodu';
+	@override String get epostaOrnek => 'ornek@sirketiniz.com';
+	@override String get parola => 'Şifre';
+	@override String get parolaOrnek => 'şifreniz';
+	@override String get beniHatirla => 'Beni Hatırla';
+	@override String get baglan => 'Giriş Yap';
+	@override String get alanlariDoldurun => 'Lütfen tüm alanları doldurun.';
+	@override String get ikiAdimBaslik => 'İki Adımlı Doğrulama';
+	@override String get ikiAdimAciklama => 'Doğrulayıcı uygulamanızdaki 6 haneli kodu girin. Kurtarma kodu da kullanabilirsiniz.';
+	@override String get koduGirin => 'Doğrulama kodunu girin.';
 	@override String get dogrula => 'Doğrula';
+	@override String get girisEkraninaDon => 'Giriş ekranına dön';
 }
 
 // Path: tarus.cikis

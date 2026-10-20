@@ -390,16 +390,20 @@ tarus:
     tema: Theme
     destek: Support
   giris:
-    altBaslik: Sync your notes across all your devices and not.tarus.tr with your Pusula account.
-    pusulaBaslik: Sign in with Pusula
-    pusulaAciklama: Sign in with the email and password of your Pusula account.
+    urunTanimi: Handwriting & Sketch Notes
+    girisYapin: Sign In
     eposta: Email
+    epostaOrnek: name@company.com
     parola: Password
-    baglan: Sign in
-    ikiAdimBaslik: Two-step verification
-    ikiAdimAciklama: Enter the code from your authenticator app or a recovery code.
-    kod: Verification code
+    parolaOrnek: your password
+    beniHatirla: Remember me
+    baglan: Sign In
+    alanlariDoldurun: Please fill in all fields.
+    ikiAdimBaslik: Two-Step Verification
+    ikiAdimAciklama: Enter the 6-digit code from your authenticator app. You can also use a recovery code.
+    koduGirin: Enter the verification code.
     dogrula: Verify
+    girisEkraninaDon: Back to sign in
   cikis:
     denetleniyor: Checking sync…
     baslik: Log out

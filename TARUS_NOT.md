@@ -170,6 +170,8 @@ derlenir (Visual Studio Build Tools gerekir). Build Tools yoksa yerel deneme iç
   ekranında üst çubuk yok, hesap ekranı `/profile` (54 pt standart üst çubuk). Antigravity'nin
   80f13791'i derlenmiyordu (`dynamite_runtime` doğrudan bağımlılık değil) — düzeltildi. Emülatörde
   (taklit Pusula + yerel Not sunucusu) giriş → liste → uyarı → eşitle → çıkış denendi.
+  Giriş ekranı Pusula/Sistem Mobil `LoginScreen` kalıbına alındı (ortalanmış 64 px plaka, «tarus **Not**»,
+  «Giriş Yapın» kartı, alan üstü etiketler, «Beni Hatırla» yalnız e-posta, `#AC865A` düğme, 700 ms açılış).
   Önceki adım (2026-10-14): «Pusula ile giriş» (kullanıcı kararı 2026-10-14). Belirteç yapıştırma
   alanı kalktı; giriş kartı Pusula Mobil'deki gibi e-posta + parola, iki adımlı doğrulamada kod
   (`lib/data/nextcloud/pusula_giris.dart`). Akış: `POST {pusula}/auth/giris/` (`X-Client: mobile`,

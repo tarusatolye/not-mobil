@@ -114,6 +114,14 @@ class Stows {
   final gorunenAd = PlainStow('gorunenAd', '', volatile: !_isOnMainIsolate);
   final eposta = PlainStow('eposta', '', volatile: !_isOnMainIsolate);
 
+  /// Giriş ekranında «Beni Hatırla» ile saklanan e-posta (şifre saklanmaz;
+  /// Pusula Mobil ile aynı). Çıkışta silinmez.
+  final kayitliEposta = PlainStow(
+    'kayitliEposta',
+    '',
+    volatile: !_isOnMainIsolate,
+  );
+
   final pfp = PlainStow<Uint8List?>(
     'pfp',
     null,

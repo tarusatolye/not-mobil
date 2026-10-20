@@ -1496,35 +1496,47 @@ class Translations$tarus$giris$en {
 
 	// Translations
 
-	/// en: 'Sync your notes across all your devices and not.tarus.tr with your Pusula account.'
-	String get altBaslik => 'Sync your notes across all your devices and not.tarus.tr with your Pusula account.';
+	/// en: 'Handwriting & Sketch Notes'
+	String get urunTanimi => 'Handwriting & Sketch Notes';
 
-	/// en: 'Sign in with Pusula'
-	String get pusulaBaslik => 'Sign in with Pusula';
-
-	/// en: 'Sign in with the email and password of your Pusula account.'
-	String get pusulaAciklama => 'Sign in with the email and password of your Pusula account.';
+	/// en: 'Sign In'
+	String get girisYapin => 'Sign In';
 
 	/// en: 'Email'
 	String get eposta => 'Email';
 
+	/// en: 'name@company.com'
+	String get epostaOrnek => 'name@company.com';
+
 	/// en: 'Password'
 	String get parola => 'Password';
 
-	/// en: 'Sign in'
-	String get baglan => 'Sign in';
+	/// en: 'your password'
+	String get parolaOrnek => 'your password';
 
-	/// en: 'Two-step verification'
-	String get ikiAdimBaslik => 'Two-step verification';
+	/// en: 'Remember me'
+	String get beniHatirla => 'Remember me';
 
-	/// en: 'Enter the code from your authenticator app or a recovery code.'
-	String get ikiAdimAciklama => 'Enter the code from your authenticator app or a recovery code.';
+	/// en: 'Sign In'
+	String get baglan => 'Sign In';
 
-	/// en: 'Verification code'
-	String get kod => 'Verification code';
+	/// en: 'Please fill in all fields.'
+	String get alanlariDoldurun => 'Please fill in all fields.';
+
+	/// en: 'Two-Step Verification'
+	String get ikiAdimBaslik => 'Two-Step Verification';
+
+	/// en: 'Enter the 6-digit code from your authenticator app. You can also use a recovery code.'
+	String get ikiAdimAciklama => 'Enter the 6-digit code from your authenticator app. You can also use a recovery code.';
+
+	/// en: 'Enter the verification code.'
+	String get koduGirin => 'Enter the verification code.';
 
 	/// en: 'Verify'
 	String get dogrula => 'Verify';
+
+	/// en: 'Back to sign in'
+	String get girisEkraninaDon => 'Back to sign in';
 }
 
 // Path: tarus.cikis

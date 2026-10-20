@@ -391,16 +391,20 @@ tarus:
     tema: Tema
     destek: Destek
   giris:
-    altBaslik: Notlarınızı Pusula hesabınızla tüm cihazlarınız ve not.tarus.tr arasında eşitleyin.
-    pusulaBaslik: Pusula ile giriş
-    pusulaAciklama: Pusula hesabınızın e-posta ve parolasıyla giriş yapın.
+    urunTanimi: El Yazısı ve Eskiz Notları
+    girisYapin: Giriş Yapın
     eposta: E-posta
-    parola: Parola
-    baglan: Giriş yap
-    ikiAdimBaslik: İki adımlı doğrulama
-    ikiAdimAciklama: Authenticator uygulamasındaki kodu ya da bir kurtarma kodunu girin.
-    kod: Doğrulama kodu
+    epostaOrnek: ornek@sirketiniz.com
+    parola: Şifre
+    parolaOrnek: şifreniz
+    beniHatirla: Beni Hatırla
+    baglan: Giriş Yap
+    alanlariDoldurun: Lütfen tüm alanları doldurun.
+    ikiAdimBaslik: İki Adımlı Doğrulama
+    ikiAdimAciklama: Doğrulayıcı uygulamanızdaki 6 haneli kodu girin. Kurtarma kodu da kullanabilirsiniz.
+    koduGirin: Doğrulama kodunu girin.
     dogrula: Doğrula
+    girisEkraninaDon: Giriş ekranına dön
   cikis:
     denetleniyor: Eşitleme denetleniyor…
     baslik: Çıkış yap
