@@ -473,15 +473,6 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                         ),
                       ],
-                      SettingsSwitch(
-                        title: t.settings.prefLabels.allowInsecureConnections,
-                        subtitle: t
-                            .settings
-                            .prefDescriptions
-                            .allowInsecureConnections,
-                        icon: TarusIkon.guvenlik,
-                        pref: stows.allowInsecureConnections,
-                      ),
                     ],
                   ),
 

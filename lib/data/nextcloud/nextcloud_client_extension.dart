@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:http/io_client.dart';
 import 'package:nextcloud/nextcloud.dart';
 import 'package:nextcloud/provisioning_api.dart';
@@ -17,6 +18,11 @@ extension NextcloudClientExtension on NextcloudClient {
     ),
   );
 
+  /// Testlerde taklit sunucu; uygulamada oturum hep [defaultNextcloudUri]'ye
+  /// açılır (sunucu sabit, 1.2.0).
+  @visibleForTesting
+  static Uri? testSunucusu;
+
   /// Not sunucusu (tarusatolye/not) User-Agent'a bakmaz; ad tarus Not'unki.
   static final userAgent =
       'tarusNot/$buildName '
@@ -30,12 +36,12 @@ extension NextcloudClientExtension on NextcloudClient {
   static NextcloudClient? withSavedDetails() {
     if (!stows.loggedIn) return null;
 
-    final url = stows.url.value;
+    // Sunucu sabit (1.2.0): oturum yalnız not.tarus.tr'ye açılır.
     final username = stows.username.value;
     final ncPassword = stows.ncPassword.value;
 
     final client = NextcloudClient(
-      url.isNotEmpty ? Uri.parse(url) : defaultNextcloudUri,
+      testSunucusu ?? defaultNextcloudUri,
       loginName: username,
       password: ncPassword,
       appPassword: ncPassword,

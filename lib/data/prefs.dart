@@ -65,7 +65,13 @@ class Stows {
 
   /// Whether the user is logged in (Pusula eşitleme belirteci kayıtlı).
   /// Please ensure that the relevant Prefs are loaded before using this.
-  bool get loggedIn => username.value.isNotEmpty && ncPassword.value.isNotEmpty;
+  ///
+  /// 1.2.0'dan beri sunucu sabittir (not.tarus.tr): [url] doluysa eski
+  /// «Başka sunucu» oturumudur ve giriş yapılmamış sayılır.
+  bool get loggedIn =>
+      url.value.isEmpty &&
+      username.value.isNotEmpty &&
+      ncPassword.value.isNotEmpty;
 
   /// 1.1.5 ve öncesinin uçtan uca şifreleme kayıtları (parola, anahtar, IV).
   /// 1.1.6'dan beri notlar düz eşitlenir, sunucu diskte şifreli saklar;
@@ -102,6 +108,11 @@ class Stows {
     eskiSifrelemeSilindi.value = true;
     return true;
   }
+
+  /// Kullanıcı kartında gösterilen Pusula adı ve e-postası (Not sunucusunun
+  /// `cloud/user` yanıtından; [username] yalnız sunucu kimliğidir).
+  final gorunenAd = PlainStow('gorunenAd', '', volatile: !_isOnMainIsolate);
+  final eposta = PlainStow('eposta', '', volatile: !_isOnMainIsolate);
 
   final pfp = PlainStow<Uint8List?>(
     'pfp',

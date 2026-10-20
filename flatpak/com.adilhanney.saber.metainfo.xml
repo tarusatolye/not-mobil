@@ -204,11 +204,12 @@
     </screenshots>
 
     <releases>
-        <release version="1.2.0" date="2026-10-14">
+        <release version="1.2.0" date="2026-10-20">
             <description>
                 <ul>
-                    <li>Sign in with your Pusula account; copying a sync token is no longer needed</li>
-                    <li>Signing out removes this device's sync access</li>
+                    <li>Not is used only with your Pusula account; sign in with your email and password</li>
+                    <li>Signing out deletes the notes from this device (they stay on not.tarus.tr); unsynced changes are warned about first</li>
+                    <li>The account card shows your Pusula name and email</li>
                     <li>Lost devices can be removed in Pusula › Account › Connected devices</li>
                 </ul>
             </description>

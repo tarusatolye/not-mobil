@@ -400,7 +400,17 @@ tarus:
     ikiAdimAciklama: Enter the code from your authenticator app or a recovery code.
     kod: Verification code
     dogrula: Verify
-    kendiSunucunuzAciklama: Enter the address of your own server to store your notes there.
+  cikis:
+    denetleniyor: Checking sync…
+    baslik: Log out
+    aciklama: The notes on this device will be deleted. Your notes stay on not.tarus.tr and are downloaded again when you sign in.
+    esitlenmemisBaslik: Unsynced changes
+    esitlenmemisAciklama: '${n} notes have changes that are not synced to not.tarus.tr yet. If you log out now, these changes will be lost.'
+    denetlenemediBaslik: Could not check sync
+    denetlenemediAciklama: not.tarus.tr could not be reached, so it is unknown whether the notes on this device are synced. If you log out, the notes are deleted from this device and unsynced changes are lost.
+    esitle: Sync
+    yineDeCik: Log out anyway
+    esitlemeBasladi: Sync started. You can log out again once it finishes.
   esitleme:
     gecici: The server is not responding right now. Your notes are safe on this device; syncing will retry automatically.
     reddedildi: The server rejected the sync.

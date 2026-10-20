@@ -4,7 +4,7 @@ Write and draw with a stylus or your finger: pens, highlighter, shapes, images a
 
 Your notes live in one list on your phone and on the web (not.tarus.tr): a note written on the phone appears on the web and vice versa. Transfers are encrypted with HTTPS, and the Not server stores notes encrypted on disk and in backups. No separate encryption password is needed.
 
-Not has no separate account: you sign in with your Pusula account. You can remove a device's access at any time by signing out or in Pusula > Account > Connected devices, and the device stops syncing within 30 seconds. Notes sync between your devices; when the same note changes in two places, the older version is kept as a conflict copy instead of being lost.
+Not has no separate account: it is used only by signing in with your Pusula account. When you sign out, the notes are deleted from this device and stay on not.tarus.tr; if there are unsynced changes, the app warns you first. You can remove a device's access at any time by signing out or in Pusula > Account > Connected devices, and the device stops syncing within 30 seconds. Notes sync between your devices; when the same note changes in two places, the older version is kept as a conflict copy instead of being lost.
 
 Organise notes in nested folders, find recent notes on the home screen, and report a problem from inside the app (Settings > Hata bildir, or press and hold an empty area).
 

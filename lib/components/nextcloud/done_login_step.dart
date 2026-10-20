@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:saber/components/nextcloud/hesap_silme_dialog.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
-import 'package:saber/data/nextcloud/pusula_giris.dart';
+import 'package:saber/data/nextcloud/not_cikisi.dart';
 import 'package:saber/data/nextcloud/saber_syncer.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/quota.dart';
@@ -25,44 +25,100 @@ class DoneLoginStep extends StatelessWidget {
   static const width = 440.0;
   static final log = Logger('DoneLoginStep');
 
-  void _logout() {
-    if (PusulaGiris.pusulaBelirteciyleMi) {
-      unawaited(PusulaGiris.birak(stows.ncPassword.value));
-    }
-    stows.url.value = '';
-    stows.username.value = '';
-    stows.ncPassword.value = '';
-    stows.pfp.value = null;
-    stows.lastStorageQuota.value = null;
-    recheckCurrentStep();
-  }
+  /// Çıkış (kullanıcı kararı 2026-10-19): önce eşitleme denetlenir;
+  /// eşitlenmemiş değişiklik varsa ya da sunucuya ulaşılamazsa uyarılır.
+  /// Çıkışta notlar cihazdan silinir ([NotCikisi]); yönlendirici giriş
+  /// ekranına geçer.
+  Future<void> _confirmLogout(BuildContext context) async {
+    final denetim = await _bekleyerek(context, NotCikisi.denetle());
+    if (denetim == null || !context.mounted) return;
 
-  void _confirmLogout(BuildContext context) {
-    showDialog<void>(
+    final cikis = t.tarus.cikis;
+    final (String baslik, String metin) = switch (denetim) {
+      _ when denetim.temiz => (cikis.baslik, cikis.aciklama),
+      _ when !denetim.sunucuyaUlasildi => (
+        cikis.denetlenemediBaslik,
+        cikis.denetlenemediAciklama,
+      ),
+      _ => (
+        cikis.esitlenmemisBaslik,
+        cikis.esitlenmemisAciklama(n: denetim.notSayisi),
+      ),
+    };
+    final secim = await showDialog<_CikisSecimi>(
       context: context,
       builder: (context) => TarusDialog(
-        title: Text(t.profile.logout),
-        content: const Text(
-          'Pusula oturumunuz bu cihazda kapatılacaktır. Notlarınız cihazda '
-          've not.tarus.tr sunucusunda saklanmaya devam eder; tekrar giriş '
-          'yapana kadar eşitleme duraklatılır.',
-        ),
+        title: Text(baslik),
+        content: Text(metin),
         actions: [
           TarusDialogDugmesi(
             onPressed: () => Navigator.of(context).pop(),
             child: Text(t.common.cancel),
           ),
+          if (!denetim.temiz && denetim.sunucuyaUlasildi)
+            TarusDialogDugmesi(
+              onPressed: () => Navigator.of(context).pop(_CikisSecimi.esitle),
+              child: Text(cikis.esitle),
+            ),
           TarusDialogDugmesi(
             isDestructiveAction: true,
-            onPressed: () {
-              Navigator.of(context).pop();
-              _logout();
-            },
-            child: Text(t.profile.logout),
+            onPressed: () => Navigator.of(context).pop(_CikisSecimi.cik),
+            child: Text(denetim.temiz ? t.profile.logout : cikis.yineDeCik),
           ),
         ],
       ),
     );
+    switch (secim) {
+      case _CikisSecimi.cik:
+        await NotCikisi.cikisYap();
+        recheckCurrentStep();
+      case _CikisSecimi.esitle:
+        unawaited(syncer.uploader.refresh());
+        if (context.mounted) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(cikis.esitlemeBasladi)));
+        }
+      case null:
+        break;
+    }
+  }
+
+  /// Denetim sürerken kapatılamayan bekleme penceresi gösterir.
+  static Future<T?> _bekleyerek<T>(
+    BuildContext context,
+    Future<T> islem,
+  ) async {
+    final navigator = Navigator.of(context);
+    unawaited(
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => PopScope(
+          canPop: false,
+          child: TarusDialog(
+            title: Text(t.tarus.cikis.baslik),
+            content: Row(
+              children: [
+                const SizedBox.square(
+                  dimension: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+                const SizedBox(width: 14),
+                Expanded(child: Text(t.tarus.cikis.denetleniyor)),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+    try {
+      return await islem;
+    } catch (e) {
+      log.warning('Çıkış denetimi başarısız: $e');
+      return null;
+    } finally {
+      navigator.pop();
+    }
   }
 
   void _resyncAll() async {
@@ -85,7 +141,9 @@ class DoneLoginStep extends StatelessWidget {
 
     return ListView(
       padding: EdgeInsets.symmetric(
-        horizontal: screenWidth > width ? (screenWidth - width) / 2 : TarusOlcu.sayfaYatay + 4,
+        horizontal: screenWidth > width
+            ? (screenWidth - width) / 2
+            : TarusOlcu.sayfaYatay + 4,
         vertical: 20,
       ),
       children: [
@@ -97,15 +155,26 @@ class DoneLoginStep extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(TarusOlcu.rLg),
                 child: pfp != null
-                    ? Image.memory(pfp, width: 52, height: 52, fit: BoxFit.cover)
+                    ? Image.memory(
+                        pfp,
+                        width: 52,
+                        height: 52,
+                        fit: BoxFit.cover,
+                      )
                     : Container(
                         width: 52,
                         height: 52,
                         decoration: BoxDecoration(
-                          color: r.accent.withValues(alpha: TarusOlcu.seciliZeminAlfa),
+                          color: r.accent.withValues(
+                            alpha: TarusOlcu.seciliZeminAlfa,
+                          ),
                           borderRadius: BorderRadius.circular(TarusOlcu.rLg),
                         ),
-                        child: Icon(TarusIkon.kullanici, color: r.accent, size: 26),
+                        child: Icon(
+                          TarusIkon.kullanici,
+                          color: r.accent,
+                          size: 26,
+                        ),
                       ),
               ),
               const SizedBox(width: 14),
@@ -114,7 +183,9 @@ class DoneLoginStep extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      stows.username.value,
+                      stows.gorunenAd.value.isNotEmpty
+                          ? stows.gorunenAd.value
+                          : stows.username.value,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
@@ -125,7 +196,9 @@ class DoneLoginStep extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      'Pusula Hesabı',
+                      stows.eposta.value.isNotEmpty
+                          ? stows.eposta.value
+                          : 'Pusula Hesabı',
                       style: TextStyle(fontSize: 12, color: r.muted2),
                     ),
                     const SizedBox(height: 6),
@@ -171,10 +244,16 @@ class DoneLoginStep extends StatelessWidget {
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: r.accent.withValues(alpha: TarusOlcu.seciliZeminAlfa),
+                      color: r.accent.withValues(
+                        alpha: TarusOlcu.seciliZeminAlfa,
+                      ),
                       borderRadius: BorderRadius.circular(TarusOlcu.rSm),
                     ),
-                    child: Icon(TarusIkon.buluttaYukle, size: 16, color: r.accent),
+                    child: Icon(
+                      TarusIkon.buluttaYukle,
+                      size: 16,
+                      color: r.accent,
+                    ),
                   ),
                   const SizedBox(width: 10),
                   Text(
@@ -208,20 +287,29 @@ class DoneLoginStep extends StatelessWidget {
                   Expanded(
                     child: OutlinedButton.icon(
                       style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 11),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 11,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(TarusOlcu.rMd),
                         ),
                       ),
                       onPressed: () => launchUrl(TarusBaglantilar.notWeb),
                       icon: const Icon(TarusIkon.baglanti, size: 16),
-                      label: const Text('Web sürümü (not.tarus.tr)', style: TextStyle(fontSize: 12)),
+                      label: const Text(
+                        'Web sürümü (not.tarus.tr)',
+                        style: TextStyle(fontSize: 12),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 8),
                   OutlinedButton.icon(
                     style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 11,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(TarusOlcu.rMd),
                       ),
@@ -253,7 +341,10 @@ class DoneLoginStep extends StatelessWidget {
                 ),
                 onPressed: () => _confirmLogout(context),
                 icon: const Icon(TarusIkon.cikis, size: 18),
-                label: Text(t.profile.logout, style: const TextStyle(fontWeight: FontWeight.w600)),
+                label: Text(
+                  t.profile.logout,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
               ),
               const SizedBox(height: 10),
               OutlinedButton(
@@ -266,7 +357,10 @@ class DoneLoginStep extends StatelessWidget {
                   ),
                 ),
                 onPressed: () => HesapSilmeDialog.goster(context),
-                child: Text(t.profile.quickLinks.deleteAccount, style: const TextStyle(fontSize: 13)),
+                child: Text(
+                  t.profile.quickLinks.deleteAccount,
+                  style: const TextStyle(fontSize: 13),
+                ),
               ),
             ],
           ),
@@ -275,3 +369,5 @@ class DoneLoginStep extends StatelessWidget {
     );
   }
 }
+
+enum _CikisSecimi { cik, esitle }

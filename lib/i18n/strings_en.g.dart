@@ -397,6 +397,7 @@ class Translations$tarus$en {
 	late final Translations$tarus$bos$en bos = Translations$tarus$bos$en.internal(_root);
 	late final Translations$tarus$ayar$en ayar = Translations$tarus$ayar$en.internal(_root);
 	late final Translations$tarus$giris$en giris = Translations$tarus$giris$en.internal(_root);
+	late final Translations$tarus$cikis$en cikis = Translations$tarus$cikis$en.internal(_root);
 	late final Translations$tarus$esitleme$en esitleme = Translations$tarus$esitleme$en.internal(_root);
 }
 
@@ -1524,9 +1525,45 @@ class Translations$tarus$giris$en {
 
 	/// en: 'Verify'
 	String get dogrula => 'Verify';
+}
 
-	/// en: 'Enter the address of your own server to store your notes there.'
-	String get kendiSunucunuzAciklama => 'Enter the address of your own server to store your notes there.';
+// Path: tarus.cikis
+class Translations$tarus$cikis$en {
+	Translations$tarus$cikis$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Checking sync…'
+	String get denetleniyor => 'Checking sync…';
+
+	/// en: 'Log out'
+	String get baslik => 'Log out';
+
+	/// en: 'The notes on this device will be deleted. Your notes stay on not.tarus.tr and are downloaded again when you sign in.'
+	String get aciklama => 'The notes on this device will be deleted. Your notes stay on not.tarus.tr and are downloaded again when you sign in.';
+
+	/// en: 'Unsynced changes'
+	String get esitlenmemisBaslik => 'Unsynced changes';
+
+	/// en: '${n} notes have changes that are not synced to not.tarus.tr yet. If you log out now, these changes will be lost.'
+	String esitlenmemisAciklama({required Object n}) => '${n} notes have changes that are not synced to not.tarus.tr yet. If you log out now, these changes will be lost.';
+
+	/// en: 'Could not check sync'
+	String get denetlenemediBaslik => 'Could not check sync';
+
+	/// en: 'not.tarus.tr could not be reached, so it is unknown whether the notes on this device are synced. If you log out, the notes are deleted from this device and unsynced changes are lost.'
+	String get denetlenemediAciklama => 'not.tarus.tr could not be reached, so it is unknown whether the notes on this device are synced. If you log out, the notes are deleted from this device and unsynced changes are lost.';
+
+	/// en: 'Sync'
+	String get esitle => 'Sync';
+
+	/// en: 'Log out anyway'
+	String get yineDeCik => 'Log out anyway';
+
+	/// en: 'Sync started. You can log out again once it finishes.'
+	String get esitlemeBasladi => 'Sync started. You can log out again once it finishes.';
 }
 
 // Path: tarus.esitleme

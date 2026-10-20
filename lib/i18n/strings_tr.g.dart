@@ -264,6 +264,7 @@ class _Translations$tarus$tr extends Translations$tarus$en {
 	@override late final _Translations$tarus$bos$tr bos = _Translations$tarus$bos$tr._(_root);
 	@override late final _Translations$tarus$ayar$tr ayar = _Translations$tarus$ayar$tr._(_root);
 	@override late final _Translations$tarus$giris$tr giris = _Translations$tarus$giris$tr._(_root);
+	@override late final _Translations$tarus$cikis$tr cikis = _Translations$tarus$cikis$tr._(_root);
 	@override late final _Translations$tarus$esitleme$tr esitleme = _Translations$tarus$esitleme$tr._(_root);
 }
 
@@ -906,7 +907,25 @@ class _Translations$tarus$giris$tr extends Translations$tarus$giris$en {
 	@override String get ikiAdimAciklama => 'Authenticator uygulamasındaki kodu ya da bir kurtarma kodunu girin.';
 	@override String get kod => 'Doğrulama kodu';
 	@override String get dogrula => 'Doğrula';
-	@override String get kendiSunucunuzAciklama => 'Notları kendi sunucunuzda saklamak için adresini girin.';
+}
+
+// Path: tarus.cikis
+class _Translations$tarus$cikis$tr extends Translations$tarus$cikis$en {
+	_Translations$tarus$cikis$tr._(TranslationsTr root) : this._root = root, super.internal(root);
+
+	final TranslationsTr _root; // ignore: unused_field
+
+	// Translations
+	@override String get denetleniyor => 'Eşitleme denetleniyor…';
+	@override String get baslik => 'Çıkış yap';
+	@override String get aciklama => 'Bu cihazdaki notlar silinecek. Notlarınız not.tarus.tr\'de kalır; yeniden giriş yaptığınızda cihaza iner.';
+	@override String get esitlenmemisBaslik => 'Eşitlenmemiş değişiklik var';
+	@override String esitlenmemisAciklama({required Object n}) => '${n} notta henüz not.tarus.tr\'ye eşitlenmemiş değişiklik var. Şimdi çıkarsanız bu değişiklikler kaybolur.';
+	@override String get denetlenemediBaslik => 'Eşitleme denetlenemedi';
+	@override String get denetlenemediAciklama => 'not.tarus.tr\'ye ulaşılamadı; cihazdaki notların eşitlenip eşitlenmediği bilinmiyor. Çıkarsanız notlar bu cihazdan silinir ve eşitlenmemiş değişiklikler kaybolur.';
+	@override String get esitle => 'Eşitle';
+	@override String get yineDeCik => 'Yine de çık';
+	@override String get esitlemeBasladi => 'Eşitleme başladı. Bitince yeniden çıkış yapabilirsiniz.';
 }
 
 // Path: tarus.esitleme

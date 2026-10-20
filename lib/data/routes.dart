@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:path_to_regexp/path_to_regexp.dart';
+import 'package:saber/data/prefs.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/home/home.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
@@ -9,9 +10,22 @@ abstract class RoutePaths {
   static const home = '$prefixOfHome/:subpage';
   static const edit = '/edit';
   static const login = '/login';
+
+  /// Oturum açıkken hesap ekranı (kullanıcı kartı, eşitleme, çıkış).
+  static const profile = '/profile';
   static const logs = '/logs';
 
   static const prefixOfHome = '/home';
+
+  /// Giriş zorunlu (1.2.0): oturum yokken yalnız giriş ve Kayıtlar açılır;
+  /// oturum açılınca giriş ekranından ana sayfaya (Hızlı Bakış) geçilir.
+  /// [stows.loggedIn]'in okuduğu kayıtlar yüklenmiş olmalı (`main`).
+  static String? girisYonlendirmesi(String konum) {
+    final serbest = konum == login || konum == logs;
+    if (!stows.loggedIn) return serbest ? null : login;
+    if (konum == login) return '$prefixOfHome/${HomePage.recentSubpage}';
+    return null;
+  }
 
   static String editFilePath(String filePath) {
     return '$edit?path=${Uri.encodeQueryComponent(filePath)}';

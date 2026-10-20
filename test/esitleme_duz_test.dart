@@ -8,6 +8,7 @@ import 'package:nextcloud/nextcloud.dart';
 import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/data/flavor_config.dart';
 import 'package:saber/data/nextcloud/esitleme_uyarisi.dart';
+import 'package:saber/data/nextcloud/nextcloud_client_extension.dart';
 import 'package:saber/data/nextcloud/saber_syncer.dart';
 import 'package:saber/data/prefs.dart';
 
@@ -156,13 +157,18 @@ void main() {
         istek.response.add(utf8.encode(govde));
         await istek.response.close();
       });
-      stows.url.value = 'http://127.0.0.1:${sunucu.port}';
+      NextcloudClientExtension.testSunucusu = Uri.parse(
+        'http://127.0.0.1:${sunucu.port}',
+      );
       stows.username.value = 'deneme';
       stows.ncPassword.value = 'nes_${'x' * 24}';
       expect(stows.loggedIn, isTrue, reason: 'şifreleme parolası gerekmez');
     });
 
-    tearDownAll(() => sunucu.close(force: true));
+    tearDownAll(() {
+      NextcloudClientExtension.testSunucusu = null;
+      return sunucu.close(force: true);
+    });
 
     setUp(() {
       istekler.clear();

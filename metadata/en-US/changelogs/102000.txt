@@ -1,3 +1,4 @@
-• Sign in with your Pusula account; copying a sync token is no longer needed
-• Signing out removes this device's sync access
+• Not is used only with your Pusula account; sign in with your email and password
+• Signing out deletes the notes from this device (they stay on not.tarus.tr); unsynced changes are warned about first
+• The account card shows your Pusula name and email
 • Lost devices can be removed in Pusula › Account › Connected devices

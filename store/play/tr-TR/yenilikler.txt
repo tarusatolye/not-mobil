@@ -1,3 +1,4 @@
-• Pusula hesabınızla giriş yapın; eşitleme belirteci kopyalamak artık gerekmiyor
-• Çıkış yapınca bu cihazın eşitleme erişimi kapanıyor
+• Not yalnız Pusula hesabınızla kullanılır; e-posta ve parolanızla giriş yapın
+• Çıkış yapınca notlar bu cihazdan silinir, not.tarus.tr'de kalır; eşitlenmemiş değişiklikte önce uyarı
+• Hesap kartında Pusula adınız ve e-postanız görünür
 • Kaybolan cihazı Pusula › Hesap › Bağlı cihazlar'dan kaldırabilirsiniz

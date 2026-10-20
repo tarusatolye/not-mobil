@@ -1,6 +1,6 @@
 # tarus Not — Play «Veri güvenliği» formu taslağı
 
-Play Console › Uygulama içeriği › Veri güvenliği formu için yanıtlar. Kaynak: not-mobil 1.1.3
+Play Console › Uygulama içeriği › Veri güvenliği formu için yanıtlar. Kaynak: not-mobil 1.2.0
 kodu (`lib/data/nextcloud/`, `lib/data/nextcloud/hata_bildir.dart`, `android/app/src/main/AndroidManifest.xml`).
 Formu göndermeden önce yayımlanan derlemeyle karşılaştırın; kod değişirse bu dosya da güncellenir.
 
@@ -8,9 +8,9 @@ Formu göndermeden önce yayımlanan derlemeyle karşılaştırın; kod değişi
 
 | Soru | Yanıt | Gerekçe |
 |---|---|---|
-| Uygulama gerekli kullanıcı verisi türlerinden herhangi birini topluyor ya da paylaşıyor mu? | **Evet** | Eşitleme açıksa notlar ve kimlik not.tarus.tr'ye gider; Hata bildir isteğe bağlı. |
+| Uygulama gerekli kullanıcı verisi türlerinden herhangi birini topluyor ya da paylaşıyor mu? | **Evet** | Giriş zorunlu (1.2.0): notlar ve kimlik her zaman not.tarus.tr'ye eşitlenir; Hata bildir isteğe bağlı. |
 | Aktarılan tüm kullanıcı verileri şifreleniyor mu? | **Evet** | Tüm trafik HTTPS (not.tarus.tr). Notlar sunucuda diskte ve yedekte şifreli saklanır (1.1.6'dan beri uçtan uca değil). |
-| Kullanıcılar verilerinin silinmesini isteyebilir mi? | **Evet** | Uygulamada Profil › Hesabı sil (adımlar + web talebi), web: `https://tarus.tr/hesap-silme` (talep e-postayla yazilim@tarus.tr'ye, Pusula yöneticisi işler). |
+| Kullanıcılar verilerinin silinmesini isteyebilir mi? | **Evet** | Uygulamada Profil › Hesabı sil (adımlar + web talebi); çıkışta notlar cihazdan silinir (sunucuda kalır). Web: `https://tarus.tr/hesap-silme` (talep e-postayla yazilim@tarus.tr'ye, Pusula yöneticisi işler). |
 | Hesap oluşturma | Uygulamada hesap **oluşturulmaz**; kimlik Pusula'dır (web'de oluşturulur). Giriş (1.2.0): Pusula e-posta + parolası uygulama içinde girilir, yalnız Pusula'ya (`pusula.tarus.tr/auth/giris/`) gider, cihazda saklanmaz; karşılığında cihaz eşitleme belirteci alınır. | `lib/components/nextcloud/nc_login_step.dart`, `lib/data/nextcloud/pusula_giris.dart` |
 | Hesap silme URL'si (Play zorunlu alanı) | `https://tarus.tr/hesap-silme` (`TarusBaglantilar.hesapSilme`) | 2026-10-06'da açıldı (tarus#c3bb217). |
 
@@ -20,8 +20,8 @@ Formu göndermeden önce yayımlanan derlemeyle karşılaştırın; kod değişi
 
 | Play veri türü | Toplanıyor mu | Zorunlu / isteğe bağlı | Amaç | Not |
 |---|---|---|---|---|
-| **Uygulama içindeki diğer kullanıcı içeriği** (notlar, çizimler, görseller, PDF'ler) | Evet | İsteğe bağlı (eşitleme kapalıyken cihazda kalır) | Uygulama işlevselliği (eşitleme) | 1.1.6'dan beri **uçtan uca şifreli değil**: notlar HTTPS ile düz yolla (`Saber/<klasör>/<ad>.sbn2`) gider; web aynı notu açar. Not sunucusu diskte ve yedekte şirket anahtarıyla (AES-256-GCM, anahtar servisi) şifreli saklar. |
-| **Kişisel bilgiler › E-posta adresi** ve **Kullanıcı kimlikleri** (Pusula e-postası ve parolası girişte, Pusula kullanıcı adı, eşitleme belirteci, cihaz modeli adı) | Evet | Eşitleme için zorunlu | Uygulama işlevselliği, hesap yönetimi | E-posta/parola yalnız girişte Pusula'ya gider, saklanmaz. Belirteç girişte Pusula'dan alınır, çıkışta iptal edilir; cihaz modeli Pusula › Hesap › Bağlı cihazlar'da ad olarak görünür. Not sunucusu belirteci Pusula'ya doğrulatır. |
+| **Uygulama içindeki diğer kullanıcı içeriği** (notlar, çizimler, görseller, PDF'ler) | Evet | **Zorunlu** (1.2.0: giriş zorunlu; girişsiz/yalnız cihazda kullanım ve başka sunucu seçeneği kalktı) | Uygulama işlevselliği (eşitleme) | 1.1.6'dan beri **uçtan uca şifreli değil**: notlar HTTPS ile düz yolla (`Saber/<klasör>/<ad>.sbn2`) gider; web aynı notu açar. Not sunucusu diskte ve yedekte şirket anahtarıyla (AES-256-GCM, anahtar servisi) şifreli saklar. |
+| **Kişisel bilgiler › E-posta adresi**, **Ad** ve **Kullanıcı kimlikleri** (Pusula e-postası ve parolası girişte, Pusula adı ve kullanıcı kimliği, eşitleme belirteci, cihaz modeli adı) | Evet | Zorunlu | Uygulama işlevselliği, hesap yönetimi | E-posta/parola yalnız girişte Pusula'ya gider, saklanmaz. Belirteç girişte Pusula'dan alınır, çıkışta iptal edilir; cihaz modeli Pusula › Hesap › Bağlı cihazlar'da ad olarak görünür. Not sunucusu belirteci Pusula'ya doğrulatır. Pusula adı ve e-postası hesap kartında göstermek için sunucudan okunur, cihazda çıkışa kadar tutulur (Ad türü bu yüzden eklendi). |
 | **Fotoğraflar** (Hata bildir ekran görüntüsü) | Evet | İsteğe bağlı, kullanıcı ekler | Uygulama işlevselliği / hata ayıklama | En çok 2 MB, yalnız kullanıcı gönderirse. |
 | **Uygulama etkinliği › diğer** (Hata bildir başlığı ve açıklaması) | Evet | İsteğe bağlı | Hata ayıklama | Kullanıcının yazdığı metin. |
 | **Uygulama bilgileri ve performans › diğer** (işletim sistemi, sürümü, uygulama sürümü) | Evet | İsteğe bağlı (yalnız Hata bildir ile) | Hata ayıklama | `meta.platform`, `platformVersion`, `appVersion`. |
@@ -36,6 +36,7 @@ sunucularında), **geçici işlenmiyor** (saklanıyor), reklam/pazarlama/analiti
 - Veriler aktarımda şifrelenir (HTTPS).
 - Notlar sunucuda diskte ve yedekte şifreli saklanır (saklama şifrelemesi; uçtan uca değil, 1.1.6).
 - Kullanıcı eşitleme erişimini çıkış yaparak ya da Pusula › Hesap › Bağlı cihazlar'dan anında kaldırabilir.
+- Çıkışta notlar, ad ve e-posta cihazdan silinir (eşitlenmemiş değişiklik varsa önce uyarılır).
 - Reklam, analitik ve üçüncü taraf izleme SDK'sı yok.
 
 ## Kullanıcının yapacakları
@@ -48,3 +49,21 @@ sunucularında), **geçici işlenmiyor** (saklanıyor), reklam/pazarlama/analiti
    gözden geçirmeden geçmeli (`ozluk/tarus.md` §4.2, Not Mobil satırı: lisans).
 3. Formu bu tabloya göre doldurun; yayımlanan derleme FOSS değilse (Onyx/Sentry SDK'ları içeride)
    SDK'ların veri toplamadığını yeniden doğrulayın.
+
+## Play Console'da değişecekler (1.2.0, 2026-10-20)
+
+Önceki kayıt (2026-10-07, taslak) 4 veri türüyle doldurulmuştu. 1.2.0'ı yüklemeden önce:
+
+1. **Veri türleri › Kişisel bilgiler › Ad** — yeni işaretle: toplanır, paylaşılmaz, **zorunlu**,
+   amaç Uygulama işlevselliği + Hesap yönetimi.
+2. **Uygulama içindeki diğer kullanıcı içeriği** — «isteğe bağlı» → **zorunlu** (giriş ve eşitleme
+   artık zorunlu).
+3. **E-posta adresi** ve **Kullanıcı kimlikleri** — zorunlu olduğunu doğrula; amaç Uygulama
+   işlevselliği + Hesap yönetimi.
+4. **Veri silme** — «Kullanıcılar silme isteyebilir» Evet kalır; açıklama alanı varsa: «Çıkışta notlar
+   cihazdan silinir; hesap ve sunucudaki notlar için https://tarus.tr/hesap-silme».
+5. **Uygulama erişimi (oturum açma bilgileri)** — Not artık girişsiz açılmıyor: «Uygulamanın tüm
+   işlevleri kısıtlı»; inceleme hesabı Pusula e-posta + parolası (eskiden parola alanında eşitleme
+   belirteci vardı — belirteç artık girilemez, Pusula parolası girilir).
+6. **Mağaza girişi** — kısa açıklama aynı; uzun açıklama ve «Yenilikler» `store/play/tr-TR/`'den
+   yeniden yapıştırılır. Ekran görüntüleri 1.1.4 arayüzünü gösteriyor, ayrıca yenilenmeli.

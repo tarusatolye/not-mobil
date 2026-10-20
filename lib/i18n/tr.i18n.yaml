@@ -401,7 +401,17 @@ tarus:
     ikiAdimAciklama: Authenticator uygulamasındaki kodu ya da bir kurtarma kodunu girin.
     kod: Doğrulama kodu
     dogrula: Doğrula
-    kendiSunucunuzAciklama: Notları kendi sunucunuzda saklamak için adresini girin.
+  cikis:
+    denetleniyor: Eşitleme denetleniyor…
+    baslik: Çıkış yap
+    aciklama: Bu cihazdaki notlar silinecek. Notlarınız not.tarus.tr'de kalır; yeniden giriş yaptığınızda cihaza iner.
+    esitlenmemisBaslik: Eşitlenmemiş değişiklik var
+    esitlenmemisAciklama: '${n} notta henüz not.tarus.tr''ye eşitlenmemiş değişiklik var. Şimdi çıkarsanız bu değişiklikler kaybolur.'
+    denetlenemediBaslik: Eşitleme denetlenemedi
+    denetlenemediAciklama: not.tarus.tr'ye ulaşılamadı; cihazdaki notların eşitlenip eşitlenmediği bilinmiyor. Çıkarsanız notlar bu cihazdan silinir ve eşitlenmemiş değişiklikler kaybolur.
+    esitle: Eşitle
+    yineDeCik: Yine de çık
+    esitlemeBasladi: Eşitleme başladı. Bitince yeniden çıkış yapabilirsiniz.
   esitleme:
     gecici: Sunucu şu an yanıt vermiyor. Notlarınız bu cihazda duruyor; eşitleme kendiliğinden yeniden denenecek.
     reddedildi: Sunucu eşitlemeyi reddetti.

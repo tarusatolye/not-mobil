@@ -3,8 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/i18n/strings.g.dart';
-import 'package:saber/tarus/tarus_ikon.dart';
 import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 import 'package:saber/tarus/tarus_olcu.dart';
 import 'package:saber/tarus/tarus_renkler.dart';
 import 'package:stow_codecs/stow_codecs.dart';
@@ -104,8 +104,7 @@ class _HomeLayoutDialogOption extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (selected)
-                  Icon(TarusIkon.tamam, size: 18, color: r.accent),
+                if (selected) Icon(TarusIkon.tamam, size: 18, color: r.accent),
               ],
             ),
           ),

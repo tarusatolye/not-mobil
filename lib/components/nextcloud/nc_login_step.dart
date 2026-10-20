@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:dynamite_runtime/dynamite_runtime.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:nextcloud/nextcloud.dart' show DynamiteStatusCodeException;
 import 'package:saber/components/settings/app_info.dart';
 import 'package:saber/data/nextcloud/pusula_giris.dart';
 import 'package:saber/i18n/strings.g.dart';
@@ -58,9 +58,7 @@ class const _Header() extends StatelessWidget {
               decoration: BoxDecoration(
                 color: r.accent.withValues(alpha: TarusOlcu.seciliZeminAlfa),
                 borderRadius: BorderRadius.circular(TarusOlcu.rLg),
-                border: Border.all(
-                  color: r.accent.withValues(alpha: 0.22),
-                ),
+                border: Border.all(color: r.accent.withValues(alpha: 0.22)),
               ),
               padding: const EdgeInsets.all(8),
               child: const TarusNotIsareti(boyut: 36),
@@ -80,7 +78,10 @@ class const _Header() extends StatelessWidget {
                   ),
                   const SizedBox(height: 3),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 7,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: r.accent.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(6),
@@ -214,9 +215,7 @@ class const _LoginWithPusula({required final VoidCallback onBaglandi})
                       alpha: TarusOlcu.seciliZeminAlfa,
                     ),
                     borderRadius: const .all(.circular(TarusOlcu.rMd)),
-                    border: Border.all(
-                      color: r.accent.withValues(alpha: 0.18),
-                    ),
+                    border: Border.all(color: r.accent.withValues(alpha: 0.18)),
                   ),
                   child: Icon(
                     ikiAdim ? TarusIkon.guvenlik : TarusIkon.kullanici,

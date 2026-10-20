@@ -94,6 +94,9 @@ Future<void> appRunner(List<String> args) async {
     ),
     stows.locale.waitUntilRead(),
     stows.url.waitUntilRead(),
+    // Giriş zorunlu: yönlendirici ilk ekranı oturuma göre seçer.
+    stows.username.waitUntilRead(),
+    stows.ncPassword.waitUntilRead(),
     stows.allowInsecureConnections.waitUntilRead(),
     PencilShader.init(),
     Printing.info().then((info) {
@@ -241,6 +244,13 @@ class const App({super.key}) extends StatefulWidget {
   });
   static final _router = GoRouter(
     initialLocation: initialLocation,
+    refreshListenable: Listenable.merge([
+      stows.url,
+      stows.username,
+      stows.ncPassword,
+    ]),
+    redirect: (context, state) =>
+        RoutePaths.girisYonlendirmesi(state.matchedLocation),
     routes: <GoRoute>[
       GoRoute(path: '/', redirect: (context, state) => initialLocation),
       GoRoute(
@@ -263,7 +273,11 @@ class const App({super.key}) extends StatefulWidget {
         builder: (context, state) =>
             const BaglamMenusu(modul: 'Giriş', child: NcLoginPage()),
       ),
-      GoRoute(path: '/profile', redirect: (context, state) => RoutePaths.login),
+      GoRoute(
+        path: RoutePaths.profile,
+        builder: (context, state) =>
+            const BaglamMenusu(modul: 'Hesap', child: NcLoginPage()),
+      ),
       GoRoute(
         path: RoutePaths.logs,
         builder: (context, state) =>

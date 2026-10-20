@@ -26,6 +26,8 @@ class const NextcloudProfile({super.key}) extends HookWidget {
     final username = useValueListenable(stows.username);
     final ncPassword = useValueListenable(stows.ncPassword);
     final pfp = useValueListenable(stows.pfp);
+    final gorunenAd = useValueListenable(stows.gorunenAd);
+    final eposta = useValueListenable(stows.eposta);
     final uyari = useValueListenable(EsitlemeUyarisi.son);
 
     final quota = useValueListenable(stows.lastStorageQuota);
@@ -35,18 +37,22 @@ class const NextcloudProfile({super.key}) extends HookWidget {
     final heading = switch (loginStep) {
       .waitingForPrefs => '',
       .nc => t.login.status.loggedOut,
-      .done => t.login.status.hi(u: stows.username.value),
+      .done => t.login.status.hi(
+        u: gorunenAd.isNotEmpty ? gorunenAd : stows.username.value,
+      ),
     };
     final subheading = switch (loginStep) {
       .waitingForPrefs => '',
       .nc => t.login.status.tapToLogin,
-      .done => t.login.status.loggedIn,
+      .done => eposta.isNotEmpty ? eposta : t.login.status.loggedIn,
     };
     const pfpSize = 44.0;
     final r = TarusRenkler.of(context);
 
     return TarusKart(
-      onTap: () => context.push(RoutePaths.login),
+      onTap: () => context.push(
+        loginStep == .done ? RoutePaths.profile : RoutePaths.login,
+      ),
       padding: const .fromLTRB(TarusOlcu.kart, 12, 8, 12),
       child: Row(
         children: [
@@ -116,7 +122,10 @@ class const NextcloudProfile({super.key}) extends HookWidget {
     if (client == null) return stows.lastStorageQuota.value = null;
 
     final user = await client.provisioningApi.users.getCurrentUser();
-    final quotaRaw = user.body.ocs.data.quota;
+    final veri = user.body.ocs.data;
+    stows.gorunenAd.value = veri.displayname;
+    stows.eposta.value = veri.email ?? '';
+    final quotaRaw = veri.quota;
     return stows.lastStorageQuota.value = Quota(quotaRaw);
   }
 }

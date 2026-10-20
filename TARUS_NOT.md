@@ -88,7 +88,21 @@ Not'un ayrı kullanıcı hesabı yoktur; kimlik Pusula'dır.
 
 1.2.0 öncesinde belirteç Pusula Ayarlar'da elle üretilip yapıştırılıyordu; o kurulumlar çıkışa
 kadar çalışır (belirteç biçimi aynı). Elle belirteç alanı bilerek kaldırıldı: Pusula hesabı olan
-herkes e-posta + parolayla girebiliyor, kendi Nextcloud sunucusu için «Başka sunucu» duruyor.
+herkes e-posta + parolayla girebiliyor.
+
+**Giriş zorunlu, sunucu sabit (1.2.0, kullanıcı kararı 2026-10-19):** oturum yokken yönlendirici
+(`RoutePaths.girisYonlendirmesi`) her sayfayı girişe çevirir (yalnız Kayıtlar serbest); «Başka sunucu»
+kalktı, istemci hep `TARUS_NOT_SUNUCU`'ya (varsayılan not.tarus.tr) bağlanır, kayıtlı `url` doluysa
+(eski Nextcloud oturumu) giriş yapılmamış sayılır. Testler taklit sunucuyu
+`NextcloudClientExtension.testSunucusu` ile verir.
+
+**Çıkış (seçenek a):** `NotCikisi.denetle()` sunucu listesini tazeden alıp yerel dosyalarla
+karşılaştırır (sunucu zamanı saniyeye kesilir, yerel de kesilerek ±500 ms). Eşitlenmemiş değişiklikte
+«Eşitle / Yine de çık», sunucuya ulaşılamazsa «denetlenemedi» uyarısı. Çıkışta belirteç bırakılır,
+eşitleme kuyrukları ve kimlik temizlenir, eşitleme kapsamındaki dosyalar (`yoksayilirMi` dışı) ve
+boşalan klasörler doğrudan silinir (sunucuya silme gitmez). Başka hesabın notu cihazda kalmasın diye
+«Yine de çık» eşitlenmemişleri de siler. Hesap kartı Pusula adını/e-postasını `cloud/user`'dan okur
+(`stows.gorunenAd`, `stows.eposta`).
 
 Belirteç Nextcloud istemcisinin uygulama parolası olarak (`Authorization: Bearer`)
 gider; Not sunucusu (`tarusatolye/not`) onu Pusula'ya doğrulatır. Notlar sunucuda
@@ -150,7 +164,13 @@ derlenir (Visual Studio Build Tools gerekir). Build Tools yoksa yerel deneme iç
 çeviren yerel bir kopya kullanılabilir (2026-10-07 turunda böyle çalıştırıldı; commit edilmez).
 
 ## Sürüm notları
-- **1.2.0** (2026-10-14): «Pusula ile giriş» (kullanıcı kararı 2026-10-14). Belirteç yapıştırma
+- **1.2.0** (2026-10-20, yayınlanmadı): ekosisteme tam bağlanma (kullanıcı kararı 2026-10-19): giriş
+  zorunlu (girişsiz kullanım kalktı), «Başka sunucu» ve «güvensiz bağlantılara izin ver» kalktı, çıkışta
+  notlar cihazdan silinir (eşitlenmemiş değişiklikte uyarı), hesap kartında Pusula adı/e-postası, giriş
+  ekranında üst çubuk yok, hesap ekranı `/profile` (54 pt standart üst çubuk). Antigravity'nin
+  80f13791'i derlenmiyordu (`dynamite_runtime` doğrudan bağımlılık değil) — düzeltildi. Emülatörde
+  (taklit Pusula + yerel Not sunucusu) giriş → liste → uyarı → eşitle → çıkış denendi.
+  Önceki adım (2026-10-14): «Pusula ile giriş» (kullanıcı kararı 2026-10-14). Belirteç yapıştırma
   alanı kalktı; giriş kartı Pusula Mobil'deki gibi e-posta + parola, iki adımlı doğrulamada kod
   (`lib/data/nextcloud/pusula_giris.dart`). Akış: `POST {pusula}/auth/giris/` (`X-Client: mobile`,
   `X-Tarus-App: not-mobil`, `X-Device-Name`) → JWT ile `POST /not/belirtecler/ {ad: cihaz modeli}`

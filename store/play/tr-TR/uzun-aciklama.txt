@@ -4,7 +4,7 @@ Kalemle ya da parmağınızla yazın ve çizin: kalemler, vurgulayıcı, şekill
 
 Notlarınız telefonda ve webde (not.tarus.tr) tek listede durur: telefonda yazdığınız not webde, webde açtığınız not telefonda görünür. Aktarım HTTPS ile şifrelidir; Not sunucusu notları diskte ve yedekte şifreli saklar. Ayrı bir şifreleme parolası gerekmez.
 
-Not'un ayrı bir hesabı yoktur: Pusula hesabınızla giriş yaparsınız. Cihazın erişimini çıkış yaparak ya da Pusula › Hesap › Bağlı cihazlar'dan istediğiniz an kaldırabilirsiniz; cihaz en geç 30 saniye içinde eşitlemeyi bırakır. Notlar cihazlarınız arasında eşitlenir; aynı not iki yerde değişirse eski sürüm kaybolmaz, çakışma kopyası olarak saklanır.
+Not'un ayrı bir hesabı yoktur: yalnız Pusula hesabınızla giriş yaparak kullanılır. Çıkış yaptığınızda notlar bu cihazdan silinir ve not.tarus.tr'de kalır; eşitlenmemiş değişiklik varsa uygulama önce uyarır. Cihazın erişimini çıkış yaparak ya da Pusula › Hesap › Bağlı cihazlar'dan istediğiniz an kaldırabilirsiniz; cihaz en geç 30 saniye içinde eşitlemeyi bırakır. Notlar cihazlarınız arasında eşitlenir; aynı not iki yerde değişirse eski sürüm kaybolmaz, çakışma kopyası olarak saklanır.
 
 İç içe klasörlerle düzenleyin, son notlarınızı ana ekranda bulun, sorunları uygulamanın içinden bildirin (Ayarlar › Hata bildir ya da boş bir yere basılı tutun).
 

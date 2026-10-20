@@ -88,38 +88,50 @@ class _NcLoginPageState extends State<NcLoginPage> {
   @override
   Widget build(BuildContext context) {
     final r = TarusRenkler.of(context);
+    final geriVar = widget.forceAppBarLeading || Navigator.of(context).canPop();
+    // Giriş zorunlu: açılıştaki giriş ekranında üst çubuk yok, marka
+    // başlığı NcLoginStep'te.
+    final ustCubukYok = step == .nc && !geriVar;
     return Scaffold(
       backgroundColor: r.bg,
-      appBar: AppBar(
-        toolbarHeight: kToolbarHeight,
-        elevation: 0,
-        backgroundColor: r.bg,
-        surfaceTintColor: Colors.transparent,
-        title: Text(
-          switch (step) {
-            .waitingForPrefs => '',
-            .done => t.profile.title,
-            _ => t.login.title,
-          },
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-            color: r.text,
-          ),
-        ),
-        leading: widget.forceAppBarLeading || Navigator.of(context).canPop()
-            ? Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: IconButton(
-                  icon: Icon(TarusIkon.geri, color: r.text),
-                  onPressed: () => Navigator.of(context).pop(),
+      appBar: ustCubukYok
+          ? null
+          : AppBar(
+              // Mobil standart üst çubuk: 54 pt, başlık 17/700, alt kenarlık.
+              toolbarHeight: 54,
+              elevation: 0,
+              backgroundColor: r.bg,
+              surfaceTintColor: Colors.transparent,
+              shape: Border(bottom: BorderSide(color: r.border)),
+              title: Text(
+                switch (step) {
+                  .waitingForPrefs => '',
+                  .done => t.profile.title,
+                  _ => t.login.title,
+                },
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                  color: r.text,
                 ),
-              )
-            : null,
-      ),
+              ),
+              leading: geriVar
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: IconButton(
+                        icon: Icon(TarusIkon.geri, color: r.text),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
+                    )
+                  : null,
+            ),
       body: switch (step) {
-        .waitingForPrefs => Center(child: CircularProgressIndicator(color: r.accent)),
-        .nc => NcLoginStep(recheckCurrentStep: recheckCurrentStep),
+        .waitingForPrefs => Center(
+          child: CircularProgressIndicator(color: r.accent),
+        ),
+        .nc => SafeArea(
+          child: NcLoginStep(recheckCurrentStep: recheckCurrentStep),
+        ),
         .done => DoneLoginStep(recheckCurrentStep: recheckCurrentStep),
       },
     );
