@@ -18,6 +18,9 @@ abstract final class TarusOlcu {
   /// Standart kart (`--r-xl`, ui.radius.card).
   static const rKart = 14.0;
 
+  /// Düğme ve giriş alanı (Arkiv/Sistem Mobil `borderRadius: 14`).
+  static const rHap = 14.0;
+
   /// Hero / büyük kart (ui.radius.hero).
   static const rHero = 16.0;
 

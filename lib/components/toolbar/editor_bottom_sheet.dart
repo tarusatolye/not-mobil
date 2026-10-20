@@ -111,7 +111,7 @@ class _EditorBottomSheetState extends State<EditorBottomSheet> {
       ),
       child: ListView(
         shrinkWrap: true,
-        padding: const .fromLTRB(16, 0, 16, 16),
+        padding: EdgeInsets.zero,
         children: [
           Wrap(
             spacing: TarusOlcu.aralik,

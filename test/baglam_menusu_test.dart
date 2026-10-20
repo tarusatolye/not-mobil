@@ -58,7 +58,7 @@ void main() {
     expect(find.text('Hata bildir'), findsOneWidget);
     expect(find.text('Vazgeç'), findsOneWidget);
 
-    await tester.tap(find.text('Hata bildir'));
+    await tester.tap(find.text('Bildir'));
     await tester.pumpAndSettle();
     expect(find.byType(HataBildirSayfasi), findsOneWidget);
     expect(find.text('Ekran: Deneme'), findsOneWidget);

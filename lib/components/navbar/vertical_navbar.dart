@@ -29,7 +29,7 @@ class const VerticalNavbar({
       padding: const EdgeInsets.all(TarusOlcu.aralik),
       child: Container(
         decoration: BoxDecoration(
-          color: r.surface,
+          color: r.card,
           borderRadius: BorderRadius.circular(TarusOlcu.rKart),
           border: Border.all(color: r.bdr2),
           boxShadow: r.elev1,

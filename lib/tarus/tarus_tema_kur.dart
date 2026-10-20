@@ -36,7 +36,9 @@ abstract final class TarusTemaKur {
     final acik = tema.acik;
 
     final kartKenari = BorderSide(color: r.border);
-    const kucukKose = BorderRadius.all(Radius.circular(TarusOlcu.rSm));
+    // Düğme ve giriş alanı köşesi 14 px (Arkiv/Sistem Mobil standardı,
+    // kullanıcı kararı 2026-10-20).
+    const kucukKose = BorderRadius.all(Radius.circular(TarusOlcu.rHap));
     const dugmeKose = RoundedRectangleBorder(borderRadius: kucukKose);
     final dugmeYazisi = yazi.labelLarge;
 
@@ -343,7 +345,7 @@ abstract final class TarusTemaKur {
         radius: const Radius.circular(4),
       ),
       navigationRailTheme: NavigationRailThemeData(
-        backgroundColor: r.surface,
+        backgroundColor: r.bg,
         indicatorColor: r.accent.withValues(alpha: TarusOlcu.seciliZeminAlfa),
         selectedIconTheme: IconThemeData(color: r.accent),
         unselectedIconTheme: IconThemeData(color: r.muted),

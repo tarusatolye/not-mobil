@@ -333,6 +333,9 @@ class Translations$tarus$en {
 
 	// Translations
 
+	/// en: 'Note menu'
+	String get notMenusu => 'Note menu';
+
 	/// en: 'Create'
 	String get olustur => 'Create';
 

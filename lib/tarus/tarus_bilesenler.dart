@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
 import 'package:saber/tarus/tarus_olcu.dart';
 import 'package:saber/tarus/tarus_renkler.dart';
@@ -349,11 +350,11 @@ class TarusSayfaUstu extends StatelessWidget {
                   width: 36,
                   height: 36,
                   decoration: BoxDecoration(
-                    color: r.accent.withValues(alpha: TarusOlcu.seciliZeminAlfa),
-                    borderRadius: BorderRadius.circular(TarusOlcu.rMd),
-                    border: Border.all(
-                      color: r.accent.withValues(alpha: 0.18),
+                    color: r.accent.withValues(
+                      alpha: TarusOlcu.seciliZeminAlfa,
                     ),
+                    borderRadius: BorderRadius.circular(TarusOlcu.rMd),
+                    border: Border.all(color: r.accent.withValues(alpha: 0.18)),
                   ),
                   padding: const EdgeInsets.all(7),
                   child: const TarusNotIsareti(boyut: 20),
@@ -406,23 +407,290 @@ class TarusSayfaUstu extends StatelessWidget {
 }
 
 /// Pencere düğmesi (Saber'in `CupertinoDialogAction` yerine).
-/// [isDestructiveAction] tehlike rengi, [isDefaultAction] ya da birden çok
-/// düğmede sonuncusu birincil (dolu vurgu) çizilir.
+///
+/// Arkiv/Sistem Mobil standardı (kullanıcı kararı 2026-10-20): 14 px hap,
+/// [isDestructiveAction] dolu tehlike rengi, İptal/Vazgeç ([isCancelAction]
+/// ya da metni «İptal»/«Vazgeç») kırmızı kontur + yumuşak zemin,
+/// [isDefaultAction] ya da birden çok düğmede sonuncusu dolu vurgu,
+/// ötekiler nötr (`--input-bg` + kenarlık).
 class TarusDialogDugmesi {
   const new({
     required this.child,
     required this.onPressed,
     this.isDestructiveAction = false,
     this.isDefaultAction = false,
+    this.isCancelAction = false,
   });
 
   final Widget child;
   final VoidCallback? onPressed;
-  final bool isDestructiveAction, isDefaultAction;
+  final bool isDestructiveAction, isDefaultAction, isCancelAction;
+
+  static const _iptalMetinleri = {'iptal', 'vazgeç', 'cancel'};
+
+  /// İptal düğmesi mi (bayrak ya da metin).
+  bool get iptalMi {
+    if (isCancelAction) return true;
+    final c = child;
+    if (c is! Text) return false;
+    final metin = c.data?.trim().toLowerCase();
+    return metin != null &&
+        (_iptalMetinleri.contains(metin) ||
+            metin == t.common.cancel.toLowerCase());
+  }
+}
+
+/// Düğme dizilişi (Arkiv `Notice`): bir düğme tam genişlik; iki düğme yan
+/// yana; üç ve daha çok düğme alt alta, İptal en altta.
+class const TarusDugmeSirasi(
+  final List<TarusDialogDugmesi> dugmeler, {
+  super.key,
+}) extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final r = TarusRenkler.of(context);
+    final acik = Theme.brightnessOf(context) == Brightness.light;
+    if (dugmeler.length <= 2) {
+      return Row(
+        children: [
+          for (var i = 0; i < dugmeler.length; i++) ...[
+            if (i > 0) const SizedBox(width: 10),
+            Expanded(
+              child: _dugme(r, acik, dugmeler[i], i == dugmeler.length - 1),
+            ),
+          ],
+        ],
+      );
+    }
+    final iptaller = dugmeler.where((d) => d.iptalMi).toList();
+    final digerleri = dugmeler.where((d) => !d.iptalMi).toList();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        for (var i = 0; i < digerleri.length; i++) ...[
+          if (i > 0) const SizedBox(height: 8),
+          _dugme(r, acik, digerleri[i], i == digerleri.length - 1),
+        ],
+        for (final d in iptaller) ...[
+          const SizedBox(height: 12),
+          _dugme(r, acik, d, false),
+        ],
+      ],
+    );
+  }
+
+  Widget _dugme(TarusRenkler r, bool acik, TarusDialogDugmesi d, bool sonuncu) {
+    const kose = RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(14)),
+    );
+    const yazi = TextStyle(fontSize: 14, fontWeight: FontWeight.w700);
+    const boyut = Size.fromHeight(46);
+    if (d.isDestructiveAction) {
+      return FilledButton(
+        onPressed: d.onPressed,
+        style: FilledButton.styleFrom(
+          backgroundColor: r.danger,
+          foregroundColor: Colors.white,
+          minimumSize: boyut,
+          shape: kose,
+          textStyle: yazi,
+        ),
+        child: d.child,
+      );
+    }
+    if (d.iptalMi) {
+      return OutlinedButton(
+        onPressed: d.onPressed,
+        style: OutlinedButton.styleFrom(
+          foregroundColor: r.danger,
+          backgroundColor: r.danger.withValues(alpha: acik ? 0.04 : 0.08),
+          side: BorderSide(color: r.danger),
+          minimumSize: boyut,
+          shape: kose,
+          textStyle: yazi,
+        ),
+        child: d.child,
+      );
+    }
+    if (d.isDefaultAction || sonuncu) {
+      return FilledButton(
+        onPressed: d.onPressed,
+        style: FilledButton.styleFrom(
+          minimumSize: boyut,
+          shape: kose,
+          textStyle: yazi,
+        ),
+        child: d.child,
+      );
+    }
+    return OutlinedButton(
+      onPressed: d.onPressed,
+      style: OutlinedButton.styleFrom(
+        foregroundColor: r.text,
+        backgroundColor: r.inputBg,
+        side: BorderSide(color: r.border),
+        minimumSize: boyut,
+        shape: kose,
+        textStyle: yazi,
+      ),
+      child: d.child,
+    );
+  }
+}
+
+/// Onay penceresi (Arkiv/Sistem Mobil `Notice.confirm` karşılığı): ortada,
+/// köşe 24, üstte 52 px yuvarlak ikon rozeti, ortalı başlık 17,5 / 800 ve
+/// açıklama, altta [TarusDugmeSirasi]. Kapat düğmesi ve başlık çizgisi yok.
+class TarusOnay extends StatelessWidget {
+  const new({
+    super.key,
+    required this.baslik,
+    this.mesaj,
+    this.ikon = TarusIkon.uyari,
+    this.renk,
+    this.rozet,
+    this.dugmeler = const [],
+  });
+
+  final String baslik;
+  final String? mesaj;
+  final IconData ikon;
+
+  /// Rozet rengi (varsayılan vurgu). Silme/çıkış için `r.danger`, uyarı için
+  /// `r.warning`.
+  final Color? renk;
+
+  /// İkon yerine rozetin içine konacak öğe (ör. ilerleme göstergesi).
+  final Widget? rozet;
+  final List<TarusDialogDugmesi> dugmeler;
+
+  @override
+  Widget build(BuildContext context) {
+    final r = TarusRenkler.of(context);
+    final c = renk ?? r.accent;
+    return Dialog(
+      backgroundColor: r.card,
+      insetPadding: const EdgeInsets.all(24),
+      shape: RoundedRectangleBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(24)),
+        side: BorderSide(color: r.border),
+      ),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 350),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(22, 24, 22, 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Center(
+                child: Container(
+                  width: 52,
+                  height: 52,
+                  decoration: BoxDecoration(
+                    color: c.withValues(alpha: 0.14),
+                    shape: BoxShape.circle,
+                  ),
+                  alignment: Alignment.center,
+                  child: rozet ?? Icon(ikon, size: 25, color: c),
+                ),
+              ),
+              const SizedBox(height: 14),
+              Semantics(
+                header: true,
+                child: Text(
+                  baslik,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 17.5,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -0.3,
+                    color: r.text,
+                  ),
+                ),
+              ),
+              if (mesaj != null) ...[
+                const SizedBox(height: 8),
+                Text(
+                  mesaj!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 13.5,
+                    height: 1.48,
+                    color: r.muted2,
+                  ),
+                ),
+              ],
+              if (dugmeler.isNotEmpty) ...[
+                const SizedBox(height: 20),
+                TarusDugmeSirasi(dugmeler),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Seçenek ızgarası düğmesi (Arkiv eylem menüsü `renderMenuBtn`): ikon +
+/// etiket, köşe 12, `--input-bg` zemin; [tehlike] kırmızı kontur.
+class const TarusSecenekDugmesi({
+  super.key,
+  required final IconData ikon,
+  required final String etiket,
+  required final VoidCallback onTap,
+  final bool tehlike = false,
+}) extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final r = TarusRenkler.of(context);
+    final acik = Theme.brightnessOf(context) == Brightness.light;
+    final renk = tehlike ? r.danger : r.text;
+    const kose = BorderRadius.all(Radius.circular(12));
+    return Material(
+      color: tehlike
+          ? r.danger.withValues(alpha: acik ? 0.04 : 0.08)
+          : r.inputBg,
+      shape: RoundedRectangleBorder(
+        borderRadius: kose,
+        side: BorderSide(color: tehlike ? r.danger : r.border),
+      ),
+      child: InkWell(
+        borderRadius: kose,
+        onTap: onTap,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: 46),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+            child: Row(
+              children: [
+                Icon(ikon, size: 17, color: renk),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    etiket,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 12.5,
+                      fontWeight: tehlike ? FontWeight.w700 : FontWeight.w600,
+                      color: renk,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 /// tarus penceresi (STANDARTLAR §tarusDialog, köşe 22 Pusula Mobil modal):
-/// başlık 16 px / 700 ve kapat düğmesi, gövde, sağa hizalı düğmeler.
+/// başlık 16 px / 700 ve kapat düğmesi, gövde, [TarusDugmeSirasi] düğmeleri.
+/// Form ve seçim pencereleri içindir; onay/uyarı için [TarusOnay].
 class TarusDialog extends StatelessWidget {
   const new({
     super.key,
@@ -494,39 +762,12 @@ class TarusDialog extends StatelessWidget {
             if (actions.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
-                child: Wrap(
-                  alignment: WrapAlignment.end,
-                  spacing: TarusOlcu.aralik,
-                  runSpacing: TarusOlcu.aralik,
-                  children: [
-                    for (var i = 0; i < actions.length; i++)
-                      _dugme(context, r, actions[i], i == actions.length - 1),
-                  ],
-                ),
+                child: TarusDugmeSirasi(actions),
               ),
           ],
         ),
       ),
     );
-  }
-
-  Widget _dugme(
-    BuildContext context,
-    TarusRenkler r,
-    TarusDialogDugmesi d,
-    bool sonuncu,
-  ) {
-    if (d.isDestructiveAction) {
-      return FilledButton(
-        onPressed: d.onPressed,
-        style: FilledButton.styleFrom(backgroundColor: r.danger),
-        child: d.child,
-      );
-    }
-    if (d.isDefaultAction || (sonuncu && actions.length > 1)) {
-      return FilledButton(onPressed: d.onPressed, child: d.child);
-    }
-    return OutlinedButton(onPressed: d.onPressed, child: d.child);
   }
 }
 

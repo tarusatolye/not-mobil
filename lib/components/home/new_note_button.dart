@@ -5,12 +5,12 @@ import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/data/routes.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/editor/editor.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
-import 'package:saber/tarus/tarus_olcu.dart';
 import 'package:saber/tarus/tarus_renkler.dart';
 
 /// Ortadaki «+» (Pusula Mobil hızlı ekle): dokununca «Yeni not» ve
-/// «Not içeri aktar» seçeneklerini alt sayfada açar. Saber'in açılır
+/// «Not içeri aktar» seçeneklerini ortalı pencerede açar. Saber'in açılır
 /// SpeedDial düğmesinin yerine.
 class const YeniNotDugmesi({
   super.key,
@@ -46,48 +46,54 @@ class const YeniNotDugmesi({
     );
   }
 
-  /// «Yeni» alt sayfası.
+  /// «Oluştur» penceresi: ortalı, iki sütunlu seçenek ızgarası (Arkiv eylem
+  /// menüsü). Alttan açılan sayfa kullanılmaz (ekosistem standardı).
   static Future<void> menuyuAc(BuildContext context, String? klasor) {
-    return showModalBottomSheet<void>(
+    return showDialog<void>(
       context: context,
-      isScrollControlled: true,
-      constraints: const BoxConstraints(maxWidth: 520),
-      builder: (sayfa) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-          child: Column(
+      builder: (pencere) {
+        final r = TarusRenkler.of(pencere);
+        return TarusDialog(
+          title: Text(t.tarus.olustur),
+          genislik: 420,
+          content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 4, bottom: 12),
-                child: Text(
-                  t.tarus.olustur,
-                  style: Theme.of(sayfa).textTheme.titleMedium,
-                ),
+              Row(
+                children: [
+                  Expanded(
+                    child: TarusSecenekDugmesi(
+                      ikon: TarusIkon.yeniNot,
+                      etiket: t.home.create.newNote,
+                      onTap: () {
+                        Navigator.of(pencere).pop();
+                        yeniNot(context, klasor);
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: TarusSecenekDugmesi(
+                      ikon: TarusIkon.notIceAktar,
+                      etiket: t.home.create.importNote,
+                      onTap: () {
+                        Navigator.of(pencere).pop();
+                        iceAktar(context, klasor);
+                      },
+                    ),
+                  ),
+                ],
               ),
-              _Secenek(
-                ikon: TarusIkon.yeniNot,
-                baslik: t.home.create.newNote,
-                onTap: () {
-                  Navigator.of(sayfa).pop();
-                  yeniNot(context, klasor);
-                },
-              ),
-              const SizedBox(height: TarusOlcu.aralik),
-              _Secenek(
-                ikon: TarusIkon.notIceAktar,
-                baslik: t.home.create.importNote,
-                aciklama: '.sbn2, .sbn, .sba, .pdf',
-                onTap: () {
-                  Navigator.of(sayfa).pop();
-                  iceAktar(context, klasor);
-                },
+              const SizedBox(height: 10),
+              Text(
+                '${t.home.create.importNote}: .sbn2, .sbn, .sba, .pdf',
+                style: TextStyle(fontSize: 11.5, color: r.muted),
               ),
             ],
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -132,67 +138,5 @@ class const YeniNotDugmesi({
       }
       throw 'Invalid file type';
     }
-  }
-}
-
-class const _Secenek({
-  required final IconData ikon,
-  required final String baslik,
-  final String? aciklama,
-  required final VoidCallback onTap,
-}) extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final r = TarusRenkler.of(context);
-    final radius = BorderRadius.circular(TarusOlcu.rHero);
-    return Material(
-      color: r.surface,
-      shape: RoundedRectangleBorder(
-        borderRadius: radius,
-        side: BorderSide(color: r.border),
-      ),
-      child: InkWell(
-        borderRadius: radius,
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Row(
-            children: [
-              Container(
-                width: 38,
-                height: 38,
-                decoration: BoxDecoration(
-                  color: r.accent.withValues(alpha: 0x18 / 0xFF),
-                  borderRadius: BorderRadius.circular(TarusOlcu.rLg),
-                ),
-                child: Icon(ikon, size: 19, color: r.accent),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      baslik,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: r.text,
-                      ),
-                    ),
-                    if (aciklama != null)
-                      Text(
-                        aciklama!,
-                        style: TextStyle(fontSize: 12, color: r.muted),
-                      ),
-                  ],
-                ),
-              ),
-              Icon(TarusIkon.ileri, size: 16, color: r.muted),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

@@ -45,18 +45,26 @@ class DoneLoginStep extends StatelessWidget {
         cikis.esitlenmemisAciklama(n: denetim.notSayisi),
       ),
     };
+    final r = TarusRenkler.of(context);
     final secim = await showDialog<_CikisSecimi>(
       context: context,
-      builder: (context) => TarusDialog(
-        title: Text(baslik),
-        content: Text(metin),
-        actions: [
+      builder: (context) => TarusOnay(
+        baslik: baslik,
+        mesaj: metin,
+        ikon: denetim.temiz
+            ? TarusIkon.cikis
+            : denetim.sunucuyaUlasildi
+            ? TarusIkon.uyari
+            : TarusIkon.bulutKapali,
+        renk: denetim.temiz ? r.danger : r.warning,
+        dugmeler: [
           TarusDialogDugmesi(
             onPressed: () => Navigator.of(context).pop(),
             child: Text(t.common.cancel),
           ),
           if (!denetim.temiz && denetim.sunucuyaUlasildi)
             TarusDialogDugmesi(
+              isDefaultAction: true,
               onPressed: () => Navigator.of(context).pop(_CikisSecimi.esitle),
               child: Text(cikis.esitle),
             ),
@@ -95,17 +103,12 @@ class DoneLoginStep extends StatelessWidget {
         barrierDismissible: false,
         builder: (context) => PopScope(
           canPop: false,
-          child: TarusDialog(
-            title: Text(t.tarus.cikis.baslik),
-            content: Row(
-              children: [
-                const SizedBox.square(
-                  dimension: 20,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                ),
-                const SizedBox(width: 14),
-                Expanded(child: Text(t.tarus.cikis.denetleniyor)),
-              ],
+          child: TarusOnay(
+            baslik: t.tarus.cikis.baslik,
+            mesaj: t.tarus.cikis.denetleniyor,
+            rozet: const SizedBox.square(
+              dimension: 22,
+              child: CircularProgressIndicator(strokeWidth: 2.2),
             ),
           ),
         ),
@@ -292,7 +295,7 @@ class DoneLoginStep extends StatelessWidget {
                           vertical: 11,
                         ),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(TarusOlcu.rMd),
+                          borderRadius: BorderRadius.circular(TarusOlcu.rHap),
                         ),
                       ),
                       onPressed: () => launchUrl(TarusBaglantilar.notWeb),
@@ -311,7 +314,7 @@ class DoneLoginStep extends StatelessWidget {
                         vertical: 11,
                       ),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(TarusOlcu.rMd),
+                        borderRadius: BorderRadius.circular(TarusOlcu.rHap),
                       ),
                     ),
                     onPressed: _resyncAll,
@@ -332,18 +335,26 @@ class DoneLoginStep extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // Çıkış: kırmızı kontur + yumuşak zemin, 14 px hap (Arkiv/Sistem).
               OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(
                   minimumSize: const Size.fromHeight(46),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(TarusOlcu.rMd),
+                  foregroundColor: r.danger,
+                  backgroundColor: r.danger.withValues(
+                    alpha: Theme.brightnessOf(context) == Brightness.light
+                        ? 0.04
+                        : 0.08,
+                  ),
+                  side: BorderSide(color: r.danger),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(14)),
                   ),
                 ),
                 onPressed: () => _confirmLogout(context),
                 icon: const Icon(TarusIkon.cikis, size: 18),
                 label: Text(
                   t.profile.logout,
-                  style: const TextStyle(fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontWeight: FontWeight.w700),
                 ),
               ),
               const SizedBox(height: 10),
@@ -352,8 +363,8 @@ class DoneLoginStep extends StatelessWidget {
                   minimumSize: const Size.fromHeight(44),
                   foregroundColor: r.danger,
                   side: BorderSide(color: r.danger.withValues(alpha: 0.4)),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(TarusOlcu.rMd),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(14)),
                   ),
                 ),
                 onPressed: () => HesapSilmeDialog.goster(context),

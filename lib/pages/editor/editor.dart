@@ -1695,12 +1695,16 @@ class EditorState extends State<Editor> {
                     icon: const Icon(TarusIkon.dahaFazla),
                     tooltip: MaterialLocalizations.of(context).showMenuTooltip,
                     onPressed: () {
-                      showModalBottomSheet(
+                      // Alttan açılan sayfa yok (ekosistem standardı):
+                      // ortalı pencere.
+                      showDialog<void>(
                         context: context,
-                        builder: (context) => bottomSheet(context),
-                        isScrollControlled: true,
-                        showDragHandle: true,
-                        constraints: const BoxConstraints(maxWidth: 500),
+                        builder: (context) => TarusDialog(
+                          title: Text(t.tarus.notMenusu),
+                          kaydir: false,
+                          genislik: 500,
+                          content: bottomSheet(context),
+                        ),
                       );
                     },
                   ),

@@ -350,6 +350,7 @@ editor:
   untitled: İsimsiz
   needsToSaveBeforeExiting: Değişiklikler kaydediliyor… kayıt tamamlandığında editörden güvenli biçimde çıkabilirsiniz.
 tarus:
+  notMenusu: Not menüsü
   olustur: Oluştur
   sonNotlar: Son notlar
   klasorler: Klasörler

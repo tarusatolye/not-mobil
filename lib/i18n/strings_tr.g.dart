@@ -240,6 +240,7 @@ class _Translations$tarus$tr extends Translations$tarus$en {
 	final TranslationsTr _root; // ignore: unused_field
 
 	// Translations
+	@override String get notMenusu => 'Not menüsü';
 	@override String get olustur => 'Oluştur';
 	@override String get sonNotlar => 'Son notlar';
 	@override String get klasorler => 'Klasörler';

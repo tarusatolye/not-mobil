@@ -1,13 +1,15 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:saber/pages/user/hata_bildir_sayfasi.dart';
+import 'package:saber/tarus/tarus_bilesenler.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
+import 'package:saber/tarus/tarus_renkler.dart';
 
 /// Basılı tutma menüsü: web'deki sağ tık menüsünün mobil karşılığı
 /// (pusula-mobil ve posta-mobil `BaglamMenusu` ile aynı davranış).
 ///
-/// Ekranın boş bir yerinde parmak ~0,7 sn kıpırdamadan basılı tutulunca alttan
-/// "Hata bildir" menüsü açılır. Tanıyıcı Flutter hareket yarışına katılır:
+/// Ekranın boş bir yerinde parmak ~0,7 sn kıpırdamadan basılı tutulunca ortada
+/// "Hata bildir" onayı açılır (alttan açılan sayfa yok, ekosistem standardı). Tanıyıcı Flutter hareket yarışına katılır:
 /// kaydırma, dokunma ve kendi basılı tutma işlevi olan öğeler (not kartı
 /// seçimi, ayarı sıfırlama, metin seçimi) önce kazanır, o dokunuşta menü
 /// açılmaz. Yazı alanı odaklıysa da açılmaz.
@@ -38,30 +40,25 @@ class BaglamMenusu extends StatelessWidget {
   }
 
   static Future<void> menuyuAc(BuildContext context, String modul) async {
-    final renk = Theme.of(context).colorScheme;
-    final secim = await showModalBottomSheet<bool>(
+    final r = TarusRenkler.of(context);
+    final secim = await showDialog<bool>(
       context: context,
-      showDragHandle: true,
-      useSafeArea: true,
-      builder: (context) => SafeArea(
-        child: Column(
-          mainAxisSize: .min,
-          children: [
-            ListTile(
-              leading: Icon(TarusIkon.hataBildir, color: renk.error),
-              title: Text(
-                'Hata bildir',
-                style: TextStyle(color: renk.error, fontWeight: .w600),
-              ),
-              onTap: () => Navigator.of(context).pop(true),
-            ),
-            ListTile(
-              leading: const Icon(TarusIkon.kapat),
-              title: const Text('Vazgeç'),
-              onTap: () => Navigator.of(context).pop(false),
-            ),
-          ],
-        ),
+      builder: (context) => TarusOnay(
+        baslik: 'Hata bildir',
+        mesaj: '«$modul» ekranıyla ilgili bir sorunu bildirmek ister misiniz?',
+        ikon: TarusIkon.hataBildir,
+        renk: r.danger,
+        dugmeler: [
+          TarusDialogDugmesi(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Vazgeç'),
+          ),
+          TarusDialogDugmesi(
+            isDefaultAction: true,
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Bildir'),
+          ),
+        ],
       ),
     );
     if (secim != true || !context.mounted) return;
