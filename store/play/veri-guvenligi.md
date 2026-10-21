@@ -37,6 +37,7 @@ sunucularında), **geçici işlenmiyor** (saklanıyor), reklam/pazarlama/analiti
 - Notlar sunucuda diskte ve yedekte şifreli saklanır (saklama şifrelemesi; uçtan uca değil, 1.1.6).
 - Kullanıcı eşitleme erişimini çıkış yaparak ya da Pusula › Hesap › Bağlı cihazlar'dan anında kaldırabilir.
 - Çıkışta notlar, ad ve e-posta cihazdan silinir (eşitlenmemiş değişiklik varsa önce uyarılır).
+  Girişte «Beni Hatırla» seçildiyse yalnız giriş e-postası cihazda kalır (şifre hiç saklanmaz).
 - Reklam, analitik ve üçüncü taraf izleme SDK'sı yok.
 
 ## Kullanıcının yapacakları
@@ -65,5 +66,8 @@ sunucularında), **geçici işlenmiyor** (saklanıyor), reklam/pazarlama/analiti
 5. **Uygulama erişimi (oturum açma bilgileri)** — Not artık girişsiz açılmıyor: «Uygulamanın tüm
    işlevleri kısıtlı»; inceleme hesabı Pusula e-posta + parolası (eskiden parola alanında eşitleme
    belirteci vardı — belirteç artık girilemez, Pusula parolası girilir).
-6. **Mağaza girişi** — kısa açıklama aynı; uzun açıklama ve «Yenilikler» `store/play/tr-TR/`'den
+6. **Beni Hatırla (f9884df4, 2026-10-20)** — giriş e-postası istenirse yalnız cihazda saklanır,
+   sunucuya ayrıca gitmez: Play anlamında «toplama» değil, formda değişiklik gerekmez. Güvenlik
+   uygulamaları metninde «çıkışta e-posta silinir» cümlesi bu istisnayla yazılır (yukarıda).
+7. **Mağaza girişi** — kısa açıklama aynı; uzun açıklama ve «Yenilikler» `store/play/tr-TR/`'den
    yeniden yapıştırılır. Ekran görüntüleri 1.1.4 arayüzünü gösteriyor, ayrıca yenilenmeli.
