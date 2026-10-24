@@ -1,3 +1,4 @@
+• Notlar sayfasındaki arama düğmesiyle tüm not ve klasörleri ada göre arayın (ışık/isik gibi Türkçe harfler fark etmez)
 • Not yalnız Pusula hesabınızla kullanılır; e-posta ve parolanızla giriş yapın
 • Çıkış yapınca notlar bu cihazdan silinir, not.tarus.tr'de kalır; eşitlenmemiş değişiklikte önce uyarı
 • Hesap kartında Pusula adınız ve e-postanız görünür
