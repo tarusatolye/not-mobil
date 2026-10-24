@@ -1,4 +1,2 @@
-• Not yalnız Pusula hesabınızla kullanılır; e-posta ve parolanızla giriş yapın
-• Çıkış yapınca notlar bu cihazdan silinir, not.tarus.tr'de kalır; eşitlenmemiş değişiklikte önce uyarı
-• Hesap kartında Pusula adınız ve e-postanız görünür
-• Kaybolan cihazı Pusula › Hesap › Bağlı cihazlar'dan kaldırabilirsiniz
+• Notlar Pusula projelerine bağlanabiliyor; seçili notu projeye bağlayabilir, kartında proje etiketini görebilirsiniz
+• Pusula proje sayfasındaki eskiz bağlantılarına dokunulduğunda not doğrudan uygulamada açılır

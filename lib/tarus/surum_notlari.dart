@@ -10,6 +10,14 @@ const ilkYayin = '2 Ekim 2026';
 
 const surumNotlari = <SurumNotu>[
   SurumNotu(
+    '1.3.0',
+    '24 Ekim 2026',
+    'Notlar artık Pusula projelerine bağlanabiliyor; seçili notu projeye '
+        'bağlayabilir, kartında proje etiketini görebilirsiniz. Pusula proje '
+        'sayfasındaki eskiz bağlantılarına dokunulduğunda not doğrudan '
+        'uygulamada açılır.',
+  ),
+  SurumNotu(
     '1.2.0',
     '20 Ekim 2026',
     'Not artık yalnız Pusula hesabıyla kullanılıyor: e-posta ve parolanızla '
