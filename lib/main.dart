@@ -267,6 +267,32 @@ class const App({super.key}) extends StatefulWidget {
           pdfPath: state.uri.queryParameters['pdfPath'],
         ),
       ),
+      // Pusula proje sayfasından eskiz açma (/proje/<projeId>/<sahip>/<yol>)
+      GoRoute(
+        path: '/proje/:projeId/:sahip/:yol',
+        builder: (context, state) {
+          final hamYol = state.pathParameters['yol'] ?? '';
+          final yol = hamYol.startsWith('/') ? hamYol : '/$hamYol';
+          return Editor(
+            path: yol,
+            customTitle: p.basenameWithoutExtension(yol),
+          );
+        },
+      ),
+      GoRoute(
+        path: '/proje/:projeId/:sahip',
+        builder: (context, state) {
+          final hamYol = state.uri.queryParameters['path'] ??
+              state.uri.queryParameters['yol'] ??
+              '';
+          final yol = hamYol.startsWith('/') ? hamYol : '/$hamYol';
+          return Editor(
+            path: yol.isNotEmpty ? yol : null,
+            customTitle:
+                yol.isNotEmpty ? p.basenameWithoutExtension(yol) : null,
+          );
+        },
+      ),
       GoRoute(
         path: RoutePaths.login,
         // tarus: basılı tutunca Hata bildir (düzenleyici çizim yüzeyi, sarılmaz).

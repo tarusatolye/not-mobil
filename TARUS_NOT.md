@@ -164,6 +164,11 @@ derlenir (Visual Studio Build Tools gerekir). Build Tools yoksa yerel deneme iç
 çeviren yerel bir kopya kullanılabilir (2026-10-07 turunda böyle çalıştırıldı; commit edilmez).
 
 ## Sürüm notları
+- **1.3.0** (2026-10-24): web eşliği — Pusula projesine bağlama ve projeden açma (FKR-0048).
+  Notlar Pusula projelerine bağlanabilir, kartta proje etiketi ve ikonu gösterilir;
+  Pusula proje sayfasındaki eskiz bağlantılarına dokunulduğunda doğrudan düzenleyicide
+  açılır (`/proje/<projeId>/<sahip>/<yol>`, Android intent-filter ve `tarus-not://`
+  derin bağlantısı).
 - **1.2.0** (2026-10-20, yayınlanmadı): ekosisteme tam bağlanma (kullanıcı kararı 2026-10-19): giriş
   zorunlu (girişsiz kullanım kalktı), «Başka sunucu» ve «güvensiz bağlantılara izin ver» kalktı, çıkışta
   notlar cihazdan silinir (eşitlenmemiş değişiklikte uyarı), hesap kartında Pusula adı/e-postası, giriş

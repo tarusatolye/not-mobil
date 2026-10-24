@@ -15,6 +15,18 @@ abstract class RoutePaths {
   static const profile = '/profile';
   static const logs = '/logs';
 
+  /// Pusula proje eskizi yolu: `/proje/:projeId/:sahip/:yol`
+  static const projeEskiz = '/proje/:projeId/:sahip';
+
+  static String projeEskizYolu({
+    required String projeId,
+    required String sahip,
+    required String yol,
+  }) {
+    final temiz = yol.startsWith('/') ? yol.substring(1) : yol;
+    return '/proje/${Uri.encodeComponent(projeId)}/${Uri.encodeComponent(sahip)}/${Uri.encodeComponent(temiz)}';
+  }
+
   static const prefixOfHome = '/home';
 
   /// Giriş zorunlu (1.2.0): oturum yokken yalnız giriş ve Kayıtlar açılır;

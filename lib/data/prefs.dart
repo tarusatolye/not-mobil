@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -119,6 +120,14 @@ class Stows {
   final kayitliEposta = PlainStow(
     'kayitliEposta',
     '',
+    volatile: !_isOnMainIsolate,
+  );
+
+  /// Notların bağlı olduğu Pusula projeleri: dosya yolu → proje etiketi ("PRJ-12 · Proje adı").
+  final notProjeleri = PlainStow<Map<String, String>>(
+    'notProjeleri',
+    const {},
+    codec: const _ProjeBaglariCodec(),
     volatile: !_isOnMainIsolate,
   );
 
@@ -470,5 +479,25 @@ class TransformedStow<T_in, T_out> extends Stow<dynamic, T_out, dynamic> {
   void dispose() {
     parent.removeListener(notifyListeners);
     super.dispose();
+  }
+}
+
+class const _ProjeBaglariCodec() extends AbstractCodec<Map<String, String>, String> {
+  @override
+  String encode(Map<String, String> input) => jsonEncode(input);
+
+  @override
+  Map<String, String> decode(dynamic encoded) {
+    if (encoded is String) {
+      try {
+        final dynamic decoded = jsonDecode(encoded);
+        if (decoded is Map) {
+          return decoded.map((k, v) => MapEntry(k.toString(), v.toString()));
+        }
+      } catch (_) {}
+    } else if (encoded is Map) {
+      return encoded.map((k, v) => MapEntry(k.toString(), v.toString()));
+    }
+    return const {};
   }
 }
