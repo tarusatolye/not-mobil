@@ -352,6 +352,9 @@ tarus:
   notMenusu: Note menu
   olustur: Create
   sonNotlar: Recent notes
+  ara: Search
+  aramaYerTutucu: Search notes and folders
+  aramaSonucYok: No results
   klasorler: Folders
   notlar: Notes
   klasorIslemleri: Folder actions
