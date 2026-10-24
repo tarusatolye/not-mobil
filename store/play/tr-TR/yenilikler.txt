@@ -1,4 +1,4 @@
-• Not yalnız Pusula hesabınızla kullanılır; e-posta ve parolanızla giriş yapın
-• Çıkış yapınca notlar bu cihazdan silinir, not.tarus.tr'de kalır; eşitlenmemiş değişiklikte önce uyarı
-• Hesap kartında Pusula adınız ve e-postanız görünür
-• Kaybolan cihazı Pusula › Hesap › Bağlı cihazlar'dan kaldırabilirsiniz
+• Notlar Özel, Şirket İçi ve Proje kategorilerine ayrılabilir
+• Not kartlarında kategori rozeti gösterilir
+• Notlar kategoriye göre süzülebilir
+• Seçim çubuğundan kategori belirlenebilir

@@ -164,6 +164,11 @@ derlenir (Visual Studio Build Tools gerekir). Build Tools yoksa yerel deneme iç
 çeviren yerel bir kopya kullanılabilir (2026-10-07 turunda böyle çalıştırıldı; commit edilmez).
 
 ## Sürüm notları
+- **1.3.0** (2026-10-24): web eşliği — Kategori (Özel / Şirket / Proje) desteği (FKR-0047).
+  Notlar webdeki gibi Özel, Şirket İçi ve Proje kategorilerine ayrılır; not kartlarında
+  STANDARTLAR §9 kategorik renklerinde (`--kat-6` turuncu, `--kat-2` çivit, `--kat-1` mor)
+  rozet gösterilir. Notlar listesinde kategoriye göre süzme sekmeleri ve seçim çubuğunda
+  kategori belirleme diyaloğu eklendi (`POST /api/notes/<yol>/category`).
 - **1.2.0** (2026-10-20, yayınlanmadı): ekosisteme tam bağlanma (kullanıcı kararı 2026-10-19): giriş
   zorunlu (girişsiz kullanım kalktı), «Başka sunucu» ve «güvensiz bağlantılara izin ver» kalktı, çıkışta
   notlar cihazdan silinir (eşitlenmemiş değişiklikte uyarı), hesap kartında Pusula adı/e-postası, giriş

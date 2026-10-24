@@ -1,0 +1,4 @@
+• Notes can be organized into Private, Internal, and Project categories
+• Category badges are displayed on note cards
+• Notes list can be filtered by category
+• Category can be assigned from the selection toolbar
