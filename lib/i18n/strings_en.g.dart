@@ -342,6 +342,15 @@ class Translations$tarus$en {
 	/// en: 'Recent notes'
 	String get sonNotlar => 'Recent notes';
 
+	/// en: 'Search'
+	String get ara => 'Search';
+
+	/// en: 'Search notes and folders'
+	String get aramaYerTutucu => 'Search notes and folders';
+
+	/// en: 'No results'
+	String get aramaSonucYok => 'No results';
+
 	/// en: 'Folders'
 	String get klasorler => 'Folders';
 
