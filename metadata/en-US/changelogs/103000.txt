@@ -1,1 +1,2 @@
-Notes can now be linked to Pusula projects and opened directly from project sketch links.
+• Search your notes and folders by name from the Notes page
+• Link notes to Pusula projects and open them from project sketch links

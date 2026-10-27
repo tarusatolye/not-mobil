@@ -51,6 +51,7 @@ class _ProjeBaglaDialogState extends State<ProjeBaglaDialog> {
   @override
   void initState() {
     super.initState();
+    _aramaController.addListener(_aramaMetniDegisti);
     _projeleriYukle();
   }
 
@@ -80,7 +81,9 @@ class _ProjeBaglaDialogState extends State<ProjeBaglaDialog> {
     }
   }
 
-  void _aramaDegisti(String deger) {
+  void _aramaMetniDegisti() {
+    final deger = _aramaController.text;
+    if (deger.trim().toLowerCase() == _aramaMetni) return;
     setState(() => _aramaMetni = deger.trim().toLowerCase());
     _aramaZamanlayici?.cancel();
     _aramaZamanlayici = Timer(const Duration(milliseconds: 300), () {
@@ -160,7 +163,7 @@ class _ProjeBaglaDialogState extends State<ProjeBaglaDialog> {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               decoration: BoxDecoration(
                 color: r.accent.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(TarusOlcu.rGirdi),
+                borderRadius: BorderRadius.circular(TarusOlcu.rSm),
                 border: Border.all(color: r.accent.withValues(alpha: 0.3)),
               ),
               child: Row(
@@ -206,9 +209,10 @@ class _ProjeBaglaDialogState extends State<ProjeBaglaDialog> {
           // Arama kutusu
           TarusMetinAlani(
             controller: _aramaController,
-            onChanged: _aramaDegisti,
-            hintText: t.tarus.proje.aramaYerTutucu,
-            prefixIcon: TarusIkon.proje,
+            placeholder: t.tarus.proje.aramaYerTutucu,
+            prefixIcon: const Icon(TarusIkon.proje),
+            focusOrder: const NumericFocusOrder(1),
+            textInputAction: TextInputAction.search,
           ),
           const SizedBox(height: 10),
 
@@ -235,7 +239,7 @@ class _ProjeBaglaDialogState extends State<ProjeBaglaDialog> {
                           final seciliMi = etiket == bagliProje;
                           return InkWell(
                             borderRadius:
-                                BorderRadius.circular(TarusOlcu.rGirdi),
+                                BorderRadius.circular(TarusOlcu.rSm),
                             onTap: () => _projeSec(p),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(

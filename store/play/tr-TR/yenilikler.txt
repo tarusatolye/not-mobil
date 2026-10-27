@@ -1,2 +1,4 @@
-• Notlar Pusula projelerine bağlanabiliyor; seçili notu projeye bağlayabilir, kartında proje etiketini görebilirsiniz
-• Pusula proje sayfasındaki eskiz bağlantılarına dokunulduğunda not doğrudan uygulamada açılır
+• Notlar sayfasındaki arama düğmesiyle tüm not ve klasörleri ada göre arayın (ışık/isik fark etmez)
+• Notlar Pusula projelerine bağlanabilir; kartta proje etiketi görünür, Pusula eskiz bağlantısı notu açar
+• Not yalnız Pusula hesabınızla kullanılır; e-posta ve parolanızla giriş yapın
+• Çıkış yapınca notlar bu cihazdan silinir, not.tarus.tr'de kalır

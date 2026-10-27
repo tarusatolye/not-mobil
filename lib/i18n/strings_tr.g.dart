@@ -243,6 +243,9 @@ class _Translations$tarus$tr extends Translations$tarus$en {
 	@override String get notMenusu => 'Not menüsü';
 	@override String get olustur => 'Oluştur';
 	@override String get sonNotlar => 'Son notlar';
+	@override String get ara => 'Ara';
+	@override String get aramaYerTutucu => 'Not ve klasör ara';
+	@override String get aramaSonucYok => 'Sonuç bulunamadı';
 	@override String get klasorler => 'Klasörler';
 	@override String get notlar => 'Notlar';
 	@override String get klasorIslemleri => 'Klasör işlemleri';

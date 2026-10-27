@@ -353,6 +353,9 @@ tarus:
   notMenusu: Not menüsü
   olustur: Oluştur
   sonNotlar: Son notlar
+  ara: Ara
+  aramaYerTutucu: Not ve klasör ara
+  aramaSonucYok: Sonuç bulunamadı
   klasorler: Klasörler
   notlar: Notlar
   klasorIslemleri: Klasör işlemleri
