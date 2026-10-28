@@ -156,6 +156,17 @@ void main() {
       expect(eskiz.yol, 'Not.sbn2');
     });
 
+    test('eskiz yolu düzenleyicinin uzantısız not yoluna çevrilir', () {
+      expect(eskizNotYolu('Toplanti/Eskiz.sbn2'), '/Toplanti/Eskiz');
+      expect(eskizNotYolu('Eski.sbn'), '/Eski');
+      expect(eskizNotYolu('/Not'), '/Not');
+    });
+
+    test('sunucu not adı uzantılı ve parça parça kodlanır', () {
+      expect(sunucuNotAdi('/Saha/Gözlem'), 'Saha/G%C3%B6zlem.sbn2');
+      expect(sunucuNotAdi('Saha/Gözlem.sbn2'), 'Saha/G%C3%B6zlem.sbn2');
+    });
+
     test('geçersiz adreslerde null döner', () {
       expect(ProjeEskizi.adresCoz('https://not.tarus.tr/hizli-bakis'), isNull);
       expect(ProjeEskizi.adresCoz('/proje/5/mehmet'), isNull); // yol eksik
