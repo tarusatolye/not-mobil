@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:saber/components/home/delete_note_button.dart';
 import 'package:saber/components/home/export_note_button.dart';
+import 'package:saber/components/home/kategori_degistir_button.dart';
 import 'package:saber/components/home/move_note_button.dart';
-import 'package:saber/components/home/proje_bagla_button.dart';
 import 'package:saber/components/home/rename_note_button.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
 import 'package:saber/tarus/tarus_olcu.dart';
@@ -58,7 +58,7 @@ class const SecimCubugu({
                 ),
               ),
               if (secili.length == 1) ...[
-                ProjeBaglaButton(
+                KategoriDegistirButton(
                   filePath: secili.first,
                   unselectNotes: birak,
                 ),

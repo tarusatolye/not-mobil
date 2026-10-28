@@ -1,2 +1,3 @@
 • Search your notes and folders by name from the Notes page
+• Notes can be Private, Internal or Project; category badges on cards and category filter tabs
 • Link notes to Pusula projects and open them from project sketch links

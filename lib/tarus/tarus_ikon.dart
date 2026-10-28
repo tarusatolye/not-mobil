@@ -36,7 +36,9 @@ abstract final class TarusIkon {
   static const IconData sil = LucideIcons.trash2;
   static const IconData disaAktar = LucideIcons.share2;
   static const IconData kopyala = LucideIcons.copy;
-  static const IconData proje = LucideIcons.briefcase;
+  static const IconData etiket = LucideIcons.tag;
+  static const IconData sirket = LucideIcons.building2;
+  static const IconData proje = LucideIcons.folderKanban;
 
   // Liste düzeni ve sıralama
   static const IconData duzenDuvar = LucideIcons.layoutDashboard;

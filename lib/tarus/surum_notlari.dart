@@ -13,9 +13,11 @@ const surumNotlari = <SurumNotu>[
     '1.3.0',
     '24 Ekim 2026',
     'Notlar sayfasındaki arama düğmesiyle bütün not ve klasörlerinizi ada '
-        'göre arayabilirsiniz; «isik» yazınca «Işık» da bulunur. Notlar artık '
-        'Pusula projelerine bağlanabiliyor; kartında proje etiketini görürsünüz '
-        've Pusula’daki eskiz bağlantısına dokunmak notu doğrudan açar.',
+        'göre arayabilirsiniz; «isik» yazınca «Işık» da bulunur. Notlar Özel, '
+        'Şirket İçi ve Proje kategorilerine ayrılır; kartta kategori rozeti, '
+        'listede kategori sekmeleri görünür. Proje kategorisindeki not bir '
+        'Pusula projesine bağlanır ve Pusula’daki eskiz bağlantısı notu '
+        'doğrudan açar.',
   ),
   SurumNotu(
     '1.2.0',

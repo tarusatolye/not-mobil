@@ -353,6 +353,11 @@ Future<bool> projeBagiKaldir({
   guncel.remove(notYolu);
   guncel.remove(temizYol);
   stows.notProjeleri.value = guncel;
+  // Sunucu notu Özel'e alır; yerel kategori kaydı da düşer (varsayılan Özel).
+  final kategoriler = Map<String, String>.from(stows.notKategorileri.value)
+    ..remove(notYolu)
+    ..remove(temizYol);
+  stows.notKategorileri.value = kategoriler;
 
   final token = belirtec ?? stows.ncPassword.value;
   if (token.isEmpty) return true;

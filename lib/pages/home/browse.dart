@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:path/path.dart' as p;
 import 'package:saber/components/home/grid_folders.dart';
 import 'package:saber/components/home/home_layout_button.dart';
+import 'package:saber/components/home/kategori_filtre_sekmeleri.dart';
 import 'package:saber/components/home/masonry_files.dart';
 import 'package:saber/components/home/new_folder_dialog.dart';
 import 'package:saber/components/home/path_components.dart';
@@ -16,6 +17,7 @@ import 'package:saber/data/file_manager/file_manager.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/data/routes.dart';
 import 'package:saber/i18n/strings.g.dart';
+import 'package:saber/tarus/kategori.dart';
 import 'package:saber/tarus/not_aramasi.dart';
 import 'package:saber/tarus/tarus_bilesenler.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
@@ -37,6 +39,7 @@ class _BrowsePageState extends State<BrowsePage> {
   DirectoryChildren? children;
 
   String? path;
+  NotKategorisi? _seciliKategori;
 
   final ValueNotifier<List<String>> selectedFiles = ValueNotifier([]);
 
@@ -137,6 +140,7 @@ class _BrowsePageState extends State<BrowsePage> {
 
   void onDirectoryTap(String folder) {
     selectedFiles.value = [];
+    _seciliKategori = null;
     if (folder == '..') {
       path = p.dirname(path ?? '/');
       if (path == '/') path = null;
@@ -149,6 +153,7 @@ class _BrowsePageState extends State<BrowsePage> {
 
   void onPathComponentTap(String? newPath) {
     selectedFiles.value = [];
+    _seciliKategori = null;
     if (newPath == null || newPath.isEmpty || newPath == '/') {
       newPath = null;
     }
@@ -251,10 +256,33 @@ class _BrowsePageState extends State<BrowsePage> {
     final crossAxisCount = genislik ~/ 300 + 1;
     final klasorSutun = (genislik ~/ 220).clamp(2, 6);
     useListenable(stows.homeLayout);
+    useListenable(stows.notKategorileri);
+    useListenable(stows.notProjeleri);
     useOnListenableChange(stows.browseSortMetric, findChildrenOfPath);
 
     final klasorler = children?.directories ?? const <String>[];
     final dosyalar = children?.files ?? const <String>[];
+
+    int ozelSayisi = 0;
+    int sirketSayisi = 0;
+    int projeSayisi = 0;
+
+    for (final f in dosyalar) {
+      final tamYol = "${path ?? ""}/$f";
+      final kat = notKategorisiAl(tamYol).kategori;
+      switch (kat) {
+        NotKategorisi.ozel => ozelSayisi++,
+        NotKategorisi.sirket => sirketSayisi++,
+        NotKategorisi.proje => projeSayisi++,
+      }
+    }
+
+    final filtrelenmisDosyalar = _seciliKategori == null
+        ? dosyalar
+        : dosyalar.where((f) {
+            final tamYol = "${path ?? ""}/$f";
+            return notKategorisiAl(tamYol).kategori == _seciliKategori;
+          }).toList();
 
     return Scaffold(
       body: CustomScrollView(
@@ -308,6 +336,21 @@ class _BrowsePageState extends State<BrowsePage> {
                 ),
               ),
             ),
+            if (dosyalar.isNotEmpty)
+              SliverToBoxAdapter(
+                child: KategoriFiltreSekmeleri(
+                  seciliKategori: _seciliKategori,
+                  onKategoriDegisti: (kat) {
+                    setState(() {
+                      _seciliKategori = kat;
+                    });
+                  },
+                  toplamSayi: dosyalar.length,
+                  ozelSayisi: ozelSayisi,
+                  sirketSayisi: sirketSayisi,
+                  projeSayisi: projeSayisi,
+                ),
+              ),
             if (klasorler.isNotEmpty) ...[
               SliverPadding(
                 padding: const .symmetric(horizontal: TarusOlcu.sayfaYatay),
@@ -359,12 +402,25 @@ class _BrowsePageState extends State<BrowsePage> {
                   ),
                 ),
               ),
+            ] else if (filtrelenmisDosyalar.isEmpty) ...[
+              SliverSafeArea(
+                top: false,
+                sliver: SliverToBoxAdapter(
+                  child: TarusBosDurum(
+                    ikon: TarusIkon.etiket,
+                    baslik: '${_seciliKategori!.etiket} kategorisinde not yok',
+                    aciklama: 'Başka bir kategori seçebilir veya seçim çubuğundan kategori belirleyebilirsiniz.',
+                  ),
+                ),
+              ),
             ] else ...[
               SliverPadding(
                 padding: const .symmetric(horizontal: TarusOlcu.sayfaYatay),
                 sliver: SliverToBoxAdapter(
                   child: TarusBolumEtiketi(
-                    t.tarus.notlar,
+                    _seciliKategori == null
+                        ? t.tarus.notlar
+                        : '${t.tarus.notlar} · ${_seciliKategori!.etiket}',
                     padding: const .fromLTRB(4, 14, 4, 4),
                   ),
                 ),
@@ -375,7 +431,8 @@ class _BrowsePageState extends State<BrowsePage> {
                 sliver: MasonryFiles(
                   crossAxisCount: crossAxisCount,
                   files: [
-                    for (final filePath in dosyalar) "${path ?? ""}/$filePath",
+                    for (final filePath in filtrelenmisDosyalar)
+                      "${path ?? ""}/$filePath",
                   ],
                   selectedFiles: selectedFiles,
                 ),
