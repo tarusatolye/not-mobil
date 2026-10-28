@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:saber/components/home/proje_bagla_dialog.dart';
 import 'package:saber/tarus/kategori.dart';
 import 'package:saber/tarus/tarus_bilesenler.dart';
+import 'package:saber/tarus/tarus_ikon.dart';
 import 'package:saber/tarus/tarus_olcu.dart';
 import 'package:saber/tarus/tarus_renkler.dart';
 
@@ -22,7 +24,7 @@ class KategoriSecimDialog extends StatefulWidget {
 
 class _KategoriSecimDialogState extends State<KategoriSecimDialog> {
   late NotKategorisi _seciliKategori;
-  late final TextEditingController _projeController;
+  late final String? _mevcutProje;
   bool _kaydediliyor = false;
 
   @override
@@ -30,13 +32,7 @@ class _KategoriSecimDialogState extends State<KategoriSecimDialog> {
     super.initState();
     final mevcut = notKategorisiAl(widget.filePath);
     _seciliKategori = mevcut.kategori;
-    _projeController = TextEditingController(text: mevcut.projeAdi ?? '');
-  }
-
-  @override
-  void dispose() {
-    _projeController.dispose();
-    super.dispose();
+    _mevcutProje = mevcut.projeAdi;
   }
 
   String get _notAdi {
@@ -46,13 +42,24 @@ class _KategoriSecimDialogState extends State<KategoriSecimDialog> {
   }
 
   Future<void> _kaydet() async {
+    // Proje kategorisi Pusula projesi seçmeyi gerektirir (sunucu projeId ister):
+    // proje seçiciye geçilir, bağ orada kurulur.
+    if (_seciliKategori == NotKategorisi.proje) {
+      final gezgin = Navigator.of(context);
+      gezgin.pop();
+      await ProjeBaglaDialog.dialogAc(
+        gezgin.context,
+        existingPath: widget.filePath,
+        unselectNotes: widget.onSaved ?? () {},
+      );
+      return;
+    }
+
     setState(() => _kaydediliyor = true);
 
-    final projeAdi = _projeController.text.trim();
     await kategoriDegistir(
       notYolu: widget.filePath,
       kategori: _seciliKategori,
-      projeAdi: _seciliKategori == NotKategorisi.proje && projeAdi.isNotEmpty ? projeAdi : null,
     );
 
     if (mounted) {
@@ -124,34 +131,19 @@ class _KategoriSecimDialogState extends State<KategoriSecimDialog> {
           ),
           if (_seciliKategori == NotKategorisi.proje) ...[
             const SizedBox(height: 14),
-            Text(
-              'Pusula Projesi / Proje Adı',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: r.muted2,
-              ),
-            ),
-            const SizedBox(height: 6),
-            TextField(
-              controller: _projeController,
-              autofocus: true,
-              style: TextStyle(fontSize: 14, color: r.text),
-              decoration: InputDecoration(
-                hintText: 'Örn. PRJ-12 · Kadıköy Konut',
-                hintStyle: TextStyle(color: r.muted, fontSize: 13),
-                filled: true,
-                fillColor: r.inputBg,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(TarusOlcu.rSm),
-                  borderSide: BorderSide(color: r.border),
+            Row(
+              children: [
+                Icon(TarusIkon.proje, size: 14, color: r.muted2),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    _mevcutProje?.isNotEmpty ?? false
+                        ? 'Bağlı proje: $_mevcutProje. Devam ederek değiştirebilirsiniz.'
+                        : 'Devam ederek notu bir Pusula projesine bağlayın.',
+                    style: TextStyle(fontSize: 12.5, color: r.muted),
+                  ),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(TarusOlcu.rSm),
-                  borderSide: BorderSide(color: r.accent, width: 1.5),
-                ),
-              ),
+              ],
             ),
           ],
         ],
@@ -165,7 +157,13 @@ class _KategoriSecimDialogState extends State<KategoriSecimDialog> {
         TarusDialogDugmesi(
           onPressed: _kaydediliyor ? null : _kaydet,
           isDefaultAction: true,
-          child: Text(_kaydediliyor ? 'Kaydediliyor…' : 'Kaydet'),
+          child: Text(
+            _kaydediliyor
+                ? 'Kaydediliyor…'
+                : _seciliKategori == NotKategorisi.proje
+                ? 'Proje seç'
+                : 'Kaydet',
+          ),
         ),
       ],
     );

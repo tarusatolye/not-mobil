@@ -1,4 +1,4 @@
-• Notlar Özel, Şirket İçi ve Proje kategorilerine ayrılabilir
-• Not kartlarında kategori rozeti gösterilir
-• Notlar kategoriye göre süzülebilir
-• Seçim çubuğundan kategori belirlenebilir
+• Notlar sayfasındaki arama düğmesiyle tüm not ve klasörleri ada göre arayın (ışık/isik fark etmez)
+• Notlar Özel, Şirket İçi ve Proje kategorilerine ayrılır; kartta kategori rozeti, listede kategori sekmeleri
+• Notlar Pusula projelerine bağlanabilir; Pusula'daki eskiz bağlantısı notu doğrudan açar
+• Not yalnız Pusula hesabınızla kullanılır; çıkış yapınca notlar bu cihazdan silinir, not.tarus.tr'de kalır

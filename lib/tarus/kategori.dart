@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:saber/data/nextcloud/nextcloud_client_extension.dart';
 import 'package:saber/data/prefs.dart';
+import 'package:saber/tarus/projeler.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
 
 /// tarus Not kategorileri: Web (`not-web`) ile birebir aynı üç kategori
@@ -154,8 +155,19 @@ String kanonikNotYolu(String path) {
   return temiz;
 }
 
-/// Verilen not dosyasının kategorisini `stows.notKategorileri`'nden okur.
+/// Verilen not dosyasının kategorisini okur.
+///
+/// Pusula projesine bağlı not (`stows.notProjeleri`, proje seçici) her zaman
+/// Proje kategorisindedir; değilse `stows.notKategorileri`'ne bakılır.
 NotKategoriBilgisi notKategorisiAl(String filePath) {
+  final bagliProje = notunProjesi(filePath);
+  if (bagliProje != null && bagliProje.isNotEmpty) {
+    return NotKategoriBilgisi(
+      kategori: NotKategorisi.proje,
+      projeAdi: bagliProje,
+    );
+  }
+
   final harita = stows.notKategorileri.value;
   final kanonik = kanonikNotYolu(filePath);
 
@@ -198,15 +210,21 @@ Future<bool> kategoriDegistir({
 
   // 1. Yerel durumu hemen güncelle (reaktif UI güncellenir)
   notKategoriAta(kanonik, bilgi);
+  if (kategori != NotKategorisi.proje) {
+    // Proje dışı kategoride Pusula proje bağı da kalkar (sunucu `proje: null` yazar).
+    final projeler = Map<String, String>.from(stows.notProjeleri.value)
+      ..remove(kanonik)
+      ..remove('/$kanonik');
+    stows.notProjeleri.value = projeler;
+  }
 
   // 2. Sunucuya bildir (oturum açıksa)
   final token = (belirtec ?? stows.ncPassword.value).trim();
   final sunucu = notSunucusu ?? NextcloudClientExtension.defaultNextcloudUri;
-  final client = httpClient ?? http.Client();
+  final client = httpClient ?? NextcloudClientExtension.newHttpClient();
 
   try {
-    final encYol = Uri.encodeComponent(kanonik);
-    final url = sunucu.replace(path: '/api/notes/$encYol/category');
+    final url = sunucu.resolve('api/notes/${sunucuNotAdi(kanonik)}/category');
     final govde = jsonEncode({
       'category': kategori.kod,
       if (projeId != null && projeId.isNotEmpty) 'projeId': projeId,
@@ -216,6 +234,7 @@ Future<bool> kategoriDegistir({
       url,
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
         if (token.isNotEmpty) 'Authorization': 'Bearer $token',
       },
       body: govde,

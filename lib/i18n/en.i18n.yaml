@@ -352,6 +352,9 @@ tarus:
   notMenusu: Note menu
   olustur: Create
   sonNotlar: Recent notes
+  ara: Search
+  aramaYerTutucu: Search notes and folders
+  aramaSonucYok: No results
   klasorler: Folders
   notlar: Notes
   klasorIslemleri: Folder actions
@@ -419,3 +422,14 @@ tarus:
   esitleme:
     gecici: The server is not responding right now. Your notes are safe on this device; syncing will retry automatically.
     reddedildi: The server rejected the sync.
+  proje:
+    bagla: Link to project
+    pusulaProjesi: Pusula project
+    projeSecin: Select project…
+    bagliProje: Linked project
+    baglandi: Note linked to project: $proje
+    bagiKaldir: Remove link
+    bagiKaldirildi: Project link removed
+    aramaYerTutucu: Search Pusula…
+    yukleniyor: Loading projects…
+    bulunamadi: No projects found

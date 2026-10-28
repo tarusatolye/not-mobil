@@ -353,6 +353,9 @@ tarus:
   notMenusu: Not menüsü
   olustur: Oluştur
   sonNotlar: Son notlar
+  ara: Ara
+  aramaYerTutucu: Not ve klasör ara
+  aramaSonucYok: Sonuç bulunamadı
   klasorler: Klasörler
   notlar: Notlar
   klasorIslemleri: Klasör işlemleri
@@ -420,3 +423,14 @@ tarus:
   esitleme:
     gecici: Sunucu şu an yanıt vermiyor. Notlarınız bu cihazda duruyor; eşitleme kendiliğinden yeniden denenecek.
     reddedildi: Sunucu eşitlemeyi reddetti.
+  proje:
+    bagla: Projeye bağla
+    pusulaProjesi: Pusula projesi
+    projeSecin: Proje seçin…
+    bagliProje: Bağlı proje
+    baglandi: Not projeye bağlandı: $proje
+    bagiKaldir: Bağı kaldır
+    bagiKaldirildi: Proje bağı kaldırıldı
+    aramaYerTutucu: Pusula'da ara…
+    yukleniyor: Projeler yükleniyor…
+    bulunamadi: Proje bulunamadı

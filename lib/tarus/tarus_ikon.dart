@@ -19,6 +19,7 @@ abstract final class TarusIkon {
   static const IconData asagi = LucideIcons.chevronDown;
   static const IconData dahaFazla = LucideIcons.ellipsisVertical;
   static const IconData tamam = LucideIcons.check;
+  static const IconData ara = LucideIcons.search;
   static const IconData seciliDaire = LucideIcons.circleCheck;
   static const IconData disBaglanti = LucideIcons.externalLink;
 

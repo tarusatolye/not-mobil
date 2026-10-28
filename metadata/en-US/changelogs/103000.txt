@@ -1,4 +1,3 @@
-• Notes can be organized into Private, Internal, and Project categories
-• Category badges are displayed on note cards
-• Notes list can be filtered by category
-• Category can be assigned from the selection toolbar
+• Search your notes and folders by name from the Notes page
+• Notes can be Private, Internal or Project; category badges on cards and category filter tabs
+• Link notes to Pusula projects and open them from project sketch links

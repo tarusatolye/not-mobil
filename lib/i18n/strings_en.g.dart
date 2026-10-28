@@ -342,6 +342,15 @@ class Translations$tarus$en {
 	/// en: 'Recent notes'
 	String get sonNotlar => 'Recent notes';
 
+	/// en: 'Search'
+	String get ara => 'Search';
+
+	/// en: 'Search notes and folders'
+	String get aramaYerTutucu => 'Search notes and folders';
+
+	/// en: 'No results'
+	String get aramaSonucYok => 'No results';
+
 	/// en: 'Folders'
 	String get klasorler => 'Folders';
 
@@ -402,6 +411,7 @@ class Translations$tarus$en {
 	late final Translations$tarus$giris$en giris = Translations$tarus$giris$en.internal(_root);
 	late final Translations$tarus$cikis$en cikis = Translations$tarus$cikis$en.internal(_root);
 	late final Translations$tarus$esitleme$en esitleme = Translations$tarus$esitleme$en.internal(_root);
+	late final Translations$tarus$proje$en proje = Translations$tarus$proje$en.internal(_root);
 }
 
 // Path: home.tabs
@@ -1594,6 +1604,45 @@ class Translations$tarus$esitleme$en {
 
 	/// en: 'The server rejected the sync.'
 	String get reddedildi => 'The server rejected the sync.';
+}
+
+// Path: tarus.proje
+class Translations$tarus$proje$en {
+	Translations$tarus$proje$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Link to project'
+	String get bagla => 'Link to project';
+
+	/// en: 'Pusula project'
+	String get pusulaProjesi => 'Pusula project';
+
+	/// en: 'Select project…'
+	String get projeSecin => 'Select project…';
+
+	/// en: 'Linked project'
+	String get bagliProje => 'Linked project';
+
+	/// en: 'Note linked to project: {proje}'
+	String baglandi({required Object proje}) => 'Note linked to project: ${proje}';
+
+	/// en: 'Remove link'
+	String get bagiKaldir => 'Remove link';
+
+	/// en: 'Project link removed'
+	String get bagiKaldirildi => 'Project link removed';
+
+	/// en: 'Search Pusula…'
+	String get aramaYerTutucu => 'Search Pusula…';
+
+	/// en: 'Loading projects…'
+	String get yukleniyor => 'Loading projects…';
+
+	/// en: 'No projects found'
+	String get bulunamadi => 'No projects found';
 }
 
 // Path: sentry.consent.description

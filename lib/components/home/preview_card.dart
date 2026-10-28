@@ -173,9 +173,12 @@ class _PreviewCardState extends State<PreviewCard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          ValueListenableBuilder(
-                            valueListenable: stows.notKategorileri,
-                            builder: (context, _, __) {
+                          ListenableBuilder(
+                            listenable: Listenable.merge([
+                              stows.notKategorileri,
+                              stows.notProjeleri,
+                            ]),
+                            builder: (context, _) {
                               final bilgi = notKategorisiAl(widget.filePath);
                               return Padding(
                                 padding: const .only(bottom: 6),

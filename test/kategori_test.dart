@@ -14,11 +14,13 @@ void main() {
   setUp(() {
     stows.ncPassword.value = 'nes_test_token_123';
     stows.notKategorileri.value = {};
+    stows.notProjeleri.value = {};
   });
 
   tearDown(() {
     stows.ncPassword.value = stows.ncPassword.defaultValue;
     stows.notKategorileri.value = stows.notKategorileri.defaultValue;
+    stows.notProjeleri.value = stows.notProjeleri.defaultValue;
   });
 
   group('NotKategorisi enum & fromKod', () {
@@ -171,7 +173,7 @@ void main() {
       expect(yerel.projeAdi, 'PRJ-101 · Kule');
 
       // Giden HTTP isteği doğrulandı mı?
-      expect(gidenIstek.url.path, '/api/notes/Mimari%2FPlan.sbn2/category');
+      expect(gidenIstek.url.path, '/api/notes/Mimari/Plan.sbn2/category');
       expect(gidenIstek.headers['Authorization'], 'Bearer nes_test_token_123');
       final govde = jsonDecode(gidenIstek.body) as Map<String, dynamic>;
       expect(govde['category'], 'project');
@@ -200,6 +202,31 @@ void main() {
       final govde = jsonDecode(gidenIstek.body) as Map<String, dynamic>;
       expect(govde['category'], 'internal');
       expect(govde.containsKey('projeId'), isFalse);
+    });
+
+    test('Pusula proje bağı kategoriyi Proje yapar, başka kategori bağı kaldırır', () async {
+      stows.notProjeleri.value = {'/Saha/Kesit': 'PRJ-7 · Liman'};
+      final bagli = notKategorisiAl('/Saha/Kesit');
+      expect(bagli.kategori, NotKategorisi.proje);
+      expect(bagli.projeAdi, 'PRJ-7 · Liman');
+
+      late http.Request gidenIstek;
+      final client = MockClient((req) async {
+        gidenIstek = req;
+        return http.Response('{"success":true}', 200);
+      });
+      final sonuc = await kategoriDegistir(
+        notYolu: '/Saha/Kesit',
+        kategori: NotKategorisi.sirket,
+        notSunucusu: Uri.parse('https://not.tarus.tr'),
+        belirtec: 'nes_test_token_123',
+        httpClient: client,
+      );
+
+      expect(sonuc, isTrue);
+      expect(gidenIstek.url.path, '/api/notes/Saha/Kesit.sbn2/category');
+      expect(stows.notProjeleri.value, isEmpty);
+      expect(notKategorisiAl('/Saha/Kesit').kategori, NotKategorisi.sirket);
     });
   });
 }

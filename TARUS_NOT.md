@@ -164,11 +164,20 @@ derlenir (Visual Studio Build Tools gerekir). Build Tools yoksa yerel deneme iç
 çeviren yerel bir kopya kullanılabilir (2026-10-07 turunda böyle çalıştırıldı; commit edilmez).
 
 ## Sürüm notları
-- **1.3.0** (2026-10-24): web eşliği — Kategori (Özel / Şirket / Proje) desteği (FKR-0047).
-  Notlar webdeki gibi Özel, Şirket İçi ve Proje kategorilerine ayrılır; not kartlarında
-  STANDARTLAR §9 kategorik renklerinde (`--kat-6` turuncu, `--kat-2` çivit, `--kat-1` mor)
-  rozet gösterilir. Notlar listesinde kategoriye göre süzme sekmeleri ve seçim çubuğunda
-  kategori belirleme diyaloğu eklendi (`POST /api/notes/<yol>/category`).
+- **1.3.0** (2026-10-24, FKR-0046 + FKR-0047 + FKR-0048 web eşliği): Notlar sayfasında arama (üst çubuk büyüteç):
+  tüm not ve klasörlerde ad/klasör yolu araması, Türkçe katlamalı (`lib/tarus/not_aramasi.dart`, web `notAramasi.ts`
+  eşi; sıra: adı başlayan, sözcük başı, içinde geçen).
+  Kategori (FKR-0047, `lib/tarus/kategori.dart`): Özel / Şirket İçi / Proje; kartta STANDARTLAR §9 kategorik
+  renklerinde rozet (`--kat-6` turuncu, `--kat-2` çivit, `--kat-1` mor), listede süzme sekmeleri, seçim çubuğunda
+  «Kategori belirle» (`POST /api/notes/<ad>.sbn2/category`; uygulama yolu uzantısız, sunucu adı `.sbn2`'li).
+  Pusula projesine bağlama ve projeden açma (FKR-0048, `lib/tarus/projeler.dart`): kategori diyaloğunda Proje
+  seçilince proje seçiciye geçilir (sunucu `projeId` ister); bağlı not her zaman Proje kategorisinde sayılır
+  (`stows.notProjeleri` önceliklidir), başka kategoriye alınınca bağ kalkar. Pusula proje sayfasındaki eskiz
+  bağlantısı (`https://not.tarus.tr/proje/<projeId>/<sahip>/<yol…>` ya da `tarus-not://proje/…`, yol çok parçalı)
+  üst `redirect`'te `ProjeEskizi.urlCoz` ile çözülüp `/edit?path=` düzenleyicisine yönlendirilir.
+  Bilinen eksik: proje listesi `GET {pusula}/not/projeler/`'i cihazın `nes_` belirteciyle çağırıyor; Pusula
+  `ProjelerView` yalnız JWT kabul ettiğinden liste boş gelir. Pusula tarafında `nes_` kabulü (ya da Not sunucusu
+  üzerinden vekil uç) gerekir. Başkasının eskizi (sahip ≠ siz) mobilde salt okunur açılmaz, yerel yol açılır.
 - **1.2.0** (2026-10-20, yayınlanmadı): ekosisteme tam bağlanma (kullanıcı kararı 2026-10-19): giriş
   zorunlu (girişsiz kullanım kalktı), «Başka sunucu» ve «güvensiz bağlantılara izin ver» kalktı, çıkışta
   notlar cihazdan silinir (eşitlenmemiş değişiklikte uyarı), hesap kartında Pusula adı/e-postası, giriş

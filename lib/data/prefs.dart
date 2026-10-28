@@ -127,7 +127,15 @@ class Stows {
   final notKategorileri = PlainStow<Map<String, String>>(
     'notKategorileri',
     const {},
-    codec: const _KategoriMapCodec(),
+    codec: const _MetinHaritasiCodec(),
+    volatile: !_isOnMainIsolate,
+  );
+
+  /// Notların bağlı olduğu Pusula projeleri: dosya yolu → proje etiketi ("PRJ-12 · Proje adı").
+  final notProjeleri = PlainStow<Map<String, String>>(
+    'notProjeleri',
+    const {},
+    codec: const _MetinHaritasiCodec(),
     volatile: !_isOnMainIsolate,
   );
 
@@ -482,7 +490,8 @@ class TransformedStow<T_in, T_out> extends Stow<dynamic, T_out, dynamic> {
   }
 }
 
-class const _KategoriMapCodec() extends AbstractCodec<Map<String, String>, String> {
+/// `Map<String, String>` ↔ JSON metni (not kategorileri ve proje bağları).
+class const _MetinHaritasiCodec() extends AbstractCodec<Map<String, String>, String> {
   @override
   String encode(Map<String, String> input) => jsonEncode(input);
 
