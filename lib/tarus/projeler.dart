@@ -318,7 +318,7 @@ Future<bool> projeBagla({
   final client = httpClient ?? NextcloudClientExtension.newHttpClient();
   try {
     final url = sunucu.resolve(
-      'api/notes/${Uri.encodeComponent(temizYol)}/category',
+      'api/notes/${sunucuNotAdi(temizYol)}/category',
     );
     final resp = await client
         .post(
@@ -361,7 +361,7 @@ Future<bool> projeBagiKaldir({
   final client = httpClient ?? NextcloudClientExtension.newHttpClient();
   try {
     final url = sunucu.resolve(
-      'api/notes/${Uri.encodeComponent(temizYol)}/category',
+      'api/notes/${sunucuNotAdi(temizYol)}/category',
     );
     final resp = await client
         .post(
@@ -380,6 +380,22 @@ Future<bool> projeBagiKaldir({
   } finally {
     if (httpClient == null) client.close();
   }
+}
+
+/// Not sunucusundaki dosya adı (`/api/notes/<ad>/...` için, parça parça kodlu).
+///
+/// Uygulamadaki not yolları uzantısızdır (`/Saha/Gözlem`); sunucu meta
+/// kaydını dosya adıyla (`Saha/Gözlem.sbn2`) tutar.
+String sunucuNotAdi(String notYolu) {
+  var ad = notYolu.startsWith('/') ? notYolu.substring(1) : notYolu;
+  if (!ad.endsWith('.sbn2') && !ad.endsWith('.sbn')) ad = '$ad.sbn2';
+  return ad.split('/').map(Uri.encodeComponent).join('/');
+}
+
+/// Pusula eskiz bağlantısındaki yolu düzenleyicinin uzantısız not yoluna çevirir.
+String eskizNotYolu(String yol) {
+  final temiz = yol.replaceFirst(RegExp(r'\.sbn2?$'), '');
+  return temiz.startsWith('/') ? temiz : '/$temiz';
 }
 
 /// Notun bağlı olduğu Pusula projesinin etiketini döner (yoksa null).
