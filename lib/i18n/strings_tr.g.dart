@@ -270,6 +270,7 @@ class _Translations$tarus$tr extends Translations$tarus$en {
 	@override late final _Translations$tarus$giris$tr giris = _Translations$tarus$giris$tr._(_root);
 	@override late final _Translations$tarus$cikis$tr cikis = _Translations$tarus$cikis$tr._(_root);
 	@override late final _Translations$tarus$esitleme$tr esitleme = _Translations$tarus$esitleme$tr._(_root);
+	@override late final _Translations$tarus$proje$tr proje = _Translations$tarus$proje$tr._(_root);
 }
 
 // Path: home.tabs
@@ -945,6 +946,25 @@ class _Translations$tarus$esitleme$tr extends Translations$tarus$esitleme$en {
 	// Translations
 	@override String get gecici => 'Sunucu şu an yanıt vermiyor. Notlarınız bu cihazda duruyor; eşitleme kendiliğinden yeniden denenecek.';
 	@override String get reddedildi => 'Sunucu eşitlemeyi reddetti.';
+}
+
+// Path: tarus.proje
+class _Translations$tarus$proje$tr extends Translations$tarus$proje$en {
+	_Translations$tarus$proje$tr._(TranslationsTr root) : this._root = root, super.internal(root);
+
+	final TranslationsTr _root; // ignore: unused_field
+
+	// Translations
+	@override String get bagla => 'Projeye bağla';
+	@override String get pusulaProjesi => 'Pusula projesi';
+	@override String get projeSecin => 'Proje seçin…';
+	@override String get bagliProje => 'Bağlı proje';
+	@override String baglandi({required Object proje}) => 'Not projeye bağlandı: ${proje}';
+	@override String get bagiKaldir => 'Bağı kaldır';
+	@override String get bagiKaldirildi => 'Proje bağı kaldırıldı';
+	@override String get aramaYerTutucu => 'Pusula\'da ara…';
+	@override String get yukleniyor => 'Projeler yükleniyor…';
+	@override String get bulunamadi => 'Proje bulunamadı';
 }
 
 // Path: sentry.consent.description

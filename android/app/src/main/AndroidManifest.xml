@@ -103,6 +103,22 @@
 
                 <data android:mimeType="application/pdf" />
             </intent-filter>
+
+            <!-- Pusula projesinden açma: web bağlantısı https://not.tarus.tr/proje/... -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="not.tarus.tr" android:pathPrefix="/proje/" />
+            </intent-filter>
+
+            <!-- Pusula mobil ve ekosistem derin bağlantısı: tarus-not://proje/... -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tarus-not" />
+            </intent-filter>
         </activity>
 
         <activity

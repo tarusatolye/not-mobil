@@ -30,6 +30,7 @@ import 'package:saber/pages/editor/editor.dart';
 import 'package:saber/pages/home/home.dart';
 import 'package:saber/pages/logs.dart';
 import 'package:saber/pages/user/login.dart';
+import 'package:saber/tarus/projeler.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:worker_manager/worker_manager.dart';
 import 'package:workmanager/workmanager.dart';
@@ -249,8 +250,19 @@ class const App({super.key}) extends StatefulWidget {
       stows.username,
       stows.ncPassword,
     ]),
-    redirect: (context, state) =>
-        RoutePaths.girisYonlendirmesi(state.matchedLocation),
+    redirect: (context, state) {
+      // Pusula proje sayfasından eskiz: https://not.tarus.tr/proje/<projeId>/<sahip>/<yol…>
+      // ya da tarus-not://proje/…; yol birden çok parça olabilir (klasör), o yüzden
+      // GoRoute kalıbı yerine burada çözülüp düzenleyiciye yönlendirilir.
+      final uri = state.uri;
+      if (uri.host == 'proje' || uri.pathSegments.firstOrNull == 'proje') {
+        final eskiz = ProjeEskizi.urlCoz(uri);
+        if (eskiz != null) {
+          return RoutePaths.editFilePath(eskizNotYolu(eskiz.yol));
+        }
+      }
+      return RoutePaths.girisYonlendirmesi(state.matchedLocation);
+    },
     routes: <GoRoute>[
       GoRoute(path: '/', redirect: (context, state) => initialLocation),
       GoRoute(

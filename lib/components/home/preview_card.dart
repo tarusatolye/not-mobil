@@ -13,6 +13,7 @@ import 'package:saber/data/prefs.dart';
 import 'package:saber/data/routes.dart';
 import 'package:saber/i18n/strings.g.dart';
 import 'package:saber/pages/editor/editor.dart';
+import 'package:saber/tarus/projeler.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
 import 'package:saber/tarus/tarus_olcu.dart';
 import 'package:saber/tarus/tarus_renkler.dart';
@@ -167,18 +168,56 @@ class _PreviewCardState extends State<PreviewCard> {
                     padding: const .fromLTRB(12, 9, 12, 11),
                     child: SizedBox(
                       width: double.infinity,
-                      child: Text(
-                        widget.filePath.substring(
-                          widget.filePath.lastIndexOf('/') + 1,
-                        ),
-                        maxLines: 2,
-                        overflow: .ellipsis,
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          height: 1.3,
-                          color: r.text,
-                        ),
+                      child: ValueListenableBuilder(
+                        valueListenable: stows.notProjeleri,
+                        builder: (context, _, __) {
+                          final bagliProje = notunProjesi(widget.filePath);
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              if (bagliProje != null && bagliProje.isNotEmpty) ...[
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      TarusIkon.proje,
+                                      size: 11,
+                                      color: r.accent,
+                                    ),
+                                    const SizedBox(width: 4),
+                                    Flexible(
+                                      child: Text(
+                                        bagliProje,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 10.5,
+                                          fontWeight: FontWeight.w600,
+                                          color: r.accent,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 3),
+                              ],
+                              Text(
+                                widget.filePath.substring(
+                                  widget.filePath.lastIndexOf('/') + 1,
+                                ),
+                                maxLines: 2,
+                                overflow: .ellipsis,
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  height: 1.3,
+                                  color: r.text,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ),
                   ),

@@ -1,5 +1,4 @@
-• Notlar sayfasındaki arama düğmesiyle tüm not ve klasörleri ada göre arayın (ışık/isik gibi Türkçe harfler fark etmez)
+• Notlar sayfasındaki arama düğmesiyle tüm not ve klasörleri ada göre arayın (ışık/isik fark etmez)
+• Notlar Pusula projelerine bağlanabilir; kartta proje etiketi görünür, Pusula eskiz bağlantısı notu açar
 • Not yalnız Pusula hesabınızla kullanılır; e-posta ve parolanızla giriş yapın
-• Çıkış yapınca notlar bu cihazdan silinir, not.tarus.tr'de kalır; eşitlenmemiş değişiklikte önce uyarı
-• Hesap kartında Pusula adınız ve e-postanız görünür
-• Kaybolan cihazı Pusula › Hesap › Bağlı cihazlar'dan kaldırabilirsiniz
+• Çıkış yapınca notlar bu cihazdan silinir, not.tarus.tr'de kalır
