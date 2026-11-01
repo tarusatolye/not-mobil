@@ -1,141 +1,71 @@
-# <img src="https://github.com/saber-notes/saber/raw/main/assets/icon/icon.png" width="30" height="30" alt="Logo"> Saber
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/readme/afis-koyu.svg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/readme/afis-acik.svg">
+  <img alt="tarus Not — el yazısı not ve eskiz" src="docs/readme/afis-koyu.svg" width="100%">
+</picture>
 
-[<img src='https://github.com/saber-notes/saber/blob/main/assets_raw/badges/google-play-badge.svg'
-    alt='Get it on Google Play'
-    height=50>][google_play]
-&nbsp;
-[<img src="https://github.com/saber-notes/saber/blob/main/assets_raw/badges/f-droid-badge.svg"
-    alt="Get it on F-Droid"
-    height=50>][f-droid]
-&nbsp;
-[<img src="https://github.com/saber-notes/saber/blob/main/assets_raw/badges/app-store-badge.svg"
-    alt="Download on the App Store"
-    height=50>][app_store]
-&nbsp;
-[<img src="https://github.com/saber-notes/saber/blob/main/assets_raw/badges/windows-badge.png"
-    alt="Download for Windows"
-    height=50>][download_windows]
-&nbsp;
-[<img src="https://github.com/saber-notes/saber/blob/main/assets_raw/badges/flathub-badge.svg"
-    alt="Download on Flathub"
-    height=50>][flathub]
-&nbsp;
-[<img src="https://github.com/saber-notes/saber/blob/main/assets_raw/badges/appimage-logo.svg"
-    alt="Get it as an AppImage"
-    height=50>][download_appimage]
+<p align="center">
+  <a href="LICENSE.md"><img alt="Lisans: GPL-3.0" src="https://img.shields.io/github/license/tarusatolye/not-mobil?style=flat-square&color=c8b89a&labelColor=0c0b0a&label=lisans"></a>
+  <img alt="Platform: Android" src="https://img.shields.io/badge/platform-Android-c8b89a?style=flat-square&labelColor=0c0b0a">
+  <a href="https://github.com/tarusatolye/not-mobil/releases/latest"><img alt="Son sürüm" src="https://img.shields.io/github/v/release/tarusatolye/not-mobil?style=flat-square&color=c8b89a&labelColor=0c0b0a&label=s%C3%BCr%C3%BCm"></a>
+</p>
 
-[English](https://github.com/saber-notes/saber/blob/main/README.md) |
-[čeština](https://github.com/saber-notes/saber/blob/main/README-cs.md) |
-[Deutsch](https://github.com/saber-notes/saber/blob/main/README-de.md) |
-[中文 (简体中文, 中国)](https://github.com/saber-notes/saber/blob/main/README-zh-CN.md) |
-[中文 (繁體, 台灣)](https://github.com/saber-notes/saber/blob/main/README-zh-TW.md) |
-[العربية](https://github.com/saber-notes/saber/blob/main/README-ar.md) |
-[Tiếng Việt](https://github.com/saber-notes/saber/blob/main/README-vi.md)
+**Not**, tarus ekosisteminin el yazısı not ve eskiz uygulamasıdır. Kalemle ya da parmağınızla yazın, çizin; notlarınız telefonda ve webde ([not.tarus.tr](https://not.tarus.tr)) aynı listede durur. Şantiyede kontrol listesi, toplantıda kat planı eskizi, masada malzeme notu için.
 
-Saber is the notes app built for handwriting.
+<table>
+  <tr>
+    <td width="25%"><img src="store/play/ekranlar/01-son-notlar.png" alt="Son notlar"></td>
+    <td width="25%"><img src="store/play/ekranlar/02-kat-plani.png" alt="Kat planı eskizi"></td>
+    <td width="25%"><img src="store/play/ekranlar/03-cephe-eskizi.png" alt="Cephe eskizi"></td>
+    <td width="25%"><img src="store/play/ekranlar/04-saha-ziyareti.png" alt="Saha ziyareti kontrol listesi"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub><b>01</b> · SON NOTLAR</sub></td>
+    <td align="center"><sub><b>02</b> · KAT PLANI</sub></td>
+    <td align="center"><sub><b>03</b> · CEPHE</sub></td>
+    <td align="center"><sub><b>04</b> · SAHA</sub></td>
+  </tr>
+</table>
 
-It's designed to be as simple and intuitive as possible, while still delivering unique features that you'll actually use. Additionally, Saber is available across all your devices, large and small, and syncs between them seamlessly.
+### ◢ Ne yapar
 
-Notably, it can invert your notes when you're in dark mode. This allows you to write with white ink on a black background, which is much easier on the eyes in low-light environments like when the teacher turns off the lights in class.
-Images and PDFs are also inverted, so you can still use a digital printout or a textbook without the fuss.
+- **El yazısı ve çizim:** kalemler, vurgulayıcı, şekiller; görsel ve PDF üzerine yazma. Sayfalı not ya da beyaz tahta.
+- **Karanlık modda ters çevirme:** koyu zemine açık mürekkeple yazarsınız; görseller ve PDF'ler de birlikte çevrilir.
+- **Telefon ve web aynı listede:** telefonda yazdığınız not webde, webde açtığınız not telefonda görünür. Çakışmada eski sürüm kaybolmaz, kopya olarak saklanır.
+- **Düzen:** iç içe klasörler, ada göre arama, Özel / Şirket İçi / Proje kategorileri.
+- **Pusula ile tek hesap:** ayrı hesap yok; Pusula hesabınızla girersiniz. Notlar Pusula projelerine bağlanabilir.
+- **İzleme yok:** reklam, analitik ya da üçüncü taraf izleme içermez.
 
-Saber uses a dual-password system to protect your notes from anyone but you, even if they have complete control over the server. You can safely store your notes on the official Saber server, another server, or even host your own!
+### ◢ Kurulum
 
-The app is completely open-source so that anyone can view the source code and see exactly what it's doing and how it handles your data. Many other note-taking apps are closed-source and proprietary, meaning that their inner workings are a mystery to the public.
+Mağaza sürümü henüz yayında değil. Web sürümü: **[not.tarus.tr](https://not.tarus.tr)**
 
-As someone who studies maths, highlighting multi-line equations was always a hassle with other apps, where the highlighter would change color when it overlapped with itself. Another problem I had was that in some apps, the highlighter would render on top of the text, fading it out and making it hard to read.
-Saber's highlighter has no such issues. It utilizes canvas compositing to render the highlighter in a way that is consistent with/better than traditional paper, where it handles overlaps and maintains color consistency.
+Kaynaktan derlemek için Flutter (depodaki `submodules/flutter`) ve Rust gerekir:
 
-Saber has everything you need to keep your notes organized. Create folders inside folders inside folders to your heart's content with no limit on the number of nested folders. And even though a note may be buried deep within a nested folder, you can still access it easily with your most recent notes always available on the home screen.
+```bash
+git clone --recursive https://github.com/tarusatolye/not-mobil.git
+cd not-mobil
+flutter pub get
+flutter build apk --release
+```
 
-Discover a whole new way to capture and organize your thoughts with Saber. Whether you're a student, professional, or creative mind, Saber is your trusted companion for digital handwriting. Download now and let your ideas flow freely!
+İmza anahtarı, Play derlemesi ve testler için ayrıntılı kılavuz: [TARUS_NOT.md](TARUS_NOT.md).
 
-[![Latest release](https://img.shields.io/github/v/release/saber-notes/saber)](https://github.com/saber-notes/saber/releases/latest)
-[![Flathub](https://img.shields.io/flathub/v/com.adilhanney.saber)](https://flathub.org/apps/details/com.adilhanney.saber)
-[![F-Droid](https://img.shields.io/f-droid/v/com.adilhanney.saber)](https://f-droid.org/en/packages/com.adilhanney.saber/)
-[![GitHub downloads](https://img.shields.io/github/downloads/saber-notes/saber/total?label=GitHub%20downloads)](https://github.com/saber-notes/saber/releases)
-[![Flathub downloads](https://img.shields.io/flathub/downloads/com.adilhanney.saber?label=Flathub%20downloads)](https://flathub.org/apps/details/com.adilhanney.saber)
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/adil192)](https://github.com/sponsors/adil192)
-[![License](https://img.shields.io/github/license/saber-notes/saber)](https://github.com/saber-notes/saber/blob/main/LICENSE.md)
-[![Translation status](https://hosted.weblate.org/widget/saber-notes/saber/svg-badge.svg)](https://hosted.weblate.org/engage/saber-notes/)
-[![Codecov](https://codecov.io/gh/saber-notes/saber/branch/main/graph/badge.svg?token=EGQSN0THW2)](https://codecov.io/gh/saber-notes/saber)
+### ◢ Lisans ve atıf
 
-<details open>
-<summary>Tap to show/hide screenshots</summary>
+Not, açık kaynak **[Saber](https://github.com/saber-notes/saber)** uygulaması (© 2022– Adil Hanney ve katkıda bulunanlar) temel alınarak geliştirilmiştir. tarus, Saber 1.36.1 üzerine arayüz, eşitleme ve giriş akışında değişiklikler yapmıştır (2026); değişikliklerin dökümü [TARUS_NOT.md](TARUS_NOT.md) «Sürüm notları» bölümündedir.
 
-<div>
-<img src="https://github.com/saber-notes/saber/raw/main/metadata/en-US/images/phoneScreenshots/1_home.png" width="180">
-<img src="https://github.com/saber-notes/saber/raw/main/metadata/en-US/images/phoneScreenshots/2_editor.png" width="180">
-<img src="https://github.com/saber-notes/saber/raw/main/metadata/en-US/images/phoneScreenshots/3_login.png" width="180">
-<img src="https://github.com/saber-notes/saber/raw/main/metadata/en-US/images/phoneScreenshots/4_settings.png" width="180">
-</div>
+Saber gibi Not da **GNU Genel Kamu Lisansı sürüm 3** ile lisanslıdır: [LICENSE.md](LICENSE.md). Gizlilik politikası: [tarus.tr/gizlilik](https://tarus.tr/gizlilik).
+
+---
+
+<details>
+<summary><b>English</b></summary>
+
+**Not** is the handwriting and sketching notes app of the tarus ecosystem. Write and draw with a stylus or finger; notes stay in one list across phone and web ([not.tarus.tr](https://not.tarus.tr)). Sign-in is with a Pusula account. No ads, analytics or third-party tracking.
+
+Not is based on the open-source [Saber](https://github.com/saber-notes/saber) app (© 2022– Adil Hanney and contributors), modified by tarus in 2026, and is licensed under the GNU General Public License v3 ([LICENSE.md](LICENSE.md)). Build notes: [TARUS_NOT.md](TARUS_NOT.md) (Turkish).
+
 </details>
 
-## Features
-
-Please see [#1 Saber progress][progress].
-
-## Install
-
-Please see
-[Install Saber](https://github.com/saber-notes/saber/wiki/install)
-on the wiki.
-
-## Build from source
-
-Please see
-[Build Saber](https://github.com/saber-notes/saber/wiki/build)
-on the wiki.
-
-## Links
-
-- [Nextcloud server][nextcloud]
-- [Privacy policy][privacy]
-- [License][license]
-- [Releases][releases]
-
-## Translating
-
-All translations are thanks to our community of contributors.
-
-If you'd like to help out translating Saber, head to [Weblate](https://hosted.weblate.org/engage/saber-notes/)!
-
-[![Translation status](https://hosted.weblate.org/widget/saber-notes/multi-auto.svg)](https://hosted.weblate.org/engage/saber-notes/)
-
-Note: To avoid falling back to English, any gaps in the translations are filled
-in by machine translation until a human can contribute.
-
-## Supporting Saber
-
-If you like Saber, please consider supporting it by:
-- Spreading the word!
-- Starring the project on GitHub
-- Sponsoring me on [GitHub Sponsors](https://github.com/sponsors/adil192)
-- Donating via [PayPal](https://paypal.me/adilhanney)
-- Buying more storage on the Nextcloud server: see [Pricing](pricing.md)
-
-## Development notes
-
-Please see
-[Maintainer notes](https://github.com/saber-notes/saber/wiki/Maintainer-notes)
-on the wiki.
-
-
-[f-droid]: https://f-droid.org/packages/com.adilhanney.saber/
-[flathub]: https://flathub.org/apps/details/com.adilhanney.saber
-[google_play]: https://play.google.com/store/apps/details?id=com.adilhanney.saber
-[snap]: https://snapcraft.io/saber
-[app_store]: https://apps.apple.com/us/app/saber/id1671523739
-[download_windows]: https://github.com/saber-notes/saber/releases/download/v1.36.1/SaberInstaller_v1.36.1.exe
-[download_appimage]: https://github.com/saber-notes/saber/releases/download/v1.36.1/Saber-1.36.1-x86_64.AppImage
-
-[nextcloud]: https://nc.saber.adil.hanney.org/
-
-[privacy]: https://github.com/saber-notes/saber/blob/main/privacy_policy.md
-[license]: https://github.com/saber-notes/saber/blob/main/LICENSE.md
-
-[releases]: https://github.com/saber-notes/saber/releases
-[issues]: https://github.com/saber-notes/saber/issues
-[progress]: https://github.com/saber-notes/saber/discussions/1
-
-[f-droid-manifest]: https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/com.adilhanney.saber.yml
+<p align="center"><sub><a href="https://tarus.tr">tarus.tr</a> · <a href="mailto:destek@tarus.tr">destek@tarus.tr</a> · PAFTA 02 · NOT · ÇARŞAMBA, SAMSUN</sub></p>
