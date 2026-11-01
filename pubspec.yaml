@@ -34,7 +34,7 @@ dependencies:
     sdk: flutter
 
   # tarus tek ikon ailesi (MIT; Lucide ISC) — lib/tarus/tarus_ikon.dart
-  lucide_icons_flutter: ^3.1.22
+  lucide_icons_flutter: ^4.0.1
 
   sbn:
     path: packages/sbn
@@ -50,7 +50,7 @@ dependencies:
 
   flutter_secure_storage: ^11.2.0
 
-  url_launcher: ^6.1.8
+  url_launcher: ^6.3.3
 
   nextcloud: ^9.0.0
 
@@ -68,7 +68,7 @@ dependencies:
   keybinder: ^1.0.1
 
   pdf: ^3.8.4
-  share_plus: ^13.3.0
+  share_plus: ^13.3.1
   file_picker: ^13.1.0
   android_file_picker:
 
@@ -120,7 +120,7 @@ dependencies:
 
   fixnum: ^1.1.0
 
-  device_info_plus: ^13.2.0
+  device_info_plus: ^13.3.0
 
   one_dollar_unistroke_recognizer: ^1.1.1
 
@@ -144,13 +144,13 @@ dependencies:
   stow_secure: ^0.7.0
   stow_codecs: ^1.4.0
 
-  sentry_flutter: ^9.30.1
-  sentry_logging: ^9.5.0
+  sentry_flutter: ^10.2.0
+  sentry_logging: ^10.2.0
 
   background_downloader: ^9.6.3
 
   flutter_hooks: ^0.21.3+1
-  image: ^4.8.0
+  image: ^4.11.0
   pool: ^1.5.2
 
 dev_dependencies:
@@ -170,7 +170,7 @@ dev_dependencies:
 
   yaml: ^3.1.2
 
-  golden_screenshot: ^11.1.1
+  golden_screenshot: ^12.1.1
 
   sentry_dart_plugin: ^3.1.1
 

@@ -277,10 +277,10 @@ packages:
     dependency: "direct main"
     description:
       name: device_info_plus
-      sha256: "0891702f96b2e465fe567b7ec448380e6b1c14f60af552a8536d9f583b6b8442"
+      sha256: ade1c36f8355d6284c98e4a47992ea263887ed3d1acb281e37635dd45f04c4aa
       url: "https://pub.dev"
     source: hosted
-    version: "13.2.0"
+    version: "13.3.0"
   device_info_plus_platform_interface:
     dependency: transitive
     description:
@@ -675,10 +675,10 @@ packages:
     dependency: "direct dev"
     description:
       name: golden_screenshot
-      sha256: "90558df15c9ac111a8f8d1867b6e241cad89892ce83a822264e9a580fb58cd99"
+      sha256: f1e894eb4d4f8c87a65b7d43ee95d84733f9e1e7980e3e0be5c3165b8b030792
       url: "https://pub.dev"
     source: hosted
-    version: "11.1.1"
+    version: "12.1.1"
   hooks:
     dependency: transitive
     description:
@@ -723,10 +723,10 @@ packages:
     dependency: "direct main"
     description:
       name: image
-      sha256: a1e7f4951e538a568e14b856702afc9ae1d2f4b202daced8d22c1b9cd211ce89
+      sha256: d701df3ef4761a22854c69b9661c9d8f25b264b3982985f25944247ce644761f
       url: "https://pub.dev"
     source: hosted
-    version: "4.10.1"
+    version: "4.11.0"
   injector:
     dependency: transitive
     description:
@@ -776,10 +776,18 @@ packages:
     dependency: transitive
     description:
       name: jni
-      sha256: d2c361082d554d4593c3012e26f6b188f902acd291330f13d6427641a92b3da1
+      sha256: d8df6dab6847855512fe44dd9032b0bbe34dda7bf7597e41d30750879779813f
       url: "https://pub.dev"
     source: hosted
-    version: "0.14.2"
+    version: "1.1.1"
+  jni_util:
+    dependency: transitive
+    description:
+      name: jni_util
+      sha256: "1ba86da04a5f2bf18fde2edb235587e70c5b0fc5bd4ba955f46b00942c3fc35f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   js:
     dependency: transitive
     description:
@@ -856,10 +864,10 @@ packages:
     dependency: "direct main"
     description:
       name: lucide_icons_flutter
-      sha256: abfff57c1f4de40204e25a15809d566b17c1a085d2aa58e00203649758c7fed4
+      sha256: a07370b432d4a88ed8fd6c26b5bbcc4e29fb7b24b6350517fd32209a6b1a50c1
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.22"
+    version: "4.0.1"
   markdown:
     dependency: transitive
     description:
@@ -1534,10 +1542,10 @@ packages:
     dependency: transitive
     description:
       name: sentry
-      sha256: "40a247686af64e497df29ab0de1303a20ca55a2e3c7c7e39b989fac47dcadf84"
+      sha256: f8219c441f6b0903f88475058373c08ac62cac753195b344cc1f8c540a6e490a
       url: "https://pub.dev"
     source: hosted
-    version: "9.30.1"
+    version: "10.2.0"
   sentry_dart_plugin:
     dependency: "direct dev"
     description:
@@ -1550,18 +1558,18 @@ packages:
     dependency: "direct main"
     description:
       name: sentry_flutter
-      sha256: bdd8897b38ce31185c42ed910628059c4eccbc0b0641213e8d1c63e2fda3f5a3
+      sha256: a4dd14fee180b0a6dfd16133bc617a8cfc8c7cbc2e991851e5765ebcbbfcc9a8
       url: "https://pub.dev"
     source: hosted
-    version: "9.30.1"
+    version: "10.2.0"
   sentry_logging:
     dependency: "direct main"
     description:
       name: sentry_logging
-      sha256: "8c777f534492e1ee32dab3448a8e08799b775a916f2f1fb384e5413ba9c58477"
+      sha256: "04c6e9af605e257f60cd7edbaa6b305b7722027881fcd46bfd8ccd9aa2283634"
       url: "https://pub.dev"
     source: hosted
-    version: "9.30.1"
+    version: "10.2.0"
   serial_csv:
     dependency: transitive
     description:
@@ -1574,10 +1582,10 @@ packages:
     dependency: "direct main"
     description:
       name: share_plus
-      sha256: "34f00f9becd2743c1fb05363d624f9f70d37f7ccdcdda47450bc0b8c9d327b8c"
+      sha256: db40767f130189d53f3ae8a6393c217ff4a492da1baff718a9873679c0c00224
       url: "https://pub.dev"
     source: hosted
-    version: "13.3.0"
+    version: "13.3.1"
   share_plus_platform_interface:
     dependency: transitive
     description:
@@ -1827,10 +1835,10 @@ packages:
     dependency: "direct main"
     description:
       name: url_launcher
-      sha256: f6a7e5c4835bb4e3026a04793a4199ca2d14c739ec378fdfe23fc8075d0439f8
+      sha256: e8cc955c97e06df9879140a1fe301f3d493f01b7c62dec7f46834be31d7e9fda
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.2"
+    version: "6.3.3"
   url_launcher_android:
     dependency: transitive
     description:
