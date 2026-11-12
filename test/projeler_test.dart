@@ -175,9 +175,9 @@ void main() {
   });
 
   group('fetchPusulaProjects & projeBagla', () {
-    test('fetchPusulaProjects: Pusula API listesini çeker', () async {
+    test('fetchPusulaProjects: Not sunucusunun /mobil/projeler ucundan listeyi çeker', () async {
       final client = MockClient((req) async {
-        expect(req.url.path, '/not/projeler/');
+        expect(req.url.path, '/mobil/projeler');
         expect(req.headers['Authorization'], 'Bearer nes_test_token_123');
         return http.Response(
           jsonEncode([
@@ -189,7 +189,7 @@ void main() {
       });
 
       final projeler = await fetchPusulaProjects(
-        pusula: Uri.parse('https://pusula.tarus.tr'),
+        notSunucusu: Uri.parse('https://not.tarus.tr'),
         belirtec: 'nes_test_token_123',
         httpClient: client,
       );
