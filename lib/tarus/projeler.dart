@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:saber/data/nextcloud/nextcloud_client_extension.dart';
 import 'package:saber/data/prefs.dart';
-import 'package:saber/data/tarus_baglantilar.dart';
 
 /// Pusula projesi (eskiz bağlama ve projeden açma için).
 ///
@@ -250,11 +249,13 @@ class ProjeEskizi {
 /// Ağ isteği başarısız olursa boş liste döner.
 Future<List<PusulaProjesi>> fetchPusulaProjects({
   String arama = '',
-  Uri? pusula,
+  Uri? notSunucusu,
   String? belirtec,
   http.Client? httpClient,
 }) async {
-  final kok = pusula ?? TarusBaglantilar.pusulaApi;
+  // Pusula `/not/projeler/` nes_ belirteci kabul etmez; liste Not sunucusunun
+  // `/mobil/projeler` vekil ucundan alınır (web İŞ-1460).
+  final kok = notSunucusu ?? NextcloudClientExtension.defaultNextcloudUri;
   final token = belirtec ?? stows.ncPassword.value;
   if (token.isEmpty) return [];
 
@@ -262,7 +263,7 @@ Future<List<PusulaProjesi>> fetchPusulaProjects({
   try {
     final query =
         arama.isNotEmpty ? '?q=${Uri.encodeQueryComponent(arama)}' : '';
-    final url = kok.resolve('not/projeler/$query');
+    final url = kok.resolve('mobil/projeler$query');
     final resp = await client
         .get(
           url,

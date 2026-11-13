@@ -14,7 +14,7 @@ enum NotKategorisi {
   sirket('internal', 'Şirket İçi'),
   proje('project', 'Proje');
 
-  new(this.kod, this.etiket);
+  const NotKategorisi(this.kod, this.etiket);
 
   final String kod;
   final String etiket;
@@ -116,7 +116,7 @@ class NotKategoriBilgisi {
       try {
         final dynamic decoded = jsonDecode(str);
         if (decoded is Map) {
-          return fromValue(decoded);
+          return NotKategoriBilgisi.fromValue(decoded);
         }
       } catch (_) {}
     }

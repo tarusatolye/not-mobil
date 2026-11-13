@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
+import 'package:saber/data/flavor_config.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/tarus/projeler.dart';
 
@@ -10,6 +11,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   setUp(() {
+    FlavorConfig.setup();
     stows.ncPassword.value = 'nes_test_token_123';
     stows.notProjeleri.value = {};
   });
@@ -175,21 +177,21 @@ void main() {
   });
 
   group('fetchPusulaProjects & projeBagla', () {
-    test('fetchPusulaProjects: Pusula API listesini çeker', () async {
+    test('fetchPusulaProjects: Not sunucusunun /mobil/projeler ucundan listeyi çeker', () async {
       final client = MockClient((req) async {
-        expect(req.url.path, '/not/projeler/');
+        expect(req.url.path, '/mobil/projeler');
         expect(req.headers['Authorization'], 'Bearer nes_test_token_123');
-        return http.Response(
-          jsonEncode([
+        return http.Response.bytes(
+          utf8.encode(jsonEncode([
             {'id': '10', 'ref_no': 'PRJ-10', 'ad': 'Merkez Ofis'},
             {'id': '20', 'ref_no': 'PRJ-20', 'ad': 'Şantiye Blok A'},
-          ]),
+          ])),
           200,
         );
       });
 
       final projeler = await fetchPusulaProjects(
-        pusula: Uri.parse('https://pusula.tarus.tr'),
+        notSunucusu: Uri.parse('https://not.tarus.tr'),
         belirtec: 'nes_test_token_123',
         httpClient: client,
       );
