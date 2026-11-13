@@ -116,7 +116,7 @@ class NotKategoriBilgisi {
       try {
         final dynamic decoded = jsonDecode(str);
         if (decoded is Map) {
-          return fromValue(decoded);
+          return NotKategoriBilgisi.fromValue(decoded);
         }
       } catch (_) {}
     }

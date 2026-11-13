@@ -4,12 +4,14 @@ import 'dart:ui';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
+import 'package:saber/data/flavor_config.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/tarus/kategori.dart';
 import 'package:saber/tarus/tarus_ikon.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  FlavorConfig.setup();
 
   setUp(() {
     stows.ncPassword.value = 'nes_test_token_123';
