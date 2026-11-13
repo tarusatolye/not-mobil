@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
+import 'package:saber/data/flavor_config.dart';
 import 'package:saber/data/prefs.dart';
 import 'package:saber/tarus/projeler.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  FlavorConfig.setup();
 
   setUp(() {
     stows.ncPassword.value = 'nes_test_token_123';
@@ -179,11 +181,13 @@ void main() {
       final client = MockClient((req) async {
         expect(req.url.path, '/not/projeler/');
         expect(req.headers['Authorization'], 'Bearer nes_test_token_123');
-        return http.Response(
-          jsonEncode([
-            {'id': '10', 'ref_no': 'PRJ-10', 'ad': 'Merkez Ofis'},
-            {'id': '20', 'ref_no': 'PRJ-20', 'ad': 'Şantiye Blok A'},
-          ]),
+        return http.Response.bytes(
+          utf8.encode(
+            jsonEncode([
+              {'id': '10', 'ref_no': 'PRJ-10', 'ad': 'Merkez Ofis'},
+              {'id': '20', 'ref_no': 'PRJ-20', 'ad': 'Şantiye Blok A'},
+            ]),
+          ),
           200,
         );
       });
