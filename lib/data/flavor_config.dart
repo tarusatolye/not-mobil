@@ -1,13 +1,13 @@
 class FlavorConfig {
   new _();
 
-  static late String _flavor;
+  static String _flavor = '';
   static String get flavor => _flavor;
 
-  static late String _appStore;
+  static String _appStore = '';
   static String get appStore => _appStore;
 
-  static late bool _shouldCheckForUpdatesByDefault;
+  static bool _shouldCheckForUpdatesByDefault = true;
   static bool get shouldCheckForUpdatesByDefault =>
       _shouldCheckForUpdatesByDefault;
 
