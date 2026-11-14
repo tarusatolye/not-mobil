@@ -367,7 +367,13 @@ class DoneLoginStep extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(14)),
                   ),
                 ),
-                onPressed: () => HesapSilmeDialog.goster(context),
+                onPressed: () => HesapSilmeDialog.goster(
+                  context,
+                  onSilindi: () async {
+                    await NotCikisi.cikisYap();
+                    recheckCurrentStep();
+                  },
+                ),
                 child: Text(
                   t.profile.quickLinks.deleteAccount,
                   style: const TextStyle(fontSize: 13),
