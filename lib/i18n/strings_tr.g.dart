@@ -192,7 +192,6 @@ class _Translations$appInfo$tr extends Translations$appInfo$en {
 	// Translations
 	@override String licenseNotice({required Object buildYear}) => 'Saber  Copyright © 2022-${buildYear}  Adil Hanney\nBu program hiçbir şeyi garanti etmez ve güvence vermez.\nBu program özgür (free) bir yazılımdır ve belli koşullar sağlandığında yeniden dağıtıma müsaittir.';
 	@override String get debug => 'DEBUG';
-	@override String get sponsorButton => 'Beni sponsorlamak veya daha fazla alan satın almak için buraya tıkla';
 	@override String get licenseButton => 'Lisans bilgisinin detaylarını görmek için buraya tıkla';
 	@override String get privacyPolicyButton => 'Gizlilik Politikasını görmek için buraya tıkla';
 }
@@ -668,7 +667,7 @@ class _Translations$profile$faq$2$tr extends Translations$profile$faq$2$en {
 
 	// Translations
 	@override String get q => 'Hesabımı nasıl silebilirim?';
-	@override String get a => 'Üstte yer alan "${_root.profile.quickLinks.deleteAccount}" butonuna tıklayın, gerekirse giriş yapın.\ntarus Not\'un ayrı bir hesabı yoktur; kimliğiniz Pusula hesabınızdır. Bu cihazın eşitleme erişimini çıkış yaparak ya da Pusula > Hesap > Bağlı cihazlar bölümünden kaldırabilirsiniz. Sunucudaki notlarınızın ve hesap verilerinizin silinmesi için orada gösterilen silme talebi sayfasını kullanın.\nEğer üçüncü parti bir sunucu kullanıyorsanız hesabınızı silme seçeneği sunulmuyor olabilir: daha fazla bilgi için ilgili sunucunun gizlilik politikasını inceleyin.';
+	@override String get a => 'Üstte yer alan "${_root.profile.quickLinks.deleteAccount}" butonuna tıklayın, gerekirse giriş yapın.\ntarus Not\'un ayrı bir hesabı yoktur; kimliğiniz Pusula hesabınızdır. Açılan pencerede Pusula e-postanızı ve parolanızı yazın; nelerin silineceği gösterilir ve onayınızla Pusula hesabınız, Not sunucusundaki notlarınız ve bu cihazdaki notlar kalıcı olarak silinir. Giremiyorsanız pencerede silme talebi sayfası ve e-posta yolu da bulunur.\nEğer üçüncü parti bir sunucu kullanıyorsanız hesabınızı silme seçeneği sunulmuyor olabilir: daha fazla bilgi için ilgili sunucunun gizlilik politikasını inceleyin.';
 }
 
 // Path: editor.toolbar

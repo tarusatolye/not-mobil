@@ -224,7 +224,7 @@ profile:
   - q: Hesabımı nasıl silebilirim?
     a: |-
       Üstte yer alan "@:profile.quickLinks.deleteAccount" butonuna tıklayın, gerekirse giriş yapın.
-      tarus Not'un ayrı bir hesabı yoktur; kimliğiniz Pusula hesabınızdır. Bu cihazın eşitleme erişimini çıkış yaparak ya da Pusula > Hesap > Bağlı cihazlar bölümünden kaldırabilirsiniz. Sunucudaki notlarınızın ve hesap verilerinizin silinmesi için orada gösterilen silme talebi sayfasını kullanın.
+      tarus Not'un ayrı bir hesabı yoktur; kimliğiniz Pusula hesabınızdır. Açılan pencerede Pusula e-postanızı ve parolanızı yazın; nelerin silineceği gösterilir ve onayınızla Pusula hesabınız, Not sunucusundaki notlarınız ve bu cihazdaki notlar kalıcı olarak silinir. Giremiyorsanız pencerede silme talebi sayfası ve e-posta yolu da bulunur.
       Eğer üçüncü parti bir sunucu kullanıyorsanız hesabınızı silme seçeneği sunulmuyor olabilir: daha fazla bilgi için ilgili sunucunun gizlilik politikasını inceleyin.
   quotaUsageUncapped: $used kullanıyorsunuz
 appInfo:
@@ -233,7 +233,6 @@ appInfo:
     Bu program hiçbir şeyi garanti etmez ve güvence vermez.
     Bu program özgür (free) bir yazılımdır ve belli koşullar sağlandığında yeniden dağıtıma müsaittir.
   debug: DEBUG
-  sponsorButton: Beni sponsorlamak veya daha fazla alan satın almak için buraya tıkla
   licenseButton: Lisans bilgisinin detaylarını görmek için buraya tıkla
   privacyPolicyButton: Gizlilik Politikasını görmek için buraya tıkla
 update:
@@ -428,7 +427,7 @@ tarus:
     pusulaProjesi: Pusula projesi
     projeSecin: Proje seçin…
     bagliProje: Bağlı proje
-    baglandi: Not projeye bağlandı: $proje
+    baglandi: 'Not projeye bağlandı: $proje'
     bagiKaldir: Bağı kaldır
     bagiKaldirildi: Proje bağı kaldırıldı
     aramaYerTutucu: Pusula'da ara…
