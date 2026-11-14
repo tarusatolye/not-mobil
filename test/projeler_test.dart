@@ -9,6 +9,7 @@ import 'package:saber/tarus/projeler.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  FlavorConfig.setup();
 
   setUp(() {
     FlavorConfig.setup();
