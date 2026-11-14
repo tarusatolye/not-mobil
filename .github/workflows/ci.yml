@@ -20,7 +20,7 @@ jobs:
     if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
     name: Analiz ve testler
     runs-on: [self-hosted, linux]   # mini PC (techstorm); GitHub'ın kendi sunucuları ödeme kilidinde
-    timeout-minutes: 40
+    timeout-minutes: 150   # mini PC sırasında bekleme de bu süreye sayılır
     steps:
       - uses: actions/checkout@v4
         with:
