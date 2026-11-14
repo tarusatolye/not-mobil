@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main, ci-deneme]
+  pull_request:
+  workflow_dispatch:
+
+# Aynı dala yeni koşu gelince eskisi iptal edilir; mini PC'de aynı anda tek iş koşar (ortak kilit).
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    # Herkese açık depo: fork'tan gelen PR mini PC'de kod çalıştıramaz (kullanıcı onayı 2026-11-14).
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    name: Analiz ve testler
+    runs-on: [self-hosted, linux]   # mini PC (techstorm); GitHub'ın kendi sunucuları ödeme kilidinde
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Flutter (alt modülden)
+        run: echo "$GITHUB_WORKSPACE/submodules/flutter/bin" >> "$GITHUB_PATH"
+      - run: flutter config --no-cli-animations --no-analytics
+      - run: flutter pub get
+      - name: Apple yazı tipleri (golden)
+        run: dart run golden_screenshot:download_apple_fonts
+      - name: Testler
+        run: flutter test --no-pub
+      - name: Statik analiz
+        run: flutter analyze --no-pub
+      - name: Biçim
+        run: dart format lib packages scripts test --output none --set-exit-if-changed
