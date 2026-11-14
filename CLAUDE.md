@@ -2,6 +2,8 @@
 
 Not uygulamasının mobil istemcisi: Flutter, Saber çatalı (Saber'den güncelleme alınmaz; dosyaları doğrudan düzenlenir). Kurallar `ozluk/ajan-ozeti.md`, mobil kuralları `ozluk/tarus-kabuk/STANDARTLAR-MOBIL.md`. Ayrıntılı kılavuz `TARUS_NOT.md` (21 KB): bütün okuma, `rg -n "^## " TARUS_NOT.md` ile bölüm aç.
 
+**Belgeler Beyin'e** (kullanıcı 2026-11-14): tasarım, plan, not, rapor ve md belgeleri repoya ya da yerel diske değil Beyin'e yazılır (`bilgi` MCP ya da `PUT https://yetki.tarus.tr/bilgi/belgeler/<yol>/`); repoda yalnız kod ve kodun yanındaki zorunlu belgeler (README, CLAUDE.md, AGENTS.md, CHANGELOG) kalır.
+
 ## Yapı
 - `lib/tarus/` tarus katmanı — yeni arayüzü buradan kur:
   - `tarus_bilesenler.dart`: `TarusKart`, `TarusDialog`, `TarusIkonDugmesi`, `TarusBosDurum`, `TarusSayfaUstu`, `TarusMetinAlani`, `TarusSecmeli`. **Kullanmadan önce yapıcısını oku** (`rg -n "const .*\(\{" -A15`): örneğin `TarusMetinAlani` `placeholder` alır (`hintText` değil), `onChanged` yoktur, `focusOrder` zorunludur.

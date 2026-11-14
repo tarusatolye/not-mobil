@@ -29,7 +29,7 @@ abstract final class PusulaGiris {
   static final log = Logger('PusulaGiris');
 
   static const uygulama = 'not-mobil';
-  static const _zamanAsimi = Duration(seconds: 20);
+  static const zamanAsimi = Duration(seconds: 20);
 
   /// E-posta + parolayla giriş. İki adımlı doğrulamada [IkiAdimGerekli] döner;
   /// çağıran kodu alıp [ikiAdimiTamamla] ile sürdürür.
@@ -75,12 +75,12 @@ abstract final class PusulaGiris {
     try {
       final giris = await client
           .post(
-            _adres(kok, 'auth/giris/'),
-            headers: _basliklar(cihazAdi: ad),
+            adres(kok, 'auth/giris/'),
+            headers: basliklar(cihazAdi: ad),
             body: jsonEncode(govde),
           )
-          .timeout(_zamanAsimi);
-      final veri = _json(giris);
+          .timeout(zamanAsimi);
+      final veri = json(giris);
       if (giris.statusCode == 202 &&
           veri['code'] == 'two_factor_required' &&
           veri['challenge_token'] is String) {
@@ -88,7 +88,7 @@ abstract final class PusulaGiris {
       }
       if (giris.statusCode != 200) {
         throw PusulaGirisHatasi(
-          _ayrinti(veri) ??
+          ayrinti(veri) ??
               (giris.statusCode == 400 || giris.statusCode == 401
                   ? 'E-posta ya da parola hatalı.'
                   : 'Pusula yanıt vermedi (${giris.statusCode}).'),
@@ -104,19 +104,19 @@ abstract final class PusulaGiris {
       try {
         final yanit = await client
             .post(
-              _adres(kok, 'not/belirtecler/'),
+              adres(kok, 'not/belirtecler/'),
               headers: {
-                ..._basliklar(cihazAdi: ad),
+                ...basliklar(cihazAdi: ad),
                 'Authorization': 'Bearer $erisim',
               },
               body: jsonEncode({'ad': ad, 'cihaz_adi': ad}),
             )
-            .timeout(_zamanAsimi);
-        final belirtecVerisi = _json(yanit);
+            .timeout(zamanAsimi);
+        final belirtecVerisi = json(yanit);
         final belirtec = belirtecVerisi['belirtec'];
         if (yanit.statusCode != 201 || belirtec is! String) {
           throw PusulaGirisHatasi(
-            _ayrinti(belirtecVerisi) ??
+            ayrinti(belirtecVerisi) ??
                 'Eşitleme erişimi alınamadı (${yanit.statusCode}).',
           );
         }
@@ -128,11 +128,11 @@ abstract final class PusulaGiris {
           unawaited(
             client
                 .post(
-                  _adres(kok, 'auth/cikis/'),
-                  headers: _basliklar(),
+                  adres(kok, 'auth/cikis/'),
+                  headers: basliklar(),
                   body: jsonEncode({'refresh_token': yenileme}),
                 )
-                .timeout(_zamanAsimi)
+                .timeout(zamanAsimi)
                 .then<void>(
                   (_) {},
                   onError: (Object e) {
@@ -195,13 +195,13 @@ abstract final class PusulaGiris {
     try {
       final yanit = await client
           .post(
-            _adres(
+            adres(
               pusula ?? TarusBaglantilar.pusulaApi,
               'not/belirtecler/birak/',
             ),
-            headers: {..._basliklar(), 'Authorization': 'Bearer $temiz'},
+            headers: {...basliklar(), 'Authorization': 'Bearer $temiz'},
           )
-          .timeout(_zamanAsimi);
+          .timeout(zamanAsimi);
       return yanit.statusCode == 204;
     } catch (e) {
       log.info('Eşitleme belirteci bırakılamadı: $e');
@@ -238,14 +238,14 @@ abstract final class PusulaGiris {
   static String _buyukBasla(String s) =>
       s.isEmpty ? s : s[0].toUpperCase() + s.substring(1);
 
-  static Uri _adres(Uri kok, String yol) {
+  static Uri adres(Uri kok, String yol) {
     final taban = kok.path.endsWith('/')
         ? kok
         : kok.replace(path: '${kok.path}/');
     return taban.resolve(yol);
   }
 
-  static Map<String, String> _basliklar({String? cihazAdi}) => {
+  static Map<String, String> basliklar({String? cihazAdi}) => {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
     // Pusula mobil istemciyi tanır, anahtarları gövdede döndürür; giriş
@@ -268,7 +268,7 @@ abstract final class PusulaGiris {
     return b.toString();
   }
 
-  static Map<String, dynamic> _json(http.Response yanit) {
+  static Map<String, dynamic> json(http.Response yanit) {
     try {
       final v = jsonDecode(utf8.decode(yanit.bodyBytes));
       return v is Map<String, dynamic> ? v : const {};
@@ -277,7 +277,7 @@ abstract final class PusulaGiris {
     }
   }
 
-  static String? _ayrinti(Map<String, dynamic> veri) {
+  static String? ayrinti(Map<String, dynamic> veri) {
     final detay = veri['detail'];
     if (detay is String && detay.isNotEmpty) return detay;
     for (final alan in ['non_field_errors', 'email', 'password']) {

@@ -271,9 +271,12 @@ class _BrowsePageState extends State<BrowsePage> {
       final tamYol = "${path ?? ""}/$f";
       final kat = notKategorisiAl(tamYol).kategori;
       switch (kat) {
-        NotKategorisi.ozel => ozelSayisi++,
-        NotKategorisi.sirket => sirketSayisi++,
-        NotKategorisi.proje => projeSayisi++,
+        case NotKategorisi.ozel:
+          ozelSayisi++;
+        case NotKategorisi.sirket:
+          sirketSayisi++;
+        case NotKategorisi.proje:
+          projeSayisi++;
       }
     }
 

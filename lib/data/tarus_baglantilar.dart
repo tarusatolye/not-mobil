@@ -9,7 +9,7 @@
 ///   --dart-define=TARUS_GIZLILIK_URL=https://tarus.tr/gizlilik/
 /// ```
 ///
-/// Varsayılanlar (2026-10-06): tarus.tr (kurumsal.tarus.tr) gizlilik
+/// Varsayılanlar (2026-10-06): tarus.tr gizlilik
 /// politikası (§10 Android uygulamaları, tarus Not dahil) ve ayrı hesap
 /// silme sayfası. yazilim.tarus.tr kapatılıyor (kullanıcı kararı 2026-10-06).
 abstract final class TarusBaglantilar {

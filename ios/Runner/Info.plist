@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Not</string>
+	<string>tarus Not</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -20,7 +20,7 @@
 		<string>tr</string>
 	</array>
 	<key>CFBundleName</key>
-	<string>Not</string>
+	<string>tarus Not</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -34,9 +34,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Take photos to add to your notes</string>
+	<string>Notlarınıza fotoğraf eklemek için kameranız kullanılır. Görüntüler yalnızca notun içine eklenir.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Include your photos in your notes</string>
+	<string>Notlarınıza eklemek istediğiniz fotoğrafları seçebilmeniz için fotoğraf arşivinize erişilir.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Notlarınızdan dışa aktardığınız görselleri fotoğraf arşivinize kaydedebilmek için erişim istenir.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
