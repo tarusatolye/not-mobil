@@ -26,6 +26,8 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
+      - name: Rust (super_native_extensions yerel derlemesi için; runner'da sudo yok, ~/.rustup'a kurar)
+        uses: dtolnay/rust-toolchain@stable
       - name: Flutter (alt modülden)
         uses: adil192/setup-flutter-submodule@v3   # sığ alt modülde sürüm etiketini de getirir (0.0.0-unknown olmasın)
         with:
