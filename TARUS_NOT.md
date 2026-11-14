@@ -235,6 +235,14 @@ derlenir (Visual Studio Build Tools gerekir). Build Tools yoksa yerel deneme iç
   arayüzüne göre güncellendi, Nextcloud testleri Saber test sunucusuna yönlendi.
 - **1.1.0** (2026-10-03): tarus 8 tema, Ayarlar → Hata bildir.
 
+## iOS / App Store (1.3.0)
+- Kimlik: bundle `tr.tarus.not` (Android ile aynı), RunnerTests `tr.tarus.not.RunnerTests`, takım `UQYJQL787C`, otomatik imzalama, görünen ad «tarus Not». `ITSAppUsesNonExemptEncryption=false` (yalnız HTTPS). İzin metinleri Türkçe (`Info.plist`: kamera, fotoğraf okuma/ekleme).
+- 2.5.2: güncelleme denetimi kapalı (`UpdateManager.etkin=false`); iOS'ta ayrıca indirme/açma kodu çalışmaz.
+- 3.1.1: uygulamada bağış/satın alma yok (Saber'in sponsor metni kaldırıldı).
+- 5.1.1(v): Profil › **Hesabı sil** uygulama içinde siler (`hesap_silme_dialog.dart`, `pusula_hesap_silme.dart`): Pusula e-posta + parola (+2 adım) → `GET /auth/me/hesabi-sil/` özeti → onay → sunucudaki notlar WebDAV ile silinir → `POST /auth/me/hesabi-sil/` → cihaz temizlenir. Web yolu (`TarusBaglantilar.hesapSilme`) yedek.
+- GPL-3.0: kaynak herkese açık (`TarusBaglantilar.kaynakKodu`), Hakkında'da lisans bildirimi.
+- Mağaza belgeleri `store/app-store/` (inceleme notu, çekim senaryosu, metinler, App Privacy, ekran görüntüleri). Derleme: `flutter build ipa --release --export-method app-store`.
+
 ## Lisans (GPL-3.0)
 tarus Not, [Saber](https://github.com/saber-notes/saber) (© 2022- Adil Hanney ve
 katkıda bulunanlar) üzerine geliştirilmiştir ve Saber gibi **GNU GPL-3.0** ile

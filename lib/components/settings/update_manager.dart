@@ -144,6 +144,7 @@ abstract class UpdateManager {
     @visibleForTesting TargetPlatform? platform,
   ]) async {
     platform ??= defaultTargetPlatform;
+    if (platform == TargetPlatform.iOS) return null;
 
     if (!UpdateManager.platformFileRegex.containsKey(platform)) return null;
 
@@ -182,6 +183,9 @@ abstract class UpdateManager {
     required void Function(TaskStatus)? onStatus,
     required void Function(double)? onProgress,
   }) async {
+    // App Store 2.5.2: iOS'ta dışarıdan uygulama/güncelleme indirilmez ve
+    // açılmaz; güncellemeler yalnız App Store'dan gelir.
+    if (Platform.isIOS) return;
     final fileName = downloadUrl.substring(downloadUrl.lastIndexOf('/') + 1);
     final task = DownloadTask(
       url: downloadUrl,

@@ -14,7 +14,7 @@ enum NotKategorisi {
   sirket('internal', 'Şirket İçi'),
   proje('project', 'Proje');
 
-  new(this.kod, this.etiket);
+  const NotKategorisi(this.kod, this.etiket);
 
   final String kod;
   final String etiket;

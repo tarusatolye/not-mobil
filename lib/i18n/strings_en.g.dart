@@ -265,9 +265,6 @@ class Translations$appInfo$en {
 	/// en: 'DEBUG'
 	String get debug => 'DEBUG';
 
-	/// en: 'Tap here to sponsor me or buy more storage'
-	String get sponsorButton => 'Tap here to sponsor me or buy more storage';
-
 	/// en: 'Tap here to view more license information'
 	String get licenseButton => 'Tap here to view more license information';
 
@@ -1080,8 +1077,8 @@ class Translations$profile$faq$2$en {
 	/// en: 'How can I delete my account?'
 	String get q => 'How can I delete my account?';
 
-	/// en: 'Tap on the "Delete account" button above, and login if needed. tarus Not has no separate account: your identity is your Pusula account. To remove this device's sync access, sign out or remove it in Pusula > Account > Connected devices. To have your notes and account data deleted from the server, use the deletion request page shown there. If you are using a third party server, there might not be an option to delete your account: you'll need to consult the server's privacy policy for more information.'
-	String get a => 'Tap on the "${_root.profile.quickLinks.deleteAccount}" button above, and login if needed.\ntarus Not has no separate account: your identity is your Pusula account. To remove this device\'s sync access, sign out or remove it in Pusula > Account > Connected devices. To have your notes and account data deleted from the server, use the deletion request page shown there.\nIf you are using a third party server, there might not be an option to delete your account: you\'ll need to consult the server\'s privacy policy for more information.';
+	/// en: 'Tap on the "Delete account" button above, and login if needed. tarus Not has no separate account: your identity is your Pusula account. In the window that opens, enter your Pusula e-mail and password; it lists what will be deleted, and once you confirm, your Pusula account, your notes on the Not server and the notes on this device are permanently deleted. If you cannot sign in, the window also offers a web request page and an e-mail address. If you are using a third party server, there might not be an option to delete your account: you'll need to consult the server's privacy policy for more information.'
+	String get a => 'Tap on the "${_root.profile.quickLinks.deleteAccount}" button above, and login if needed.\ntarus Not has no separate account: your identity is your Pusula account. In the window that opens, enter your Pusula e-mail and password; it lists what will be deleted, and once you confirm, your Pusula account, your notes on the Not server and the notes on this device are permanently deleted. If you cannot sign in, the window also offers a web request page and an e-mail address.\nIf you are using a third party server, there might not be an option to delete your account: you\'ll need to consult the server\'s privacy policy for more information.';
 }
 
 // Path: editor.toolbar
@@ -1626,7 +1623,7 @@ class Translations$tarus$proje$en {
 	/// en: 'Linked project'
 	String get bagliProje => 'Linked project';
 
-	/// en: 'Note linked to project: {proje}'
+	/// en: 'Note linked to project: $proje'
 	String baglandi({required Object proje}) => 'Note linked to project: ${proje}';
 
 	/// en: 'Remove link'
