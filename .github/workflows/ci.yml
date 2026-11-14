@@ -39,6 +39,6 @@ jobs:
       # Golden (piksel) testleri ayrı: Linux çizimi Windows'ta üretilmiş PNG'lerden farklı (İŞ-1456, Mankurt kararı:
       # golden yenileme ayrı iş). Golden doğrulaması içermeyen bütün test dosyaları koşar.
       - name: Testler (golden hariç)
-        run: flutter test --no-pub $(grep -rL "matchesGoldenFile\|goldens/" test --include='*_test.dart' | sort)
+        run: flutter test --no-pub $(grep -rLi "golden" test --include='*_test.dart' | sort)
       - name: Statik analiz (yalnız hatalar düşürür)
         run: flutter analyze --no-pub --no-fatal-infos --no-fatal-warnings
