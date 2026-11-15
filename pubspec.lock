@@ -69,10 +69,10 @@ packages:
     dependency: "direct main"
     description:
       name: background_downloader
-      sha256: "9a3bde7e8331edb70588bef7171acc2a0a77e50fbe3c310f5022a14ebd2bdf0f"
+      sha256: "7c5c1d65a9778282229bfc90f41536074bd4921c775608b260a5b6bf129513e3"
       url: "https://pub.dev"
     source: hosted
-    version: "9.6.3"
+    version: "9.6.6"
   barcode:
     dependency: transitive
     description:
@@ -205,10 +205,10 @@ packages:
     dependency: "direct main"
     description:
       name: crypto
-      sha256: c8ea0233063ba03258fbcf2ca4d6dadfefe14f02fab57702265467a19f27fadf
+      sha256: e3626ae6270383c9e3a549f34c9e4cd26c09ae6a9adaab2bf4737a00340efdc4
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.7"
+    version: "3.0.8"
   crypton:
     dependency: transitive
     description:
@@ -471,10 +471,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_hooks
-      sha256: "8ae1f090e5f4ef5cfa6670ce1ab5dddadd33f3533a7f9ba19d9f958aa2a89f42"
+      sha256: b4f6eb8f13fc92523023a47d4a2e541b17827535334941f9a974f10da0797a7e
       url: "https://pub.dev"
     source: hosted
-    version: "0.21.3+1"
+    version: "0.21.4"
   flutter_keyboard_visibility_linux:
     dependency: transitive
     description:
@@ -1939,10 +1939,10 @@ packages:
     dependency: "direct main"
     description:
       name: vector_math
-      sha256: "92b9910f66ed1057fd4da7b040ae7c74cafacf885bdc81be496928d5049b032d"
+      sha256: fa49e1674cb84acb900141714e6c6e1f9ae099827c24d141430ff6819db4e1bc
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.3"
+    version: "2.4.4"
   version:
     dependency: transitive
     description:

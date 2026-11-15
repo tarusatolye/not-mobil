@@ -56,11 +56,11 @@ dependencies:
 
   collapsible: ^1.0.0
 
-  vector_math: ^2.4.3
+  vector_math: ^2.4.4
 
   intl: any
 
-  crypto: ^3.0.2
+  crypto: ^3.0.8
   encrypt: ^5.0.1
 
   http: ^1.1.0
@@ -147,9 +147,9 @@ dependencies:
   sentry_flutter: ^10.2.0
   sentry_logging: ^10.2.0
 
-  background_downloader: ^9.6.3
+  background_downloader: ^9.6.6
 
-  flutter_hooks: ^0.21.3+1
+  flutter_hooks: ^0.21.4
   image: ">=4.8.0 <4.11.0" # 4.11+ archive >=4.1 ister; pdf archive<4.1 ile sınırlıyor
   pool: ^1.5.2
 
