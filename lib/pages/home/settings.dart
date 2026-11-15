@@ -135,7 +135,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 children: [
                   TarusBolumEtiketi(
                     t.tarus.ayar.esitleme,
-                    padding: const .fromLTRB(4, 4, 4, 8),
+                    padding: const .fromLTRB(4, 12, 4, 8),
                   ),
                   const NextcloudProfile(),
 

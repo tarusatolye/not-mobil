@@ -17,6 +17,12 @@ ALANLAR = [
 ]
 
 
+# STANDARTLAR-MOBIL §3: mobil uygulama marka vurgusunu taşır. Modern ve Karanlık
+# temada vurgu Not markası #AC865A (Arkiv/Pusula ile aynı kalıp); öteki temalar
+# kendi vurgusunu korur. accent-lt: açık zeminde koyu, koyu zeminde açık taba.
+MARKA = {'modern': ('#AC865A', '#8A6A42'), 'karanlik': ('#AC865A', '#CDAA7E')}
+
+
 def blok(ad):
     m = re.search(r'\.theme-' + ad + r'\s*\{(.*?)\n\}', css, re.S)
     if not m:
@@ -67,6 +73,8 @@ for t in TEMALAR:
                 v = deger(g, 'ovl-3')
             else:
                 raise SystemExit('%s: %s yok (%s)' % (t, css_ad, v))
+        if t in MARKA and css_ad in ('accent', 'accent-lt'):
+            v = MARKA[t][0 if css_ad == 'accent' else 1]
         alanlar.append('    %s: %s,' % (dart_ad, renk(v)))
     alanlar.append('    elev1: %s,' % golgeler(deger(g, 'elev-1')))
     alanlar.append('    elev2: %s,' % golgeler(deger(g, 'elev-2')))

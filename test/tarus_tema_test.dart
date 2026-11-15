@@ -32,7 +32,7 @@ void main() {
   test('renkler tarus.css token değerleri', () {
     final karanlik = TarusTema.bul('karanlik')!;
     expect(karanlik.bg, const Color(0xFF050505));
-    expect(karanlik.accent, const Color(0xFF2563EB));
+    expect(karanlik.accent, const Color(0xFFAC865A));
     expect(TarusTema.bul('violet')!.accent, const Color(0xFFD946EF));
     expect(TarusTema.bul('sand')!.ad, 'Kahve');
     expect(TarusTema.bul('yok'), isNull);

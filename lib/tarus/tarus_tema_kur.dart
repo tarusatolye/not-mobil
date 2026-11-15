@@ -79,7 +79,7 @@ abstract final class TarusTemaKur {
         scrolledUnderElevation: 0,
         centerTitle: false,
         titleSpacing: TarusOlcu.sayfaYatay,
-        toolbarHeight: 56,
+        toolbarHeight: TarusOlcu.ustCubuk,
         iconTheme: IconThemeData(color: r.muted2, size: TarusOlcu.ikon),
         actionsIconTheme: IconThemeData(color: r.muted2, size: TarusOlcu.ikon),
         titleTextStyle: yazi.titleMedium!.copyWith(

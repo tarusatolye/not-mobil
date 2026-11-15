@@ -119,8 +119,16 @@ class TarusKart extends StatelessWidget {
   }
 }
 
-/// Bölüm etiketi (Ayarlar grupları, liste bölümleri): 12 px / 700,
-/// `--muted2`; büyük harf kullanılmaz (Türkçe İ/I dönüşümü).
+/// Bölüm etiketi metnini büyük harfe çevirir (Türkçe İ/I kurallarıyla).
+String bolumMetni(String metin) {
+  final tr = LocaleSettings.currentLocale.languageCode == 'tr';
+  return (tr ? metin.replaceAll('i', 'İ').replaceAll('ı', 'I') : metin)
+      .toUpperCase();
+}
+
+/// Bölüm etiketi (Ayarlar grupları, liste bölümleri): kardeş uygulamalardaki
+/// gibi BÜYÜK HARF, 11 px / 700, harf aralığı 0,4, `--muted`. Türkçede
+/// i→İ, ı→I dönüşümü [bolumMetni] ile yapılır.
 class const TarusBolumEtiketi(
   final String metin, {
   super.key,
@@ -138,12 +146,12 @@ class const TarusBolumEtiketi(
             child: Semantics(
               header: true,
               child: Text(
-                metin,
+                bolumMetni(metin),
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 11,
                   fontWeight: FontWeight.w700,
-                  color: r.muted2,
-                  letterSpacing: 0.2,
+                  color: r.muted,
+                  letterSpacing: 0.4,
                 ),
               ),
             ),
@@ -335,11 +343,11 @@ class TarusSayfaUstu extends StatelessWidget {
     final r = TarusRenkler.of(context);
     return SliverAppBar(
       pinned: true,
-      toolbarHeight: 62,
+      toolbarHeight: TarusOlcu.ustCubuk,
       automaticallyImplyLeading: false,
       backgroundColor: r.bg,
       surfaceTintColor: Colors.transparent,
-      shape: const Border(),
+      shape: Border(bottom: BorderSide(color: r.border)),
       titleSpacing: TarusOlcu.sayfaYatay + 4,
       title: Row(
         mainAxisSize: MainAxisSize.min,
@@ -410,7 +418,8 @@ class TarusSayfaUstu extends StatelessWidget {
 ///
 /// Arkiv/Sistem Mobil standardı (kullanıcı kararı 2026-10-20): 14 px hap,
 /// [isDestructiveAction] dolu tehlike rengi, İptal/Vazgeç ([isCancelAction]
-/// ya da metni «İptal»/«Vazgeç») kırmızı kontur + yumuşak zemin,
+/// ya da metni «İptal»/«Vazgeç») nötr ikincil (tehlike rengi almaz,
+/// STANDARTLAR-MOBIL §8),
 /// [isDefaultAction] ya da birden çok düğmede sonuncusu dolu vurgu,
 /// ötekiler nötr (`--input-bg` + kenarlık).
 class TarusDialogDugmesi {
@@ -449,15 +458,12 @@ class const TarusDugmeSirasi(
   @override
   Widget build(BuildContext context) {
     final r = TarusRenkler.of(context);
-    final acik = Theme.brightnessOf(context) == Brightness.light;
     if (dugmeler.length <= 2) {
       return Row(
         children: [
           for (var i = 0; i < dugmeler.length; i++) ...[
             if (i > 0) const SizedBox(width: 10),
-            Expanded(
-              child: _dugme(r, acik, dugmeler[i], i == dugmeler.length - 1),
-            ),
+            Expanded(child: _dugme(r, dugmeler[i], i == dugmeler.length - 1)),
           ],
         ],
       );
@@ -469,17 +475,17 @@ class const TarusDugmeSirasi(
       children: [
         for (var i = 0; i < digerleri.length; i++) ...[
           if (i > 0) const SizedBox(height: 8),
-          _dugme(r, acik, digerleri[i], i == digerleri.length - 1),
+          _dugme(r, digerleri[i], i == digerleri.length - 1),
         ],
         for (final d in iptaller) ...[
           const SizedBox(height: 12),
-          _dugme(r, acik, d, false),
+          _dugme(r, d, false),
         ],
       ],
     );
   }
 
-  Widget _dugme(TarusRenkler r, bool acik, TarusDialogDugmesi d, bool sonuncu) {
+  Widget _dugme(TarusRenkler r, TarusDialogDugmesi d, bool sonuncu) {
     const kose = RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(14)),
     );
@@ -499,12 +505,14 @@ class const TarusDugmeSirasi(
       );
     }
     if (d.iptalMi) {
+      // STANDARTLAR-MOBIL §8: Vazgeç/İptal asla tehlike rengi almaz;
+      // nötr ikincil (saydam zemin, 1 px kenarlık, birincil metin).
       return OutlinedButton(
         onPressed: d.onPressed,
         style: OutlinedButton.styleFrom(
-          foregroundColor: r.danger,
-          backgroundColor: r.danger.withValues(alpha: acik ? 0.04 : 0.08),
-          side: BorderSide(color: r.danger),
+          foregroundColor: r.text,
+          backgroundColor: Colors.transparent,
+          side: BorderSide(color: r.border),
           minimumSize: boyut,
           shape: kose,
           textStyle: yazi,
