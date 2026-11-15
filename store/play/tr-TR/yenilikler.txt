@@ -1,4 +1,3 @@
-• Notlar sayfasındaki arama düğmesiyle tüm not ve klasörleri ada göre arayın (ışık/isik fark etmez)
-• Notlar Özel, Şirket İçi ve Proje kategorilerine ayrılır; kartta kategori rozeti, listede kategori sekmeleri
-• Notlar Pusula projelerine bağlanabilir; Pusula'daki eskiz bağlantısı notu doğrudan açar
-• Not yalnız Pusula hesabınızla kullanılır; çıkış yapınca notlar bu cihazdan silinir, not.tarus.tr'de kalır
+• Hesap ekranı diğer tarus uygulamalarıyla aynı düzende: profil kartı, Eşitleme ve depolama, Destek ve Hesap bölümleri, uygulama sürüm kartı
+• Modern ve Karanlık temada mavi vurgu yerine Not'un taba marka rengi
+• Pencerelerde İptal düğmesi artık kırmızı değil nötr; üst çubuklar 54 pt ve alt çizgili
