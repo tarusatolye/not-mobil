@@ -164,6 +164,14 @@ derlenir (Visual Studio Build Tools gerekir). Build Tools yoksa yerel deneme iç
 çeviren yerel bir kopya kullanılabilir (2026-10-07 turunda böyle çalıştırıldı; commit edilmez).
 
 ## Sürüm notları
+- **1.3.1** (2026-11-15, tarus-kabuk mobil eşitlemesi; 15 Kasım denetimi sonrası): Hesap ekranı (`/profile`,
+  `done_login_step.dart`) Arkiv/Sistem Hesap yapısına alındı: ortalı profil kartı (baş harf avatarı, ad, e-posta,
+  «Pusula hesabı» rozeti, «Tarus Kimlik & SSO Profili» → `TarusBaglantilar.kimlik`), bölümler Eşitleme ve depolama
+  (kota, Şimdi eşitle, Web sürümü) / Destek (Hata bildir) / Hesap (Hesabı sil), «Uygulama» sürüm kartı, Çıkış yap
+  düğmesi; başlık «Hesap». Çıkış ve hesap silme mantığı değişmedi. Modern ve Karanlık temada vurgu `#AC865A`
+  (STANDARTLAR-MOBIL §3; `scripts/tarus_renkler_uret.py` `MARKA`, öteki temalar kendi vurgusunda). `TarusDugmeSirasi`
+  İptal/Vazgeç tehlike rengi almaz (§8, nötr ikincil). Üst çubuk 54 pt (`TarusOlcu.ustCubuk`; tema, `TarusSayfaUstu`
+  alt çizgi). Bölüm etiketi BÜYÜK HARF 11/700 (`bolumMetni`, Türkçe İ/I). Eski «Profilim» başlığı «Hesap» oldu.
 - **1.3.0** (2026-10-24, FKR-0046 + FKR-0047 + FKR-0048 web eşliği): Notlar sayfasında arama (üst çubuk büyüteç):
   tüm not ve klasörlerde ad/klasör yolu araması, Türkçe katlamalı (`lib/tarus/not_aramasi.dart`, web `notAramasi.ts`
   eşi; sıra: adı başlayan, sözcük başı, içinde geçen).

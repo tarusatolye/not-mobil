@@ -1,0 +1,3 @@
+• Account page now matches the other tarus apps: profile card, Sync and storage, Support and Account sections, app version card
+• Not's brand tan accent replaces the blue accent in Modern and Dark themes
+• Cancel buttons in dialogs are neutral instead of red; headers are 54 pt with a bottom border

@@ -31,6 +31,9 @@ abstract final class TarusOlcu {
   static const rAltCubuk = 28.0;
 
   // Boşluk (ui.spacing).
+  /// Standart üst çubuk yüksekliği (STANDARTLAR-MOBIL §6: 54 pt).
+  static const ustCubuk = 54.0;
+
   /// Ana ekranların dış yatay boşluğu.
   static const sayfaYatay = 12.0;
 

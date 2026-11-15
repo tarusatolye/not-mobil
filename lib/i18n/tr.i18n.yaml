@@ -208,7 +208,7 @@ login:
       followPrompts: Lütfen tarayıcıda açılan sunucu sayfasındaki adımları izleyin
       browserDidntOpen: Giriş sayfası açılmadıysa buraya tıklayın
 profile:
-  title: Profilim
+  title: Hesap
   logout: Çıkış yap
   quotaUsage: Toplam $total alanın $used kadarını ($percent%) kullandınız
   connectedTo: Bağlanılan sunucu
@@ -388,6 +388,18 @@ tarus:
     hicNotYok: Henüz not yok
     klasordeNotYok: Bu klasörde henüz not yok
     yeniNotIcinArti: Yeni not oluşturmak için alttaki + düğmesine dokunun.
+  hesap:
+    rozet: Pusula hesabı
+    kimlikProfili: Tarus Kimlik & SSO Profili
+    esitlemeDepolama: Eşitleme ve depolama
+    simdiEsitle: Şimdi eşitle
+    simdiEsitleAciklama: Tüm notları not.tarus.tr'ye yeniden gönder
+    webSurumu: Web sürümü
+    destek: Destek
+    hesapBolumu: Hesap
+    uygulama: Uygulama
+    yukluSurum: Yüklü sürüm
+    sunucu: Sunucu
   ayar:
     esitleme: Eşitleme
     gorunum: Görünüm

@@ -65,6 +65,15 @@ abstract final class TarusBaglantilar {
     ),
   );
 
+  /// Tarus Kimlik & SSO profili (kardeş uygulamaların Hesap ekranındaki
+  /// «Tarus Kimlik & SSO Profili» düğmesi).
+  static final Uri kimlik = Uri.parse(
+    const String.fromEnvironment(
+      'TARUS_KIMLIK_URL',
+      defaultValue: 'https://hesap.tarus.tr/kisisel',
+    ),
+  );
+
   /// tarus Not'un web sürümü (not.tarus.tr).
   static final Uri notWeb = Uri.parse(
     const String.fromEnvironment(

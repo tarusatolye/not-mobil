@@ -169,7 +169,7 @@ class _Translations$profile$tr extends Translations$profile$en {
 	final TranslationsTr _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Profilim';
+	@override String get title => 'Hesap';
 	@override String get logout => 'Çıkış yap';
 	@override String quotaUsage({required Object total, required Object used, required Object percent}) => 'Toplam ${total} alanın ${used} kadarını (${percent}%) kullandınız';
 	@override String get connectedTo => 'Bağlanılan sunucu';
@@ -265,6 +265,7 @@ class _Translations$tarus$tr extends Translations$tarus$en {
 	@override String get urunTanimi => 'El yazısı not ve eskiz defteri. Kalemle yazın, çizin, sayfaları klasörlerde düzenleyin; notlarınız Pusula hesabınızla cihazlar ve web arasında eşitlensin.';
 	@override late final _Translations$tarus$yetenek$tr yetenek = _Translations$tarus$yetenek$tr._(_root);
 	@override late final _Translations$tarus$bos$tr bos = _Translations$tarus$bos$tr._(_root);
+	@override late final _Translations$tarus$hesap$tr hesap = _Translations$tarus$hesap$tr._(_root);
 	@override late final _Translations$tarus$ayar$tr ayar = _Translations$tarus$ayar$tr._(_root);
 	@override late final _Translations$tarus$giris$tr giris = _Translations$tarus$giris$tr._(_root);
 	@override late final _Translations$tarus$cikis$tr cikis = _Translations$tarus$cikis$tr._(_root);
@@ -879,6 +880,26 @@ class _Translations$tarus$bos$tr extends Translations$tarus$bos$en {
 	@override String get hicNotYok => 'Henüz not yok';
 	@override String get klasordeNotYok => 'Bu klasörde henüz not yok';
 	@override String get yeniNotIcinArti => 'Yeni not oluşturmak için alttaki + düğmesine dokunun.';
+}
+
+// Path: tarus.hesap
+class _Translations$tarus$hesap$tr extends Translations$tarus$hesap$en {
+	_Translations$tarus$hesap$tr._(TranslationsTr root) : this._root = root, super.internal(root);
+
+	final TranslationsTr _root; // ignore: unused_field
+
+	// Translations
+	@override String get rozet => 'Pusula hesabı';
+	@override String get kimlikProfili => 'Tarus Kimlik & SSO Profili';
+	@override String get esitlemeDepolama => 'Eşitleme ve depolama';
+	@override String get simdiEsitle => 'Şimdi eşitle';
+	@override String get simdiEsitleAciklama => 'Tüm notları not.tarus.tr\'ye yeniden gönder';
+	@override String get webSurumu => 'Web sürümü';
+	@override String get destek => 'Destek';
+	@override String get hesapBolumu => 'Hesap';
+	@override String get uygulama => 'Uygulama';
+	@override String get yukluSurum => 'Yüklü sürüm';
+	@override String get sunucu => 'Sunucu';
 }
 
 // Path: tarus.ayar

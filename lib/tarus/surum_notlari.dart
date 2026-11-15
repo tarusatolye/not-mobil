@@ -10,6 +10,15 @@ const ilkYayin = '2 Ekim 2026';
 
 const surumNotlari = <SurumNotu>[
   SurumNotu(
+    '1.3.1',
+    '15 Kasım 2026',
+    'Hesap ekranı diğer tarus uygulamalarıyla aynı düzende: profil kartı, '
+        'Eşitleme ve depolama, Destek ve Hesap bölümleri, uygulama sürüm kartı '
+        've Çıkış yap düğmesi. Modern ve Karanlık temada vurgu rengi Not’un '
+        'taba markası oldu; pencerelerde İptal düğmesi artık kırmızı değil, '
+        'üst çubuklar 54 pt ve alt çizgili.',
+  ),
+  SurumNotu(
     '1.3.0',
     '24 Ekim 2026',
     'Notlar sayfasındaki arama düğmesiyle bütün not ve klasörlerinizi ada '

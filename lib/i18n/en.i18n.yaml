@@ -208,7 +208,7 @@ login:
       followPrompts: Please follow the steps on the server page opened in your browser
       browserDidntOpen: Login page didn't open? Click here
 profile:
-  title: My profile
+  title: Account
   logout: Log out
   quotaUsage: You're using $used of $total ($percent%)
   quotaUsageUncapped: You're using $used
@@ -387,6 +387,18 @@ tarus:
     hicNotYok: No notes yet
     klasordeNotYok: No notes in this folder yet
     yeniNotIcinArti: Tap the + button below to create a new note.
+  hesap:
+    rozet: Pusula account
+    kimlikProfili: Tarus Identity & SSO Profile
+    esitlemeDepolama: Sync and storage
+    simdiEsitle: Sync now
+    simdiEsitleAciklama: Send all notes to not.tarus.tr again
+    webSurumu: Web version
+    destek: Support
+    hesapBolumu: Account
+    uygulama: App
+    yukluSurum: Installed version
+    sunucu: Server
   ayar:
     esitleme: Sync
     gorunum: Appearance

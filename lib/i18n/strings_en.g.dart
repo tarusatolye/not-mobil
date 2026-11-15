@@ -224,8 +224,8 @@ class Translations$profile$en {
 
 	// Translations
 
-	/// en: 'My profile'
-	String get title => 'My profile';
+	/// en: 'Account'
+	String get title => 'Account';
 
 	/// en: 'Log out'
 	String get logout => 'Log out';
@@ -404,6 +404,7 @@ class Translations$tarus$en {
 
 	late final Translations$tarus$yetenek$en yetenek = Translations$tarus$yetenek$en.internal(_root);
 	late final Translations$tarus$bos$en bos = Translations$tarus$bos$en.internal(_root);
+	late final Translations$tarus$hesap$en hesap = Translations$tarus$hesap$en.internal(_root);
 	late final Translations$tarus$ayar$en ayar = Translations$tarus$ayar$en.internal(_root);
 	late final Translations$tarus$giris$en giris = Translations$tarus$giris$en.internal(_root);
 	late final Translations$tarus$cikis$en cikis = Translations$tarus$cikis$en.internal(_root);
@@ -1475,6 +1476,48 @@ class Translations$tarus$bos$en {
 
 	/// en: 'Tap the + button below to create a new note.'
 	String get yeniNotIcinArti => 'Tap the + button below to create a new note.';
+}
+
+// Path: tarus.hesap
+class Translations$tarus$hesap$en {
+	Translations$tarus$hesap$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Pusula account'
+	String get rozet => 'Pusula account';
+
+	/// en: 'Tarus Identity & SSO Profile'
+	String get kimlikProfili => 'Tarus Identity & SSO Profile';
+
+	/// en: 'Sync and storage'
+	String get esitlemeDepolama => 'Sync and storage';
+
+	/// en: 'Sync now'
+	String get simdiEsitle => 'Sync now';
+
+	/// en: 'Send all notes to not.tarus.tr again'
+	String get simdiEsitleAciklama => 'Send all notes to not.tarus.tr again';
+
+	/// en: 'Web version'
+	String get webSurumu => 'Web version';
+
+	/// en: 'Support'
+	String get destek => 'Support';
+
+	/// en: 'Account'
+	String get hesapBolumu => 'Account';
+
+	/// en: 'App'
+	String get uygulama => 'App';
+
+	/// en: 'Installed version'
+	String get yukluSurum => 'Installed version';
+
+	/// en: 'Server'
+	String get sunucu => 'Server';
 }
 
 // Path: tarus.ayar
