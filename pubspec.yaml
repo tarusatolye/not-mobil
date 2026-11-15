@@ -150,7 +150,7 @@ dependencies:
   background_downloader: ^9.6.3
 
   flutter_hooks: ^0.21.3+1
-  image: ^4.11.0
+  image: ">=4.8.0 <4.11.0" # 4.11+ archive >=4.1 ister; pdf archive<4.1 ile sınırlıyor
   pool: ^1.5.2
 
 dev_dependencies:
@@ -170,7 +170,7 @@ dev_dependencies:
 
   yaml: ^3.1.2
 
-  golden_screenshot: ^12.1.1
+  golden_screenshot: ^11.1.1
 
   sentry_dart_plugin: ^3.1.1
 

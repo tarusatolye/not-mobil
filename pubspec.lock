@@ -675,10 +675,10 @@ packages:
     dependency: "direct dev"
     description:
       name: golden_screenshot
-      sha256: f1e894eb4d4f8c87a65b7d43ee95d84733f9e1e7980e3e0be5c3165b8b030792
+      sha256: "94857cfbdb3ff25cd24ebd7d9f0d21d08a8f1c198fc3529c76edb73c29158d92"
       url: "https://pub.dev"
     source: hosted
-    version: "12.1.1"
+    version: "11.2.0"
   hooks:
     dependency: transitive
     description:
@@ -723,10 +723,10 @@ packages:
     dependency: "direct main"
     description:
       name: image
-      sha256: d701df3ef4761a22854c69b9661c9d8f25b264b3982985f25944247ce644761f
+      sha256: "0be525eb917b032c7c9c980597c508a255814a858bd8d9abfc9c57e04f3ebf89"
       url: "https://pub.dev"
     source: hosted
-    version: "4.11.0"
+    version: "4.10.2"
   injector:
     dependency: transitive
     description:
@@ -852,6 +852,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.3"
+  listen:
+    dependency: transitive
+    description:
+      name: listen
+      sha256: "47501a08016a43fcad79252439d723f50f14f88fa7bfd8a177e0a417e5c9e1f2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   logging:
     dependency: "direct main"
     description:
@@ -1787,10 +1795,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: "2a122cbe059f8b610d3a5415f42e255b6c17b1f21eee1d960f31080237fb4f11"
+      sha256: "0a10344e901e5b2e63819567951cb6a06673ed6b84f40462188ff5a0c41f371f"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.12"
+    version: "0.7.14"
   timezone:
     dependency: transitive
     description:
