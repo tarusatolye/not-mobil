@@ -27,3 +27,8 @@ Derleme hatası varsa iş bitmemiştir; araç çalışmıyorsa (analiz sunucusu 
 ## Bilinen tuzaklar
 - Saber kodu büyük (`lib/components/canvas`, `lib/data/editor`): ilgisiz yerleri okuma; değişikliği `lib/tarus` ve dokunduğun ekranla sınırla.
 - Birkaç eşlik PR'ı aynı sürümü (1.3.0 gibi) açarsa sürüm dosyaları çakışır; PR'dan önce `main` ile birleştir, notları birleştir.
+
+## Taslak ve onay kuralı
+
+- Arayüz ya da tasarım taslağı HTML olarak Beyin'e `<uygulama>/taslak/<ad>.html` yoluyla yazılır; kullanıcıya yerel dosya yolu verilmez.
+- Kullanıcının kararını gerektiren her şey Sistem › Projeler'de onay olarak açılır; karar orada verilir ve ilgili işe düşer.
