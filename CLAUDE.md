@@ -32,3 +32,9 @@ Derleme hatası varsa iş bitmemiştir; araç çalışmıyorsa (analiz sunucusu 
 
 - Arayüz ya da tasarım taslağı HTML olarak Beyin'e `<uygulama>/taslak/<ad>.html` yoluyla yazılır; kullanıcıya yerel dosya yolu verilmez.
 - Kullanıcının kararını gerektiren her şey Sistem › Projeler'de onay olarak açılır; karar orada verilir ve ilgili işe düşer.
+
+## Beyin (bilgi kaynağı)
+
+- Göreve başlamadan önce Beyin dizinini oku: `T:\Ortak\Beyin\genel\tarus.md` (Mac: `/Volumes/arkiv/Ortak/Beyin/genel/tarus.md`); sonra yalnız işle ilgili parçayı aç.
+- Paylaşıma erişemeyen ajanlar aynı belgeleri yetki Beyin API'si (`/bilgi/belgeler/<yol>/`) üzerinden okur.
+- Beyin'de gizli değer (parola, anahtar, belirteç) tutulmaz; yalnız nerede durduğu yazılır.
