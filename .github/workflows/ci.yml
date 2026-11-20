@@ -22,7 +22,7 @@ jobs:
     runs-on: [self-hosted, linux]   # mini PC (techstorm); GitHub'ın kendi sunucuları ödeme kilidinde
     timeout-minutes: 150   # mini PC sırasında bekleme de bu süreye sayılır
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           submodules: true
